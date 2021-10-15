@@ -79,3 +79,51 @@ This adds the feature of having organized conversations in dedicated spaces call
 13. Click Create pull request to open a new pull request
 
 ### **_`If you are asked to make changes on the same feature, repeat steps 8 to 13 to add more commits to your pull request.`_**
+<!-- Steps and setup for project
+
+1 Install all tools needed for the project and set them up (especially git credentials, watch tutorials)
+
+2 Fork the repo
+https://github.com/zurichat/zc_plugin_channels
+
+3 Create a branch from dev branch (slackname.fe-dev)
+
+4 Clone the repo on your local machine
+
+5 Navigate to the project root folder, open the frontend folder, right click and select "git bash here"
+
+6 Check out to your branch (git checkout slackname.fe-dev)
+
+7 Run (yarn) to install all dependencies
+
+8 Run (code .) to open the project in Visual Studio Code
+
+9 In the vscode integrated terminal or git bash run (yarn start) to start the dev server
+
+10 Write your code
+
+11 Commit and push to your repo
+
+NB If you need to install any dependency please inform me first (state the package and why you need it)
+
+- MAKING PULL REQUESTS
+
+As soon as you're done with the feature and want to create a PR 
+
+1 Commit and push all changes if any
+
+2 Head to the forked repository
+
+3 Select Pull Requests
+
+4 Create Pull Request
+
+5 (main repo) dev <-- (forked repo) slackname.fe-dev
+
+6 Reference the issue you were given
+
+7 Add reviewer (mrkendrick)
+
+8 Make sure there are no conflicts (if any resolve it or call my attention, DO NOT CREATE THE PR)
+
+9 If everything goes well, Create the PR  -->
