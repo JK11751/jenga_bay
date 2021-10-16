@@ -2,9 +2,9 @@
 
 When contributing to the project, please follow these guidelines:
 
--   Check the issues we have on [GitHub](https://github.com/zurichat/zc_plugin_dm/issues).
+<!-- -   Check the issues we have on [GitHub](https://github.com/zurichat/zc_plugin_dm/issues). -->
 
--   Check the design you're creating on figma link here [Figma Design](https://www.figma.com/file/LQAKDdQteJwjrhtFTv7PlV/Zuri.Chat-DM?node-id=13%3A2)
+<!-- -   Check the design you're creating on figma link here [Figma Design](https://www.figma.com/file/LQAKDdQteJwjrhtFTv7PlV/Zuri.Chat-DM?node-id=13%3A2) -->
 
 #### Please note, the above guideline is a prequisite for this project.
 
