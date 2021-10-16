@@ -10,9 +10,9 @@ When contributing to the project, please follow these guidelines:
 
 ## Contributing to the project
 
-1.  Fork the repository on [GitHub](https://github.com/zurichat/zc_plugin_dm/fork)
+1.  Fork the repository on [GitHub](https://github.com/JengaBay/jenga_bay/fork)
 2.  Clone the repository on your local machine `git clone https://github.com/zurichat/zc_plugin_dm.git`
-3.  CD into the directory `$cd zc_plugin_dm` on your machine
+3.  CD into the directory `$cd jenga_bay` on your machine
 4.  CD into the Directory `$cd frontend`on your machine
 5.  Run `yarn` to install all the dependencies
 6.  Run `yarn start` on directories `frontend`to start the server
