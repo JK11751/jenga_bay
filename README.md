@@ -27,7 +27,7 @@ This adds the feature of having organized conversations in dedicated spaces call
 --- -->
 
 ## **Design Link:**
-
+https://www.figma.com/file/pCQcOANBwtEy4jPXioeBrU/Jenga-Bay-UI-Design?node-id=7%3A17
 ## **Contribution Guide - Steps to Collaborate on the Repository for Team Members**
 
 <!-- ### **_Fork and Clone Repository_**
