@@ -12,9 +12,9 @@ const SignUp = () => {
                     <Box mt="150px">   
                         <VStack spacing="2px" top="20px"> 
                             <Text color="#ffffff" fontSize="4xl">Hello There</Text>
-                            <Text color="#ffffff" fontSize="md">Enter your details and start your </Text>
-                            <Text color="#ffffff" fontSize="md">journey shopping for construction </Text>
-                            <Text color="#ffffff" fontSize="md">and building materials with us</Text>
+                            <Text color="#ffffff" fontSize="sm">Enter your details and start your </Text>
+                            <Text color="#ffffff" fontSize="sm">journey shopping for construction </Text>
+                            <Text color="#ffffff" fontSize="sm" pb={5}>and building materials with us</Text>
                             <Text color="#ffffff" fontSize="xs">Register as a seller instead?</Text>    
                         </VStack>
                     </Box>
