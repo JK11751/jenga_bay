@@ -2,7 +2,7 @@
 
 When contributing to the project, please follow these guidelines:
 
-<!-- -   Check the issues we have on [GitHub](https://github.com/zurichat/zc_plugin_dm/issues). -->
+<!-- -   Check the issues we have on [GitHub](https://github.com/JengaBay/jenga_bay/issues). -->
 
 <!-- -   Check the design you're creating on figma link here [Figma Design](https://www.figma.com/file/LQAKDdQteJwjrhtFTv7PlV/Zuri.Chat-DM?node-id=13%3A2) -->
 
@@ -11,7 +11,7 @@ When contributing to the project, please follow these guidelines:
 ## Contributing to the project
 
 1.  Fork the repository on [GitHub](https://github.com/JengaBay/jenga_bay/fork)
-2.  Clone the repository on your local machine `git clone https://github.com/zurichat/zc_plugin_dm.git`
+2.  Clone the repository on your local machine `git clone https://github.com/JengaBay/jenga_bay.git`
 3.  CD into the directory `$cd jenga_bay` on your machine
 4.  CD into the Directory `$cd frontend`on your machine
 5.  Run `yarn` to install all the dependencies
