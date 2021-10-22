@@ -27,10 +27,10 @@ This adds the feature of having organized conversations in dedicated spaces call
 --- -->
 
 ## **Design Link:**
-
+https://www.figma.com/file/pCQcOANBwtEy4jPXioeBrU/Jenga-Bay-UI-Design?node-id=7%3A17
 ## **Contribution Guide - Steps to Collaborate on the Repository for Team Members**
 
-### **_Fork and Clone Repository_**
+<!-- ### **_Fork and Clone Repository_**
 
 1. Visit the Repository to the Project on Github Website: https://github.com/JengaBay/jenga_bay
 2. Fork the repository: Click the "Fork" button on the upper right corner of the Repo page.
@@ -127,3 +127,4 @@ As soon as you're done with the feature and want to create a PR
 8 Make sure there are no conflicts (if any resolve it or call my attention, DO NOT CREATE THE PR)
 
 9 If everything goes well, Create the PR  -->
+ -->
