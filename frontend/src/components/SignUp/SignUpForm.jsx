@@ -14,25 +14,30 @@ import linkedInIcon from "../../assets/linkedin.png"
 const SignUpForm = () => {
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
+    const [checked, setChecked] = useState(false)
+    const handleChecked = ()=>{
+        setChecked(!checked)
+    }
+    
     return(
-        <Flex flexDirection="column" mt={5}>
+        <Flex flexDirection="column" >
             <Text align="center" fontSize="4xl">Create an Account</Text>
-            <HStack alignSelf="center" mt={5} mb={3}>
+            <HStack alignSelf="center" mt={3} mb={3}>
                 <Image src={facebookIcon} />
                 <Image src={googleIcon} />
                 <Image src={linkedInIcon} />
             </HStack>
-            <Stack direction="row" p={4}>
+            <Stack direction="row" alignItems="center" pr={4} pl={4}>
                 <Divider orientation="horizontal" />
-                <Text align="center">OR</Text>
+                <Text alignSelf="center" fontWeight="500" p={2}>OR</Text>
                 <Divider orientation="horizontal" />
             </Stack>
             <Text align="center" fontSize="md">sign up with your email address</Text>
-            <VStack spacing="10px" pl={20} pr={20} pt={4} pb={4}>
+            <VStack spacing="15px" pl={20} pr={20} pt={4} pb={4}>
                 <FormControl id="username" isRequired>
                     <InputGroup>
                         <InputLeftElement pointerEvents="none" children={<IoIosPerson  h={4} w={4} color="gray.300" />}/> 
-                        <Input _placeholder={{ color: 'gray.500' }} variant="filled" size="md" placeholder="Username" type="text" />
+                        <Input variant="filled" size="md" placeholder="Username" type="text" />
                     </InputGroup>
                 </FormControl>
                 <FormControl id="email" isRequired>
@@ -51,13 +56,16 @@ const SignUpForm = () => {
                     </InputGroup>
                 </FormControl>
             </VStack>
-            <Flex pl={20} pr={20} >
-                <Input width="3px" height="20px" type="checkbox"></Input>
-                <Text align="center" fontSize="xs">By creating an account, you agree to the terms of service and conditions, and Privacy Policy</Text>
+            <Flex  pl={20} pr={20} >
+                <input height="20px" checked={checked} onChange={handleChecked} type="checkbox"></input>
+                <Text align="center" fontSize="xs" mb={4}>By creating an account, you agree to the terms of service and conditions, and Privacy Policy</Text>
             </Flex>
             <Button alignSelf='center' padding="10px" background="#007ACC" borderRadius="50px" width="300px" height="35px" color="#ffffff">Sign Up</Button>
-            <Text align="center" fontSize="xs">Already have an account?<Box as="span" background="#007ACC" > Log in</Box></Text>
+            <Text align="center" mt={4} fontSize="xs">Already have an account?<Box as="span" textColor="#007ACC" > Log in</Box></Text>
         </Flex>
     )
+
+   
 }
+
 export default SignUpForm;

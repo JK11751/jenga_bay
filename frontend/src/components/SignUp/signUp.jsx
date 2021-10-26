@@ -19,7 +19,7 @@ const SignUp = () => {
                         </VStack>
                     </Box>
                 </Box>
-                <Box width="70%" bg="#ffffff" borderRadius="0px 10px 10px 0px">
+                <Box alignSelf="center" width="70%" bg="#ffffff" borderRadius="0px 10px 10px 0px">
                     <SignUpForm />
                 </Box>
             </Flex>
