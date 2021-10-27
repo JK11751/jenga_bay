@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import { useReducer } from "react";
+import userReducer from "./userReducer";
 
 //combines all the reducers into one reducer
 const rootReducer = combineReducers({
-    useReducer,
+    userReducer,
 });
 
 export default rootReducer;

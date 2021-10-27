@@ -1,16 +1,20 @@
 import { theme } from './utils/theme';
 import { ChakraProvider } from "@chakra-ui/react";
-import Home from './components/Home/home';
-// import NavBar from './components/shared/NavBar';
-// import SignUp from './components/SignUp/signUp.jsx';
-
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
+import { Provider } from 'react-redux';
+import store from "./redux/store"
+import routes from "./routes/routes"
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      {/* <NavBar/> */}
-      {/* <SignUp />  */}
-      <Home/>
+      <Provider store={store}>
+        <Router >
+          <Switch>
+            <Route component={routes}/>
+          </Switch>
+        </Router>
+        </Provider>
     </ChakraProvider>
   );
 }
