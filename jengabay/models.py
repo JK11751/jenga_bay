@@ -35,6 +35,8 @@ class Seller(models.Model):
     building = models.CharField(max_length=100, null=False)
     password = models.CharField(max_length=500, null=False)
     business_reg_doc = models.ImageField(upload_to='images/profile', default='images/profile/profile.jpg')
+    is_registered = models.BooleanField(default=False, null=False)
+    registration_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         '''returns a string representation of an instance of this model'''
@@ -72,11 +74,11 @@ class Item(models.Model):
 class Order(models.Model):
     buyer = models.ForeignKey(Buyer, null=False, on_delete=PROTECT)
     ordered_items = models.ManyToManyField(Item)
-    date = models.DateTimeField(default=timezone.now)
+    date_placed = models.DateTimeField(default=timezone.now, null=False)
 
     def __str__(self):
         '''returns a string representation of purchase order'''
-        return self.id + '--' + self.buyer.buyer_name + '--' + self.date
+        return self.id + '--' + self.buyer.buyer_name + '--' + self.date_placed
 
 
 
