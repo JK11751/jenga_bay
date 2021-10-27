@@ -2,9 +2,10 @@ import { Box, Text, Flex } from "@chakra-ui/react";
 import { VStack } from "@chakra-ui/layout";
 import React from "react"
 import SignUpForm from "./SignUpForm";
+// import NavBar from "../shared/NavBar";
 
 const SignUp = () => {
-    return(
+    return( 
         <Box ml="220px" mt="50px">
             <Flex width="70vw" boxShadow="lg">
                 <Box borderRadius="10px 0px 0px 10px" height="80vh" width="40%" background="#007ACC">
@@ -24,6 +25,7 @@ const SignUp = () => {
                 </Box>
             </Flex>
         </Box>
+ 
     )
 }
 export default SignUp;
