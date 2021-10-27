@@ -1,10 +1,12 @@
 import React from "react"
+import NavBar from "../shared/NavBar";
+import { Box } from "@chakra-ui/layout";
 
 const Home = () => {
     return(
-        <div>
-            <h1>Home Page</h1>
-        </div>
+        <Box width="100vw" height="100vh">
+            <NavBar />
+        </Box>
     )
 }
 export default Home;

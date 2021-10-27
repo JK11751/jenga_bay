@@ -1,7 +1,8 @@
 import React from "react"
 import {Route, Switch} from "react-router-dom"
 import Home from "../components/Home/home.js";
-import SignUp from '../components/SignUp/signUp.jsx';
+import SignUpPage from "../components/SignUp/signUpPage.js";
+import NavBar from "../components/shared/NavBar"
 
 const routes =()=>{
     return(
@@ -10,7 +11,10 @@ const routes =()=>{
                 <Home />
             </Route>
             <Route exact path="/sign-up">
-                <SignUp />
+                <SignUpPage />
+            </Route>
+            <Route exact-path ="/nav-bar">
+                <NavBar />
             </Route>
         </Switch>
     )

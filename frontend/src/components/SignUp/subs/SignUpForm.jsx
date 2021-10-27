@@ -7,9 +7,9 @@ import { HiOutlineMail } from "react-icons/hi"
 import { IoIosPerson } from "react-icons/io"
 import { BiLockAlt } from "react-icons/bi"
 import { Image } from "@chakra-ui/image"
-import facebookIcon from "../../assets/facebook.png"
-import googleIcon from "../../assets/Google.png"
-import linkedInIcon from "../../assets/linkedin.png"
+import facebookIcon from "../../../assets/facebook.png"
+import googleIcon from "../../../assets/Google.png"
+import linkedInIcon from "../../../assets/linkedin.png"
 
 const SignUpForm = () => {
     const [show, setShow] = useState(false)
