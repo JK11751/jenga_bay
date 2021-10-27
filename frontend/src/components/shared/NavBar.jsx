@@ -3,11 +3,12 @@ import { Flex, HStack, Spacer, Text } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import icon from "../../assets/logo.png"
 import { Button } from "@chakra-ui/button";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
     return(
-        <Flex height="50px" p={4} alignItems="center" background="#007ACC">
-            <Image src={icon}/>
+        <Flex height="50px" p={15} alignItems="center" background="#007ACC">
+            <Link to="/"><Image src={icon}/></Link>
             <Spacer/>
             <HStack spacing="50px">
                 <Text textColor="#ffffff">Features</Text>
