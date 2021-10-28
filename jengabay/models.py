@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.deletion import CASCADE, PROTECT
-from datetime import timezone
+from datetime import datetime, timezone
 
 class County(models.Model):
     '''Creates county instances'''
@@ -27,7 +27,7 @@ class Seller(models.Model):
     business_name = models.CharField(max_length=200, null=False)
     business_reg_no = models.CharField(max_length=100, null=False)
     email = models.EmailField(null=False)
-    phone_number = models.IntegerField(null=False)
+    phone_number = models.CharField(max_length=15, null=False)
     sub_county = models.ForeignKey(SubCounty,null=False, on_delete=PROTECT)
     town = models.CharField(max_length=50, null=False)
     local_area_name = models.CharField(max_length=100, null=False)
@@ -35,6 +35,8 @@ class Seller(models.Model):
     building = models.CharField(max_length=100, null=False)
     password = models.CharField(max_length=500, null=False)
     business_reg_doc = models.ImageField(upload_to='images/profile', default='images/profile/profile.jpg')
+    is_registered = models.BooleanField(default=False, null=False)
+    registration_date = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
         '''returns a string representation of an instance of this model'''
@@ -45,7 +47,7 @@ class Buyer(models.Model):
     '''Creates buyer instances'''
     buyer_name = models.CharField(max_length=100, null=False)
     email_address = models.EmailField(null=False)
-    phone_number = models.CharField(null=False)
+    phone_number = models.CharField(max_length=15, null=False)
     password = models.CharField(max_length=500, null=False)
 
     def __str__(self):
@@ -70,13 +72,13 @@ class Item(models.Model):
 
 
 class Order(models.Model):
-    buyer = models.ForeignKey(Buyer, null=False, on_delete=PROTECT)
+    customer = models.ForeignKey(Buyer, null=False, on_delete=PROTECT)
     ordered_items = models.ManyToManyField(Item)
-    date = models.DateTimeField(default=timezone.now)
+    date_placed = models.DateTimeField(default=datetime.now, null=False)
 
     def __str__(self):
         '''returns a string representation of purchase order'''
-        return self.id + '--' + self.buyer.buyer_name + '--' + self.date
+        return self.id + '--' + self.buyer.buyer_name + '--' + self.date_placed
 
 
 
