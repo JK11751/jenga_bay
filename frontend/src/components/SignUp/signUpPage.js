@@ -5,9 +5,9 @@ import { Box } from "@chakra-ui/layout";
 
 const SignUpPage =()=>{
     return(
-        <Box width="100vw" h="100vh">
+        <Box width="100vw" h="100vh" backgroundColor="#F8F8F8">
             <NavBar/>
-            <SignUp/>
+            <SignUp />
         </Box>
     )
 }
