@@ -7,3 +7,11 @@ from .models import *
 class SellerListCreateView(ListCreateAPIView):
     serializer_class = SellerSerializer
     queryset = Seller.objects.all()
+
+class ItemListCreateView(ListCreateAPIView):
+    serializer_class = ItemSerializer
+    queryset = Item.objects.all()
+
+class OrderListCreateView(ListCreateAPIView):
+    serializer_class = OrderSerializer
+    queryset = Order.objects.all()
