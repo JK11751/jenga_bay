@@ -35,6 +35,7 @@ class Seller(models.Model):
     building = models.CharField(max_length=100, null=False)
     password = models.CharField(max_length=500, null=False)
     business_reg_doc = models.ImageField(upload_to='images/profile', default='images/profile/profile.jpg')
+    profile_pic = models.ImageField(upload_to='images/profile', default='images/profile/profile.jpg')
     is_registered = models.BooleanField(default=False, null=False)
     registration_date = models.DateTimeField(null=True, default=datetime.now)
 
