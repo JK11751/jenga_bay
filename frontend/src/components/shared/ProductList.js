@@ -7,7 +7,7 @@ const ProductList =[
     },
     {
         id:"002",
-        prodName:"Sand",
+        name:"Sand",
         // image_url:"https://bit.ly/sage-adebayo",
         description:"this is a product",
     },

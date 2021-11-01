@@ -20,8 +20,11 @@ class APIServices {
   async getUsers(data) {
     return api.post("/some-endpoint", data);
   }
+  async getProducts(){
+    return api.get(`https://jsonplaceholder.typicode.com/photos`);
+  }
 }
 
-const instance = new APIServices();//an instanc eof axios that can be used globally
+const instance = new APIServices();//an instance of axios that can be used globally
 
 export default instance;
