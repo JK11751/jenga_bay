@@ -21,7 +21,7 @@ class APIServices {
     return api.post("/some-endpoint", data);
   }
   async getProducts(){
-    return api.get(`https://jsonplaceholder.typicode.com/photos`);
+    return api.get(`http://localhost:8000/`);
   }
 }
 

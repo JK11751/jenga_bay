@@ -58,15 +58,44 @@ class Buyer(models.Model):
 
 class Item(models.Model):
     '''Creates instances of a product'''
+
+    options = (
+        ("metal and steel work", "Metal and Steel Work"),
+        ("cement", "Cement"),
+        ("ceramics", "Ceramics"),
+        ("plastics", "plastics"),
+        ("wood and timber", "Wood and Timber"),
+        ("sand and stone", "Sand and Stone"),
+        ("bricks and masonry", "Bricks and Masonry"),
+        ("fabricators", "Fabricators"),
+        ("tools", "Tools"),
+        ("glass", "Glass"),
+        ("electrical systems", "Electrical Systems"),
+        ("paints", "Paints"),
+        ("plumbing", "Plumbing"),
+        ("security systems", "Security Systems"),
+        ("doors and windows", "Doors and Windows"),
+        ("telecommunications equipment", "Telecomunications Equipment"),
+        ("building safety", "Building Safety"),
+        ("furniture", "Furniture"),
+        ("surface finishing", "Surface Finishing"),
+        ("protection", "Protection"),
+        ("roofing", "Roofing"),
+        ("conveyor systems", "Conveyor Systems"),
+        ("composites", "Composites"),
+        ("flooring", "Flooring"),
+        ("adhesives", "Adhesives"),
+        ("others", "Others"),
+    )
     item_name = models.CharField(max_length=100, null=False)
-    item_descripton = models.TextField(null=True)
+    item_description = models.TextField(null=True)
     item_seller = models.ForeignKey(Seller, on_delete=CASCADE)
     item_main_image = models.ImageField(upload_to='images/product', default='images/product/main.jpg', null=False)
     item_extra_image1 = models.ImageField(upload_to='images/product', default='images/product/extra1.jpg', null=True)
     item_extra_image2 = models.ImageField(upload_to='images/product', default='images/product/extra2.jpg', null=True)
     item_extra_image3 = models.ImageField(upload_to='images/product', default='images/product/extra3.jpg', null=True)
     item_extra_image4 = models.ImageField(upload_to='images/product', default='images/product/extra4.jpg', null=True)
-
+    category = models.CharField(max_length=50, choices=options, default = 'uncategorized')
     def __str__(self):
         '''returns a string representation of an instance of this model'''
         return self.item_name

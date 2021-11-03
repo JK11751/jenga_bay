@@ -58,3 +58,9 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = "__all__"
+
+class ItemViewSerializer(serializers.ModelSerializer):
+    item_seller = SellerSerializer(many=False)
+    class Meta:
+        model = Item
+        fields = "__all__"

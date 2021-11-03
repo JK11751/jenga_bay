@@ -2,7 +2,12 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('sellerapiview', views.SellerListCreateView.as_view(), name='sellerapiview'),
-    path('', views.ItemListCreateView.as_view(), name='itemapiview'),
-    path('orderapiview', views.OrderListCreateView.as_view(), name='orderapiview'),
+    #seller api view end point
+    path('sellers', views.SellerListCreateView.as_view(), name='sellers'),
+    #itmes api end point
+    path('', views.ItemListView.as_view(), name='itemsview'),
+    path('itemcreate', views.ItemListCreateView.as_view(), name='itemcreate'),
+
+    #oredr api end point
+    path('order', views.OrderListCreateView.as_view(), name='order'),
 ]
