@@ -12,6 +12,9 @@
     run the following command to install rest framework
       $ pip install djangorestframework
       
+    run the following command to install cors-headers
+      $ python -m pip install django-cors-headers
+      
     next run the commands below to migrate models to the database
       $ python manage.py makemigrations
       $ python manage.py migrate
@@ -19,4 +22,9 @@
     next command will run the server
       $ python manage.py runserver
       
-    access the seller api endpoint from http://localhost:8000/sellerapiview
+    access the api endpoints from:
+    http://localhost:8000    (to get items information)
+    http://localhost:8000/itemcreate  (to add a new product item)
+    http://localhost:8000/sellers    (to add a seller and get seller information)
+    http://localhost:8000/order      (to add create an order and get order information)
+    
