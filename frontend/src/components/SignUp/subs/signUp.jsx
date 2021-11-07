@@ -5,8 +5,10 @@ import SignUpForm from "./SignUpForm";
 import { Image } from "@chakra-ui/image";
 import { Button } from "@chakra-ui/button";
 import logo from "../../../assets/logo.png"
+import { useHistory } from 'react-router-dom';
 
 const SignUp = () => {
+    const history = useHistory();
     return( 
         <Box ml="15vw" mt="40px">
             <Flex width="70vw" boxShadow="lg">
@@ -18,7 +20,7 @@ const SignUp = () => {
                             <Text color="#ffffff" fontSize="md">Enter your details and start your </Text>
                             <Text color="#ffffff" fontSize="md">journey shopping for construction </Text>
                             <Text color="#ffffff" fontSize="md" pb={5}>and building materials with us</Text>
-                            <Button variant="link" color="#ffffff" fontSize="xs">Register as a seller instead?</Button>    
+                            <Button variant="link" color="#ffffff" fontSize="xs" onClick={()=> history.push("/registration")} >Register as a seller instead?</Button>   
                         </VStack>
                     </Box>
                 </Box>

@@ -34,6 +34,10 @@ const SignUpForm = () => {
   //     setChecked(!checked)
   // }
 
+  const [email,setEmail]=useState("")
+  const [password,setPassword]=useState("")
+  const [username,setUsername]=useState("")
+
   return (
     <Flex flexDirection="column">
       <Text align="center" fontSize="4xl" mt={10}>
@@ -66,6 +70,8 @@ const SignUpForm = () => {
               size="md"
               placeholder="Username"
               type="text"
+              value={username}
+              onChange={e => setUsername(e.target.value)} 
             />
           </InputGroup>
         </FormControl>
@@ -80,6 +86,8 @@ const SignUpForm = () => {
               size="md"
               placeholder="Enter Email Address"
               type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
             />
           </InputGroup>
         </FormControl>
@@ -95,6 +103,8 @@ const SignUpForm = () => {
               type={show ? "text" : "password"}
               placeholder="Enter password"
               size="md"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
             />
             <InputRightElement width="4.5rem">
               {show ? (
@@ -127,6 +137,7 @@ const SignUpForm = () => {
         </Checkbox>
       </Flex>
       <Button
+        type="submit"
         alignSelf="center"
         padding="10px"
         background="#007ACC"

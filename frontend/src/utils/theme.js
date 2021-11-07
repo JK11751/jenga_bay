@@ -26,29 +26,7 @@ const theme = extendTheme({
       },
     },
   },
-  Input: {
-    variants: {
-      filled: (props) => ({
-        _placeholder: {
-          color: 'black.900'
-        },
-      }),
-    }
-  },
   
-  // Input : {
-  //   variants: {
-  //     outline: (props: Dict) => ({
-  //       field: {
-  //         bg: mode('white', 'gray.800')(props),
-  //         borderColor: 'gray.300',
-  //         _placeholder: {
-  //           color: 'red.500',
-  //         },
-  //       },
-  //     }),
-  //   },
-  // },
 });
 
 

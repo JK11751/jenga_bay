@@ -1,28 +1,35 @@
 import { Flex } from "@chakra-ui/layout";
-import React, {useEffect} from "react";
+import React, {useEffect } from "react";
 import ProductCard from "./ProductCard";
-// import ProductList from "./ProductList";
+import ProductList from "./ProductList";
 import { handleGetProducts } from "../../redux/actions/appActions";
 import { useDispatch, useSelector } from "react-redux";
 
 const ProductContainer = () =>{
+    
+    //setting the product list to be rendered
+    // const[data, setData] = useState({products: [] });
 
+    //fetching data from the api
     const dispatch = useDispatch();
-    const productReducer = useSelector(({ productReducer }) => productReducer);
+    const productReducer = useSelector(({ productReducer }) => productReducer);// setting the value of product Reducer to the data fetched from the api
     useEffect(() => {
-        dispatch(handleGetProducts())
+        dispatch(handleGetProducts())// dispatches the action to get the data from the api
+        // setData(productReducer)
     }, []);
 		
-        console.log(productReducer)
-        
+    console.log(productReducer)
+   
+
 	
     return(
-        <Flex alignSelf="center" flexWrap="wrap" p={10}>
-            {productReducer.products.map((product)=>{ 
+        <Flex ml="4.8vw" width="90vw" alignSelf="center" flexWrap="wrap" p={5}>
+            {ProductList.map((product)=>{ 
             return(
-                <ProductCard photo={product.url} id={product.id} name={product.title} description={product.title}/> 
+                <ProductCard photo={product.item_main_image} id={product.id} name={product.item_name} description={product.item_description}/> 
             )
             })}
+            
         </Flex>
     )
 }
