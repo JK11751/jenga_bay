@@ -7,9 +7,9 @@ const SearchBar = () => {
         <InputGroup marginLeft="70px">
             <InputLeftElement
                 pointerEvents="none"
-                children={<BiSearchAlt2 w={4} />}
+                children={<BiSearchAlt2 />}
             />
-            <Input background="#ffffff" borderRadius="50px" width="700px" placeholder="search here..." size="md"/>
+            <Input background="#ffffff" borderRadius="50px" width="750px" placeholder="search here..." height="33px"/>
         </InputGroup>
     )
 }
