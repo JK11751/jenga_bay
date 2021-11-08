@@ -1,8 +1,8 @@
 import React from "react"
 import { Box } from "@chakra-ui/layout";
-import NavBar from "../../components/shared/NavBar";
-import ProductContainer from "../../components/shared/ProductContainer";
-import CategoryChips from "../../components/shared/CategoryChips";
+import NavBar from "../../components/Sections/NavBar";
+import ProductContainer from "../../components/Products/ProductContainer"
+import CategoryChips from "../../components/Categories/CategoryChips"
 import { Image } from "@chakra-ui/image";
 // import image from "../../assets/product.jpg"
 // import ProductList from "../shared/ProductList";

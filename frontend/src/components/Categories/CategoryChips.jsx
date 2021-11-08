@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/button";
 import { Flex } from "@chakra-ui/layout";
-import CategoryList from "../../pages/Home/CategoryList";
+import CategoryList from "./CategoryList";
 
 const CategoryChips = () => {
     return(

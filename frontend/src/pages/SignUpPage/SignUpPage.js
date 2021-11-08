@@ -1,6 +1,6 @@
 import React from "react";
 import SignUpContainer from "./subs/SignUpContainer";
-import NavBar from "../../components/shared/NavBar";
+import NavBar from "../../components/Sections/NavBar";
 import { Box } from "@chakra-ui/layout";
 
 const SignUpPage =()=>{

@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/layout";
 import React from "react"
-import NavBar from "../../components/shared/NavBar";
+import NavBar from "../../components/Sections/NavBar";
 import ItemDescription from "../../components/Products/ItemDescription";
 import ProductDetail from "./subs/ProductDetails";
  
