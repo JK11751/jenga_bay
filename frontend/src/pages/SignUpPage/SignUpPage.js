@@ -1,13 +1,13 @@
 import React from "react";
-import SignUp from "./subs/SignUp";
-import NavBar from "../shared/NavBar";
+import SignUpContainer from "./subs/SignUpContainer";
+import NavBar from "../../components/shared/NavBar";
 import { Box } from "@chakra-ui/layout";
 
 const SignUpPage =()=>{
     return(
         <Box width="100vw" h="100vh" backgroundColor="#F8F8F8">
             <NavBar/>
-            <SignUp />
+            <SignUpContainer />
         </Box>
     )
 }

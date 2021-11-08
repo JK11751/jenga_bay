@@ -6,7 +6,7 @@ import { Image } from "@chakra-ui/image";
 import { Button } from "@chakra-ui/button";
 import logo from "../../../assets/logo.png"
 import SignInForm from "./SignInForm";
-const SignIn = () => {
+const SignInContainer = () => {
     return(  
         <Box ml="15vw" mt="40px">
             <Flex width="70vw" boxShadow="lg">
@@ -33,4 +33,4 @@ const SignIn = () => {
  
     )
 }
-export default SignIn;
+export default SignInContainer;

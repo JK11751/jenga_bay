@@ -17,10 +17,6 @@ const SignInForm= () => {
     const history = useHistory();
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
-    // const [checked, setChecked] = useState(false)
-    // const handleChecked = ()=>{
-    //     setChecked(!checked)
-    // }
     
     return(
         <Flex flexDirection="column" >

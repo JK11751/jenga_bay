@@ -1,14 +1,14 @@
 import React from "react";
-import NavBar from "../shared/NavBar";
+import NavBar from "../../components/shared/NavBar";
 import { Box } from "@chakra-ui/layout";
-import SignIn from "./subs/SignIn";
+import SignInContainer from "./subs/SignInContainer";
 
 
 const SignInPage =()=>{
     return(
         <Box width="100vw" h="100vh" backgroundColor="#F8F8F8">
-            <NavBar/>
-            <SignIn/>
+            <NavBar />
+            <SignInContainer />
            
         </Box>
     )
