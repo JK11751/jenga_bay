@@ -41,5 +41,23 @@ const ProductList =[
         item_main_image:"https://bit.ly/sage-adebayo",
         item_description:"this is a product",
     },
+    {
+        id:"006",
+        item_name:"Cement",
+        item_main_image:"https://bit.ly/sage-adebayo",
+        item_description:"this is a product",
+    },
+    {
+        id:"009",
+        item_name:"Cement",
+        item_main_image:"https://bit.ly/sage-adebayo",
+        item_description:"this is a product",
+    },
+    {
+        id:"010",
+        item_name:"Cement",
+        item_main_image:"https://bit.ly/sage-adebayo",
+        item_description:"this is a product",
+    },
 ]
 export default ProductList;
