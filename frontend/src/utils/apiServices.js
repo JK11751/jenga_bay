@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseURL = 'whatever the url will be';// base url for all endpoints
+const baseURL = 'http://localhost:8000';// base url for all endpoints
 
 const apiConfig = {
     baseURL,
@@ -21,7 +21,7 @@ class APIServices {
     return api.post("/some-endpoint", data);
   }
   async getProducts(){
-    return api.get(`http://localhost:8000/`);
+    return api.get(`/`);
   }
 }
 
