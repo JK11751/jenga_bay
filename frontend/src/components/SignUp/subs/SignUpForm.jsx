@@ -25,8 +25,11 @@ import { BiShowAlt, BiHide } from "react-icons/bi";
 import facebookIcon from "../../../assets/facebook.png";
 import googleIcon from "../../../assets/Google.png";
 import linkedInIcon from "../../../assets/linkedin.png";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 
 const SignUpForm = () => {
+  const history=useHistory();
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   // const [checked, setChecked] = useState(false)
@@ -109,7 +112,7 @@ const SignUpForm = () => {
             <InputRightElement width="4.5rem">
               {show ? (
                 <IconButton
-                  as={BiShowAlt}
+                  as={<BiShowAlt/>}
                   variant="untyled"
                   h={5}
                   w={5}
@@ -117,7 +120,7 @@ const SignUpForm = () => {
                 ></IconButton>
               ) : (
                 <IconButton
-                  as={BiHide}
+                  as={<BiHide/>}
                   h={5}
                   w={5}
                   variant="unstyled"
@@ -145,15 +148,16 @@ const SignUpForm = () => {
         width="300px"
         height="35px"
         color="#ffffff"
+        onClick={()=> history.push("/")}
       >
         Sign Up
       </Button>
       <Text align="center" mt={4} fontSize="xs">
         Already have an account?
-        <Box as="span" textColor="#007ACC">
+        <Link to="/sign-in"><Box as="span" textColor="#007ACC">
           {" "}
           Log in
-        </Box>
+        </Box></Link>
       </Text>
     </Flex>
   );

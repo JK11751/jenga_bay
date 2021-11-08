@@ -24,6 +24,7 @@ const routes =()=>{
             <Route exact path="/product">
                 <ProductPage />
             </Route>
+            <Route exact path="/product/:productId" component={ProductPage}/>
         </Switch>
     )
 }

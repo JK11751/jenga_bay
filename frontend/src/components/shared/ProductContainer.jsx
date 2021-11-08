@@ -1,9 +1,10 @@
 import { Flex } from "@chakra-ui/layout";
 import React, {useEffect } from "react";
 import ProductCard from "./ProductCard";
-import ProductList from "./ProductList";
+// import ProductList from "./ProductList";
 import { handleGetProducts } from "../../redux/actions/appActions";
 import { useDispatch, useSelector } from "react-redux";
+
 
 const ProductContainer = () =>{
     
@@ -22,11 +23,11 @@ const ProductContainer = () =>{
    
 
 	
-    return(
+    return(  
         <Flex ml="4.8vw" width="90vw" alignSelf="center" flexWrap="wrap" p={5}>
-            {ProductList.map((product)=>{ 
+            {productReducer.products.map((product)=>{ 
             return(
-                <ProductCard photo={product.item_main_image} id={product.id} name={product.item_name} description={product.item_description}/> 
+                <ProductCard id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_seller.business_name}/> 
             )
             })}
             

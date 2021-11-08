@@ -1,5 +1,5 @@
 import React from "react";
-import SignUp from "./subs/signUp";
+import SignUp from "./subs/SignUp";
 import NavBar from "../shared/NavBar";
 import { Box } from "@chakra-ui/layout";
 

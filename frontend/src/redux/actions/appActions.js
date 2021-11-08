@@ -1,5 +1,5 @@
 import APIServices from "../../utils/apiServices";
-import {  GET_PRODUCTS, GET_USERS } from "./types";
+import {  GET_PRODUCT, GET_PRODUCTS, GET_USERS } from "./types";
 
 // Redux actions are called here with an underscore before the name (convention)
 
@@ -40,4 +40,9 @@ export const handleGetProducts = () => async (dispatch) => {
     console.log(`Error from handleGetRooms: ${error}`);
   }
 };
+
+//Getting a specific product
+export const getDetails = id => dispatch => {
+  dispatch({type: GET_PRODUCT, payload: id})
+}
 
