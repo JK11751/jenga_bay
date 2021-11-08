@@ -1,6 +1,6 @@
 import { Box, Flex, VStack, Text, HStack } from "@chakra-ui/layout";
 // import { Image } from "@chakra-ui/image";
-// import img from "../../assets/product.jpg"
+import img from "../../assets/product.jpg"
 import ImageCarousel from "../../components/Products/ImageCarousel";
 import React from "react"
 import NavBar from "../../components/shared/NavBar";
@@ -10,6 +10,7 @@ import Icon from "@chakra-ui/icon";
 import {MdOutlineAddBox} from "react-icons/md"
 import {FiMinusSquare} from "react-icons/fi"
 import { Input } from "@chakra-ui/input";
+import { Avatar } from "@chakra-ui/avatar";
  
 
 const ProductPage = ()=> {
@@ -21,7 +22,11 @@ const ProductPage = ()=> {
                     <ImageCarousel />
                 </Flex>
                 <VStack alignItems="left" mt={5} p={10}>
-                    <Text fontSize="20px">COMPANY NAME</Text>
+                    <HStack>
+                        <Avatar size="sm" name="Dan Abrahmov" src={img} />
+                        <Text fontSize="20px">COMPANY NAME</Text>
+                    </HStack>
+                    
                     <Text fontSize="40px">THIS IS THE ITEM NAME. THIS IS THE ITEM NAME</Text>
                     <Text fontSize="20px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                     Fusce a neque orci. Vivamus nisl tortor, sollicitudin in augue vitae, dictum 

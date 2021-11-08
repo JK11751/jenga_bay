@@ -2,7 +2,7 @@ import { FormControl } from "@chakra-ui/react"
 import { Input, InputGroup, InputRightElement,InputLeftElement } from "@chakra-ui/input"
 import { useState } from "react"
 import { Button, IconButton } from "@chakra-ui/button"
-import {VStack, Text, HStack, Stack, Divider, Flex } from "@chakra-ui/layout"
+import {VStack, Text, HStack, Stack, Divider, Flex, Spacer,Box } from "@chakra-ui/layout"
 import { HiOutlineMail } from "react-icons/hi"
 import { BiLockAlt } from "react-icons/bi"
 import { Image } from "@chakra-ui/image"
@@ -10,8 +10,11 @@ import {BiShowAlt, BiHide} from "react-icons/bi"
 import facebookIcon from "../../../assets/facebook.png"
 import googleIcon from "../../../assets/Google.png"
 import linkedInIcon from "../../../assets/linkedin.png"
+import { Link } from "react-router-dom"
+import { useHistory } from "react-router"
 
 const SignInForm= () => {
+    const history = useHistory();
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
     // const [checked, setChecked] = useState(false)
@@ -52,10 +55,11 @@ const SignInForm= () => {
                 </FormControl>
             </VStack>
             <Flex mb={4} alignContent="center" pl={20} pr={20} >
-            <Button variant="link" align="right" color="black" fontSize="xs">Forgot Password?</Button>
+            <Spacer/>
+            <Button variant="link" color="black" fontSize="xs">Forgot Password?</Button>
             </Flex>
-            <Button alignSelf='center' padding="10px" background="#007ACC" borderRadius="50px" width="300px" height="35px" color="#ffffff">Sign In</Button>
-            <Text align="center" mt={4} fontSize="xs">Don't have an account?</Text><Button variant="Link" textColor="#007ACC"> Sign Up instead</Button>
+            <Button alignSelf='center' padding="10px" background="#007ACC" borderRadius="50px" width="300px" height="35px" color="#ffffff" onClick={()=> history.push("/")}>Sign In</Button>
+            <Text align="center" mt={4} fontSize="xs">Don't have an account?<Link to="/sign-up"><Box as="span" textColor="#007ACC">{" "}Sign up </Box></Link></Text>
         </Flex>
     )
 

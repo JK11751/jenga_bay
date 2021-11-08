@@ -1,8 +1,8 @@
 import React, {useState} from "react"
-import { Box, Divider, Flex, HStack, Spacer } from "@chakra-ui/layout";
+import {VStack, Flex, HStack, Spacer } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import icon from "../../assets/logo.png"
-// import { Button} from "@chakra-ui/button";
+import { Button} from "@chakra-ui/button";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import {BiMenu, BiMenuAltLeft, BiCartAlt} from "react-icons/bi"
@@ -10,6 +10,12 @@ import {IoIosArrowDown} from "react-icons/io"
 import {MdOutlineAccountCircle} from "react-icons/md"
 import {IoMdNotificationsOutline} from "react-icons/io"
 import { Icon } from "@chakra-ui/icon";
+import {
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverBody,
+  } from "@chakra-ui/react"
 
 const NavBar = () => {
     const [showMenu, setShowMenu] = useState(true)
@@ -32,10 +38,6 @@ const NavBar = () => {
             
             <SearchBar />
             <Spacer/>
-            {/* <HStack spacing="10px">
-                <Link to="/sign-up"><Button h="30px" alignItems="center" fontWeight="500" fontSize="13px" w="130px" textColor="#18A0FB" background="#ffffff" variant="outline">Sign Up</Button></Link>
-                <Link to="/sign-in"  ><Button h="30px" w="130px" alignItems="center" fontWeight="500" fontSize="13px" textColor="#ffffff" colorScheme="#18A0FB" background="#18A0FB" variant="solid">Login</Button></Link>
-            </HStack>  */}
             <HStack spacing="20px">
                 <Icon color="#ffffff" h={7} w={7} as={IoMdNotificationsOutline}/>
                 <Icon color="#ffffff" h={7} w={7} as={BiCartAlt}/>
@@ -43,12 +45,29 @@ const NavBar = () => {
                 {/* <Divider variant="solid" size="10px" orientation="vertical" /> */}
                 {/* <ColoredLine color="red"/> */}
                 {/* <div style={{ borderTop: "2px solid #fff ", marginLeft: 20, marginRight: 20 }}></div> */}
-
-                <HStack>
-                <Icon color="#ffffff" h={7} w={7} as={MdOutlineAccountCircle}/>
-                <Icon color="#ffffff" h={5} w={4} as={IoIosArrowDown}/></HStack>
-
+                <Popover mr={5} isLazy>
+                    <PopoverTrigger>
+                    <Button variant="ghost">
+                        <HStack>
+                        <Icon color="#ffffff" h={7} w={7} as={MdOutlineAccountCircle}/>
+                        <Icon color="#ffffff" h={5} w={4} as={IoIosArrowDown}/>
+                        </HStack>
+                    </Button>   
+                    </PopoverTrigger>
+                    <PopoverContent width="200px">
+                        {/* <PopoverHeader fontWeight="semibold">Popover placement</PopoverHeader> */}
+                        {/* <PopoverArrow /> */}
+                        {/* <PopoverCloseButton /> */}
+                        <PopoverBody>
+                        <VStack spacing="10px">
+                            <Link to="/sign-up"><Button h="30px" alignItems="center" fontWeight="500" fontSize="13px" w="130px" textColor="#18A0FB" background="#ffffff" variant="outline">Sign Up</Button></Link>
+                            <Link to="/sign-in"  ><Button h="30px" w="130px" alignItems="center" fontWeight="500" fontSize="13px" textColor="#ffffff" colorScheme="#18A0FB" background="#18A0FB" variant="solid">Login</Button></Link>
+                        </VStack> 
+                        </PopoverBody>
+                    </PopoverContent>
+                    </Popover>
             </HStack>
+                
         </Flex>
         
     )
