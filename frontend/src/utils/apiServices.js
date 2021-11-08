@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseURL = 'http://localhost:8000';// base url for all endpoints
+const baseURL = 'http://127.0.0.1:8000';// base url for all endpoints
 
 const apiConfig = {
     baseURL,

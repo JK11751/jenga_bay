@@ -1,6 +1,5 @@
 import React from "react";
 import {Flex, VStack, Text, HStack } from "@chakra-ui/layout";
-// import { Image } from "@chakra-ui/image";
 import img from "../../../assets/product.jpg"
 import ImageCarousel from "../../../components/Products/ImageCarousel";
 import { Button } from "@chakra-ui/button";
@@ -9,8 +8,12 @@ import {MdOutlineAddBox} from "react-icons/md"
 import {FiMinusSquare} from "react-icons/fi"
 import { Input } from "@chakra-ui/input";
 import { Avatar } from "@chakra-ui/avatar";
+// import { useSelector } from "react-redux";
+// import { useParams } from "react-router";
 
-const ProductDetail = (productId) => {
+const ProductDetail = () => {
+    // let {productId} = useParams()
+ 
     return(
         <Flex p={10} flexDir="row">
                 <Flex flexShrink={0} p={1}>

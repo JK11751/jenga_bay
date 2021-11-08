@@ -112,7 +112,7 @@ const SignUpForm = () => {
             <InputRightElement width="4.5rem">
               {show ? (
                 <IconButton
-                  as={BiShowAlt}
+                  as={<BiShowAlt/>}
                   variant="untyled"
                   h={5}
                   w={5}
@@ -120,7 +120,7 @@ const SignUpForm = () => {
                 ></IconButton>
               ) : (
                 <IconButton
-                  as={BiHide}
+                  as={<BiHide/>}
                   h={5}
                   w={5}
                   variant="unstyled"
