@@ -7,7 +7,7 @@ import { Button } from "@chakra-ui/button";
 import logo from "../../../assets/logo.png"
 import { useHistory } from 'react-router-dom';
 
-const SignUp = () => {
+const SignUpContainer = () => {
     const history = useHistory();
     return( 
         <Box ml="15vw" mt="40px">
@@ -32,4 +32,4 @@ const SignUp = () => {
  
     )
 }
-export default SignUp;
+export default SignUpContainer;

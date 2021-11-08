@@ -1,8 +1,8 @@
 import React from "react"
 import {Route, Switch} from "react-router-dom"
 import Home from "../pages/Home/home.js";
-import SignUpPage from "../components/SignUp/signUpPage.js";
-import SignInPage from "../components/Login/SignInPage.js";
+import SignUpPage from "../pages/SignUpPage/SignUpPage.js";
+import SignInPage from "../pages/LoginPage/SignInPage.js";
 import Profile from "../components/Profile/Profile.js";
 import ProductPage from "../pages/ProductPage/ProductPage.js";
 
