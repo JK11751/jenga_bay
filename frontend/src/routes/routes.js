@@ -5,7 +5,6 @@ import SignUpPage from "../pages/SignUpPage/SignUpPage.js";
 import SignInPage from "../pages/LoginPage/SignInPage.js";
 import Profile from "../components/Profile/Profile.js";
 import ProductPage from "../pages/ProductPage/ProductPage.js";
-import ProductAddToCart from "../components/Products/Test.js";
 
 const routes =()=>{
     return(
@@ -21,9 +20,6 @@ const routes =()=>{
             </Route>
             <Route exact path="/registration">
                 <Profile />
-            </Route>
-            <Route exact path="/test">
-                <ProductAddToCart/>
             </Route>
             <Route exact path="/product">
                 <ProductPage />
