@@ -28,6 +28,23 @@ const theme = extendTheme({
   },
   
 });
+export const components = {
+	Drawer: {
+		variants: {
+			alwaysOpen: {
+				parts: ['dialog, dialogContainer'],
+				dialog: {
+					pointerEvents: 'auto',
+				},
+				dialogContainer: {
+					pointerEvents: 'none',
+          width:0
+				},
+			},
+		},
+	},
+};
+
 
 
 

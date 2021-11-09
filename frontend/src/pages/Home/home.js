@@ -1,10 +1,10 @@
 import React from "react"
 import { Box } from "@chakra-ui/layout";
-import NavBar from "../../components/Sections/NavBar";
+import NavBar from "../../components/PageSections/NavBar";
 import ProductContainer from "../../components/Products/ProductContainer"
 import CategoryChips from "../../components/Categories/CategoryChips"
 import { Image } from "@chakra-ui/image";
-// import image from "../../assets/product.jpg"
+import Footer from "../../components/PageSections/Footer";
 // import ProductList from "../shared/ProductList";
 
 const Home = () => {
@@ -17,6 +17,7 @@ const Home = () => {
             </Box>
             <CategoryChips />
             <ProductContainer alignSelf="center"/> 
+            <Footer/>
         </Box>
     )
 }
