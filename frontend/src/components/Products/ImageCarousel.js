@@ -4,14 +4,14 @@ import dummyData from './DummyData';
 const ImageCarousel = () => {
  
 
-  const captionStyle = {
-    fontSize: '2em',
-    fontWeight: 'bold',
-  }
-  const slideNumberStyle = {
-    fontSize: '20px',
-    fontWeight: 'bold',
-  }
+  // const captionStyle = {
+  //   fontSize: '2em',
+  //   fontWeight: 'bold',
+  // }
+  // const slideNumberStyle = {
+  //   fontSize: '20px',
+  //   fontWeight: 'bold',
+  // }
   return (
     <div>
       <div style={{ textAlign: "center" }}>
@@ -21,14 +21,14 @@ const ImageCarousel = () => {
           <Carousel
             data={dummyData}
             time={2000}
-            width="550px"
+            width="500px"
             height="400px"
-            captionStyle={captionStyle}
-            radius="10px"
-            slideNumber={true}
-            slideNumberStyle={slideNumberStyle}
-            captionPosition="bottom"
-            automatic={true}
+            // captionStyle={captionStyle}
+            radius="5px"
+            slideNumber={false}
+            // slideNumberStyle={slideNumberStyle}
+            // captionPosition="bottom"
+            automatic={false}
             dots={true}
             pauseIconColor="white"
             pauseIconSize="40px"

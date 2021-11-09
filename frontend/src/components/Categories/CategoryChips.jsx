@@ -7,7 +7,7 @@ const CategoryChips = () => {
     <Flex ml="200px" mt={5} mb={5}>
         {CategoryList.map((category) =>
         
-            (<Button key={category.id} mr={10} borderRadius="30px" size="sm" variant="outline">{category.value}</Button>)
+            (<Button backgroundColor="white" key={category.id} mr={10} borderRadius="30px" size="sm" variant="outline">{category.value}</Button>)
         )}
     </Flex>
     )

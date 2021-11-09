@@ -59,7 +59,7 @@ const data = {
 function ProductCard(props) {
     const MotionBox = motion(Box)
   return (
-    <Flex flexDir="row" p={2}>
+    <Flex flexDir="row" p={2}  mr={4} >
       <Link to={{ pathname: `/product/${props.id}` }}>
         <MotionBox
           bg={useColorModeValue("white", "gray.800")}
