@@ -3,8 +3,8 @@ import {Route, Switch} from "react-router-dom"
 import Home from "../pages/Home/home.js";
 import SignUpPage from "../pages/SignUpPage/SignUpPage.js";
 import SignInPage from "../pages/LoginPage/SignInPage.js";
-import Profile from "../components/Profile/Profile.js";
 import ProductPage from "../pages/ProductPage/ProductPage.js";
+import RegistrationPage from "../pages/CompanyRegistration/RegistrationPage.js";
 
 const routes =()=>{
     return(
@@ -19,7 +19,7 @@ const routes =()=>{
                 <SignInPage />
             </Route>
             <Route exact path="/registration">
-                <Profile />
+                <RegistrationPage />
             </Route>
             <Route exact path="/product">
                 <ProductPage />
