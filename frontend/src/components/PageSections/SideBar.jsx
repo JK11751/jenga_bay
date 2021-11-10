@@ -14,7 +14,7 @@ const SideBar = ({ isOpen, handleClick }) => {
       in={isOpen}
       style={{ height: "100vh", width: "300px", zIndex: 100 }}
     >
-      <VStack color="black" bg="#F5F5F5" h="100vh" w="250px">
+      <VStack color="black" bg="#007ACC" h="100vh" w="250px">
         <VStack spacing="10px" p={5} width="100%" color="white">
         <HStack spacing="50px">
         <Flex flexShrink={0}>

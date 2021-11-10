@@ -10,9 +10,10 @@ const ProductDetailsCard = () => {
   // let {productId} = useParams()
 
   return (
-    <Flex bg={useColorModeValue("white", "gray.800")}
+    <Flex
+    bg={useColorModeValue("white", "gray.800")}
     width="15xl"
-    height="2xl"
+    height="1.3xl"
     borderWidth="1px"
     rounded="lg"
     shadow="lg"
@@ -23,18 +24,15 @@ const ProductDetailsCard = () => {
     p={10}
     borderRadius="10px"
     alignSelf="center"
-    position="relative" flexDir="row">
-    
+    position="relative" 
+    flexDir="row">
       <Flex
-        
         flexShrink={0}
-        p={1}
-        
+        p={5}
       >
-        {/* <ImageCarousel /> */}
         <ImageSlider ml={20} />
       </Flex>
-      <ProductDetails />
+      <ProductDetails p={10} />
     </Flex>
   );
 };

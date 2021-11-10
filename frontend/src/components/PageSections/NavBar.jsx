@@ -47,7 +47,7 @@ const NavBar = () => {
 
         <SearchBar />
         <Spacer />
-        <HStack ml="19vw" spacing="20px">
+        <HStack ml="12vw" spacing="20px">
           <Icon color="#ffffff" h={7} w={7} as={IoMdNotificationsOutline} />
           <Icon color="#ffffff" h={7} w={7} as={BiCartAlt} />
           <Popover mr={5} isLazy>
@@ -102,12 +102,12 @@ const NavBar = () => {
           </Popover>
         </HStack>
         </Flex>
-        <Box alignItems="center" height="30px" backgroundColor="#c4c4c4" width="100vw" as="h6">
-           <Box ml="4vw"> 
+        <Box alignItems="center" height="30px" backgroundColor="#0292f1" width="100vw" as="h6">
+           <Box ml="5vw"> 
             {showMenu ? (
           <Icon
             onClick={handleClick}
-            color="#000"
+            color="#fff"
             mr={5}
             as={BiMenu}
             h={7}
@@ -116,14 +116,14 @@ const NavBar = () => {
         ) : (
           <Icon
             onClick={handleClick}
-            color="#000"
+            color="#fff"
             mr={5}
             as={BiMenuAltLeft}
-            h={9}
-            w={9}
+            h={7}
+            w={7}
           />
         )}
-        <Button textAlign="center" variant="link">Register as a seller</Button></Box>
+        <Button fontWeight="normal" textColor="#fff" textAlign="center" variant="link">Register as a seller</Button></Box>
         </Box>
       </Flex>
       <SideBar isOpen={isOpen} handleClick={handleClick} />

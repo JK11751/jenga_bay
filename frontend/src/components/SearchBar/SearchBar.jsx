@@ -7,12 +7,12 @@ import {Flex} from "@chakra-ui/layout"
 const SearchBar = () => {
     return(
         <Flex flexDir="row">
-        <InputGroup marginLeft="70px">
+        <InputGroup ml="13vw">
             <InputLeftElement
                 pointerEvents="none"
                 children={<BiSearchAlt2 />}
             />
-            <Input  background="#ffffff" borderRadius="50px" width="600px" placeholder="search here..." size="md"/>
+            <Input background="#ffffff" borderRadius="50px" width="600px" placeholder="search here..." size="md"/>
         </InputGroup>
         {/* <Button fontWeight="normal" pl={3} pr={3} width="100px" height="35px" borderRadius="50px">search</Button> */}
         </Flex>
