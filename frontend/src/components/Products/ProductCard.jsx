@@ -99,7 +99,7 @@ function ProductCard(props) {
               )} */}
               <HStack>
                 {/* <Avatar size="sm" src={props.company_image}/> */}
-                <Box as="text" textTransform="uppercase" fontWeight="light">
+                <Box as="span" textTransform="uppercase" fontWeight="light">
                   {props.description}
                 </Box>
               </HStack>

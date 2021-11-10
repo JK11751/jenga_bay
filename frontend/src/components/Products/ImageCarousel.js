@@ -21,7 +21,7 @@ const ImageCarousel = () => {
           <Carousel
             data={dummyData}
             time={2000}
-            width="500px"
+            width="450px"
             height="400px"
             // captionStyle={captionStyle}
             radius="5px"
