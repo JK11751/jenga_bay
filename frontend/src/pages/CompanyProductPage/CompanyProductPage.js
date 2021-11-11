@@ -1,24 +1,23 @@
-import React from "react";
-import { Box, Flex } from "@chakra-ui/react";
+import React from 'react';
+import NavBar from '../../components/PageSections/NavBar';
+import { Box,} from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
-import UploadForm from "./UploadForm";
-//import logo from "../../../assets/logo.png";
-const CompanyProductPage=()=> {
-  return (
-    <Box >
-      <Flex width="70vw">
-        <Box
-          height="100vh"
-          width="25%"
-          background="#007ACC"
-        >
-          <Image ml={5} mt={5} src="/assets/logo.png" alt="logo" />
-        </Box>
-        <Box height="100vh" width="70%" bg="#ffffff" >
-                    <UploadForm alignSelf="center"/>
+import ProductContainer from '../../components/Products/ProductContainer';
+import CategoryChips from '../../components/Categories/CategoryChips';
+
+const  CompanyProductPage=()=> {
+  const img = "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg"
+    return(
+        <Box flexDir="column" width="100vw" height="100vh">
+            <NavBar />
+            
+            <Box>
+                <Image height="300px" width="100vw" src={img}>
+                </Image>
             </Box>
-      </Flex>
-    </Box>
-  );
+            <CategoryChips />
+            <ProductContainer alignSelf="center"/> 
+        </Box>
+    )
 }
 export default CompanyProductPage;
