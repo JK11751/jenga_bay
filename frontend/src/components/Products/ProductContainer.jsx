@@ -17,7 +17,7 @@ const ProductContainer = () =>{
     useEffect(() => {
         dispatch(handleGetProducts())// dispatches the action to get the data from the api
         // setData(productReducer)
-    }, []);
+    }, [dispatch]);
 		
     console.log(productReducer)
    
