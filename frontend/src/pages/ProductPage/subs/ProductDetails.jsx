@@ -43,7 +43,7 @@ export const ProductDetails = () => {
     
     const handleOnChange = (e) => {
         setValue(e.target.value);
-        setCount(value);
+        // setCount(value);
     }
 
     return (
