@@ -10,9 +10,9 @@ import { useHistory } from 'react-router-dom';
 const SignUpContainer = () => {
     const history = useHistory();
     return( 
-        <Box ml="15vw" mt="40px">
+        <Box ml="15vw" mt="2vh">
             <Flex width="70vw" boxShadow="lg">
-                <Box borderRadius="10px 0px 0px 10px" height="80vh" width="40%" background="#007ACC">
+                <Box borderRadius="10px 0px 0px 10px" height="90vh" width="40%" background="#007ACC">
                     <Image ml={5} mt={5} src={logo} alt="logo" />
                     <Box mt="150px">   
                         <VStack spacing="2px" top="20px"> 
@@ -24,7 +24,7 @@ const SignUpContainer = () => {
                         </VStack>
                     </Box>
                 </Box>
-                <Box height="80vh" width="70%" bg="#ffffff" borderRadius="0px 10px 10px 0px">
+                <Box height="90vh" width="70%" bg="#ffffff" borderRadius="0px 10px 10px 0px">
                     <SignUpForm alignSelf="center"/>
                 </Box>
             </Flex>

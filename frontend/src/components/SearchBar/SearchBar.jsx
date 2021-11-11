@@ -1,16 +1,21 @@
 import React from "react"
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input"
 import {BiSearchAlt2} from "react-icons/bi"
+// import { Button } from "@chakra-ui/button"
+import {Flex} from "@chakra-ui/layout"
 
 const SearchBar = () => {
     return(
-        <InputGroup marginLeft="70px">
+        <Flex flexDir="row">
+        <InputGroup ml="13vw">
             <InputLeftElement
                 pointerEvents="none"
                 children={<BiSearchAlt2 />}
             />
-            <Input background="#ffffff" borderRadius="50px" width="750px" placeholder="search here..." height="33px"/>
+            <Input background="#ffffff" borderRadius="50px" width="600px" placeholder="search here..." size="md"/>
         </InputGroup>
+        {/* <Button fontWeight="normal" pl={3} pr={3} width="100px" height="35px" borderRadius="50px">search</Button> */}
+        </Flex>
     )
 }
 

@@ -59,7 +59,7 @@ const data = {
 function ProductCard(props) {
     const MotionBox = motion(Box)
   return (
-    <Flex flexDir="row" p={2}>
+    <Flex flexDir="row" p={2}  mr={4} >
       <Link to={{ pathname: `/product/${props.id}` }}>
         <MotionBox
           bg={useColorModeValue("white", "gray.800")}
@@ -99,7 +99,7 @@ function ProductCard(props) {
               )} */}
               <HStack>
                 {/* <Avatar size="sm" src={props.company_image}/> */}
-                <Box as="text" textTransform="uppercase" fontWeight="light">
+                <Box as="span" textTransform="uppercase" fontWeight="light">
                   {props.description}
                 </Box>
               </HStack>

@@ -16,7 +16,7 @@ import {
   Divider,
   Flex,
 } from "@chakra-ui/layout";
-import { HiOutlineMail } from "react-icons/hi";
+import { HiOutlineMail, HiPhone } from "react-icons/hi";
 import { IoIosPerson } from "react-icons/io";
 import { BiLockAlt } from "react-icons/bi";
 import { Image } from "@chakra-ui/image";
@@ -43,7 +43,7 @@ const SignUpForm = () => {
 
   return (
     <Flex flexDirection="column">
-      <Text align="center" fontSize="4xl" mt={10}>
+      <Text align="center" fontSize="4xl" mt={7}>
         Create an Account
       </Text>
       <HStack alignSelf="center" mt={3} mb={3}>
@@ -88,6 +88,22 @@ const SignUpForm = () => {
               variant="filled"
               size="md"
               placeholder="Enter Email Address"
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+          </InputGroup>
+        </FormControl>
+        <FormControl id="phone-number" isRequired>
+          <InputGroup>
+            <InputLeftElement
+              pointerEvents="none"
+              children={<HiPhone color="gray.300" />}
+            />
+            <Input
+              variant="filled"
+              size="md"
+              placeholder="Enter your phone number"
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}

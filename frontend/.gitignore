@@ -8,6 +8,15 @@
 /.pnp
 .pnp.js
 
+#virtual environments
+/venv
+
+#media files
+/media
+/media/images
+/media/images/product
+/media/images/profile
+
 # testing
 /coverage
 
