@@ -1,10 +1,9 @@
 import React from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/image";
-import logo from "../../assets/logo.png";
-import RegistrationForm from "./RegistrationForm";
-
-const LeftBar=()=> {
+import UploadForm from "./UploadForm";
+import logo from "../../assets/logo.png"
+const CompanyProductUploadPage=()=> {
   return (
     <Box >
       <Flex width="70vw">
@@ -16,10 +15,10 @@ const LeftBar=()=> {
           <Image ml={5} mt={5} src={logo} alt="logo" />
         </Box>
         <Box height="100vh" width="70%" bg="#ffffff" >
-                    <RegistrationForm alignSelf="center"/>
+                    <UploadForm alignSelf="center"/>
             </Box>
       </Flex>
     </Box>
   );
 }
-export default LeftBar;
+export default CompanyProductUploadPage;

@@ -7,7 +7,7 @@ import SignUpPage from "../pages/SignUpPage/SignUpPage.js";
 import SignInPage from "../pages/LoginPage/SignInPage.js";
 import ProductPage from "../pages/ProductPage/ProductPage.js";
 import RegistrationPage from "../pages/CompanyRegistration/RegistrationPage.js";
-import Profile from "../components/Profile/Profile.js";
+import CompanyProductUploadPage from "../pages/CompanyProductUploadPage/CompanyProductUploadPage.js";
 import CompanyProductPage from "../pages/CompanyProductPage/CompanyProductPage.js";
 
 const routes =()=>{
@@ -17,10 +17,10 @@ const routes =()=>{
                 <Home />
             </Route>
             <Route exact path="/upload">
-                <CompanyProductPage />
+                <CompanyProductUploadPage />
             </Route>
             <Route exact path="/profile">
-                <Profile />
+                <CompanyProductPage />
             </Route>
             <Route exact path="/sign-up">
                 <SignUpPage />
