@@ -22,26 +22,65 @@ import { BiLockAlt } from "react-icons/bi";
 import { Image } from "@chakra-ui/image";
 import { Checkbox } from "@chakra-ui/checkbox";
 import { BiShowAlt, BiHide } from "react-icons/bi";
+import { FormHelperText } from "@chakra-ui/form-control";
 import facebookIcon from "../../../assets/facebook.png";
 import googleIcon from "../../../assets/Google.png";
 import linkedInIcon from "../../../assets/linkedin.png";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
+import { useForm } from "../../../utils/useForm";
+
+
 
 const SignUpForm = () => {
-  const history=useHistory();
+  const history = useHistory();
+
+  //handling form submission
+  const { handleSubmit, handleChange, data: user, errors } = useForm({
+    validations: {
+      name: {
+        pattern: {
+          value: '^[A-Za-z]*$',
+          message: "You're not allowed to use special characters or numbers in your name.",
+        },
+      },
+      email:{
+        pattern:{
+          value: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',
+          message:"Please enter a valid email address"
+        }
+      },
+      phoneNumber:{
+        pattern:{
+          value: '^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$',
+          message:"Please enter a valid phone number"
+        },
+        custom: {
+          isValid: (value) => value.length >= 10,
+          message: 'The number needs to be at least 10 characters long.',
+        },
+      },
+      password: {
+        custom: {
+          isValid: (value) => value.length > 6,
+          message: 'The password needs to be at least 6 characters long.',
+        },
+      },
+      
+    },
+
+    onSubmit: () => {
+      alert('User submitted!');
+      history.push("/");
+    }
+  });
+
+  
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-  // const [checked, setChecked] = useState(false)
-  // const handleChecked = ()=>{
-  //     setChecked(!checked)
-  // }
-
-  const [email,setEmail]=useState("")
-  const [password,setPassword]=useState("")
-  const [username,setUsername]=useState("")
 
   return (
+    <form onSubmit={handleSubmit}>
     <Flex flexDirection="column">
       <Text align="center" fontSize="4xl" mt={7}>
         Create an Account
@@ -73,10 +112,11 @@ const SignUpForm = () => {
               size="md"
               placeholder="Username"
               type="text"
-              value={username}
-              onChange={e => setUsername(e.target.value)} 
+              value={user.name || ""}
+              onChange={handleChange("name")} 
             />
           </InputGroup>
+          {errors.name && <FormHelperText>{errors.name}</FormHelperText>}
         </FormControl>
         <FormControl id="email" isRequired>
           <InputGroup>
@@ -89,12 +129,13 @@ const SignUpForm = () => {
               size="md"
               placeholder="Enter Email Address"
               type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              value={user.email || ""}
+              onChange={handleChange("email")}
             />
           </InputGroup>
+          {errors.email && <FormHelperText>{errors.email}</FormHelperText>}
         </FormControl>
-        <FormControl id="phone-number" isRequired>
+        <FormControl id="phoneNumber" isRequired>
           <InputGroup>
             <InputLeftElement
               pointerEvents="none"
@@ -104,11 +145,12 @@ const SignUpForm = () => {
               variant="filled"
               size="md"
               placeholder="Enter your phone number"
-              type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              type="text"
+              value={user.phoneNumber || ""}
+              onChange={handleChange("phoneNumber")}
             />
           </InputGroup>
+          {errors.phoneNumber && <FormHelperText>{errors.phoneNumber}</FormHelperText>}
         </FormControl>
         <FormControl id="password" isRequired>
           <InputGroup>
@@ -122,8 +164,8 @@ const SignUpForm = () => {
               type={show ? "text" : "password"}
               placeholder="Enter password"
               size="md"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
+              value={user.password || ""}
+              onChange={handleChange("password")}
             />
             <InputRightElement width="4.5rem">
               {show ? (
@@ -145,7 +187,9 @@ const SignUpForm = () => {
               )}
             </InputRightElement>
           </InputGroup>
+          {errors.password && <FormHelperText>{errors.password}</FormHelperText>}
         </FormControl>
+        
       </VStack>
       <Flex mb={4} alignContent="center" pl={20} pr={20}>
         <Checkbox isRequired size="lg" colorScheme="green">
@@ -164,10 +208,11 @@ const SignUpForm = () => {
         width="300px"
         height="35px"
         color="#ffffff"
-        onClick={()=> history.push("/")}
+        onClick={handleSubmit}
       >
         Sign Up
       </Button>
+      {/* <button type="submit">Submit</button> */}
       <Text align="center" mt={4} fontSize="xs">
         Already have an account?
         <Link to="/sign-in"><Box as="span" textColor="#007ACC">
@@ -176,6 +221,7 @@ const SignUpForm = () => {
         </Box></Link>
       </Text>
     </Flex>
+    </form>
   );
 };
 
