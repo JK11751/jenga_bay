@@ -11,6 +11,7 @@ const SearchBar = () => {
     const [options, setOptions] = useState([])
     const [searchModalOpen, setSearchModalOpen] = useState("")
 
+    //handles change in input
     const onInputChange = (event) => {
         const searchInput = event.target.value
         console.log(searchInput)
@@ -27,6 +28,7 @@ const SearchBar = () => {
        setOptions(newOptions)
     }
 
+    //handles closing of search when clicking anywhere outside the modal
     const [clickedOutside, setClickedOutside] = useState(false);
     const myRef = useRef();
 
@@ -35,6 +37,8 @@ const SearchBar = () => {
         setClickedOutside(true);
         }
     };
+
+    //useEffect to listen to any click events
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -43,7 +47,7 @@ const SearchBar = () => {
 
     return(
         <Flex flexDir="column">
-            <InputGroup ml="13vw">
+            <InputGroup ml="9vw">
                 <Input borderWidth="1.9px" onChange={onInputChange} onClick={(e) => {setClickedOutside(false)}} focusBorderColor = "blue" background="#ffffff" borderRadius="5px" width="554px" placeholder="search here..." size="md"/>
                 <InputRightAddon
                     pointerEvents="none"

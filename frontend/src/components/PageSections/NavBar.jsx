@@ -39,9 +39,28 @@ const NavBar = () => {
         background="#007ACC"
         flexDir="column"
       >
-      
       <Flex alignSelf="flex-start" alignItems="center" height="60px" flexDir="row" ml="2vw">
-        
+      <Box > 
+            {showMenu ? (
+          <Icon
+            onClick={handleClick}
+            color="#fff"
+            mr={5}
+            as={BiMenu}
+            h={7}
+            w={7}
+          />
+        ) : (
+          <Icon
+            onClick={handleClick}
+            color="#fff"
+            mr={5}
+            as={BiMenuAltLeft}
+            h={7}
+            w={7}
+          />
+        )}
+        </Box>
         <Flex alignSelf="center" flexShrink={0}>
           <Link to="/">
             <Image src={icon} />
@@ -105,29 +124,6 @@ const NavBar = () => {
           </Popover>
         </HStack>
         </Flex>
-        <Box alignItems="center" height="30px" backgroundColor="#0292f1" width="100vw" as="h6">
-           <Box ml="5vw"> 
-            {showMenu ? (
-          <Icon
-            onClick={handleClick}
-            color="#fff"
-            mr={5}
-            as={BiMenu}
-            h={7}
-            w={7}
-          />
-        ) : (
-          <Icon
-            onClick={handleClick}
-            color="#fff"
-            mr={5}
-            as={BiMenuAltLeft}
-            h={7}
-            w={7}
-          />
-        )}
-        <Button fontWeight="normal" textColor="#fff" textAlign="center" variant="link">Register as a seller</Button></Box>
-        </Box>
       </Flex>
       <SideBar isOpen={isOpen} handleClick={handleClick} />
     </>

@@ -27,72 +27,72 @@ const CategoryList = [
         id:7,
         value:"Bricks and Masonry"
     },
+    {
+        id:8,
+        value:"Sand and Stone"
+    },
+    {
+        id:9,
+        value:"Wood and Timber"
+    },
+    {
+        id:10,
+        value:"plastics"
+    },
+    {
+        id:11,
+        value:"Ceramics"
+    },
     // {
-    //     id:8,
-    //     value:"Sand and Stone"
-    // },
-    // {
-    //     id:9,
-    //     value:"Wood and Timber"
-    // },
-    // {
-    //     id:10,
-    //     value:"plastics"
-    // },
-    // {
-    //     id:10,
-    //     value:"Ceramics"
-    // },
-    // {
-    //     id:11,
+    //     id:12,
     //     value:"Cement"
     // },
     // {
-    //     id:12,
+    //     id:13,
     //     value:"Plumbing"
     // },
     // {
-    //     id:13,
+    //     id:14,
     //     value:"Security Systems"
     // },
     // {
-    //     id:14,
+    //     id:15,
     //     value:"Doors and Windows"
     // },
     // {
-    //     id:15,
+    //     id:16,
     //     value:"Telecomunications Equipment"
     // },
     // {
-    //     id:16,
+    //     id:17,
     //     value:"Building Safety"
     // },
     // {
-    //     id:17,
+    //     id:18,
     //     value: "Furniture"
     // },
     // {
-    //     id:18,
+    //     id:19,
     //     value:"Protection"
     // },
     // {
-    //     id:19,
+    //     id:20,
     //     value:"Roofing"
     // },
     // {
-    //     id:20,
+    //     id:21,
     //     value:"Conveyor Systems"
     // },
     // {
-    //     id:21,
+    //     id:22,
     //     value:"Composites"
     // },
     // {
-    //     id:22,
+    //     id:23,
     //     value:"Adhesives"
     // },
     // {
-    //     id:23,
+    //     id:24,
     //     value:"Others"
     // },
 ]
