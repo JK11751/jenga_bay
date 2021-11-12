@@ -37,7 +37,7 @@ https://www.figma.com/file/pCQcOANBwtEy4jPXioeBrU/Jenga-Bay-UI-Design?node-id=7%
 # Contribution Guide - Steps to Collaborate on the Repository for Team Members
 - [Contribution Guide](docs/CONTRIBUTING.md)
 - [Styling Guide](docs/STYLING.md)
-- [Contributing to Backend](running backend server)
+- [Contributing to Backend](run backend server)
 - [Contributing to Frontend](jenga_bay/frontend/README.md)
 - [Pull Request Guidelines](docs/MAKINGPRS.md)
 
