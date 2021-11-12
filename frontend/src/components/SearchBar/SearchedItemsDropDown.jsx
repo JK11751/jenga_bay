@@ -1,25 +1,20 @@
-import { Box, Modal,ModalBody,ModalContent,ModalOverlay } from "@chakra-ui/react";
+import { Box, List, ListItem } from "@chakra-ui/react";
 import React from "react";
-import { useDisclosure } from "@chakra-ui/hooks";
 
-const SearchedUsersDropdown = ({onOpen}) => {
-    const {isOpen, onClose} =useDisclosure()
+
+const SearchedUsersDropdown = ({options}) => {
+
     return(
-        <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalContent>
-                <ModalBody>
-                    <Box width="600px" bg="white" position="absolute" top="5vh" left="27.9vw">
-                        <li>This is a search item</li>
-                        <li>This is a search item</li>
-                        <li>This is a search item</li>
-                        <li>This is a search item</li>
-                        <li>This is a search item</li>
-                        <li>This is a search item</li>
-                        <li>This is a search item</li>
-                    </Box>
-                    </ModalBody>
-                </ModalContent>
-        </Modal>
+        <Box shadow="lg" borderTopWidth="1.9px" borderTopColor="gray.100" borderBottomRadius="10px" zIndex={1000}  width="600px" bg="white" position="absolute" top="6.6vh" left="27.9vw">
+            <List>
+            {!options.length && (
+                <p className='notFound-text'>No matches Found</p>
+            )}
+                {options.map((category) =>
+                (<ListItem padding="5px" key={category.id}>{category.value}</ListItem>)
+                )}
+            </List>
+        </Box>
     )
 }
 
