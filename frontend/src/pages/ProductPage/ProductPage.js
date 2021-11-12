@@ -5,6 +5,7 @@ import ItemDescription from "../../components/Products/ItemDescription";
 import ProductDetailsCard from "./subs/ProductDetailsCard";
 import {MdKeyboardArrowRight} from "react-icons/md"
 import { Icon } from "@chakra-ui/icon";
+import Footer from "../../components/PageSections/Footer"
  
 
 const ProductPage = ()=> {
@@ -22,6 +23,7 @@ const ProductPage = ()=> {
             </Box>
             <ProductDetailsCard />
             <ItemDescription/>
+            <Footer />
         </Box>
         
     )
