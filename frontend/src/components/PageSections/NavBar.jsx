@@ -30,6 +30,9 @@ const NavBar = () => {
   return (
     <>
       <Flex
+        position="sticky"
+        top={0}
+        zIndex="100"
         pl={10}
         pr={10}
         alignItems="center"

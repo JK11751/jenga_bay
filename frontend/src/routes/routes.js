@@ -9,6 +9,7 @@ import ProductPage from "../pages/ProductPage/ProductPage.js";
 import RegistrationPage from "../pages/CompanyRegistration/RegistrationPage.js";
 import CompanyProductUploadPage from "../pages/CompanyProductUploadPage/CompanyProductUploadPage.js";
 import CompanyProductPage from "../pages/CompanyProductPage/CompanyProductPage.js";
+import { Test } from "../components/Test.js";
 
 const routes =()=>{
     return(
@@ -33,6 +34,9 @@ const routes =()=>{
             </Route>
             <Route exact path="/product">
                 <ProductPage />
+            </Route>
+            <Route exact path="/test">
+                <Test />
             </Route>
             <Route exact path="/product/:productId" component={ProductPage}/>
         </Switch>

@@ -20,7 +20,6 @@
 
 .thumbnail:hover {
     transform: scale(1.1);
-    border: #476ff1 solid 3px;
 }
 
 .active-thumbnail {
