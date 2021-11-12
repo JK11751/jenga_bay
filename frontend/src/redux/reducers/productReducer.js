@@ -1,10 +1,10 @@
-import { GET_PRODUCTS, GET_PRODUCT } from "../actions/types";
+import { GET_PRODUCTS, GET_PRODUCT_DETAILS } from "../actions/types";
 
 //STEP 2 - stating initial state and defining actions
 //Thi sis the default state
 const initialState ={
     products:[],
-    productId:{},
+    productDetails:[],
 };
 
 const productReducer = (state = initialState, action) => {
@@ -18,10 +18,10 @@ const productReducer = (state = initialState, action) => {
                 ...state,
                 products:payload
             }     
-        case GET_PRODUCT:
+        case GET_PRODUCT_DETAILS:
             return{
                 ...state,
-                productId:payload
+                productDetails:payload
             } 
         default:
             return state;//returns defult state if no data is fetched

@@ -8,7 +8,7 @@ const Dot = ({ active }) => {
       css={css`
         padding: 5px;
         z-index: 30;
-        margin-right: 5px;
+        margin-right: 10px;
         cursor: pointer;
         border-radius: 50%;
         background: ${active ? 'blue' : 'white'};
