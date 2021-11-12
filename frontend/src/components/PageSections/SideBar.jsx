@@ -7,7 +7,42 @@ import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { Image } from "@chakra-ui/image";
 
+ // //function to set visibility of the search drop down and close it on click outside of the page
+// function useComponentVisible(initialIsVisible) {
+
+//     const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible);
+//     const ref = useRef(null);
+
+//    //function to hide dropdown
+//     const handleHideDropdown = (event) => {
+//       if (event.key === "Escape") {
+//         setIsComponentVisible(false);
+//       }
+//     };
+//     //function to close dropdown on outside click
+//     const handleClickOutside = event => {
+//       if (ref.current && !ref.current.contains(event.target)) {
+//         setIsComponentVisible(false);
+//       }
+//     };
+  
+//     //useEffect to listen to any click or keyboard press event
+//     useEffect(() => {
+//       document.addEventListener("keydown", handleHideDropdown, true);
+//       document.addEventListener("click", handleClickOutside, true);
+//       return () => {
+//         document.removeEventListener("keydown", handleHideDropdown, true);
+//         document.removeEventListener("click", handleClickOutside, true);
+//       };
+//     });
+  
+//     return { ref, isComponentVisible, setIsComponentVisible };
+// }
+
 const SideBar = ({ isOpen, handleClick }) => {
+
+// const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(true);
+
   return (
     <Slide
       direction="left"

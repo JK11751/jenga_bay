@@ -1,5 +1,5 @@
 import APIServices from "../../utils/apiServices";
-import {  GET_PRODUCT, GET_PRODUCTS, GET_USERS } from "./types";
+import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS } from "./types";
 
 // Redux actions are called here with an underscore before the name (convention)
 
@@ -42,7 +42,17 @@ export const handleGetProducts = () => async (dispatch) => {
 };
 
 //Getting a specific product
-export const getDetails = id => dispatch => {
-  dispatch({type: GET_PRODUCT, payload: id})
+const getProductDetails = (productDetails) => ({
+  type: GET_PRODUCT_DETAILS,
+  payload: productDetails,
+});
+
+export const handleGetProductDetails = (id) => async(dispatch) => {
+  try {
+    const { data } = await APIServices.getProductDetails(id);
+    await dispatch(getProductDetails(data));
+  } catch (error) {
+    console.log(`Error from handleGetRooms: ${error}`);
+  }
 }
 

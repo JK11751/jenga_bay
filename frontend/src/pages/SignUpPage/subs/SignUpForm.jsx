@@ -46,13 +46,13 @@ const SignUpForm = () => {
       },
       email:{
         pattern:{
-          value: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',
+          value: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$',
           message:"Please enter a valid email address"
         }
       },
       phoneNumber:{
         pattern:{
-          value: '^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$',
+          value: '^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$',
           message:"Please enter a valid phone number"
         },
         custom: {
