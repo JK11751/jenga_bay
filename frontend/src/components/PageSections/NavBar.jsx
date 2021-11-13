@@ -29,14 +29,14 @@ const NavBar = () => {
         position="sticky"
         top={0}
         zIndex="100"
-        pl={10}
-        pr={10}
+        pl={3}
+        pr={3}
         shadow="lg"
         alignItems="center"
         background="#007ACC"
         flexDir="column"
       >
-      <Flex alignSelf="flex-start" alignItems="center" height="60px" flexDir="row" ml="2vw">
+      <Flex alignSelf="flex-start" alignItems="center" height="60px" flexDir="row" mr="2.5vw" ml="2.5vw">
         <Box > 
           <Icon
             onClick={() => handleToggle(true)}
@@ -44,7 +44,7 @@ const NavBar = () => {
             as={FiMenu}
             h={10}
             w={7}
-            mr={2}
+            mr={6}
             mb={1}
           />
         </Box>
@@ -69,7 +69,7 @@ const NavBar = () => {
                     w={7}
                     as={MdOutlineAccountCircle}
                   />
-                  <Icon color="#555" h={5} w={4} as={IoIosArrowDown} />
+                  <Icon color="#fff" h={5} w={4} as={IoIosArrowDown} />
                 </HStack>
               </Button>
             </PopoverTrigger>

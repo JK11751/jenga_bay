@@ -47,7 +47,7 @@ const SearchBar = () => {
 
     return(
         <Flex flexDir="column">
-            <InputGroup ml="6vw">
+            <InputGroup ml="10vw">
                 <Input borderWidth="1.9px" onChange={onInputChange} onClick={(e) => {setClickedOutside(false)}} focusBorderColor = "blue" background="#ffffff" borderRadius="5px" width="554px" placeholder="search here..." size="md"/>
                 <InputRightAddon
                     pointerEvents="none"

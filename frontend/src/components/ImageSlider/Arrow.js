@@ -11,13 +11,13 @@ const Arrow = ({ direction, handleClick }) => {
       css={css`
         display: flex;
         position: absolute;
-        top: 50%;
-        ${direction === 'right' ? `right: -6vw` : `left: -6vw`};
+        top: 45%;
+        ${direction === 'right' ? `right: -4vw` : `left: -4vw`};
         height: 50px;
         width: 50px;
         justify-content: center;
-        color:white;
-        background: #007ACC;
+        color:black;
+        background: transparent;
         z-index:10;
         border-radius: 50%;
         cursor: pointer;
