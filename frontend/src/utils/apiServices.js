@@ -24,7 +24,7 @@ class APIServices {
     return api.get(`/`);
   }
   async getProductDetails(id){
-    return api.get(`/?id=1`);
+    return api.get(`/items/${id}`);
   }
 }
 

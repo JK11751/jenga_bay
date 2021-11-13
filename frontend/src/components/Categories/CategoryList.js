@@ -43,58 +43,58 @@ const CategoryList = [
         id:11,
         value:"Ceramics"
     },
-    // {
-    //     id:12,
-    //     value:"Cement"
-    // },
-    // {
-    //     id:13,
-    //     value:"Plumbing"
-    // },
-    // {
-    //     id:14,
-    //     value:"Security Systems"
-    // },
-    // {
-    //     id:15,
-    //     value:"Doors and Windows"
-    // },
-    // {
-    //     id:16,
-    //     value:"Telecomunications Equipment"
-    // },
-    // {
-    //     id:17,
-    //     value:"Building Safety"
-    // },
-    // {
-    //     id:18,
-    //     value: "Furniture"
-    // },
-    // {
-    //     id:19,
-    //     value:"Protection"
-    // },
-    // {
-    //     id:20,
-    //     value:"Roofing"
-    // },
-    // {
-    //     id:21,
-    //     value:"Conveyor Systems"
-    // },
-    // {
-    //     id:22,
-    //     value:"Composites"
-    // },
-    // {
-    //     id:23,
-    //     value:"Adhesives"
-    // },
-    // {
-    //     id:24,
-    //     value:"Others"
-    // },
+    {
+        id:12,
+        value:"Cement"
+    },
+    {
+        id:13,
+        value:"Plumbing"
+    },
+    {
+        id:14,
+        value:"Security Systems"
+    },
+    {
+        id:15,
+        value:"Doors and Windows"
+    },
+    {
+        id:16,
+        value:"Telecomunications Equipment"
+    },
+    {
+        id:17,
+        value:"Building Safety"
+    },
+    {
+        id:18,
+        value: "Furniture"
+    },
+    {
+        id:19,
+        value:"Protection"
+    },
+    {
+        id:20,
+        value:"Roofing"
+    },
+    {
+        id:21,
+        value:"Conveyor Systems"
+    },
+    {
+        id:22,
+        value:"Composites"
+    },
+    {
+        id:23,
+        value:"Adhesives"
+    },
+    {
+        id:24,
+        value:"Others"
+    },
 ]
 
 export default CategoryList;
