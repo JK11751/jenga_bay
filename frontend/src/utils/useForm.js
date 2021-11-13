@@ -1,3 +1,9 @@
+/*
+    This is a custom validation react hook created to make validation easier 
+    since we have so many forms that require validation. Instead of doing validation as someone fills the form
+    it does validation after filling the form to prevent re-renders
+*/
+
 import {useState} from 'react'
 
 export const useForm = (options) => {
@@ -31,18 +37,22 @@ export const useForm = (options) => {
             const newErrors = {};
             for (const key in validations) {
                 const value = data[key];
-                const validation = validations[key];
+                const validation = validations[key];//gets key for each validation
+
+                //checks for validation for required fields
                 if (validation?.required?.value && !value) {
                     valid = false;
                     newErrors[key] = validation?.required?.message;
                 }
 
+                //checks for validations that require regex patterns
                 const pattern = validation?.pattern;
                 if (pattern?.value && !RegExp(pattern.value).test(value)) {
                     valid = false;
                     newErrors[key] = pattern.message;
                 }
 
+                //checks for custom validations
                 const custom = validation?.custom;
                 if (custom?.isValid && !custom.isValid(value)) {
                     valid = false;
@@ -50,14 +60,16 @@ export const useForm = (options) => {
                 }
             }
 
+            //if validation fails, it returns the errors
             if (!valid) {
                 setErrors(newErrors);
                 return;
             }
         }
-
+        //otherwise set errors to empty object
         setErrors({});
 
+        //proceed to execute the onsubmit function
         if (options?.onSubmit) {
           options.onSubmit();
         }
@@ -68,5 +80,5 @@ export const useForm = (options) => {
         handleChange,
         handleSubmit,
         errors,
-      };
+    };
 };

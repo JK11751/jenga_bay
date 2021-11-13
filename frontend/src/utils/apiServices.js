@@ -23,8 +23,11 @@ class APIServices {
   async getProducts(){
     return api.get(`/`);
   }
-  async getProductDetails(id){
-    return api.get(`/?id=1`);
+  async getProductDetails(item_id){
+    return api.get(`/items/${item_id}`);
+  }
+  async getSellerDetails(seller_id){
+    return api.get(`/sellers/${seller_id}`);
   }
 }
 

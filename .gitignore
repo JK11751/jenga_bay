@@ -133,3 +133,6 @@ dmypy.json
 /media/images
 /media/images/product
 /media/images/profile
+
+#migrations
+jengabay/migrations/0006_auto_20211113_1008.py

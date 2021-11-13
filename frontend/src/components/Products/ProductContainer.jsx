@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 const ProductContainer = () =>{
+    const [isloading, setisloading] = React.useState(true)
     
     //setting the product list to be rendered
     // const[data, setData] = useState({products: [] });
@@ -17,6 +18,7 @@ const ProductContainer = () =>{
     useEffect(() => {
         dispatch(handleGetProducts())// dispatches the action to get the data from the api
         // setData(productReducer)
+        setisloading(false)
     }, [dispatch]);
 		
     console.log(productReducer)
@@ -27,7 +29,7 @@ const ProductContainer = () =>{
         <Flex ml="5vw" borderRadius="10px" width="90vw" alignSelf="center" flexWrap="wrap" pl={3} pr={3}>
             {productReducer.products.map((product)=>{ 
             return(
-                <ProductCard id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
+                <ProductCard isloading={isloading} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
             )
             })}
             
