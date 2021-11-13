@@ -53,14 +53,20 @@ class ItemSerializer(serializers.ModelSerializer):
         model = Item
         fields = "__all__"
 
-class OrderSerializer(serializers.ModelSerializer):
-    customer = serializers.PrimaryKeyRelatedField(queryset=Buyer.objects.all())
-    class Meta:
-        model = Order
-        fields = "__all__"
-
 class ItemViewSerializer(serializers.ModelSerializer):
     item_seller = SellerSerializer(many=False)
     class Meta:
         model = Item
+        fields = "__all__"
+
+class TransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = "__all__"
+
+class OrderSerializer(serializers.ModelSerializer):
+    customer = serializers.PrimaryKeyRelatedField(queryset=Buyer.objects.all())
+    payment_transaction = serializers.PrimaryKeyRelatedField(queryset=Transaction.objects.all(), many=True)
+    class Meta:
+        model = Order
         fields = "__all__"
