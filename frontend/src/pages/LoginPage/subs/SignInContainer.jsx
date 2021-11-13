@@ -4,7 +4,7 @@ import React from "react"
 //import SignUpForm from "../../SignUp/subs/SignUpForm";
 import { Image } from "@chakra-ui/image";
 import { Button } from "@chakra-ui/button";
-import logo from "../../../assets/logo.png"
+import logo from "../../../assets/JengaBay.png"
 import SignInForm from "./SignInForm";
 const SignInContainer = () => {
     return(  

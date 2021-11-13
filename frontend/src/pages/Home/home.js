@@ -10,7 +10,7 @@ import AdsCarousel from "./AdsCarousel";
 const Home = () => {
     // const img = "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg"
     return(
-        <Box bgColor="#EAEDED" flexDir="column" width="100vw" height="100vh">
+        <Box bgColor="#fff" flexDir="column" width="100vw" height="100vh">
             <NavBar />
             <Box alignSelf="center" ml="5vw" mt={5}>
                 <AdsCarousel alignSelf="center"/>

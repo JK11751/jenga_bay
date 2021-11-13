@@ -3,7 +3,7 @@ import NavBar from '../../components/PageSections/NavBar'
 import Footer from "../../components/PageSections/Footer"
 import CategoryChips from "../../components/Categories/CategoryChips"
 import ProductsContainer from "./subs/ProductsContainer"
-// import logo from "../../assets/logo.png"
+// import logo from "../../assets/JengaBay.png"
 import { Box, Flex} from '@chakra-ui/layout'
 // import { Image } from '@chakra-ui/image'
 

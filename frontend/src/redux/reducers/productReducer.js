@@ -4,7 +4,7 @@ import { GET_PRODUCTS, GET_PRODUCT_DETAILS } from "../actions/types";
 //Thi sis the default state
 const initialState ={
     products:[],
-    productDetails:[],
+    productDetails:{},
 };
 
 const productReducer = (state = initialState, action) => {

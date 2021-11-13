@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { SliderData } from "./SliderData";//test data
+// import { SliderData } from "./SliderData";//test data
 import "./ImageSlider.css"
 import { Flex, HStack } from "@chakra-ui/layout";
+import { useSelector } from "react-redux";
 
 //component imports
 import Dots from "./Dots";
@@ -25,6 +26,15 @@ function scrollTo(el) {
 
 
 const ImageSlider = () => {
+
+    const productData = useSelector((state) => state.productReducer).productDetails;
+    const SliderData = [
+        {image: productData.item_main_image},
+        {image: productData.item_extra_image1},
+        {image: productData.item_extra_image2},
+        {image: productData.item_extra_image3},
+        {image: productData.item_extra_image4},
+    ]
 
     const [current, setCurrent] = useState(0)
     const length = SliderData.length
@@ -72,7 +82,7 @@ const ImageSlider = () => {
             <HStack mt="5vh" alignItems="center" zIndex="20">
                 {SliderData.map((slide,index) => {
                     return(
-                        <img onClick={(e) => {setCurrent(index)}} id={`thumbnail-${index}`} key={index} className="thumbnail" src={slide.image} alt="product thumbnails"/>
+                        <img onClick={(e) => {setCurrent(index)}} id={`thumbnail-${index}`} key={index} className="thumbnail" src={slide.image} alt="thumbnail"/>
                     )
                 })}
             </HStack>

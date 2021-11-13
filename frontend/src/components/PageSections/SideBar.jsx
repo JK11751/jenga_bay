@@ -1,76 +1,74 @@
-import React from "react";
-import logo from "../../assets/logo.png"
+import React, {useEffect,useState, useRef} from "react";
+import logo from "../../assets/JengaBay.png"
 import { Box,HStack, VStack, Text, Divider, Flex } from "@chakra-ui/layout";
 import { Slide } from "@chakra-ui/transition";
-import { IconButton } from "@chakra-ui/button";
-import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { Image } from "@chakra-ui/image";
+import { BiMenu } from "react-icons/bi";
+import { Icon } from "@chakra-ui/icon";
 
- // //function to set visibility of the search drop down and close it on click outside of the page
-// function useComponentVisible(initialIsVisible) {
 
-//     const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible);
-//     const ref = useRef(null);
+const SideBar = ({ show, handleToggle }) => {
 
-//    //function to hide dropdown
-//     const handleHideDropdown = (event) => {
-//       if (event.key === "Escape") {
-//         setIsComponentVisible(false);
-//       }
-//     };
-//     //function to close dropdown on outside click
-//     const handleClickOutside = event => {
-//       if (ref.current && !ref.current.contains(event.target)) {
-//         setIsComponentVisible(false);
-//       }
-//     };
-  
-//     //useEffect to listen to any click or keyboard press event
-//     useEffect(() => {
-//       document.addEventListener("keydown", handleHideDropdown, true);
-//       document.addEventListener("click", handleClickOutside, true);
-//       return () => {
-//         document.removeEventListener("keydown", handleHideDropdown, true);
-//         document.removeEventListener("click", handleClickOutside, true);
-//       };
-//     });
-  
-//     return { ref, isComponentVisible, setIsComponentVisible };
-// }
+  //handles closing of the sidebar when someone clicks outside
+  function OutsideClick(ref) {
+    const [isClicked, setIsClicked] = useState(false);
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          setIsClicked(true);
+          handleToggle(false)
+        } else {
+          setIsClicked(false);
+          // onToggle()
+        }
+      }
+    
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+      return isClicked;
+  }
 
-const SideBar = ({ isOpen, handleClick }) => {
-
-// const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(true);
+  const boxRef = useRef(null);
+  // boxOutsideClick will be true on outside click
+  const boxOutsideClick = OutsideClick(boxRef); 
 
   return (
+    <>
+    {!boxOutsideClick && 
     <Slide
       direction="left"
-      in={isOpen}
+      in={show}
       style={{ height: "100vh", width: "300px", zIndex: 100 }}
     >
-      <VStack color="black" bg="#F5F5F5" h="100vh" w="250px">
+     <VStack ref={boxRef} color="black" bg="#F5F5F5" h="100vh" w="250px">
         <VStack spacing="10px" p={5} width="100%" color="white">
         <HStack spacing="50px">
+        <Icon
+          onClick={() => handleToggle(false)}
+          color="#fff"
+          mr={5}
+          as={BiMenu}
+          h={7}
+          w={7}
+          alignSelf="flex-start"
+            />
         <Flex flexShrink={0}>
             <Link to="/"><Image src={logo}/></Link>
         </Flex>
-          <IconButton
-            w="20px"
-            alignSelf="flex-end"
-            aria-label="Close Control Panel"
-            icon={<IoMdClose />}
-            onClick={handleClick}
-            color="black"
-          /></HStack>
+          </HStack>
           <Divider colorScheme="black" size="100%" orientation="horizontal" />
         </VStack>
         <Box p={5}  m="5px">
+          <Text></Text>
           <Text>Home</Text>
         </Box>
         {/* Insert other contents */}
       </VStack>
-    </Slide>
+    </Slide>}</>
   );
 };
 export default SideBar;

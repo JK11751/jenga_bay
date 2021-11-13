@@ -23,7 +23,7 @@ const SearchBar = () => {
         }
 
        const newOptions = CategoryList.filter((category) => 
-            category.value.includes(event.target.value))
+            category.value.toLowerCase().includes(event.target.value))
  
        setOptions(newOptions)
     }
@@ -47,7 +47,7 @@ const SearchBar = () => {
 
     return(
         <Flex flexDir="column">
-            <InputGroup ml="9vw">
+            <InputGroup ml="6vw">
                 <Input borderWidth="1.9px" onChange={onInputChange} onClick={(e) => {setClickedOutside(false)}} focusBorderColor = "blue" background="#ffffff" borderRadius="5px" width="554px" placeholder="search here..." size="md"/>
                 <InputRightAddon
                     pointerEvents="none"

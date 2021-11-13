@@ -1,5 +1,5 @@
-import React from 'react'
-import { Flex, VStack, Text, HStack, Box, Divider } from "@chakra-ui/layout";
+import React, {useEffect} from 'react'
+import { Flex, VStack, Text, HStack, Box} from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import Icon from "@chakra-ui/icon";
 import { MdAdd } from "react-icons/md";
@@ -15,9 +15,9 @@ Stat,
 StatNumber,
 } from "@chakra-ui/react";
 import Rating from "../../../components/Products/Rating";
-// import { handleGetProductDetails } from '../../../redux/actions/appActions';
-// import {useDispatch,useSelector} from "react-redux"
-// import {useParams} from "react-router";
+import { handleGetProductDetails } from '../../../redux/actions/appActions';
+import {useDispatch,useSelector} from "react-redux"
+import {useParams} from "react-router";
 
 const data = {
   rating: 4.5,
@@ -29,19 +29,15 @@ const styling = {
 };
 
 export const ProductDetails = () => {
-  // let { productId } = useParams()
-  // const dispatch = useDispatch()
+  let { productId } = useParams()
+  const dispatch = useDispatch()
+  const productData = useSelector((state) => state.productReducer).productDetails;
   // const productReducer = useSelector(({ productReducer }) => productReducer);
 
-  // const product = async () => { 
-  //   await dispatch(handleGetProductDetails(productId));
-  // };
-
-  // useEffect(() => {
-    
-  //   product()
-  //   // dispatch(handleGetProductDetails(productId))
-  // }, [])
+  useEffect(() => {
+  
+    dispatch(handleGetProductDetails(productId))
+  }, [productId,dispatch])
 
   const [count, setCount] = React.useState(0)
   const [value, setValue] = React.useState(0)
@@ -72,11 +68,10 @@ export const ProductDetails = () => {
         fontFamily="monospace"
         fontSize="20px"
       >
-        Bamburi Cement
-        {/* {productReducer.productDetails[0].item_name} */}
+        {productData.item_seller}
       </Box>
       <Text fontFamily="monospace" fontSize="2em">
-        50 meter roofing ironsheets 55"
+      {productData.item_name}
       </Text>
       <Flex>
         <Rating {...styling} rating={data.rating} />
@@ -91,10 +86,7 @@ export const ProductDetails = () => {
         </Stat>
       </Box>
       <Text fontFamily="sans-serif" fontSize="15px">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a neque
-        orci. Vivamus nisl tortor, sollicitudin in augue vitae, dictum
-        imperdiet orci. Vestibulum ut ligula nulla. Nam id tortor vel risus
-        dapibus viverra
+      {productData.item_description}
       </Text>
       <p>----------------------------------------------------------------</p>
     

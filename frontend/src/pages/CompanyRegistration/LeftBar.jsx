@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/image";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/JengaBay.png";
 import RegistrationForm from "./RegistrationForm";
 
 const LeftBar=()=> {

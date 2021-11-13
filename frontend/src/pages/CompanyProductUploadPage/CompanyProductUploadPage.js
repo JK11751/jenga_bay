@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/image";
 import UploadForm from "./UploadForm";
-import logo from "../../assets/logo.png"
+import logo from "../../assets/JengaBay.png"
 const CompanyProductUploadPage=()=> {
   return (
     <Box >

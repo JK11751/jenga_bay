@@ -1,11 +1,12 @@
 import React from "react";
 import { VStack, Flex, HStack, Spacer,Box } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
-import icon from "../../assets/logo.png";
+import icon from "../../assets/JengaBay.png";
 import { Button } from "@chakra-ui/button";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
-import { BiMenu, BiMenuAltLeft, BiCartAlt } from "react-icons/bi";
+import { BiCartAlt } from "react-icons/bi";
+import { FiMenu } from "react-icons/fi"
 import { IoIosArrowDown } from "react-icons/io";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -16,17 +17,12 @@ import {
   PopoverContent,
   PopoverBody,
 } from "@chakra-ui/react";
-import { useDisclosure } from "@chakra-ui/hooks";
 import SideBar from "./SideBar";
 
 const NavBar = () => {
-  const { isOpen, onToggle } = useDisclosure();
-  const [showMenu, setShowMenu] = React.useState(true);
+  const [show, setShow] = React.useState(false)
+  const handleToggle = (setting) => setShow(setting)
 
-  const handleClick = () => {
-    setShowMenu(!showMenu);
-    onToggle();
-  };
   return (
     <>
       <Flex
@@ -35,31 +31,22 @@ const NavBar = () => {
         zIndex="100"
         pl={10}
         pr={10}
+        shadow="lg"
         alignItems="center"
         background="#007ACC"
         flexDir="column"
       >
       <Flex alignSelf="flex-start" alignItems="center" height="60px" flexDir="row" ml="2vw">
-      <Box > 
-            {showMenu ? (
+        <Box > 
           <Icon
-            onClick={handleClick}
+            onClick={() => handleToggle(true)}
             color="#fff"
-            mr={5}
-            as={BiMenu}
-            h={7}
+            as={FiMenu}
+            h={10}
             w={7}
+            mr={2}
+            mb={1}
           />
-        ) : (
-          <Icon
-            onClick={handleClick}
-            color="#fff"
-            mr={5}
-            as={BiMenuAltLeft}
-            h={7}
-            w={7}
-          />
-        )}
         </Box>
         <Flex alignSelf="center" flexShrink={0}>
           <Link to="/">
@@ -70,19 +57,19 @@ const NavBar = () => {
         <SearchBar />
         <Spacer />
         <HStack ml="12vw" spacing="20px">
-          <Icon color="#ffffff" h={7} w={7} as={IoMdNotificationsOutline} />
-          <Icon color="#ffffff" h={7} w={7} as={BiCartAlt} />
+          <Icon color="#fff" h={7} w={7} as={IoMdNotificationsOutline} />
+          <Icon color="#fff" h={7} w={7} as={BiCartAlt} />
           <Popover mr={5} isLazy>
             <PopoverTrigger>
               <Button variant="ghost">
                 <HStack>
                   <Icon
-                    color="#ffffff"
+                    color="#fff"
                     h={7}
                     w={7}
                     as={MdOutlineAccountCircle}
                   />
-                  <Icon color="#ffffff" h={5} w={4} as={IoIosArrowDown} />
+                  <Icon color="#555" h={5} w={4} as={IoIosArrowDown} />
                 </HStack>
               </Button>
             </PopoverTrigger>
@@ -97,7 +84,7 @@ const NavBar = () => {
                       fontSize="13px"
                       w="130px"
                       textColor="#18A0FB"
-                      background="#ffffff"
+                      background="#fff"
                       variant="outline"
                     >
                       Sign Up
@@ -110,7 +97,7 @@ const NavBar = () => {
                       alignItems="center"
                       fontWeight="500"
                       fontSize="13px"
-                      textColor="#ffffff"
+                      textColor="#000"
                       colorScheme="#18A0FB"
                       background="#18A0FB"
                       variant="solid"
@@ -125,7 +112,7 @@ const NavBar = () => {
         </HStack>
         </Flex>
       </Flex>
-      <SideBar isOpen={isOpen} handleClick={handleClick} />
+      <SideBar show={show} handleToggle={handleToggle} />
     </>
   );
 };
