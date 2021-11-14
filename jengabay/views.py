@@ -6,43 +6,65 @@ from .models import *
 
 # Create your views here.
 class SellerListCreateView(ListCreateAPIView):
-    """View class for creating new sellers and listing all registered sellers data"""
+    """api for creating new sellers and listing all registered sellers data"""
 
     serializer_class = SellerSerializer
     queryset = Seller.objects.all().filter(is_registered=True)
 
-class SpecificSellerView(RetrieveUpdateDestroyAPIView):
-    """View class used to get, update and delete a specific seller"""
+class SpecificSellerProfileView(RetrieveUpdateDestroyAPIView):
+    """api used to get, update and delete a specific seller"""
 
     serializer_class = SellerSerializer
     queryset = Seller.objects.all()
 
-class SpecificItemView(RetrieveUpdateDestroyAPIView):
-    """View class used to get, update or delete an item"""
+class SpecificSellerView(ListAPIView):
+    """api used to get a specific seller"""
 
-    serializer_class = ItemSerializer
-    queryset = Item.objects.all()
+    serializer_class = SellerSerializer
 
-class AllItemsView(ListAPIView):
-    """View class used to list all items in the database exclusive
-    of the foreign key fields data"""
+    def get_queryset(self):
+        return Seller.objects.all().filter(id=self.kwargs['pk'])
 
-    serializer_class = ItemSerializer
-    queryset = Item.objects.all()
+class SpecificItemView(ListAPIView):
+    """api used to get a specific item"""
 
-class AllItemsListCreateView(ListCreateAPIView):
-    """View class used to create and list all items in the database inclusive
-    of the foreign key fields data"""
+    serializer_class = ItemViewSerializer
+    
+    def get_queryset(self):
+        return Item.objects.all().filter(id=self.kwargs['pk'])
+
+class SpecificSellerSpecificItemView(RetrieveUpdateDestroyAPIView):
+    """api used to get, update and delete a specific item in a specific seller page"""
 
     serializer_class = ItemViewSerializer
     queryset = Item.objects.all()
 
-class SpecificSellerItemsView(ListAPIView):
-    """View class for listing all items belonging to a specific seller"""
+class AllItemsListView(ListAPIView):
+    """api listing all items in the database"""
+
+    serializer_class = ItemViewSerializer
+    queryset = Item.objects.all()
+
+class SpecificSellerItemsView(ListCreateAPIView):
+    """api for listing and creating items belonging to a specific seller"""
     
-    serializer_class = ItemSerializer
+    serializer_class = ItemViewSerializer
     def get_queryset(self):
         return Item.objects.all().filter(item_seller=self.kwargs['pk'])
+
+class HomePageItemsCategoryView(ListAPIView):
+    """api listing all items belonging to a certain category in the home page"""
+    
+    serializer_class = ItemViewSerializer
+    def get_queryset(self):
+        return Item.objects.all().filter(category=self.kwargs['category'])
+
+class SellerPageItemsCategoryView(ListAPIView):
+    """api listing all items belonging to a certain category in a specific seller page"""
+    
+    serializer_class = ItemViewSerializer
+    def get_queryset(self):
+        return Item.objects.all().filter(category=self.kwargs['category']).filter(item_seller=self.kwargs['pk'])
 
 class OrderListCreateView(ListCreateAPIView):
     serializer_class = OrderSerializer

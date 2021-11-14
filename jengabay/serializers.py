@@ -47,12 +47,6 @@ class BuyerSerializer(serializers.ModelSerializer):
         model = Buyer
         fields = "__all__"
 
-class ItemSerializer(serializers.ModelSerializer):
-    item_seller = serializers.PrimaryKeyRelatedField(queryset=Seller.objects.all())
-    class Meta:
-        model = Item
-        fields = "__all__"
-
 class ItemViewSerializer(serializers.ModelSerializer):
     item_seller = SellerSerializer(many=False)
     class Meta:
