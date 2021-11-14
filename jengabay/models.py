@@ -3,7 +3,7 @@ from django.db.models.deletion import CASCADE, PROTECT
 from datetime import datetime, timezone
 
 class County(models.Model):
-    '''Creates county instances'''
+    '''Creates county entity instances'''
     county_name = models.CharField(max_length=100)
     code = models.IntegerField()
 
@@ -13,7 +13,7 @@ class County(models.Model):
 
 
 class SubCounty(models.Model):
-    '''Creates subcounty instances'''
+    '''Creates subcounty entity instances'''
     subcounty_name = models.CharField(max_length=100)
     county = models.ForeignKey(County, on_delete=PROTECT)
 
@@ -23,7 +23,7 @@ class SubCounty(models.Model):
 
 
 class Seller(models.Model):
-    '''Creates seller instances'''
+    '''Creates seller entity instances'''
     business_name = models.CharField(max_length=200, null=False)
     business_reg_no = models.CharField(max_length=100, null=False)
     email = models.EmailField(null=False)
@@ -45,7 +45,7 @@ class Seller(models.Model):
 
 
 class Buyer(models.Model):
-    '''Creates buyer instances'''
+    '''Creates buyer entity instances'''
     buyer_name = models.CharField(max_length=100, null=False)
     email_address = models.EmailField(null=False)
     phone_number = models.CharField(max_length=15, null=False)
@@ -57,8 +57,9 @@ class Buyer(models.Model):
 
 
 class Item(models.Model):
-    '''Creates instances of a product'''
+    '''Creates instances of an item entity'''
 
+    #Item category options
     options = (
         ("metal and steel work", "Metal and Steel Work"),
         ("cement", "Cement"),
@@ -87,15 +88,19 @@ class Item(models.Model):
         ("adhesives", "Adhesives"),
         ("others", "Others"),
     )
+
     item_name = models.CharField(max_length=100, null=False)
     item_description = models.TextField(null=True)
     item_seller = models.ForeignKey(Seller, on_delete=CASCADE)
+    item_price = models.FloatField(null=False)
+    item_measurement_unit = models.CharField(max_length=100, null=False)
     item_main_image = models.ImageField(upload_to='images/product', default='images/product/main.jpg', null=False)
     item_extra_image1 = models.ImageField(upload_to='images/product', default='images/product/extra1.jpg', null=True)
     item_extra_image2 = models.ImageField(upload_to='images/product', default='images/product/extra2.jpg', null=True)
     item_extra_image3 = models.ImageField(upload_to='images/product', default='images/product/extra3.jpg', null=True)
     item_extra_image4 = models.ImageField(upload_to='images/product', default='images/product/extra4.jpg', null=True)
-    category = models.CharField(max_length=50, choices=options, default = 'uncategorized')
+    category = models.CharField(max_length=50, choices=options, default = 'others')
+
     def __str__(self):
         '''returns a string representation of an instance of this model'''
         return self.item_name
@@ -103,7 +108,26 @@ class Item(models.Model):
     def __unicode__(self):
         return self.pk
 
+class Transaction(models.Model):
+    """Creates instances of a payment transaction"""
+
+    t_mode = (
+        ("m-pesa", "M-pesa"),
+    )
+
+    transaction_mode = models.CharField(max_length=100, choices=t_mode, null=False)
+    date = models.DateTimeField(default=datetime.now, null=False)
+    amount = models.FloatField(null=False)
+    transaction_code = models.CharField(max_length=200, null=False)
+
 class Order(models.Model):
+    """Creats an instance of an order entity"""
+
     customer = models.ForeignKey(Buyer, null=False, on_delete=PROTECT)
     ordered_items = models.ManyToManyField(Item)
     date_placed = models.DateTimeField(default=datetime.now, null=True)
+    total_amount_payable = models.FloatField(null=False)
+    seller = models.ForeignKey(Seller, null=False, on_delete=PROTECT)
+    is_delivered = models.BooleanField(default=False, null=False)
+    date_delivered = models.DateTimeField(null=True)
+    payment_transaction = models.ForeignKey(Transaction, on_delete=PROTECT, null=True)

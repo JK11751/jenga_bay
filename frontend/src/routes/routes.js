@@ -9,18 +9,14 @@ import ProductPage from "../pages/ProductPage/ProductPage.js";
 import RegistrationPage from "../pages/CompanyRegistration/RegistrationPage.js";
 import CompanyProductUploadPage from "../pages/CompanyProductUploadPage/CompanyProductUploadPage.js";
 import CompanyProductPage from "../pages/CompanyProductPage/CompanyProductPage.js";
+import { CategoryPage } from "../pages/CategoriesPage/CategoryPage.js";
+// import Test from "../components/Test.js";
 
 const routes =()=>{
     return(
         <Switch>
             <Route exact path="/">
                 <Home />
-            </Route>
-            <Route exact path="/upload">
-                <CompanyProductUploadPage />
-            </Route>
-            <Route exact path="/profile">
-                <CompanyProductPage />
             </Route>
             <Route exact path="/sign-up">
                 <SignUpPage />
@@ -35,6 +31,18 @@ const routes =()=>{
                 <ProductPage />
             </Route>
             <Route exact path="/product/:productId" component={ProductPage}/>
+            <Route exact path="/upload">
+                <CompanyProductUploadPage />
+            </Route>
+            <Route exact path="/profile">
+                <CompanyProductPage />
+            </Route>
+            <Route exact path="/category">
+                <CategoryPage />
+            </Route>
+            {/* <Route exact path="/test">
+                <Test/>
+            </Route> */}
         </Switch>
     )
 }

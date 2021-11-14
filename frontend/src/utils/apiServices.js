@@ -23,6 +23,12 @@ class APIServices {
   async getProducts(){
     return api.get(`/`);
   }
+  async getProductDetails(item_id){
+    return api.get(`/items/${item_id}`);
+  }
+  async getSellerDetails(seller_id){
+    return api.get(`/sellers/${seller_id}`);
+  }
 }
 
 const instance = new APIServices();//an instance of axios that can be used globally

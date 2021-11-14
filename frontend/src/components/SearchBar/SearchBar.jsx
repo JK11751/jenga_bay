@@ -1,24 +1,62 @@
-import React from "react"
-import { Input, InputGroup, InputLeftElement } from "@chakra-ui/input"
+import React, {useState,useRef,useEffect} from "react"
+import { Input, InputGroup, InputRightAddon } from "@chakra-ui/input"
 import {BiSearchAlt2} from "react-icons/bi"
-// import { Button } from "@chakra-ui/button"
 import {Flex} from "@chakra-ui/layout"
 import SearchedUsersDropdown from "./SearchedItemsDropDown"
-import { useDisclosure } from "@chakra-ui/hooks"
+import CategoryList from "../Categories/CategoryList";
+
 
 const SearchBar = () => {
-    const {onOpen} = useDisclosure()
+    
+    const [options, setOptions] = useState([])
+    const [searchModalOpen, setSearchModalOpen] = useState("")
+
+    //handles change in input
+    const onInputChange = (event) => {
+        const searchInput = event.target.value
+        console.log(searchInput)
+
+        if (searchInput) {
+            setSearchModalOpen(true);
+        } else {
+            setSearchModalOpen(false);
+        }
+
+       const newOptions = CategoryList.filter((category) => 
+            category.value.toLowerCase().includes(event.target.value))
+ 
+       setOptions(newOptions)
+    }
+
+    //handles closing of search when clicking anywhere outside the modal
+    const [clickedOutside, setClickedOutside] = useState(false);
+    const myRef = useRef();
+
+    const handleClickOutside = e => {
+        if (!myRef.current.contains(e.target)) {
+        setClickedOutside(true);
+        }
+    };
+
+    //useEffect to listen to any click events
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    });
+    
+
     return(
         <Flex flexDir="column">
-        <InputGroup ml="13vw">
-            <InputLeftElement
-                pointerEvents="none"
-                children={<BiSearchAlt2 />}
-            />
-            <Input onChange={onOpen} background="#ffffff" borderRadius="50px" width="600px" placeholder="search here..." size="md"/>
-        </InputGroup>
-        {/* <Button fontWeight="normal" pl={3} pr={3} width="100px" height="35px" borderRadius="50px">search</Button> */}
-        <SearchedUsersDropdown />
+            <InputGroup ml="10vw">
+                <Input borderWidth="1.9px" onChange={onInputChange} onClick={(e) => {setClickedOutside(false)}} focusBorderColor = "blue" background="#ffffff" borderRadius="5px" width="554px" placeholder="search here..." size="md"/>
+                <InputRightAddon
+                    pointerEvents="none"
+                    children={<BiSearchAlt2 />}
+                />
+            </InputGroup>
+            <div ref={myRef}>
+             { !clickedOutside && searchModalOpen && <SearchedUsersDropdown options={options} />}
+            </div>
         </Flex>
     )
 }

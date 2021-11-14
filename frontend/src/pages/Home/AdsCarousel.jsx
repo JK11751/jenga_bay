@@ -13,7 +13,7 @@ const AdsCarousel = () => {
       
         <Carousel
             data={dummyData}
-            time={2000}
+            time={6000}
             height="400px" 
             width="90vw"
             captionStyle={captionStyle}

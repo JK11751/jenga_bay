@@ -15,6 +15,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import Rating from "./Rating";
 import {motion} from "framer-motion"
 import { Badge } from "@chakra-ui/layout";
+import { Spinner } from "@chakra-ui/spinner";
 
 const data = {
   isNew: true,
@@ -29,11 +30,12 @@ const data = {
 function ProductCard(props) {
     const MotionBox = motion(Box)
   return (
-    <Flex flexDir="row" p={2}  mr={4} >
+    <Flex flexDir="row" p={2}  mr={1} >
       <Link to={{ pathname: `/product/${props.id}` }}>
         <MotionBox
           bg={useColorModeValue("white", "gray.800")}
-          width="3xs"
+          width="180px"
+          height="300px"
           borderWidth="1px"
           rounded="lg"
           shadow="lg"
@@ -47,34 +49,41 @@ function ProductCard(props) {
               position="absolute"
               top={2}
               right={2}
-              bg="red.200"
-              colorScheme="red" 
+              bg="#1EE164"
+              color="white" 
               rounded="full" 
               px="2"
               fontSize="0.8em"
             >New</Badge>
           )}
-
-          <Image
+          { props.isloading ?
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+          :<Image
             sx={{objectFit:"cover"}}
             src={props.photo}
-            h="200px"
+            h="180px"
             w="100%"
             alt={`Picture of ${props.name}`}
             roundedTop="lg"
           />
+          }
 
-          <Box p="6">
+          <Box pl="4" pr="6" pt="3">
             <Box d="flex" alignItems="baseline">
               <HStack>
-                {/* <Avatar size="sm" src={props.company_image}/> */}
-                <Box as="span" textTransform="uppercase" fontWeight="light">
+                <Box fontSize="12px" as="span" textTransform="uppercase" fontWeight="normal">
                   {props.companyName}
                 </Box>
                  {data.isNew && (
                       <Circle
-                        size="10px"
-                        bg="red.200"
+                        size="8px"
+                        bg="#1EE164"
                       />
                   )}
               </HStack>
@@ -84,20 +93,21 @@ function ProductCard(props) {
               mt="1"
               justifyContent="space-between"
               alignContent="center"
-              fontSize="xl"
+              fontSize="md"
               fontWeight="semibold"
-              as="h5"
+              as="span"
               lineHeight="tight"
               isTruncated
+              
             >
               {props.name}
             </Box>
-            <Flex justifyContent="space-between" alignContent="center">
+            <Flex mt="5px" justifyContent="space-between" alignContent="center">
               <Box
-                fontSize="2xl"
+                fontSize="lg"
                 color={useColorModeValue("gray.800", "white")}
               >
-                <Box as="span" color={"gray.600"} fontSize="lg">
+                <Box as="span" color={"gray.600"} fontSize="md">
                   £
                 </Box>
                 {data.price.toFixed(2)}
