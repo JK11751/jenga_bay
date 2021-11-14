@@ -10,7 +10,8 @@ import RegistrationPage from "../pages/CompanyRegistration/RegistrationPage.js";
 import CompanyProductUploadPage from "../pages/CompanyProductUploadPage/CompanyProductUploadPage.js";
 import CompanyProductPage from "../pages/CompanyProductPage/CompanyProductPage.js";
 import { CategoryPage } from "../pages/CategoriesPage/CategoryPage.js";
-// import Test from "../components/Test.js";
+import { Cart } from "../pages/Cart/Cart.js";
+import Shop from "../pages/Cart/Test.js";
 
 const routes =()=>{
     return(
@@ -40,9 +41,12 @@ const routes =()=>{
             <Route exact path="/category">
                 <CategoryPage />
             </Route>
-            {/* <Route exact path="/test">
-                <Test/>
-            </Route> */}
+            <Route exact path="/cart">
+                <Cart />
+            </Route>
+            <Route exact path="/test">
+                <Shop />
+            </Route>
         </Switch>
     )
 }
