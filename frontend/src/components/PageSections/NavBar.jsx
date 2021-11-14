@@ -1,5 +1,5 @@
 import React from "react";
-import { VStack, Flex, HStack, Spacer,Box } from "@chakra-ui/layout";
+import { VStack, Flex, HStack, Spacer,Box, Circle, Text } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import icon from "../../assets/JengaBay.png";
 import { Button } from "@chakra-ui/button";
@@ -41,6 +41,7 @@ const NavBar = () => {
           <Icon
             onClick={() => handleToggle(true)}
             color="#fff"
+            _hover={{cursor:"pointer"}}
             as={FiMenu}
             h={10}
             w={7}
@@ -58,7 +59,10 @@ const NavBar = () => {
         <Spacer />
         <HStack ml="12vw" spacing="20px">
           <Icon color="#fff" h={7} w={7} as={IoMdNotificationsOutline} />
-          <Icon color="#fff" h={7} w={7} as={BiCartAlt} />
+          <Box>
+            <Icon _hover={{cursor:"pointer"}} color="#fff" h={7} w={7} as={BiCartAlt} />
+            <Circle alignItems="center" p={2} right="9vw" position="absolute" top={4} size="15px" bg="red"><Text fontWeight="bold" fontSize="10px" color="white">1</Text></Circle>
+          </Box>
           <Popover mr={5} isLazy>
             <PopoverTrigger>
               <Button variant="ghost">

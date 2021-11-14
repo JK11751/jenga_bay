@@ -13,7 +13,7 @@ import { CategoryPage } from "../pages/CategoriesPage/CategoryPage.js";
 import { Cart } from "../pages/Cart/Cart.js";
 import Shop from "../pages/Cart/Test.js";
 
-const routes =()=>{
+const routes =({cartItems})=>{
     return(
         <Switch>
             <Route exact path="/">
@@ -31,7 +31,7 @@ const routes =()=>{
             <Route exact path="/product">
                 <ProductPage />
             </Route>
-            <Route exact path="/product/:productId" component={ProductPage}/>
+            <Route exact path="/product-details/:productId" component={ProductPage}/>
             <Route exact path="/upload">
                 <CompanyProductUploadPage />
             </Route>
@@ -42,7 +42,7 @@ const routes =()=>{
                 <CategoryPage />
             </Route>
             <Route exact path="/cart">
-                <Cart />
+                <Cart cartItems={cartItems} />
             </Route>
             <Route exact path="/test">
                 <Shop />
