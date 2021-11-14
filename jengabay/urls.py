@@ -12,13 +12,13 @@ urlpatterns = [
     path('sellers/<str:pk>/profile', views.SpecificSellerProfileView.as_view(), name='seller_profile'),
 
     #api endpoint for viewing all items
-    path('', views.AllItemsListView.as_view(), name='items'),
+    path('items', views.AllItemsListView.as_view(), name='items'),
 
     #api endpoint for viewing a specific item in the home page
-    path('<int:pk>', views.SpecificItemView.as_view(), name='item_view'),
+    path('items/<int:pk>', views.SpecificItemView.as_view(), name='item_view'),
 
     #api endpoint for viewing items belonging to a specific category in the home page
-    path('<str:category>', views.HomePageItemsCategoryView.as_view(), name='home_category'),
+    path('items/category/<str:category>', views.HomePageItemsCategoryView.as_view(), name='home_category'),
 
     #api endpoint for viewing and creating items belonging to a specific seller
     path('sellers/<str:pk>/items', views.SpecificSellerItemsView.as_view(),name='seller_items'),
