@@ -21,6 +21,7 @@ import Rating from "../../../components/Products/Rating";
 import { handleGetProductDetails } from '../../../redux/actions/appActions';
 import {useDispatch,useSelector} from "react-redux"
 import {useParams} from "react-router";
+import { useHistory } from 'react-router';
 
 const data = {
   rating: 4.5,
@@ -30,6 +31,7 @@ const data = {
 function ProductDetails({handleAddProduct}) {
   let { productId } = useParams()
   const dispatch = useDispatch()
+  const history = useHistory()
   const productReducer = useSelector(({ productReducer }) => productReducer);
 
   console.log("ProductReducer", productReducer.productDetails)
@@ -95,7 +97,7 @@ function ProductDetails({handleAddProduct}) {
         <Rating rating={data.rating} />
         <Text ml={2}>34 reviews</Text>
       </Flex>
-      <Text fontFamily="sans-serif" color="#555" fontSize="12px">
+      <Text _hover={{cursor:"pointer"}} onClick={() => history.push(`/sellers/${product.item_seller.id}/items`)} fontFamily="sans-serif" color="#555" fontSize="12px">
         Brand: {product.item_seller.business_name} Visit Brand Store
       </Text>
       <VStack alignItems="flex-start" spacing="10px">
