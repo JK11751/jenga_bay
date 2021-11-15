@@ -17,6 +17,7 @@ import {motion} from "framer-motion"
 import { Badge } from "@chakra-ui/layout";
 import { IconButton } from "@chakra-ui/button";
 import { Icon } from "@chakra-ui/icon";
+import { useHistory } from "react-router";
 
 const data = {
   isNew: true,
@@ -29,10 +30,12 @@ const data = {
 };
 
 function ProductCard(props) {
-    const MotionBox = motion(Box)
+  const history = useHistory();
+
+  const MotionBox = motion(Box)
   return (
     <Flex flexDir="row" p={2}  mr={1} >
-      <Link to={{ pathname: `/product-details/${props.id}` }}>
+      <Link to={{ pathname: `/product-details/${props.id}`}}>
         <MotionBox
           bg={useColorModeValue("white", "gray.800")}
           width="180px"
@@ -68,9 +71,17 @@ function ProductCard(props) {
           <Box pl="4" pr="6" pt="3">
             <Box d="flex" alignItems="baseline">
               <HStack>
-                <Box fontSize="12px" as="span" textTransform="uppercase" fontWeight="normal">
+              <Tooltip
+                label="View more products from seller"
+                bg="white"
+                placement={"top"}
+                color={"gray.800"}
+                fontSize={"1.2em"}
+              >
+                <Box onClick={() => history.push(`/sellers/${props.sellerId}/items`)} _hover={{cursor:"pointer"}} fontSize="12px" as="span" textTransform="uppercase" fontWeight="normal">
                   {props.companyName}
                 </Box>
+                </Tooltip>
                  {data.isNew && (
                       <Circle
                         size="8px"

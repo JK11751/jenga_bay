@@ -4,7 +4,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {BrowserRouter as Router, Switch } from "react-router-dom"
+import {BrowserRouter as Router, Switch} from "react-router-dom"
 import { Provider } from 'react-redux';
 import store from "./redux/store"
 import Routes from './routes/routes';

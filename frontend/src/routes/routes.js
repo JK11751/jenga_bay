@@ -11,7 +11,6 @@ import CompanyProductUploadPage from "../pages/CompanyProductUploadPage/CompanyP
 import CompanyProductPage from "../pages/CompanyProductPage/CompanyProductPage.js";
 import { CategoryPage } from "../pages/CategoriesPage/CategoryPage.js";
 import { Cart } from "../pages/Cart/Cart.js";
-// import Shop from "../pages/Cart/Test.js";
 
 const Routes =({cartItems, handleAddProduct, handleRemoveProduct, clearCart})=>{
     return(
@@ -44,9 +43,6 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, clearCart})=>{
             <Route exact path="/cart">
                 <Cart clearCart={clearCart} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems} />
             </Route>
-            {/* <Route exact path="/test">
-                <Shop />
-            </Route> */}
         </Switch>
         </div>
     )

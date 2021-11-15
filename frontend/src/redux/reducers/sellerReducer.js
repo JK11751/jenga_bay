@@ -1,7 +1,7 @@
 import { GET_SELLER_DETAILS, GET_SELLER_ITEMS } from "../actions/types";
 
 const initialState = {
-    sellerDetails: {},
+    sellerDetails: [],
     sellerItems: [],
 };
 
@@ -15,10 +15,10 @@ const sellerReducer = (state = initialState, action) => {
                 sellerDetails:payload
             }
         case GET_SELLER_ITEMS:
-        return{
-            ...state,
-            sellerItems:payload
-        }  
+            return{
+                ...state,
+                sellerItems:payload
+            }  
         default:
             return state;//returns defult state if no data is fetched
         }

@@ -4,7 +4,7 @@ import { GET_PRODUCTS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_PRODUCT_DETAILS } 
 //Thi sis the default state
 const initialState ={
     products:[],
-    productDetails:{},
+    productDetails:[],
     itemsInCategory: [],
 };
 

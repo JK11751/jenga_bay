@@ -10,6 +10,7 @@ import { Box, Flex,HStack,Text } from '@chakra-ui/layout'
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { handleGetItemsInCategory } from "../../redux/actions/appActions";
+import { useHistory } from 'react-router'
 
 export const CategoryPage = ({cartItems}) => {
     const itemList = useSelector((state) => state.productReducer).itemsInCategory
@@ -17,11 +18,12 @@ export const CategoryPage = ({cartItems}) => {
 
     const {categoryName} = useParams()
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(() => { 
         dispatch(handleGetItemsInCategory(categoryName))
         setItemsInCategoryList(itemList)
-    }, [categoryName,dispatch,itemList])
+    }, [categoryName,dispatch])
     
 
     return (
@@ -38,7 +40,7 @@ export const CategoryPage = ({cartItems}) => {
                     (
                         <><HStack>
                         <input type="checkbox"></input>
-                        <Text _hover={{cursor:"pointer"}} ml={2} padding="2px" key={category.id}>{category.value}</Text>
+                        <Text onClick={()=> history.push(`/categories/${category.value}`)} _hover={{cursor:"pointer"}} ml={2} padding="2px" key={category.id}>{category.value}</Text>
                         </HStack>
                         </>
                     )
