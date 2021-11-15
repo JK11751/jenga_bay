@@ -34,8 +34,8 @@ function ProductCard(props) {
 
   const MotionBox = motion(Box)
   return (
-    <Flex flexDir="row" p={2}  mr={1} >
-      <Link to={{ pathname: `/product-details/${props.id}`}}>
+    <Flex onClick={() => history.push(`/product-details/${props.id}`) } flexDir="row" p={2}  mr={1} >
+      {/* <Link to={{ pathname: `/product-details/${props.id}`}}> */}
         <MotionBox
           bg={useColorModeValue("white", "gray.800")}
           width="180px"
@@ -69,7 +69,7 @@ function ProductCard(props) {
             roundedTop="lg"
           />
           <Box pl="4" pr="6" pt="3">
-            <Box d="flex" alignItems="baseline">
+            <Box onClick={() => history.push(`/sellers/${props.sellerId}/items`)} _hover={{cursor:"pointer"}}  d="flex" alignItems="baseline">
               <HStack>
               <Tooltip
                 label="View more products from seller"
@@ -78,7 +78,7 @@ function ProductCard(props) {
                 color={"gray.800"}
                 fontSize={"1.2em"}
               >
-                <Box onClick={() => history.push(`/sellers/${props.sellerId}/items`)} _hover={{cursor:"pointer"}} fontSize="12px" as="span" textTransform="uppercase" fontWeight="normal">
+                <Box fontSize="12px" as="span" textTransform="uppercase" fontWeight="normal">
                   {props.companyName}
                 </Box>
                 </Tooltip>
@@ -129,7 +129,7 @@ function ProductCard(props) {
             <Rating rating={data.rating} />
           </Box>
         </MotionBox>
-      </Link>
+      {/* </Link> */}
     </Flex>
   );
 }
