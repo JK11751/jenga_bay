@@ -61,11 +61,6 @@ function ProductDetails({handleAddProduct}) {
     setCount(value)
   }
 
-  const handleAddToCartClicked = () => {
-    handleAddProduct(productReducer.productDetails)
-    // history.push("/cart")
-  }
-
   return (
     <>
     {productReducer.productDetails.map((product)=> {
@@ -159,7 +154,7 @@ function ProductDetails({handleAddProduct}) {
           backgroundColor="transparent"
           width="200px"
           height="38px"
-          onClick={handleAddToCartClicked}
+          onClick={() => handleAddProduct(product)}
         >
          Add to Cart 
         </Button>
