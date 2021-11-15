@@ -19,12 +19,8 @@ import { Tag, TagLabel } from '@chakra-ui/tag';
 // import {BsArrowLeftShort} from "react-icons/bs"
 import Rating from "../../../components/Products/Rating";
 import { handleGetProductDetails } from '../../../redux/actions/appActions';
-import { handleGetSellerDetails } from '../../../redux/actions/appActions';
-// import { AddCart } from '../../../redux/actions/appActions';
 import {useDispatch,useSelector} from "react-redux"
 import {useParams} from "react-router";
-// import { connect } from 'react-redux';
-// import { useHistory } from 'react-router';
 
 const data = {
   rating: 4.5,
@@ -32,21 +28,18 @@ const data = {
 
 
 function ProductDetails({handleAddProduct}) {
-  // const history = useHistory()
   let { productId } = useParams()
   const dispatch = useDispatch()
-  const productData = useSelector((state) => state.productReducer).productDetails;
-  console.log("ProductData", productData.id)
-  const sellerData = useSelector((state) => state.sellerReducer).sellerDetails;
+  const productReducer = useSelector(({ productReducer }) => productReducer);
+
+  console.log("ProductReducer", productReducer.productDetails)
+  
   //getting product details
   useEffect(() => {
     dispatch(handleGetProductDetails(productId))
-  }, [productId,dispatch])
+  }, [])
 
-  //getting seller details
-  useEffect(() => {
-    dispatch(handleGetSellerDetails(productData.item_seller))
-  }, [productData.item_seller,dispatch])
+
 
   const [count, setCount] = React.useState(1)
   const [value, setValue] = React.useState(0)
@@ -69,11 +62,14 @@ function ProductDetails({handleAddProduct}) {
   }
 
   const handleAddToCartClicked = () => {
-    handleAddProduct(productData)
+    handleAddProduct(productReducer.productDetails)
     // history.push("/cart")
   }
 
   return (
+    <>
+    {productReducer.productDetails.map((product)=> {
+      return (
       <VStack mt={10} p={4} alignItems="left">
       {/* <Box
         as="button"
@@ -95,17 +91,17 @@ function ProductDetails({handleAddProduct}) {
         textTransform="uppercase"
         color="#C4C4C4"
       >
-        {productData.category}
+        {product.category}
       </Box>
       <Text fontFamily="sans-serif" fontSize="2em">
-        {productData.item_name}
+        {product.item_name}
       </Text>
       <Flex>
         <Rating rating={data.rating} />
         <Text ml={2}>34 reviews</Text>
       </Flex>
       <Text fontFamily="sans-serif" color="#555" fontSize="12px">
-        Brand: {sellerData.business_name} Visit Brand Store
+        Brand: {product.item_seller.business_name} Visit Brand Store
       </Text>
       <VStack alignItems="flex-start" spacing="10px">
         <Stat> 
@@ -122,7 +118,7 @@ function ProductDetails({handleAddProduct}) {
           </StatLabel>
         </Stat>
         <Tag  colorScheme="cyan" size="lg">
-        <TagLabel>{productData.item_measurement_unit}</TagLabel>
+        <TagLabel>{product.item_measurement_unit}</TagLabel>
         </Tag>
       </VStack>
       <Divider orientation="horizontal" />
@@ -172,7 +168,7 @@ function ProductDetails({handleAddProduct}) {
         <Text p={3} fontSize='20px'>Product Description</Text>
         <Divider color="#000000"/>
         <Text p={2} fontFamily="sans-serif" fontSize="15px" lineHeight="25px">
-          {productData.item_description}  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis erat
+          {product.item_description}  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis erat
         </Text>
       </Box>
       <Box borderColor="#f3f3f3" borderWidth="1px" mt={10} borderRadius="10px">
@@ -181,19 +177,20 @@ function ProductDetails({handleAddProduct}) {
         <List p={2}>
           <ListItem>
             <ListIcon as={MdCheckCircle} color="green.500" />
-            Units of measurement: {productData.item_measurement_unit} 
+            Units of measurement: {product.item_measurement_unit} 
           </ListItem>
           <ListItem> 
             <ListIcon as={MdCheckCircle} color="green.500" />
-            Price: {productData.item_price} 
+            Price: {product.item_price} 
           </ListItem>
           <ListItem> 
             <ListIcon as={MdCheckCircle} color="green.500" />
-            Category: {productData.category} 
+            Category: {product.category} 
           </ListItem>
           </List>
       </Box>
-    </VStack>
+    </VStack>)})}
+    </>
   )
 }
 
