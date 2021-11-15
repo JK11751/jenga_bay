@@ -10,9 +10,12 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/breadcrum
 import { useSelector } from "react-redux";
 
 const ProductPage = ({handleAddProduct,cartItems})=> {
-    const productData = useSelector((state) => state.productReducer).productDetails;
-    const sellerData = useSelector((state) => state.sellerReducer).sellerDetails;
+    const productReducer = useSelector(({ productReducer }) => productReducer);
+
     return(
+        <>
+        {productReducer.productDetails.map((product) => {
+            return(
         <Box height="100vh">
             <NavBar cartItems={cartItems}/>
             <Flex overflowY="hidden" flexDir="row">
@@ -25,13 +28,13 @@ const ProductPage = ({handleAddProduct,cartItems})=> {
                             <BreadcrumbLink href="#">Products</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbItem >
-                            <BreadcrumbLink href="#">{sellerData.business_name}</BreadcrumbLink>
+                            <BreadcrumbLink href="#">{product.item_seller.business_name}</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbItem >
-                            <BreadcrumbLink href="#">{productData.category}</BreadcrumbLink>
+                            <BreadcrumbLink href="#">{product.category}</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbItem isCurrentPage>
-                            <BreadcrumbLink href="#">{productData.item_name}</BreadcrumbLink>
+                            <BreadcrumbLink href="#">{product.item_name}</BreadcrumbLink>
                         </BreadcrumbItem>
                     </Breadcrumb>
                     <Box p={0}>   
@@ -45,8 +48,8 @@ const ProductPage = ({handleAddProduct,cartItems})=> {
                     </Box>
                 </Flex>
             </Flex>
-        </Box>
-        
+        </Box>)})}
+        </>
     )
 }
 

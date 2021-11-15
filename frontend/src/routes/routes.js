@@ -11,7 +11,6 @@ import CompanyProductUploadPage from "../pages/CompanyProductUploadPage/CompanyP
 import CompanyProductPage from "../pages/CompanyProductPage/CompanyProductPage.js";
 import { CategoryPage } from "../pages/CategoriesPage/CategoryPage.js";
 import { Cart } from "../pages/Cart/Cart.js";
-// import Shop from "../pages/Cart/Test.js";
 
 const Routes =({cartItems, handleAddProduct, handleRemoveProduct, clearCart})=>{
     return(
@@ -29,27 +28,21 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, clearCart})=>{
             <Route exact path="/registration">
                 <RegistrationPage />
             </Route>
-            <Route exact path="/product">
-                <ProductPage />
-            </Route>
             <Route exact path="/product-details/:productId">
                 <ProductPage cartItems={cartItems} handleAddProduct={handleAddProduct} />
             </Route>
             <Route exact path="/upload">
                 <CompanyProductUploadPage cartItems={cartItems} />
             </Route>
-            <Route exact path="/profile">
-                <CompanyProductPage cartItems={cartItems} />
+            <Route exact path="/sellers/:sellerId/items">
+                <CompanyProductPage cartItems={cartItems} handleAddProduct={handleAddProduct} />
             </Route>
-            <Route exact path="/category">
+            <Route exact path="/categories/:categoryName">
                 <CategoryPage cartItems={cartItems} />
             </Route>
             <Route exact path="/cart">
                 <Cart clearCart={clearCart} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems} />
             </Route>
-            {/* <Route exact path="/test">
-                <Shop />
-            </Route> */}
         </Switch>
         </div>
     )

@@ -5,6 +5,7 @@ import icon from "../../assets/JengaBay.png";
 import { Button } from "@chakra-ui/button";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
+
 import { BiCartAlt } from "react-icons/bi";
 import { FiMenu } from "react-icons/fi"
 import { IoIosArrowDown } from "react-icons/io";
@@ -68,7 +69,7 @@ const NavBar = ({cartItems}) => {
           <Box>
             <Icon onClick={handleOpenCart} _hover={{cursor:"pointer"}} color="#fff" h={7} w={7} as={BiCartAlt} />
             { cartItems.length > 0 &&
-            <Circle alignItems="center" p={2} right="9vw" position="absolute" top={4} size="15px" bg="red"><Text fontWeight="bold" fontSize="10px" color="white">{cartItems.length}</Text></Circle>
+            <Circle alignItems="center" p={2} right={36} position="absolute" top={4} size="15px" bg="red"><Text fontWeight="bold" fontSize="10px" color="white">{cartItems.length}</Text></Circle>
             }
           </Box>
           <Popover mr={5} isLazy>

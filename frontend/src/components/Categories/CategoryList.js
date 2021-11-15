@@ -1,39 +1,39 @@
 const CategoryList = [
     {
         id:1,
-        value:"Metal and Steel Work"
+        value:"metal and steel work"
     },
     {
         id:2,
-        value:"Tools"
+        value:"tools"
     },
     {
         id:3,
-        value:"Electrical Systems"
+        value:"electrical systems"
     },
     {
         id:4,
-        value:"Paints"
+        value:"paints"
     },
     {
         id:5,
-        value:"Glass"
+        value:"glass"
     },
     {
         id:6,
-        value:"Fabricators"
+        value:"fabricators"
     },
     {
         id:7,
-        value:"Bricks and Masonry"
+        value:"bricks and masonry"
     },
     {
         id:8,
-        value:"Sand and Stone"
+        value:"sand and stone"
     },
     {
         id:9,
-        value:"Wood and Timber"
+        value:"wood and timber"
     },
     {
         id:10,
@@ -41,59 +41,59 @@ const CategoryList = [
     },
     {
         id:11,
-        value:"Ceramics"
+        value:"ceramics"
     },
     {
         id:12,
-        value:"Cement"
+        value:"cement"
     },
     {
         id:13,
-        value:"Plumbing"
+        value:"plumbing"
     },
     {
         id:14,
-        value:"Security Systems"
+        value:"security systems"
     },
     {
         id:15,
-        value:"Doors and Windows"
+        value:"doors and windows"
     },
     {
         id:16,
-        value:"Telecomunications Equipment"
+        value:"telecomunications rquipment"
     },
     {
         id:17,
-        value:"Building Safety"
+        value:"building safety"
     },
     {
         id:18,
-        value: "Furniture"
+        value: "furniture"
     },
     {
         id:19,
-        value:"Protection"
+        value:"protection"
     },
     {
         id:20,
-        value:"Roofing"
+        value:"roofing"
     },
     {
         id:21,
-        value:"Conveyor Systems"
+        value:"conveyor systems"
     },
     {
         id:22,
-        value:"Composites"
+        value:"composites"
     },
     {
         id:23,
-        value:"Adhesives"
+        value:"adhesives"
     },
     {
         id:24,
-        value:"Others"
+        value:"others"
     },
 ]
 
