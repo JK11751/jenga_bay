@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect, useState } from "react"
 import { Box } from "@chakra-ui/layout";
 import NavBar from "../../components/PageSections/NavBar";
 import ProductContainer from "../../components/Products/ProductContainer"
@@ -6,9 +6,22 @@ import CategoryChips from "../../components/Categories/CategoryChips"
 import Footer from "../../components/PageSections/Footer";
 import AdsCarousel from "./AdsCarousel";
 // import ProductList from "../shared/ProductList";
+import { handleGetProducts } from "../../redux/actions/appActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Home = ({handleAddProduct, cartItems}) => {
-    // const img = "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg"
+
+    const [productList, setProductList] = useState([])
+
+    //fetching data from the api
+    const dispatch = useDispatch();
+    const productReducer = useSelector((state) => state.productReducer).products
+    // setting the value of product Reducer to the data fetched from the api
+    useEffect(() => {
+        dispatch(handleGetProducts())// dispatches the action to get the data from the api
+        setProductList(productReducer)
+    }, [dispatch,productReducer]);
+
     return(
         <Box bgColor="#fff" flexDir="column" width="100vw" height="100vh">
             <NavBar cartItems={cartItems} />
@@ -17,7 +30,7 @@ const Home = ({handleAddProduct, cartItems}) => {
             </Box>
             
             <CategoryChips />
-            <ProductContainer handleAddProduct={handleAddProduct} alignSelf="center"/> 
+            <ProductContainer productList={productList} handleAddProduct={handleAddProduct} alignSelf="center"/> 
             <Box p={3}>
             <Footer/>
             </Box>

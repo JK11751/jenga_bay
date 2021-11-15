@@ -20,14 +20,30 @@ class APIServices {
   async getUsers(data) {
     return api.post("/some-endpoint", data);
   }
+
+  //getting all products
   async getProducts(){
     return api.get(`/items`);
   }
+
+  //getting details of a specific product
   async getProductDetails(item_id){
     return api.get(`/items/${item_id}`);
   }
+
+  //getting items in a specific category
+  async getItemsInSpecificCategory(category_name){
+    return api.get(`/items/category/${category_name}`)
+  }
+
+  //getting details of a specific seller
   async getSellerDetails(seller_id){
     return api.get(`/sellers/${seller_id}`);
+  }
+
+  //Getting all items belonging to a specific seller
+  async getSellerItems(seller_id){
+    return api.get(`/sellers/${seller_id}/items`)
   }
 }
 

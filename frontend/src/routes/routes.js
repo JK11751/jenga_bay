@@ -29,19 +29,16 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, clearCart})=>{
             <Route exact path="/registration">
                 <RegistrationPage />
             </Route>
-            <Route exact path="/product">
-                <ProductPage />
-            </Route>
             <Route exact path="/product-details/:productId">
                 <ProductPage cartItems={cartItems} handleAddProduct={handleAddProduct} />
             </Route>
             <Route exact path="/upload">
                 <CompanyProductUploadPage cartItems={cartItems} />
             </Route>
-            <Route exact path="/profile">
+            <Route exact path="/sellers/:sellerId/items">
                 <CompanyProductPage cartItems={cartItems} />
             </Route>
-            <Route exact path="/category">
+            <Route exact path="/categories/:categoryName">
                 <CategoryPage cartItems={cartItems} />
             </Route>
             <Route exact path="/cart">

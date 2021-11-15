@@ -1,5 +1,5 @@
 import APIServices from "../../utils/apiServices";
-import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS, GET_SELLER_DETAILS } from "./types";
+import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS, GET_SELLER_DETAILS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_SELLER_ITEMS } from "./types";
 
 // Redux actions are called here with an underscore before the name (convention)
 
@@ -60,6 +60,21 @@ export const handleGetProductDetails = (item_id) => async(dispatch) => {
   }
 }
 
+//Getting products from a specific category
+const getProductsInCategory = (products) => ({
+  type: GET_PRODUCTS_IN_SPECIFIC_CATEGORY,
+  payload: products,
+});
+
+export const handleGetItemsInCategory = (category_name) => async(dispatch) => {
+  try {
+    const { data } = await APIServices.getItemsInSpecificCategory(category_name);
+    await dispatch(getProductsInCategory(data));
+  } catch (error) {
+    console.log(`Error from handleGetItemsInCategory: ${error}`);
+  }
+}
+
 /*---------------------------------------------SELLERS----------------------------------------------------- */
 
 //Getting a specific seller details
@@ -74,6 +89,21 @@ export const handleGetSellerDetails = (seller_id) => async(dispatch) => {
     await dispatch(getSellerDetails(data));
   } catch (error) {
     console.log(`Error from handleGetSellerDetails: ${error}`);
+  }
+}
+
+//Getting a specific seller's items
+const getSellerItems = (sellerItems) => ({
+  type: GET_SELLER_ITEMS,
+  payload: sellerItems,
+});
+
+export const handleGetSellerItems = (seller_id) => async(dispatch) => {
+  try {
+    const { data } = await APIServices.getSellerItems(seller_id);
+    await dispatch(getSellerItems(data));
+  } catch (error) {
+    console.log(`Error from handleGetSellerItems: ${error}`);
   }
 }
 
