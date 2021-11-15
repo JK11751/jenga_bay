@@ -1,5 +1,5 @@
 import APIServices from "../../utils/apiServices";
-import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS, GET_SELLER_DETAILS, UPDATE_QUANTITY,ADD_TO_CART,REMOVE_FROM_CART, NUMBER_OF_ITEMS_IN_CART, UPDATE_CART, DELETE_CART, INCREASE_QUANTITY, DECREASE_QUANTITY, } from "./types";
+import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS, GET_SELLER_DETAILS } from "./types";
 
 // Redux actions are called here with an underscore before the name (convention)
 
@@ -79,11 +79,11 @@ export const handleGetSellerDetails = (seller_id) => async(dispatch) => {
 
 /*------------------------------------------------CART----------------------------------------------------- */
 
-// //Adding Items to cart
+//Adding Items to cart
 // export function addToCartAction(product) {
 //   return {
 //     type: ADD_TO_CART,
-//     payload: { Id: product.item_id, Name: product.item_name, Price: product.item_price }
+//     payload: product.id
 //   };
 // }
 
@@ -95,7 +95,7 @@ export const handleGetSellerDetails = (seller_id) => async(dispatch) => {
 //   };
 // }
 
-// //Updating Quantity of cart item
+//Updating Quantity of cart item
 // export function updateItemQuantity(payload) {
 //   return {
 //     type: UPDATE_QUANTITY,
@@ -103,41 +103,41 @@ export const handleGetSellerDetails = (seller_id) => async(dispatch) => {
 //   };
 // }
 
-/*GET NUMBER CART*/
-export function GetNumberCart(){
-  return{
-      type:NUMBER_OF_ITEMS_IN_CART
-  }
-}
+// /*GET NUMBER CART*/
+// export function GetNumberCart(){
+//   return{
+//       type:NUMBER_OF_ITEMS_IN_CART
+//   }
+// }
 
-export function AddCart(payload){
-  return {
-      type:ADD_TO_CART,
-      payload
-  }
-}
-export function UpdateCart(payload){
-  return {
-      type: UPDATE_CART,
-      payload
-  }
-}
-export function DeleteCart(payload){
-  return{
-      type:DELETE_CART,
-      payload
-  }
-}
+// export function AddCart(payload){
+//   return {
+//       type:ADD_TO_CART,
+//       payload
+//   }
+// }
+// export function UpdateCart(payload){
+//   return {
+//       type: UPDATE_CART,
+//       payload
+//   }
+// }
+// export function DeleteCart(payload){
+//   return{
+//       type:DELETE_CART,
+//       payload
+//   }
+// }
 
-export function IncreaseQuantity(payload){
-  return{
-      type: INCREASE_QUANTITY,
-      payload
-  }
-}
-export function DecreaseQuantity(payload){
-  return{
-      type: DECREASE_QUANTITY,
-      payload
-  }
-}
+// export function IncreaseQuantity(payload){
+//   return{
+//       type: INCREASE_QUANTITY,
+//       payload
+//   }
+// }
+// export function DecreaseQuantity(payload){
+//   return{
+//       type: DECREASE_QUANTITY,
+//       payload
+//   }
+// }

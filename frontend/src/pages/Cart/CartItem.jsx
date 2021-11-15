@@ -1,65 +1,51 @@
 import React from 'react'
 import { Box, HStack, Text, VStack } from '@chakra-ui/layout'
 import { Image } from '@chakra-ui/image'
-import product from "../../assets/product.jpg"
 import {MdDelete} from "react-icons/md"
 import Icon from '@chakra-ui/icon'
 import { Button } from '@chakra-ui/button'
-import { Input } from '@chakra-ui/input'
-import { useNumberInput } from '@chakra-ui/number-input'
 
-const style = {
-    fontFamily:"monospace"
-}
 
-function NumberStepper() {
-    const {
-      getInputProps,
-      getIncrementButtonProps,
-      getDecrementButtonProps,
-    } = useNumberInput({
-      step: 1,
-      defaultValue: 1,
-      min: 1,
-      max: 5000,
-      precision: 0,
-    })
-  
-    const inc = getIncrementButtonProps()
-    const dec = getDecrementButtonProps()
-    const input = getInputProps({ isReadOnly: true })
-  
-    return (
-      <HStack maxW="320px">
-        <Button {...inc}>+</Button>
-        <Input textAlign="center" width="50px" {...input} />
-        <Button {...dec}>-</Button>
-      </HStack>
-    )
-  }
 
-export const CartItem = () => {
+export const CartItem = (props) => {
+    console.log(props.key)
+
+    const mystyle = {
+        fontFamily:"monospace"
+    }    
+    
+    function NumberStepper({quantity, add, remove}) {
+          
+        return (
+          <HStack maxW="320px">
+            <Button onClick={add}>+</Button>
+            <span className="btn btn-info">{quantity}</span>
+            <Button onClick={remove}>-</Button>
+          </HStack>
+        )
+    }  
+
     return (
         <Box borderRadius="10px" width="80%" shadow="lg">
-            <HStack p={4} spacing="2vw">
+            <HStack p={4} spacing="5vw">
                 <HStack>
-                    <Image objectFit="cover" borderRadius="10px" width="70px" height="70px" src={product} alt="product"/>
+                    <Image objectFit="cover" borderRadius="10px" width="70px" height="70px" src={props.image} alt="product"/>
                     <VStack alignItems="left" spacing="2px">
-                        <Text {...style}>Cement</Text>
-                        <Text {...style}>kilograms</Text>
+                        <Text {...mystyle}>{props.name}</Text>
+                        <Text {...mystyle}>{props.unit}</Text>
                     </VStack>
                 </HStack>    
                 <VStack alignItems="center" spacing="10px" p={5}>
-                    <Text {...style}>Item Price: Ksh.5,000</Text>    
+                    <Text {...mystyle}>Item Price: {props.price}</Text>    
                 </VStack>
                 <VStack alignItems="center" spacing="10px" p={5}>
-                    <NumberStepper />
+                    <NumberStepper add={() => props.handleAddProduct(props.item)} remove={() => props.handleRemoveProduct(props.item)} quantity ={props.quantity} />
                 </VStack>
-                <VStack alignItems="left" spacing="10px" p={5}>
-                    <Text {...style}>Total: Ksh.10,000</Text>
+                <VStack alignItems="center" spacing="10px" p={5}>
+                   <Text>{props.quantity} * {props.price} </Text>
                 </VStack>
-                <Icon as={MdDelete}/>
-            </HStack>    
+                <Icon _hover={{cursor:"pointer"}} onClick={() => props.handleRemoveProduct(props.item)} as={MdDelete}/>
+            </HStack>     
         </Box>
     )
 }

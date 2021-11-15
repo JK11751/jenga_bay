@@ -2,19 +2,19 @@ import { Box, Flex, Spacer } from "@chakra-ui/layout";
 import React from "react"
 import NavBar from "../../components/PageSections/NavBar";
 // import ProductDetailsCard from "./subs/ProductDetailsCard";
-import { ProductDetails } from "./subs/ProductDetails";
+import ProductDetails from "../ProductPage/subs/ProductDetails"
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import {MdKeyboardArrowRight} from "react-icons/md"
 // import Footer from "../../components/PageSections/Footer"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/breadcrumb";
 import { useSelector } from "react-redux";
 
-const ProductPage = ()=> {
+const ProductPage = ({handleAddProduct,cartItems})=> {
     const productData = useSelector((state) => state.productReducer).productDetails;
     const sellerData = useSelector((state) => state.sellerReducer).sellerDetails;
     return(
         <Box height="100vh">
-            <NavBar />
+            <NavBar cartItems={cartItems}/>
             <Flex overflowY="hidden" flexDir="row">
                 <Flex flexDir="column">
                     <Breadcrumb mt={7} textSize="1.5em" fontFamily="monospace" textTransform="uppercase" ml={20} spacing="8px" separator={<MdKeyboardArrowRight color="gray.500" />}>
@@ -41,7 +41,7 @@ const ProductPage = ()=> {
                 <Spacer/>
                 <Flex bgColor="#E9F6FF" alignItems="flex-start" width="50%" flexDir="column">
                     <Box ml={5}>
-                    <ProductDetails />
+                    <ProductDetails handleAddProduct={handleAddProduct} />
                     </Box>
                 </Flex>
             </Flex>

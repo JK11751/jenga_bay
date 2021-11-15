@@ -11,19 +11,20 @@ import CompanyProductUploadPage from "../pages/CompanyProductUploadPage/CompanyP
 import CompanyProductPage from "../pages/CompanyProductPage/CompanyProductPage.js";
 import { CategoryPage } from "../pages/CategoriesPage/CategoryPage.js";
 import { Cart } from "../pages/Cart/Cart.js";
-import Shop from "../pages/Cart/Test.js";
+// import Shop from "../pages/Cart/Test.js";
 
-const routes =({cartItems})=>{
+const Routes =({cartItems, handleAddProduct, handleRemoveProduct, clearCart})=>{
     return(
+        <div>
         <Switch>
             <Route exact path="/">
-                <Home />
+                <Home cartItems={cartItems} handleAddProduct={handleAddProduct} />
             </Route>
             <Route exact path="/sign-up">
-                <SignUpPage />
+                <SignUpPage cartItems={cartItems} />
             </Route>
             <Route exact path="/sign-in">
-                <SignInPage />
+                <SignInPage cartItems={cartItems} />
             </Route>
             <Route exact path="/registration">
                 <RegistrationPage />
@@ -31,23 +32,26 @@ const routes =({cartItems})=>{
             <Route exact path="/product">
                 <ProductPage />
             </Route>
-            <Route exact path="/product-details/:productId" component={ProductPage}/>
+            <Route exact path="/product-details/:productId">
+                <ProductPage cartItems={cartItems} handleAddProduct={handleAddProduct} />
+            </Route>
             <Route exact path="/upload">
-                <CompanyProductUploadPage />
+                <CompanyProductUploadPage cartItems={cartItems} />
             </Route>
             <Route exact path="/profile">
-                <CompanyProductPage />
+                <CompanyProductPage cartItems={cartItems} />
             </Route>
             <Route exact path="/category">
-                <CategoryPage />
+                <CategoryPage cartItems={cartItems} />
             </Route>
             <Route exact path="/cart">
-                <Cart cartItems={cartItems} />
+                <Cart clearCart={clearCart} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems} />
             </Route>
-            <Route exact path="/test">
+            {/* <Route exact path="/test">
                 <Shop />
-            </Route>
+            </Route> */}
         </Switch>
+        </div>
     )
 }
-export default routes;
+export default Routes;

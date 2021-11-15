@@ -6,8 +6,8 @@ import {
   Box,
   Image,
   useColorModeValue,
-  Icon,
-  chakra,
+  // Icon,
+  // chakra,
   Tooltip,
   HStack,
 } from "@chakra-ui/react";
@@ -16,6 +16,7 @@ import Rating from "./Rating";
 import {motion} from "framer-motion"
 import { Badge } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/spinner";
+import { IconButton } from "@chakra-ui/button";
 
 const data = {
   isNew: true,
@@ -31,7 +32,7 @@ function ProductCard(props) {
     const MotionBox = motion(Box)
   return (
     <Flex flexDir="row" p={2}  mr={1} >
-      <Link to={{ pathname: `/product/${props.id}` }}>
+      <Link to={{ pathname: `/product-details/${props.id}` }}>
         <MotionBox
           bg={useColorModeValue("white", "gray.800")}
           width="180px"
@@ -119,9 +120,9 @@ function ProductCard(props) {
                 color={"gray.800"}
                 fontSize={"1.2em"}
               >
-                <chakra.a href={"#"} display={"flex"}>
-                  <Icon as={FiShoppingCart} h={7} w={7} alignSelf={"center"} />
-                </chakra.a>
+                {/* <chakra.a href={"#"} display={"flex"}> */}
+                  <IconButton _hover={{cursor:"pointer"}} onClick={() => {props.handleAddProduct(props.product)}} icon={FiShoppingCart} h={7} w={7} alignSelf={"center"} />
+                {/* </chakra.a> */}
               </Tooltip>
             </Flex>
             <Rating rating={data.rating} />

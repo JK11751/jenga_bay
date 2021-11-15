@@ -7,10 +7,10 @@ import ProductsContainer from "./subs/ProductsContainer"
 import { Box, Flex} from '@chakra-ui/layout'
 // import { Image } from '@chakra-ui/image'
 
-export const CategoryPage = () => {
+export const CategoryPage = ({cartItems}) => {
     return (
         <Box>
-            <NavBar/>
+            <NavBar cartItems={cartItems}/>
             <Flex flexDir="row">
                 <Box
                     height="auto"

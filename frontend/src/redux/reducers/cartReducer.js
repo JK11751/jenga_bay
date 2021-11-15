@@ -1,7 +1,8 @@
-import { ADD_TO_CART } from "../actions/types";
+import { ADD_TO_CART,REMOVE_FROM_CART } from "../actions/types";
+// import { addItemToCart, removeItemFromCart } from "../../utils/cart.utils";
 
 const initialState = {
-    addToCart: {},
+    cartItems:[],
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -9,10 +10,16 @@ const cartReducer = (state = initialState, action) => {
 
     switch (type) {   
         case ADD_TO_CART:
-            return{
+            return {
+                ...state,payload,
+                // cartItems: addItemToCart(state.cartItems, payload)
+            };
+        case REMOVE_FROM_CART:
+            return {
                 ...state,
-                addToCart:payload
-            } 
+                payload,
+                // cartItems: removeItemFromCart(state.cartItems, payload)
+            }
         default:
             return state;//returns defult state if no data is fetched
         }
