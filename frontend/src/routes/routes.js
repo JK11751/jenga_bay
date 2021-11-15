@@ -35,7 +35,7 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, clearCart})=>{
                 <CompanyProductUploadPage cartItems={cartItems} />
             </Route>
             <Route exact path="/sellers/:sellerId/items">
-                <CompanyProductPage cartItems={cartItems} />
+                <CompanyProductPage cartItems={cartItems} handleAddProduct={handleAddProduct} />
             </Route>
             <Route exact path="/categories/:categoryName">
                 <CategoryPage cartItems={cartItems} />
