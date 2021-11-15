@@ -18,6 +18,8 @@ const ProductPage = ({handleAddProduct,cartItems})=> {
             <NavBar cartItems={cartItems}/>
             <Flex overflowY="hidden" flexDir="row">
                 <Flex flexDir="column">
+                    {productReducer.productDetails.map((product)=>{
+                        return(
                     <Breadcrumb mt={7} textSize="1.5em" fontFamily="monospace" textTransform="uppercase" ml={20} spacing="8px" separator={<MdKeyboardArrowRight color="gray.500" />}>
                         <BreadcrumbItem>
                             <BreadcrumbLink href="/">Home</BreadcrumbLink>
@@ -26,15 +28,15 @@ const ProductPage = ({handleAddProduct,cartItems})=> {
                             <BreadcrumbLink href="#">Products</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbItem >
-                            <BreadcrumbLink href="#">bamburi Cement</BreadcrumbLink>
+                            <BreadcrumbLink href="#">{product.item_seller.business_name}</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbItem >
-                            <BreadcrumbLink href="#">Cement</BreadcrumbLink>
+                            <BreadcrumbLink href="#">{product.category}</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbItem isCurrentPage>
-                            <BreadcrumbLink href="#">Cement</BreadcrumbLink>
+                            <BreadcrumbLink href="#">{product.item_name}</BreadcrumbLink>
                         </BreadcrumbItem>
-                    </Breadcrumb>
+                    </Breadcrumb>)})}
                     <Box p={0}>   
                         <ImageSlider />
                     </Box>
