@@ -21,7 +21,7 @@ class APIServices {
     return api.post("/some-endpoint", data);
   }
   async getProducts(){
-    return api.get(`/`);
+    return api.get(`/items`);
   }
   async getProductDetails(item_id){
     return api.get(`/items/${item_id}`);

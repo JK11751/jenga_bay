@@ -20,18 +20,23 @@ import { Tag, TagLabel } from '@chakra-ui/tag';
 import Rating from "../../../components/Products/Rating";
 import { handleGetProductDetails } from '../../../redux/actions/appActions';
 import { handleGetSellerDetails } from '../../../redux/actions/appActions';
+// import { AddCart } from '../../../redux/actions/appActions';
 import {useDispatch,useSelector} from "react-redux"
 import {useParams} from "react-router";
+// import { connect } from 'react-redux';
+// import { useHistory } from 'react-router';
 
 const data = {
   rating: 4.5,
 };
 
 
-export const ProductDetails = () => {
+function ProductDetails({handleAddProduct}) {
+  // const history = useHistory()
   let { productId } = useParams()
   const dispatch = useDispatch()
   const productData = useSelector((state) => state.productReducer).productDetails;
+  console.log("ProductData", productData.id)
   const sellerData = useSelector((state) => state.sellerReducer).sellerDetails;
   //getting product details
   useEffect(() => {
@@ -61,6 +66,11 @@ export const ProductDetails = () => {
   const handleOnChange = (e) => {
     setValue(e.target.value);
     setCount(value)
+  }
+
+  const handleAddToCartClicked = () => {
+    handleAddProduct(productData)
+    // history.push("/cart")
   }
 
   return (
@@ -153,6 +163,7 @@ export const ProductDetails = () => {
           backgroundColor="transparent"
           width="200px"
           height="38px"
+          onClick={handleAddToCartClicked}
         >
          Add to Cart 
         </Button>
@@ -185,3 +196,7 @@ export const ProductDetails = () => {
     </VStack>
   )
 }
+
+
+
+export default ProductDetails

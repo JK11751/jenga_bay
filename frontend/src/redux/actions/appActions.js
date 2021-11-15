@@ -7,6 +7,8 @@ import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS, GET_SELLER_DETAILS } fro
 // @desc This is a redux function to fetch users and update the redux state
 // Pass params if needed
 
+/*-----------------------------------------------USERS----------------------------------------------------- */
+
 // Get users
 const getUsers = (users) => ({
   type: GET_USERS,
@@ -26,7 +28,9 @@ export const handleGetUsers = (params) => async (dispatch) => {
   }
 };
 
-// Get Products
+/*-----------------------------------------------PRODUCTS----------------------------------------------------- */
+
+// Getting All Products
 const getProducts = (products) => ({
   type: GET_PRODUCTS,
   payload: products,
@@ -56,6 +60,8 @@ export const handleGetProductDetails = (item_id) => async(dispatch) => {
   }
 }
 
+/*---------------------------------------------SELLERS----------------------------------------------------- */
+
 //Getting a specific seller details
 const getSellerDetails = (sellerDetails) => ({
   type: GET_SELLER_DETAILS,
@@ -71,3 +77,67 @@ export const handleGetSellerDetails = (seller_id) => async(dispatch) => {
   }
 }
 
+/*------------------------------------------------CART----------------------------------------------------- */
+
+//Adding Items to cart
+// export function addToCartAction(product) {
+//   return {
+//     type: ADD_TO_CART,
+//     payload: product.id
+//   };
+// }
+
+// //Removing an item from Cart
+// export function removeFromCartAction(item_id) {
+//   return {
+//     type: REMOVE_FROM_CART,
+//     productId: item_id
+//   };
+// }
+
+//Updating Quantity of cart item
+// export function updateItemQuantity(payload) {
+//   return {
+//     type: UPDATE_QUANTITY,
+//     payload
+//   };
+// }
+
+// /*GET NUMBER CART*/
+// export function GetNumberCart(){
+//   return{
+//       type:NUMBER_OF_ITEMS_IN_CART
+//   }
+// }
+
+// export function AddCart(payload){
+//   return {
+//       type:ADD_TO_CART,
+//       payload
+//   }
+// }
+// export function UpdateCart(payload){
+//   return {
+//       type: UPDATE_CART,
+//       payload
+//   }
+// }
+// export function DeleteCart(payload){
+//   return{
+//       type:DELETE_CART,
+//       payload
+//   }
+// }
+
+// export function IncreaseQuantity(payload){
+//   return{
+//       type: INCREASE_QUANTITY,
+//       payload
+//   }
+// }
+// export function DecreaseQuantity(payload){
+//   return{
+//       type: DECREASE_QUANTITY,
+//       payload
+//   }
+// }

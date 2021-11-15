@@ -10,19 +10,21 @@ import RegistrationPage from "../pages/CompanyRegistration/RegistrationPage.js";
 import CompanyProductUploadPage from "../pages/CompanyProductUploadPage/CompanyProductUploadPage.js";
 import CompanyProductPage from "../pages/CompanyProductPage/CompanyProductPage.js";
 import { CategoryPage } from "../pages/CategoriesPage/CategoryPage.js";
-// import Test from "../components/Test.js";
+import { Cart } from "../pages/Cart/Cart.js";
+// import Shop from "../pages/Cart/Test.js";
 
-const routes =()=>{
+const Routes =({cartItems, handleAddProduct, handleRemoveProduct, clearCart})=>{
     return(
+        <div>
         <Switch>
             <Route exact path="/">
-                <Home />
+                <Home cartItems={cartItems} handleAddProduct={handleAddProduct} />
             </Route>
             <Route exact path="/sign-up">
-                <SignUpPage />
+                <SignUpPage cartItems={cartItems} />
             </Route>
             <Route exact path="/sign-in">
-                <SignInPage />
+                <SignInPage cartItems={cartItems} />
             </Route>
             <Route exact path="/registration">
                 <RegistrationPage />
@@ -30,20 +32,26 @@ const routes =()=>{
             <Route exact path="/product">
                 <ProductPage />
             </Route>
-            <Route exact path="/product/:productId" component={ProductPage}/>
+            <Route exact path="/product-details/:productId">
+                <ProductPage cartItems={cartItems} handleAddProduct={handleAddProduct} />
+            </Route>
             <Route exact path="/upload">
-                <CompanyProductUploadPage />
+                <CompanyProductUploadPage cartItems={cartItems} />
             </Route>
             <Route exact path="/profile">
-                <CompanyProductPage />
+                <CompanyProductPage cartItems={cartItems} />
             </Route>
             <Route exact path="/category">
-                <CategoryPage />
+                <CategoryPage cartItems={cartItems} />
+            </Route>
+            <Route exact path="/cart">
+                <Cart clearCart={clearCart} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems} />
             </Route>
             {/* <Route exact path="/test">
-                <Test/>
+                <Shop />
             </Route> */}
         </Switch>
+        </div>
     )
 }
-export default routes;
+export default Routes;

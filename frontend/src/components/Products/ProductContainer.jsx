@@ -6,7 +6,7 @@ import { handleGetProducts } from "../../redux/actions/appActions";
 import { useDispatch, useSelector } from "react-redux";
 
 
-const ProductContainer = () =>{
+const ProductContainer = ({handleAddProduct}) =>{
     const [isloading, setisloading] = React.useState(true)
     
     //setting the product list to be rendered
@@ -29,7 +29,7 @@ const ProductContainer = () =>{
         <Flex ml="5vw" borderRadius="10px" width="90vw" alignSelf="center" flexWrap="wrap" pl={3} pr={3}>
             {productReducer.products.map((product)=>{ 
             return(
-                <ProductCard isloading={isloading} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
+                <ProductCard product={product} handleAddProduct={handleAddProduct} isloading={isloading} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
             )
             })}
             

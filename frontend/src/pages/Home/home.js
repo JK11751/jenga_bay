@@ -7,17 +7,17 @@ import Footer from "../../components/PageSections/Footer";
 import AdsCarousel from "./AdsCarousel";
 // import ProductList from "../shared/ProductList";
 
-const Home = () => {
+const Home = ({handleAddProduct, cartItems}) => {
     // const img = "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg"
     return(
         <Box bgColor="#fff" flexDir="column" width="100vw" height="100vh">
-            <NavBar />
+            <NavBar cartItems={cartItems} />
             <Box alignSelf="center" ml="5vw" mt={5}>
                 <AdsCarousel alignSelf="center"/>
             </Box>
             
             <CategoryChips />
-            <ProductContainer alignSelf="center"/> 
+            <ProductContainer handleAddProduct={handleAddProduct} alignSelf="center"/> 
             <Box p={3}>
             <Footer/>
             </Box>
