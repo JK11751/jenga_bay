@@ -17,6 +17,7 @@ import {motion} from "framer-motion"
 import { Badge } from "@chakra-ui/layout";
 import { Spinner } from "@chakra-ui/spinner";
 import { IconButton } from "@chakra-ui/button";
+import { Icon } from "@chakra-ui/icon";
 
 const data = {
   isNew: true,
@@ -121,7 +122,7 @@ function ProductCard(props) {
                 fontSize={"1.2em"}
               >
                 {/* <chakra.a href={"#"} display={"flex"}> */}
-                  <IconButton _hover={{cursor:"pointer"}} onClick={() => {props.handleAddProduct(props.product)}} icon={FiShoppingCart} h={7} w={7} alignSelf={"center"} />
+                  <IconButton variant="unstyled" _hover={{cursor:"pointer"}} onClick={() => {props.handleAddProduct(props.product)}} icon={<Icon as={FiShoppingCart} h={7} w={7}/>} alignSelf={"center"} />
                 {/* </chakra.a> */}
               </Tooltip>
             </Flex>

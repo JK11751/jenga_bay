@@ -18,9 +18,9 @@ export const CartItem = (props) => {
           
         return (
           <HStack maxW="320px">
-            <Button onClick={add}>+</Button>
-            <span className="btn btn-info">{quantity}</span>
-            <Button onClick={remove}>-</Button>
+            <Button variant="unstyled" onClick={add}>+</Button>
+            <span width="50px">{quantity}</span>
+            <Button variant="unstyled" onClick={remove}>-</Button>
           </HStack>
         )
     }  
@@ -31,7 +31,7 @@ export const CartItem = (props) => {
                 <HStack>
                     <Image objectFit="cover" borderRadius="10px" width="70px" height="70px" src={props.image} alt="product"/>
                     <VStack alignItems="left" spacing="2px">
-                        <Text {...mystyle}>{props.name}</Text>
+                        <Text fontWeight="bold" {...mystyle}>{props.name}</Text>
                         <Text {...mystyle}>{props.unit}</Text>
                     </VStack>
                 </HStack>    
