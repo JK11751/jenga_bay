@@ -6,8 +6,8 @@ import {
   Box,
   Image,
   useColorModeValue,
-  Icon,
-  chakra,
+  // Icon,
+  // chakra,
   Tooltip,
   HStack,
 } from "@chakra-ui/react";
@@ -15,7 +15,9 @@ import { FiShoppingCart } from "react-icons/fi";
 import Rating from "./Rating";
 import {motion} from "framer-motion"
 import { Badge } from "@chakra-ui/layout";
-import { Spinner } from "@chakra-ui/spinner";
+import { IconButton } from "@chakra-ui/button";
+import { Icon } from "@chakra-ui/icon";
+import { useHistory } from "react-router";
 
 const data = {
   isNew: true,
@@ -28,10 +30,12 @@ const data = {
 };
 
 function ProductCard(props) {
-    const MotionBox = motion(Box)
+  const history = useHistory();
+
+  const MotionBox = motion(Box)
   return (
     <Flex flexDir="row" p={2}  mr={1} >
-      <Link to={{ pathname: `/product/${props.id}` }}>
+      <Link to={{ pathname: `/product-details/${props.id}`}}>
         <MotionBox
           bg={useColorModeValue("white", "gray.800")}
           width="180px"
@@ -56,15 +60,7 @@ function ProductCard(props) {
               fontSize="0.8em"
             >New</Badge>
           )}
-          { props.isloading ?
-            <Spinner
-              thickness="4px"
-              speed="0.65s"
-              emptyColor="gray.200"
-              color="blue.500"
-              size="xl"
-            />
-          :<Image
+          <Image
             sx={{objectFit:"cover"}}
             src={props.photo}
             h="180px"
@@ -72,14 +68,20 @@ function ProductCard(props) {
             alt={`Picture of ${props.name}`}
             roundedTop="lg"
           />
-          }
-
           <Box pl="4" pr="6" pt="3">
             <Box d="flex" alignItems="baseline">
               <HStack>
-                <Box fontSize="12px" as="span" textTransform="uppercase" fontWeight="normal">
+              <Tooltip
+                label="View more products from seller"
+                bg="white"
+                placement={"top"}
+                color={"gray.800"}
+                fontSize={"1.2em"}
+              >
+                <Box onClick={() => history.push(`/sellers/${props.sellerId}/items`)} _hover={{cursor:"pointer"}} fontSize="12px" as="span" textTransform="uppercase" fontWeight="normal">
                   {props.companyName}
                 </Box>
+                </Tooltip>
                  {data.isNew && (
                       <Circle
                         size="8px"
@@ -119,9 +121,9 @@ function ProductCard(props) {
                 color={"gray.800"}
                 fontSize={"1.2em"}
               >
-                <chakra.a href={"#"} display={"flex"}>
-                  <Icon as={FiShoppingCart} h={7} w={7} alignSelf={"center"} />
-                </chakra.a>
+                {/* <chakra.a href={"#"} display={"flex"}> */}
+                  <IconButton variant="unstyled" _hover={{cursor:"pointer"}} onClick={() => {props.handleAddProduct(props.product)}} icon={<Icon as={FiShoppingCart} h={7} w={7}/>} alignSelf={"center"} />
+                {/* </chakra.a> */}
               </Tooltip>
             </Flex>
             <Rating rating={data.rating} />

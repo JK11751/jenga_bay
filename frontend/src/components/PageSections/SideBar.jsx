@@ -14,9 +14,13 @@ import {
   AccordionIcon,
 } from "@chakra-ui/react"
 import CategoryList from "../Categories/CategoryList";
-
+import { useHistory } from "react-router";
 
 const SideBar = ({ show, handleToggle }) => {
+
+  
+  const history = useHistory()
+  
 
   //handles closing of the sidebar when someone clicks outside
   function OutsideClick(ref) {
@@ -94,7 +98,7 @@ const SideBar = ({ show, handleToggle }) => {
             </h2>
             <AccordionPanel pb={4}>
             {CategoryList.map((category) =>
-              (<p key={category.id}>{category.value}</p>)
+              (<p p={5} _hover={{cursor:"pointer"}} onClick={() => history.push(`/categories/${category.value}`)} key={category.id}>{category.value}</p>)
             )}
             </AccordionPanel>
           </AccordionItem>

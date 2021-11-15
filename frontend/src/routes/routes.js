@@ -10,40 +10,41 @@ import RegistrationPage from "../pages/CompanyRegistration/RegistrationPage.js";
 import CompanyProductUploadPage from "../pages/CompanyProductUploadPage/CompanyProductUploadPage.js";
 import CompanyProductPage from "../pages/CompanyProductPage/CompanyProductPage.js";
 import { CategoryPage } from "../pages/CategoriesPage/CategoryPage.js";
-// import Test from "../components/Test.js";
+import { Cart } from "../pages/Cart/Cart.js";
 
-const routes =()=>{
+const Routes =({cartItems, handleAddProduct, handleRemoveProduct, clearCart})=>{
     return(
+        <div>
         <Switch>
             <Route exact path="/">
-                <Home />
+                <Home cartItems={cartItems} handleAddProduct={handleAddProduct} />
             </Route>
             <Route exact path="/sign-up">
-                <SignUpPage />
+                <SignUpPage cartItems={cartItems} />
             </Route>
             <Route exact path="/sign-in">
-                <SignInPage />
+                <SignInPage cartItems={cartItems} />
             </Route>
             <Route exact path="/registration">
                 <RegistrationPage />
             </Route>
-            <Route exact path="/product">
-                <ProductPage />
+            <Route exact path="/product-details/:productId">
+                <ProductPage cartItems={cartItems} handleAddProduct={handleAddProduct} />
             </Route>
-            <Route exact path="/product/:productId" component={ProductPage}/>
             <Route exact path="/upload">
-                <CompanyProductUploadPage />
+                <CompanyProductUploadPage cartItems={cartItems} />
             </Route>
-            <Route exact path="/profile">
-                <CompanyProductPage />
+            <Route exact path="/sellers/:sellerId/items">
+                <CompanyProductPage cartItems={cartItems} handleAddProduct={handleAddProduct} />
             </Route>
-            <Route exact path="/category">
-                <CategoryPage />
+            <Route exact path="/categories/:categoryName">
+                <CategoryPage cartItems={cartItems} />
             </Route>
-            {/* <Route exact path="/test">
-                <Test/>
-            </Route> */}
+            <Route exact path="/cart">
+                <Cart clearCart={clearCart} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems} />
+            </Route>
         </Switch>
+        </div>
     )
 }
-export default routes;
+export default Routes;
