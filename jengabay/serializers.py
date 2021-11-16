@@ -53,6 +53,13 @@ class ItemViewSerializer(serializers.ModelSerializer):
         model = Item
         fields = "__all__"
 
+class ItemSerializer(serializers.ModelSerializer):
+    item_seller = serializers.PrimaryKeyRelatedField(queryset=Seller.objects.all(), many=False)
+    class Meta:
+        model = Item
+        fields = "__all__"
+
+
 class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction

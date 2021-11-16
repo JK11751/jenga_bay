@@ -36,7 +36,7 @@ class SpecificItemView(ListAPIView):
 class SpecificSellerSpecificItemView(RetrieveUpdateDestroyAPIView):
     """api used to get, update and delete a specific item in a specific seller page"""
 
-    serializer_class = ItemViewSerializer
+    serializer_class = ItemSerializer
     queryset = Item.objects.all()
 
 class AllItemsListView(ListAPIView):
@@ -48,7 +48,7 @@ class AllItemsListView(ListAPIView):
 class SpecificSellerItemsView(ListCreateAPIView):
     """api for listing and creating items belonging to a specific seller"""
     
-    serializer_class = ItemViewSerializer
+    serializer_class = ItemSerializer
     def get_queryset(self):
         return Item.objects.all().filter(item_seller=self.kwargs['pk'])
 
