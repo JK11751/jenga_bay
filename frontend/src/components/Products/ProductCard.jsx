@@ -1,107 +1,93 @@
-// import { Box, Flex, HStack, Text, VStack } from "@chakra-ui/layout";
-// import React from "react";
-// import { Image } from "@chakra-ui/image";
-// import { Avatar } from "@chakra-ui/avatar";
-// // import { getDetails } from "../../redux/actions/appActions";
-// // import { useDispatch } from "react-redux";
-// // import { Button } from "@chakra-ui/button";
+import React from "react";
 import { Link } from "react-router-dom";
-// // import img from "../../assets/product.jpg"
-
-// const ProductCard = (props)=>{
-//     // const dispatch = useDispatch()
-//     return(
-
-//         <Link to={{pathname:`/product/${props.id}`}}>
-//         <Box _hover={{ boxShadow: "lg",bg:"#18A0FB" }} _focus={{ boxShadow: "outline" }} borderRadius="5px" ml={10} mb={5} height="300px" width="200px" backgroundColor="#007ACC">
-//             <Flex flexDir="column">
-//                 <Image borderRadius="5px" height="200px" width="100%" src={props.photo} alt="This is a product"/>
-//                 <VStack alignItems="center" p="5px">
-//                     <HStack>
-//                         <Avatar size="sm" src={props.company_image}/>
-//                         <Text color="#ffffff" fontWeight="501px">{props.description}</Text>
-//                     </HStack>
-//                     <Text fontFamily="heading" fontSize="15px" color="#ffffff">{props.category}</Text>
-//                     <Text fontSize="15px" color="#ffffff">{props.name}</Text>
-//                     {/* <Button onClick={()=> dispatch(getDetails(props.id))}>>View more</Button> */}
-//                 </VStack>
-//             </Flex>
-//         </Box></Link>
-//     )
-// }
-
-// export default ProductCard;
 import {
   Flex,
   Circle,
   Box,
   Image,
   useColorModeValue,
-  Icon,
-  chakra,
+  // Icon,
+  // chakra,
   Tooltip,
   HStack,
 } from "@chakra-ui/react";
 import { FiShoppingCart } from "react-icons/fi";
 import Rating from "./Rating";
 import {motion} from "framer-motion"
+import { Badge } from "@chakra-ui/layout";
+import { IconButton } from "@chakra-ui/button";
+import { Icon } from "@chakra-ui/icon";
+import { useHistory } from "react-router";
 
 const data = {
   isNew: true,
   imageURL:
     "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4600&q=80",
-  name: "Wayfarer Classic",
+  name: "JengaBay Product",
   price: 4.5,
   rating: 4.2,
   numReviews: 34,
 };
 
 function ProductCard(props) {
-    const MotionBox = motion(Box)
+  const history = useHistory();
+
+  const MotionBox = motion(Box)
   return (
-    <Flex flexDir="row" p={2}>
-      <Link to={{ pathname: `/product/${props.id}` }}>
+    <Flex onClick={() => history.push(`/product-details/${props.id}`) } flexDir="row" p={2}  mr={1} >
+      {/* <Link to={{ pathname: `/product-details/${props.id}`}}> */}
         <MotionBox
           bg={useColorModeValue("white", "gray.800")}
-          width="3xs"
+          width="180px"
+          height="300px"
           borderWidth="1px"
           rounded="lg"
           shadow="lg"
           position="relative"
           className="my-box"
-          whileHover={{ scale: 1.1 }}
+          whileHover={{ scale: 1.08 }}
         >
           {data.isNew && (
-            <Circle
+            <Badge
               size="10px"
               position="absolute"
               top={2}
               right={2}
-              bg="red.200"
-            />
+              bg="#1EE164"
+              color="white" 
+              rounded="full" 
+              px="2"
+              fontSize="0.8em"
+            >New</Badge>
           )}
-
           <Image
             sx={{objectFit:"cover"}}
             src={props.photo}
-            h="200px"
+            h="180px"
             w="100%"
-            alt={`Picture of ${data.name}`}
+            alt={`Picture of ${props.name}`}
             roundedTop="lg"
           />
-
-          <Box p="6">
-            <Box d="flex" alignItems="baseline">
-              {/* {data.isNew && (
-                <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
-                  New
-                </Badge>
-              )} */}
+          <Box pl="4" pr="6" pt="3">
+            <Box onClick={() => history.push(`/sellers/${props.sellerId}/items`)} _hover={{cursor:"pointer"}}  d="flex" alignItems="baseline">
               <HStack>
-                {/* <Avatar size="sm" src={props.company_image}/> */}
-                <Box as="text" textTransform="uppercase" fontWeight="light">
-                  {props.description}
+              <Tooltip
+                label="View more products from seller"
+                bg="white"
+                placement={"top"}
+                color={"gray.800"}
+                fontSize={"1.2em"}
+              >
+                <Box fontSize="12px" as="span" textTransform="uppercase" fontWeight="normal">
+                  {props.companyName}
                 </Box>
+                </Tooltip>
+                 {data.isNew && (
+                      <Circle
+                        size="8px"
+                        bg="#1EE164"
+                      />
+                  )}
               </HStack>
             </Box>
 
@@ -109,22 +95,21 @@ function ProductCard(props) {
               mt="1"
               justifyContent="space-between"
               alignContent="center"
-              fontSize="xl"
+              fontSize="md"
               fontWeight="semibold"
-              as="h5"
+              as="span"
               lineHeight="tight"
               isTruncated
+              
             >
               {props.name}
             </Box>
-            <Flex justifyContent="space-between" alignContent="center">
-              {/* <Rating rating={data.rating} numReviews={data.numReviews} /> */}
-
+            <Flex mt="5px" justifyContent="space-between" alignContent="center">
               <Box
-                fontSize="2xl"
+                fontSize="lg"
                 color={useColorModeValue("gray.800", "white")}
               >
-                <Box as="span" color={"gray.600"} fontSize="lg">
+                <Box as="span" color={"gray.600"} fontSize="md">
                   £
                 </Box>
                 {data.price.toFixed(2)}
@@ -136,15 +121,15 @@ function ProductCard(props) {
                 color={"gray.800"}
                 fontSize={"1.2em"}
               >
-                <chakra.a href={"#"} display={"flex"}>
-                  <Icon as={FiShoppingCart} h={7} w={7} alignSelf={"center"} />
-                </chakra.a>
+                {/* <chakra.a href={"#"} display={"flex"}> */}
+                  <IconButton variant="unstyled" _hover={{cursor:"pointer"}} onClick={() => {props.handleAddProduct(props.product)}} icon={<Icon as={FiShoppingCart} h={7} w={7}/>} alignSelf={"center"} />
+                {/* </chakra.a> */}
               </Tooltip>
             </Flex>
             <Rating rating={data.rating} />
           </Box>
         </MotionBox>
-      </Link>
+      {/* </Link> */}
     </Flex>
   );
 }

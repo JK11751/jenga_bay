@@ -10,7 +10,7 @@ import {
     useColorModeValue,
     Image,
   } from '@chakra-ui/react';
-import logo from "../../assets/logo.png"
+import logo from "../../assets/JengaBay.png"
   
   const ListHeader = ({ children }) => {
     return (

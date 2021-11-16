@@ -23,8 +23,13 @@
       $ python manage.py runserver
       
     access the api endpoints from:
-    http://localhost:8000    (to get items information)
-    http://localhost:8000/itemcreate  (to add a new product item)
-    http://localhost:8000/sellers    (to add a seller and get seller information)
-    http://localhost:8000/order      (to add create an order and get order information)
-    
+    http://localhost:8000/sellers   (to add a seller and get all sellers information)
+    http://localhost:8000/sellers/seller-id (to get a specific seller information)
+    http://localhost:8000/sellers/seller-id/profile  (to get, update or delete a specific seller)
+    http://localhost:8000/items  (api end point for all items in the database)
+    http://localhost:8000/items/item_id   (api end point to view a specific item)
+    http://localhost:8000/items/category/category_name  (to get all items in a specific category)
+    http://localhost:8000/sellers/seller-id/items   (to get all items belonging to a specific seller)
+    http://localhost:8000/sellers/seller-id/items/item_id   (to get, update and delete a specific item belonging to a specific seller)
+    http://localhost:8000/sellers/seller-id/items/category/category_name   (to get items belonging to a specific category in a specific seller page)
+    http://localhost:8000/order   (to add create an order and get order information)

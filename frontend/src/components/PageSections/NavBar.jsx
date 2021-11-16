@@ -1,86 +1,133 @@
-import React, {useState} from "react"
-import {VStack, Flex, HStack, Spacer } from "@chakra-ui/layout";
+import React from "react";
+import { VStack, Flex, HStack, Spacer,Box, Circle, Text } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
-import icon from "../../assets/logo.png"
-import { Button} from "@chakra-ui/button";
+import icon from "../../assets/JengaBay.png";
+import { Button } from "@chakra-ui/button";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
-import {BiMenu, BiMenuAltLeft, BiCartAlt} from "react-icons/bi"
-import {IoIosArrowDown} from "react-icons/io"
-import {MdOutlineAccountCircle} from "react-icons/md"
-import {IoMdNotificationsOutline} from "react-icons/io"
+
+import { BiCartAlt } from "react-icons/bi";
+import { FiMenu } from "react-icons/fi"
+import { IoIosArrowDown } from "react-icons/io";
+import { MdOutlineAccountCircle } from "react-icons/md";
+import { IoMdNotificationsOutline } from "react-icons/io";
 import { Icon } from "@chakra-ui/icon";
 import {
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
-    PopoverBody,
-} from "@chakra-ui/react"
-import { useDisclosure } from "@chakra-ui/hooks";
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+} from "@chakra-ui/react";
 import SideBar from "./SideBar";
+import { useHistory } from "react-router";
 
+const NavBar = ({cartItems}) => {
+  const history= useHistory()
+  const [show, setShow] = React.useState(false)
+  const handleToggle = (setting) => setShow(setting)
 
-const NavBar = () => {
-    const {isOpen, onOpen, onClose} = useDisclosure();
-    const [showMenu, setShowMenu] = useState(true)
-    const handleClick = () => {
-        setShowMenu(!showMenu);
-        onOpen();
-    }
-    // const ColoredLine = ({color}) => (
-    //     <hr
-    //         style={{
-    //             color: color,
-    //             backgroundColor: color,
-    //             height: 5
-    //         }}
-    //     />
-    // );
-    return(
-        <>
-        <Flex pos="sticky" height="50px" pl={10} pr={10} alignItems="center" background="#007ACC">
-        {showMenu ? <Icon onClick={handleClick} color="#FFFFFF" mr={5} as={BiMenu} h={9} w={9}/>: <Icon onClick={handleClick} color="#FFFFFF" mr={5} as={BiMenuAltLeft} h={9} w={9}/>}
-        <Flex flexShrink={0}>
-            <Link to="/"><Image src={icon}/></Link>
+  const handleOpenCart = () => {
+    history.push("/cart")
+  }
+
+  return (
+    <>
+      <Flex
+        position="sticky"
+        top={0}
+        zIndex="100"
+        pl={3}
+        pr={3}
+        shadow="lg"
+        alignItems="center"
+        background="#007ACC"
+        flexDir="column"
+      >
+      <Flex alignSelf="flex-start" alignItems="center" height="60px" flexDir="row" mr="2.5vw" ml="2.5vw">
+        <Box > 
+          <Icon
+            onClick={() => handleToggle(true)}
+            color="#fff"
+            _hover={{cursor:"pointer"}}
+            as={FiMenu}
+            h={10}
+            w={7}
+            mr={6}
+            mb={1}
+          />
+        </Box>
+        <Flex alignSelf="center" flexShrink={0}>
+          <Link to="/">
+            <Image src={icon} />
+          </Link>
         </Flex>
-            
-            <SearchBar />
-            <Spacer/>
-            <HStack spacing="20px">
-                <Icon color="#ffffff" h={7} w={7} as={IoMdNotificationsOutline}/>
-                <Icon color="#ffffff" h={7} w={7} as={BiCartAlt}/>
-                {/* <Box color="#ffffff" width="5px"></Box> */}
-                {/* <Divider variant="solid" size="10px" orientation="vertical" /> */}
-                {/* <ColoredLine color="red"/> */}
-                {/* <div style={{ borderTop: "2px solid #fff ", marginLeft: 20, marginRight: 20 }}></div> */}
-                <Popover mr={5} isLazy>
-                    <PopoverTrigger>
-                    <Button variant="ghost">
-                        <HStack>
-                        <Icon color="#ffffff" h={7} w={7} as={MdOutlineAccountCircle}/>
-                        <Icon color="#ffffff" h={5} w={4} as={IoIosArrowDown}/>
-                        </HStack>
-                    </Button>   
-                    </PopoverTrigger>
-                    <PopoverContent width="200px">
-                        {/* <PopoverHeader fontWeight="semibold">Popover placement</PopoverHeader> */}
-                        {/* <PopoverArrow /> */}
-                        {/* <PopoverCloseButton /> */}
-                        <PopoverBody>
-                        <VStack spacing="10px">
-                            <Link to="/sign-up"><Button h="30px" alignItems="center" fontWeight="500" fontSize="13px" w="130px" textColor="#18A0FB" background="#ffffff" variant="outline">Sign Up</Button></Link>
-                            <Link to="/sign-in"  ><Button h="30px" w="130px" alignItems="center" fontWeight="500" fontSize="13px" textColor="#ffffff" colorScheme="#18A0FB" background="#18A0FB" variant="solid">Login</Button></Link>
-                        </VStack> 
-                        </PopoverBody>
-                    </PopoverContent>
-                    </Popover>
-            </HStack>
-                
+
+        <SearchBar />
+        <Spacer />
+        <HStack ml="12vw" spacing="20px">
+          <Icon color="#fff" h={7} w={7} as={IoMdNotificationsOutline} />
+          <Box>
+            <Icon onClick={handleOpenCart} _hover={{cursor:"pointer"}} color="#fff" h={7} w={7} as={BiCartAlt} />
+            { cartItems.length > 0 &&
+            <Circle alignItems="center" p={2} right={36} position="absolute" top={4} size="15px" bg="red"><Text fontWeight="bold" fontSize="10px" color="white">{cartItems.length}</Text></Circle>
+            }
+          </Box>
+          <Popover mr={5} isLazy>
+            <PopoverTrigger>
+              <Button variant="ghost">
+                <HStack>
+                  <Icon
+                    color="#fff"
+                    h={7}
+                    w={7}
+                    as={MdOutlineAccountCircle}
+                  />
+                  <Icon color="#fff" h={5} w={4} as={IoIosArrowDown} />
+                </HStack>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent width="200px">
+              <PopoverBody>
+                <VStack spacing="10px">
+                  <Link to="/sign-up">
+                    <Button
+                      h="30px"
+                      alignItems="center"
+                      fontWeight="500"
+                      fontSize="13px"
+                      w="130px"
+                      textColor="#18A0FB"
+                      background="#fff"
+                      variant="outline"
+                    >
+                      Sign Up
+                    </Button>
+                  </Link>
+                  <Link to="/sign-in">
+                    <Button
+                      h="30px"
+                      w="130px"
+                      alignItems="center"
+                      fontWeight="500"
+                      fontSize="13px"
+                      textColor="#000"
+                      colorScheme="#18A0FB"
+                      background="#18A0FB"
+                      variant="solid"
+                    >
+                      Login
+                    </Button>
+                  </Link>
+                </VStack>
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
+        </HStack>
         </Flex>
-        <SideBar isOpen={isOpen} onClose={onClose} onOpen={onOpen} />
-        </>
-        
-    )
-}
+      </Flex>
+      <SideBar show={show} handleToggle={handleToggle} />
+    </>
+  );
+};
 
 export default NavBar;
