@@ -8,6 +8,7 @@ import {MdKeyboardArrowRight} from "react-icons/md"
 // import Footer from "../../components/PageSections/Footer"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/breadcrumb";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const ProductPage = ({handleAddProduct,cartItems})=> {
     const productReducer = useSelector(({ productReducer }) => productReducer);
@@ -24,17 +25,17 @@ const ProductPage = ({handleAddProduct,cartItems})=> {
                         <BreadcrumbItem>
                             <BreadcrumbLink href="/">Home</BreadcrumbLink>
                         </BreadcrumbItem>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink href="#">Products</BreadcrumbLink>
+                        <BreadcrumbItem isCurrentPage>
+                            <BreadcrumbLink>Products</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbItem >
-                            <BreadcrumbLink href="#">{product.item_seller.business_name}</BreadcrumbLink>
+                            <BreadcrumbLink as={Link} to={{pathname: `/sellers/${product.item_seller.id}/items`}}>{product.item_seller.business_name}</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbItem >
-                            <BreadcrumbLink href="#">{product.category}</BreadcrumbLink>
+                            <BreadcrumbLink as={Link} to={{pathname: `/categories/${product.category}`}}>{product.category}</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbItem isCurrentPage>
-                            <BreadcrumbLink href="#">{product.item_name}</BreadcrumbLink>
+                            <BreadcrumbLink>{product.item_name}</BreadcrumbLink>
                         </BreadcrumbItem>
                     </Breadcrumb>)})}
                     <Box p={0}>   

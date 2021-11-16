@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import NavBar from '../../components/PageSections/NavBar';
+import Footer from '../../components/PageSections/Footer';
 import { Box, Flex} from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import ProductCard from '../../components/Products/ProductCard';
@@ -34,7 +35,8 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
             return(
                 <ProductCard key={key} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
             )
-            })}</Flex> 
+            })}</Flex>
+            <Footer /> 
         </Box>
     )
 }
