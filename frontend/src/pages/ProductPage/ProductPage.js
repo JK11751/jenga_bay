@@ -23,7 +23,7 @@ const ProductPage = ({handleAddProduct,cartItems})=> {
                         return(
                     <Breadcrumb mt={7} textSize="1.5em" fontFamily="monospace" textTransform="uppercase" ml={20} spacing="8px" separator={<MdKeyboardArrowRight color="gray.500" />}>
                         <BreadcrumbItem>
-                            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                            <BreadcrumbLink as={Link} to={{pathname: `/`}}>Home</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbItem isCurrentPage>
                             <BreadcrumbLink>Products</BreadcrumbLink>

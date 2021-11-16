@@ -1,6 +1,6 @@
 import {
     Box,
-    chakra,
+    // chakra,
     Flex,
     SimpleGrid,
     Stat,
@@ -56,7 +56,7 @@ import {
         </chakra.h1> */}
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
           <StatsCard
-            title={'Users'}
+            title={'Customers'}
             stat={'5,000'}
             icon={<BsPerson size={'3em'} />}
           />
@@ -66,7 +66,7 @@ import {
             icon={<FiServer size={'3em'} />}
           />
           <StatsCard
-            title={'Datacenters'}
+            title={'Branches'}
             stat={'7'}
             icon={<GoLocation size={'3em'} />}
           />

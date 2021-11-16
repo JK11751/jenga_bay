@@ -1,8 +1,7 @@
-import React, { useEffect,useRef } from 'react'
+import React, { useEffect,useRef, useState } from 'react'
 import NavBar from '../../components/PageSections/NavBar';
 import Footer from '../../components/PageSections/Footer';
-import logo from "../../assets/product.jpg"
-import { Box, Flex, HStack, VStack, Text, Center, Divider, Heading} from "@chakra-ui/layout";
+import { Box, Flex, HStack, VStack, Text, Center, Divider } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import ProductCard from '../../components/Products/ProductCard';
 import { Avatar,AvatarBadge, IconButton } from "@chakra-ui/react";
@@ -10,7 +9,7 @@ import { Icon } from '@chakra-ui/icon';
 import {MdCheckCircle, MdLocationOn} from "react-icons/md"
 import { BiImageAdd } from 'react-icons/bi';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react"
-import { handleGetSellerItems } from '../../redux/actions/appActions';
+import { handleGetSellerItems, handleGetSellerProfile } from '../../redux/actions/appActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import Reviews from './subs/Reviews';
@@ -30,19 +29,51 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
     const img = "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg"
 
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
+    const seller = useSelector((state) => state.sellerReducer).sellerProfile
     const {sellerId} = useParams()
     const dispatch = useDispatch()
-
+    const [clicked, setClicked] = useState(false)
     const inputFile = useRef(null) 
 
     useEffect(() => { 
         dispatch(handleGetSellerItems(sellerId))
+        dispatch(handleGetSellerProfile(sellerId))
     }, [sellerId,dispatch])
 
     const onButtonClick = () => {
         // `current` points to the mounted file input element
        inputFile.current.click();
-      };
+    };
+
+    function setColor(e) {
+        var target = e.target,
+        count = +target.dataset.count;
+      
+        target.style.backgroundColor = count === 1 ? "#c4c4c4" : '#FFA90A';
+        target.style.color = count === 1 ? "#000000" : '#FFFFFF';
+        target.dataset.count = count === 1 ? 0 : 1;
+         /* 
+      
+         () : ? - this is conditional (ternary) operator - equals 
+      
+         if (count === 1) {
+            target.style.backgroundColor = "#7FFF00";
+            target.dataset.count = 0;
+         } else {
+            target.style.backgroundColor = "#FFFFFF";
+            target.dataset.count = 1;
+         } 
+         target.dataset - return all "data attributes" for current element, 
+         in the form of object, 
+         and you don't need use global variable in order to save the state 0 or 1
+        */ 
+    }
+
+    const onFollowClick = (e) => {
+        setColor(e)
+        setClicked(!clicked)
+
+    }
 
     return (
         <>
@@ -53,7 +84,7 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
                     <Image mt={1} borderRadius="10px" height="300px" width="70vw" src={img} />
                 </Center>
                 <Box position="absolute" top="45vh" left="17vw">
-                    <Avatar borderColor="#0095F8" borderWidth="5px" height="180px" width="180px" name="Seun Adebayo" src={logo}>
+                    <Avatar borderColor="#0095F8" borderWidth="5px" height="180px" width="180px" name={seller.business_name} src={seller.profile_pic}>
                     <AvatarBadge
                   as={IconButton}
                   onClick={onButtonClick}
@@ -67,20 +98,24 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
                     </Avatar>
                 </Box>
                 <Box mt="5vh" ml="32vw">
-                    <HStack spacing="23vw">
+                    <HStack spacing="13vw">
+                    <HStack alignItems="top">
                         <VStack alignItems="left">
                             <HStack>
-                                <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">Company Name</Text>
+                                <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">{seller.business_name}</Text>
                                 <Icon color="green" as={MdCheckCircle}/>
                             </HStack>
                             {/* <Text>Company Email</Text>
                             <Text>Company Phone Number</Text> */}
                             <HStack>
                                 <Icon as={MdLocationOn}/>
-                                <Text>Nairobi, Kenya</Text>
-                            </HStack>
-                            
+                                <Text>{seller.local_area_name}, {seller.town}</Text>
+                            </HStack>  
                         </VStack>
+                        <Box ml="4vw">
+                            <Button onClick={(e) => onFollowClick(e)} id="followButton" ml="1vw" _focus={{borderColor:"none", bg:"#FFA90A"}}>{clicked ? "Following" : "Follow"}</Button>
+                        </Box>
+                    </HStack>
                         {/* <HStack>
                             <button>follow</button>
                             <button>followers</button>
@@ -102,7 +137,7 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
                     </HStack>
                 </Box>
                 <Center>
-                    <Divider borderColor="#c4c4c4" pos="absolute" top="73vh" width="70vw" />
+                    <Divider borderColor="#c4c4c4" pos="absolute" top="74vh" width="70vw" />
                 </Center>
             </Flex>
             <Center  alignItems="left">  
@@ -185,14 +220,18 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
                             shadow="lg"
                             position="relative"
                             p={5}>
-                            <Heading>GENERAL</Heading>
-                                <Text>Location</Text>
-                                <Heading>ADDITIONAL CONTACT INFO</Heading>
-                                    ADDITIONAL CONTACT INFO
-                                    http://minionsmovie.com/
-                                <Heading>MORE INFO</Heading>
-                                <Heading>About</Heading>    
-                                <Text>
+                            <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">GENERAL</Text>
+                                <Text p={2}>Business Name:{seller.business_name}</Text>
+                                <Text p={2}>Business Email:{seller.email}</Text>
+                                <Text p={2}>Business Phone Number:{seller.phone_number}</Text>
+                                <Text p={2}>Business Address:</Text>
+                                <Text p={2}>{seller.town}, {seller.local_area_name}</Text>
+                                <Text p={2}>{seller.street}{seller.building}</Text>
+                                <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">COMPANY WEBSITE</Text>
+                                <Text fontFamily="sans-serif" p={2}>https://bamburicement.com/</Text>
+                                <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">MORE INFO</Text>
+                                <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">About</Text>    
+                                <Text p={2} fontFamily="sans-serif" lineHeight="30px">
                                 Minions: The Rise of Gru in theaters July 1, 2022.<br/>
                                 Additional information<br/>
                                 Releasing July 1, 2022 from the biggest animated franchise 
@@ -221,7 +260,7 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
                                     directed by returning franchise filmmaker Kyle Balda (Despicable Me 3, Minions), co-directed by Brad Ableson
                                     (The Simpsons) and Jonathan del Val (The Secret Life of Pets films), and features the iconic voice of Pierre
                                     Coffin as the Minions and a killer ʼ70s soundtrack courtesy of legendary Grammy-winning music producer Jack 
-                                    Antonoff. See less</Text>
+                                    Antonoff.</Text>
                             </Box>
                         </TabPanel>
                         <TabPanel>
@@ -231,7 +270,7 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
                             <Flex borderRadius="10px" width="80vw" alignSelf="center" flexWrap="wrap" >
                                 {sellerReducer.sellerItems.map((product,key)=>{ 
                                 return(
-                                    <ProductCard key={key} price={product.item_price} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
+                                    <ProductCard key={key} price={product.item_price} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
                                 )
                                 })}
                             </Flex>

@@ -1,7 +1,7 @@
 import React, {useState,useRef,useEffect} from "react"
-import { Input, InputGroup, InputRightAddon, InputRightElement } from "@chakra-ui/input"
+import { Input, InputGroup, InputRightAddon } from "@chakra-ui/input"
 import {BiSearchAlt2} from "react-icons/bi"
-import {MdClose} from "react-icons/md"
+// import {MdClose} from "react-icons/md"
 import {Flex} from "@chakra-ui/layout"
 import SearchedUsersDropdown from "./SearchedItemsDropDown"
 import CategoryList from "../Categories/CategoryList";
@@ -11,11 +11,10 @@ const SearchBar = () => {
     
     const [options, setOptions] = useState([])
     const [searchModalOpen, setSearchModalOpen] = useState("")
-    const [searchInput, setSearchInput] = useState("")
-    
+
     //handles change in input
     const onInputChange = (event) => {
-        setSearchInput(event.target.value)
+        const searchInput = event.target.value
         console.log(searchInput)
 
         if (searchInput) {
@@ -30,10 +29,7 @@ const SearchBar = () => {
        setOptions(newOptions)
     }
 
-    const handleClick = () => {
-        setSearchInput("")
-    }
-
+   
     //handles closing of search when clicking anywhere outside the modal
     const [clickedOutside, setClickedOutside] = useState(false);
     const myRef = useRef();
@@ -54,12 +50,11 @@ const SearchBar = () => {
     return(
         <Flex flexDir="column">
             <InputGroup ml="10vw">
-                <Input value={searchInput} borderWidth="1.9px" onChange={onInputChange} onClick={(e) => {setClickedOutside(false)}} focusBorderColor = "blue" background="#ffffff" borderRadius="5px" width="554px" placeholder="Search products, categories and brands..." size="md"/>
-                {searchInput && <InputRightElement
-                    onClick={() => handleClick()}
-                    children={<MdClose color="#555"/>}
-                    mr="13.5vw"
-                />}
+                <Input borderWidth="1.9px" ref={myRef} onChange={onInputChange} onClick={(e) => {setClickedOutside(false)}} focusBorderColor = "blue" background="#ffffff" borderRadius="5px" width="554px" placeholder="Search products, categories and brands..." size="md"/>
+                {/* <InputRightElement
+                    pointerEvents="none"
+                    children={<MdClose color="#fff"/>}
+                /> */}
                 <InputRightAddon
                     borderColor="#FFA90A"
                     bg="#FFA90A"
