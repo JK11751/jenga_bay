@@ -1,10 +1,11 @@
 import React from "react";
-import { VStack, Flex, HStack, Spacer,Box } from "@chakra-ui/layout";
+import { VStack, Flex, HStack, Spacer,Box, Circle, Text } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import icon from "../../assets/JengaBay.png";
 import { Button } from "@chakra-ui/button";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
+
 import { BiCartAlt } from "react-icons/bi";
 import { FiMenu } from "react-icons/fi"
 import { IoIosArrowDown } from "react-icons/io";
@@ -18,10 +19,16 @@ import {
   PopoverBody,
 } from "@chakra-ui/react";
 import SideBar from "./SideBar";
+import { useHistory } from "react-router";
 
-const NavBar = () => {
+const NavBar = ({cartItems}) => {
+  const history= useHistory()
   const [show, setShow] = React.useState(false)
   const handleToggle = (setting) => setShow(setting)
+
+  const handleOpenCart = () => {
+    history.push("/cart")
+  }
 
   return (
     <>
@@ -41,6 +48,7 @@ const NavBar = () => {
           <Icon
             onClick={() => handleToggle(true)}
             color="#fff"
+            _hover={{cursor:"pointer"}}
             as={FiMenu}
             h={10}
             w={7}
@@ -58,7 +66,12 @@ const NavBar = () => {
         <Spacer />
         <HStack ml="12vw" spacing="20px">
           <Icon color="#fff" h={7} w={7} as={IoMdNotificationsOutline} />
-          <Icon color="#fff" h={7} w={7} as={BiCartAlt} />
+          <Box>
+            <Icon onClick={handleOpenCart} _hover={{cursor:"pointer"}} color="#fff" h={7} w={7} as={BiCartAlt} />
+            { cartItems.length > 0 &&
+            <Circle alignItems="center" p={2} right={36} position="absolute" top={4} size="15px" bg="red"><Text fontWeight="bold" fontSize="10px" color="white">{cartItems.length}</Text></Circle>
+            }
+          </Box>
           <Popover mr={5} isLazy>
             <PopoverTrigger>
               <Button variant="ghost">
