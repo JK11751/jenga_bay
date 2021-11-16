@@ -2,10 +2,18 @@ import React from 'react'
 import { Box, Divider, HStack, Text, VStack } from '@chakra-ui/layout'
 import NavBar from '../../components/PageSections/NavBar'
 import { Icon } from '@chakra-ui/icon'
-import { BsArrowLeftShort, BsArrowDown } from 'react-icons/bs'
+import { BsArrowDown } from 'react-icons/bs'
+import {IoIosArrowBack} from "react-icons/io"
 import { Input } from '@chakra-ui/input'
 import { Button } from '@chakra-ui/button'
 import { CartItem } from './CartItem'
+import {
+    Table,
+    Thead,
+    Tr,
+    Th,
+} from "@chakra-ui/react"
+import { useHistory } from 'react-router'
 
 const style ={
     color:"#C4C4C4",
@@ -21,6 +29,7 @@ const otherStyles = {
 
 export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, clearCart}) => {
 
+    const history = useHistory()
     const TotalPrice = cartItems.reduce((price, item) => price + item.quantity * item.item_price, 0)
     
     return (
@@ -36,8 +45,9 @@ export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, clearCar
                     fontSize="15px"
                     color="#555"
                     mb={3}
+                    onClick={() => history.push(`/`)}
                 >
-                    <Icon as={BsArrowLeftShort}/> 
+                    <Icon as={IoIosArrowBack}/> 
                     Continue Shopping
                 </Box>
                 <Divider width="60vw" borderColor="gray.400" />
@@ -48,6 +58,16 @@ export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, clearCar
                         <Text>Sort by: price <Icon as={BsArrowDown}/></Text>
                     </HStack>
                 </VStack>
+                <Table width="60%" variant="simple">
+                    <Thead>
+                        <Tr>
+                        <Th mr="2px">PRODUCT</Th>
+                        <Th>PRICE</Th>
+                        <Th>QUANTITY</Th>
+                        <Th>ITEM TOTAL</Th>
+                        </Tr>
+                    </Thead>
+                </Table>
                 <Box width="80%">
                     {cartItems.length === 0 && (<Text> There are no items in the cart</Text>)}
                     {cartItems.map((item) => (
