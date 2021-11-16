@@ -22,9 +22,11 @@ export const CategoryPage = ({cartItems}) => {
 
     useEffect(() => { 
         dispatch(handleGetItemsInCategory(categoryName))
-        setItemsInCategoryList(itemList)
     }, [categoryName,dispatch])
     
+    useEffect(() => {
+        setItemsInCategoryList(itemList)
+    }, [itemList])
 
     return (
         <Box>

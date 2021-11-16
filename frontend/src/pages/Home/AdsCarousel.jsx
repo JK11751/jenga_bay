@@ -4,10 +4,10 @@ import dummyData from '../../components/Products/DummyData';
 const AdsCarousel = () => {
  
 
-    const captionStyle = {
-      fontSize: '1em',
-      fontWeight: 'bold',
-    }
+    // const captionStyle = {
+    //   fontSize: '1em',
+    //   fontWeight: 'bold',
+    // }
 
     return (
       
@@ -16,10 +16,10 @@ const AdsCarousel = () => {
             time={6000}
             height="400px" 
             width="90vw"
-            captionStyle={captionStyle}
+            // captionStyle={captionStyle}
             radius="5px"
             slideNumber={false}
-            captionPosition="bottom"
+            // captionPosition="bottom"
             automatic={true}
             dots={true}
             pauseIconColor="white"

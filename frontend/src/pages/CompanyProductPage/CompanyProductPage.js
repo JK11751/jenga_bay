@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import NavBar from '../../components/PageSections/NavBar';
+import Footer from '../../components/PageSections/Footer';
 import { Box, Flex} from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import ProductCard from '../../components/Products/ProductCard';
@@ -14,8 +15,6 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
     const {sellerId} = useParams()
     const dispatch = useDispatch()
-
-    
 
     useEffect(() => { 
         dispatch(handleGetSellerItems(sellerId))
@@ -32,9 +31,10 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
             <Flex ml="5vw" borderRadius="10px" width="90vw" alignSelf="center" flexWrap="wrap" pl={3} pr={3}>
             {sellerReducer.sellerItems.map((product,key)=>{ 
             return(
-                <ProductCard key={key} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
+                <ProductCard key={key} price={product.item_price} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
             )
-            })}</Flex> 
+            })}</Flex>
+            <Footer /> 
         </Box>
     )
 }

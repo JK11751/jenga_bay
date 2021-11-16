@@ -1,6 +1,7 @@
 import React, {useState,useRef,useEffect} from "react"
 import { Input, InputGroup, InputRightAddon } from "@chakra-ui/input"
 import {BiSearchAlt2} from "react-icons/bi"
+// import {MdClose} from "react-icons/md"
 import {Flex} from "@chakra-ui/layout"
 import SearchedUsersDropdown from "./SearchedItemsDropDown"
 import CategoryList from "../Categories/CategoryList";
@@ -28,6 +29,7 @@ const SearchBar = () => {
        setOptions(newOptions)
     }
 
+   
     //handles closing of search when clicking anywhere outside the modal
     const [clickedOutside, setClickedOutside] = useState(false);
     const myRef = useRef();
@@ -48,10 +50,16 @@ const SearchBar = () => {
     return(
         <Flex flexDir="column">
             <InputGroup ml="10vw">
-                <Input borderWidth="1.9px" onChange={onInputChange} onClick={(e) => {setClickedOutside(false)}} focusBorderColor = "blue" background="#ffffff" borderRadius="5px" width="554px" placeholder="search here..." size="md"/>
-                <InputRightAddon
+                <Input borderWidth="1.9px" ref={myRef} onChange={onInputChange} onClick={(e) => {setClickedOutside(false)}} focusBorderColor = "blue" background="#ffffff" borderRadius="5px" width="554px" placeholder="Search products, categories and brands..." size="md"/>
+                {/* <InputRightElement
                     pointerEvents="none"
-                    children={<BiSearchAlt2 />}
+                    children={<MdClose color="#fff"/>}
+                /> */}
+                <InputRightAddon
+                    borderColor="#FFA90A"
+                    bg="#FFA90A"
+                    pointerEvents="none"
+                    children={<BiSearchAlt2 color="#fff"/>}
                 />
             </InputGroup>
             <div ref={myRef}>

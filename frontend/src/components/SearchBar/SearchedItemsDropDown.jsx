@@ -13,13 +13,13 @@ const SearchedUsersDropdown = ({options}) => {
                     <p className='notFound-text'>No matches Found</p>
                 </>
             )}
-                {options.map((category) =>
-                    (   <>
-                            <Box as="span">     </Box>
-                            <ListItem padding="5px" key={category.id}>{category.value}</ListItem>
-                        </>
-                    )
-                )}
+            {options.map((category) =>
+                (   <>
+                        <Box as="span">     </Box>
+                        <ListItem padding="5px" key={category.id}>{category.value}</ListItem>
+                    </>
+                )
+            )}
             </List>
         </Box>
     )
