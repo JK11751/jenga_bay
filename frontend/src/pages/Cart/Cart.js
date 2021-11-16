@@ -6,6 +6,12 @@ import { BsArrowLeftShort, BsArrowDown } from 'react-icons/bs'
 import { Input } from '@chakra-ui/input'
 import { Button } from '@chakra-ui/button'
 import { CartItem } from './CartItem'
+import {
+    Table,
+    Thead,
+    Tr,
+    Th,
+  } from "@chakra-ui/react"
 
 const style ={
     color:"#C4C4C4",
@@ -48,6 +54,16 @@ export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, clearCar
                         <Text>Sort by: price <Icon as={BsArrowDown}/></Text>
                     </HStack>
                 </VStack>
+                <Table width="60%" variant="simple">
+                    <Thead>
+                        <Tr>
+                        <Th mr="2px">PRODUCT</Th>
+                        <Th>PRICE</Th>
+                        <Th>QUANTITY</Th>
+                        <Th>ITEM TOTAL</Th>
+                        </Tr>
+                    </Thead>
+                </Table>
                 <Box width="80%">
                     {cartItems.length === 0 && (<Text> There are no items in the cart</Text>)}
                     {cartItems.map((item) => (

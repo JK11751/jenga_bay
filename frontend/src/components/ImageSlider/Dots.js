@@ -11,7 +11,7 @@ const Dot = ({ active }) => {
         margin-right: 10px;
         cursor: pointer;
         border-radius: 50%;
-        background: ${active ? 'blue' : 'white'};
+        background: ${active ? 'blue' : 'grey'};
       `}
     />
   )
@@ -24,7 +24,7 @@ const Dots = ({ slides, activeSlide }) => {
     <div
       css={css`
         position: absolute;
-        bottom: 10px;
+        bottom: 170px;
         width: 100%;
         z-index: 30;
         display: flex;
