@@ -1,5 +1,8 @@
 import React, {useEffect, useState } from "react"
-import { Box, Flex } from "@chakra-ui/layout";
+import { Box, Flex,Avatar,
+    AvatarBadge,
+    IconButton,
+    Center, } from "@chakra-ui/react";
 import NavBar from "../../components/PageSections/NavBar";
 import ProductCard from "../../components/Products/ProductCard";
 import CategoryChips from "../../components/Categories/CategoryChips"
@@ -8,6 +11,7 @@ import AdsCarousel from "./AdsCarousel";
 // import ProductList from "../shared/ProductList";
 import { handleGetProducts } from "../../redux/actions/appActions";
 import { useDispatch, useSelector } from "react-redux";
+import { SmallCloseIcon } from '@chakra-ui/icons';
 
 const Home = ({handleAddProduct, cartItems}) => {
 
@@ -28,6 +32,20 @@ const Home = ({handleAddProduct, cartItems}) => {
     return(
         <Box alignItems="center" bgColor="#fff" flexDir="column" width="100vw" height="100vh">
             <NavBar cartItems={cartItems} />
+
+            <Center>
+              <Avatar size="xl" src="https://bit.ly/sage-adebayo">
+                <AvatarBadge
+                  as={IconButton}
+                  size="sm"
+                  rounded="full"
+                  top="-10px"
+                  colorScheme="red"
+                  aria-label="remove Image"
+                  icon={<SmallCloseIcon />}
+                />
+              </Avatar>
+            </Center>
             <Box alignSelf="center" ml="5vw" mt={5}>
                 <AdsCarousel alignSelf="center"/>
             </Box>
