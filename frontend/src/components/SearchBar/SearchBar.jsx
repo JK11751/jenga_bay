@@ -1,6 +1,7 @@
 import React, {useState,useRef,useEffect} from "react"
-import { Input, InputGroup, InputRightAddon } from "@chakra-ui/input"
+import { Input, InputGroup, InputRightAddon, InputRightElement } from "@chakra-ui/input"
 import {BiSearchAlt2} from "react-icons/bi"
+import {MdClose} from "react-icons/md"
 import {Flex} from "@chakra-ui/layout"
 import SearchedUsersDropdown from "./SearchedItemsDropDown"
 import CategoryList from "../Categories/CategoryList";
@@ -10,10 +11,11 @@ const SearchBar = () => {
     
     const [options, setOptions] = useState([])
     const [searchModalOpen, setSearchModalOpen] = useState("")
-
+    const [searchInput, setSearchInput] = useState("")
+    
     //handles change in input
     const onInputChange = (event) => {
-        const searchInput = event.target.value
+        setSearchInput(event.target.value)
         console.log(searchInput)
 
         if (searchInput) {
@@ -26,6 +28,10 @@ const SearchBar = () => {
             category.value.toLowerCase().includes(event.target.value))
  
        setOptions(newOptions)
+    }
+
+    const handleClick = () => {
+        setSearchInput("")
     }
 
     //handles closing of search when clicking anywhere outside the modal
@@ -48,10 +54,17 @@ const SearchBar = () => {
     return(
         <Flex flexDir="column">
             <InputGroup ml="10vw">
-                <Input borderWidth="1.9px" onChange={onInputChange} onClick={(e) => {setClickedOutside(false)}} focusBorderColor = "blue" background="#ffffff" borderRadius="5px" width="554px" placeholder="search here..." size="md"/>
+                <Input value={searchInput} borderWidth="1.9px" onChange={onInputChange} onClick={(e) => {setClickedOutside(false)}} focusBorderColor = "blue" background="#ffffff" borderRadius="5px" width="554px" placeholder="Search products, categories and brands..." size="md"/>
+                {searchInput && <InputRightElement
+                    onClick={() => handleClick()}
+                    children={<MdClose color="#555"/>}
+                    mr="13.5vw"
+                />}
                 <InputRightAddon
+                    borderColor="#FFA90A"
+                    bg="#FFA90A"
                     pointerEvents="none"
-                    children={<BiSearchAlt2 />}
+                    children={<BiSearchAlt2 color="#fff"/>}
                 />
             </InputGroup>
             <div ref={myRef}>

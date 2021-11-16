@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react'
-import { Flex, VStack, Text, HStack, Box, Divider, ListIcon, ListItem, List } from "@chakra-ui/layout";
+import { VStack, Text, HStack, Box, Divider, ListIcon, ListItem, List } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import Icon from "@chakra-ui/icon";
-import { MdAdd, MdCheckCircle } from "react-icons/md";
+import { MdCheckCircle } from "react-icons/md";
+// import { MdAdd } from "react-icons/md";
 // import { FiMinus } from "react-icons/fi";
 // import {
 //   Input,
@@ -25,6 +26,7 @@ import { useHistory } from 'react-router';
 
 const data = {
   rating: 4.5,
+  numReviews: 34,
 };
 
 
@@ -39,7 +41,7 @@ function ProductDetails({handleAddProduct}) {
   //getting product details
   useEffect(() => {
     dispatch(handleGetProductDetails(productId))
-  }, [])
+  }, [dispatch, productId])
 
 
 
@@ -90,18 +92,16 @@ function ProductDetails({handleAddProduct}) {
         fontSize="15px"
         textTransform="uppercase"
         color="#C4C4C4"
+        onClick={() => history.push(`/categories/${product.category}`)}
       >
         {product.category}
       </Box>
       <Text fontFamily="sans-serif" fontSize="2em">
         {product.item_name}
       </Text>
-      <Flex>
-        <Rating rating={data.rating} />
-        <Text ml={2}>34 reviews</Text>
-      </Flex>
+        <Rating rating={data.rating} numReviews={data.numReviews} />
       <HStack>
-        <Text _hover={{cursor:"pointer"}} onClick={() => history.push(`/profile/sellers`)} fontFamily="sans-serif" color="#555" fontSize="12px">
+        <Text _hover={{cursor:"pointer"}} onClick={() => history.push(`/seller/${product.item_seller.id}/profile`)} fontFamily="sans-serif" color="#555" fontSize="12px">
           Brand: {product.item_seller.business_name}
         </Text>
         <Text _hover={{cursor:"pointer"}} onClick={() => history.push(`/sellers/${product.item_seller.id}/items`)} fontFamily="sans-serif" color="#555" fontSize="12px">
@@ -111,7 +111,7 @@ function ProductDetails({handleAddProduct}) {
       <VStack alignItems="flex-start" spacing="10px">
         <Stat> 
           <StatNumber fontFamily="monospace" fontSize="20px">
-            $20.00
+            Ksh.{product.item_price}
           </StatNumber>
         </Stat>
         <Stat> 
@@ -175,7 +175,7 @@ function ProductDetails({handleAddProduct}) {
         <Text p={3} fontSize='20px'>Product Description</Text>
         <Divider color="#000000"/>
         <Text p={2} fontFamily="sans-serif" fontSize="15px" lineHeight="25px">
-          {product.item_description}  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis erat
+          {product.item_description} 
         </Text>
       </Box>
       <Box borderColor="#f3f3f3" borderWidth="1px" mt={10} borderRadius="10px">

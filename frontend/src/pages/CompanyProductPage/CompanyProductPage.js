@@ -16,8 +16,6 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
     const {sellerId} = useParams()
     const dispatch = useDispatch()
 
-    
-
     useEffect(() => { 
         dispatch(handleGetSellerItems(sellerId))
     }, [sellerId,dispatch])
@@ -33,7 +31,7 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
             <Flex ml="5vw" borderRadius="10px" width="90vw" alignSelf="center" flexWrap="wrap" pl={3} pr={3}>
             {sellerReducer.sellerItems.map((product,key)=>{ 
             return(
-                <ProductCard key={key} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
+                <ProductCard key={key} price={product.item_price} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
             )
             })}</Flex>
             <Footer /> 
