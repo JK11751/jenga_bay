@@ -13,6 +13,7 @@ import { CategoryPage } from "../pages/CategoriesPage/CategoryPage.js";
 import { Cart } from "../pages/Cart/Cart.js";
 import NotFound from "../pages/NotFound.js";
 import { CompanyProfilePage } from "../pages/CompanyProfilePage/CompanyProfilePage.js";
+import CheckoutPage from "../pages/CheckoutPage.js/CheckoutPage.js";
 
 const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQuantity, clearCart})=>{
     return(
@@ -47,6 +48,9 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQu
             </Route>
             <Route exact path="/cart">
                 <Cart clearCart={clearCart} handleUpdateQuantity={handleUpdateQuantity} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems} />
+            </Route>
+            <Route exact path="/checkout">
+                <CheckoutPage/>
             </Route>
             <Route exact path="*">
                 <NotFound cartItems={cartItems}/>

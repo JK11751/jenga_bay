@@ -91,7 +91,7 @@ export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, handleUp
                         <input type="checkbox"></input>
                         <Text mb={5} {...style}>I agree to Terms & Conditions</Text>
                     </HStack>
-                    <Button size="md" fontWeight="normal" fontFamily="sans-serif" color="white" bg="#555" borderRadius="50px">CHECKOUT</Button>
+                    <Button onClick={() => history.push("/checkout")} size="md" fontWeight="normal" fontFamily="sans-serif" color="white" bg="#555" borderRadius="50px">CHECKOUT</Button>
                 </VStack>   
            </Box>
         </Box>
