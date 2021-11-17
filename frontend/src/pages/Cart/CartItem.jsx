@@ -41,7 +41,7 @@ export const CartItem = (props) => {
                         <Text {...mystyle}>{props.price}</Text>    
                     </VStack>
                     <VStack mr={12} alignItems="center" spacing="10px" p={5}>
-                        <NumberStepper add={() => props.handleAddProduct(props.item)} remove={() => props.handleRemoveProduct(props.item)} quantity ={props.quantity} />
+                        <NumberStepper add={() => props.handleAddProduct(props.item)} remove={() => props.handleUpdateQuantity(props.item)} quantity ={props.quantity} />
                     </VStack>
                     <VStack mr={12} alignItems="center" spacing="10px" p={5}>
                         <Text>{props.quantity} * {props.price} </Text>

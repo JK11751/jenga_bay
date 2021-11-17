@@ -14,7 +14,7 @@ import { Cart } from "../pages/Cart/Cart.js";
 import NotFound from "../pages/NotFound.js";
 import { CompanyProfilePage } from "../pages/CompanyProfilePage/CompanyProfilePage.js";
 
-const Routes =({cartItems, handleAddProduct, handleRemoveProduct, clearCart})=>{
+const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQuantity, clearCart})=>{
     return(
         <div>
         <Switch>
@@ -46,7 +46,7 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, clearCart})=>{
                 <CategoryPage cartItems={cartItems} />
             </Route>
             <Route exact path="/cart">
-                <Cart clearCart={clearCart} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems} />
+                <Cart clearCart={clearCart} handleUpdateQuantity={handleUpdateQuantity} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems} />
             </Route>
             <Route exact path="*">
                 <NotFound cartItems={cartItems}/>
