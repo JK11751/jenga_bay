@@ -49,11 +49,11 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, clearCart})=>{
             <Route exact path="/cart">
                 <Cart clearCart={clearCart} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems} />
             </Route>
-            <Route exact path="*">
-                <NotFound cartItems={cartItems}/>
-            </Route>
             <Route exact path="/checkout">
                 <CheckoutPage/>
+            </Route>
+            <Route exact path="*">
+                <NotFound cartItems={cartItems}/>
             </Route>
         </Switch>
         </div>
