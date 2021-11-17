@@ -27,7 +27,7 @@ const otherStyles = {
     fontFamily:"monospace"
 }
 
-export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, clearCart}) => {
+export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQuantity, clearCart}) => {
 
     const history = useHistory()
     const TotalPrice = cartItems.reduce((price, item) => price + item.quantity * item.item_price, 0)
@@ -71,7 +71,7 @@ export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, clearCar
                 <Box width="80%">
                     {cartItems.length === 0 && (<Text> There are no items in the cart</Text>)}
                     {cartItems.map((item) => (
-                        <CartItem name={item.item_name} unit={item.item_measurement_unit} image={item.item_main_image} price={item.item_price} quantity={item.quantity} item={item} handleAddProduct={handleAddProduct} handleRemoveProduct={handleRemoveProduct}/>   
+                        <CartItem name={item.item_name} unit={item.item_measurement_unit} image={item.item_main_image} price={item.item_price} quantity={item.quantity} item={item} handleUpdateQuantity={handleUpdateQuantity} handleAddProduct={handleAddProduct} handleRemoveProduct={handleRemoveProduct}/>   
                     ))}
                 </Box>    
                {cartItems.length !== 0 && ( <Box p={5}>

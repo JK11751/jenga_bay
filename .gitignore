@@ -136,6 +136,7 @@ dmypy.json
 
 #migrations
 jengabay/migrations/0006_auto_20211113_1008.py
+jengabay/migrations/0006_auto_20211117_0926.py
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
