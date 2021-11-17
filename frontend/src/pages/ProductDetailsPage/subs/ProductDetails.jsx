@@ -3,14 +3,14 @@ import { VStack, Text, HStack, Box, Divider, ListIcon, ListItem, List } from "@c
 import { Button } from "@chakra-ui/button";
 import Icon from "@chakra-ui/icon";
 import { MdCheckCircle } from "react-icons/md";
-// import { MdAdd } from "react-icons/md";
-// import { FiMinus } from "react-icons/fi";
-// import {
-//   Input,
-//   InputGroup,
-//   InputLeftAddon,
-//   InputRightAddon,
-// } from "@chakra-ui/input";
+import { MdAdd } from "react-icons/md";
+import { FiMinus } from "react-icons/fi";
+import {
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  InputRightAddon,
+} from "@chakra-ui/input";
 import {
 Stat,
 StatNumber,
@@ -30,7 +30,7 @@ const data = {
 };
 
 
-function ProductDetails({handleAddProduct}) {
+function ProductDetails({handleAddProduct,handleBuyProductNow}) {
   let { productId } = useParams()
   const dispatch = useDispatch()
   const history = useHistory()
@@ -45,25 +45,25 @@ function ProductDetails({handleAddProduct}) {
 
 
 
-  // const [count, setCount] = React.useState(1)
-  // const [value, setValue] = React.useState(0)
+  const [count, setCount] = React.useState(1)
+  const [value, setValue] = React.useState(0)
 
-  // const handleDecrease = () => {
-  //   if (count>=0){
-  //   setCount(count - 1)
-  //   setValue(count)
-  //   }
-  // }
+  const handleDecrease = () => {
+    if (count>=0){
+    setCount(count - 1)
+    setValue(count)
+    }
+  }
 
-  // const handleIncrease = () => {
-  //   setCount(count + 1)
-  //   setValue(count)
-  // }
+  const handleIncrease = () => {
+    setCount(count + 1)
+    setValue(count)
+  }
   
-  // const handleOnChange = (e) => {
-  //   setValue(e.target.value);
-  //   setCount(value)
-  // }
+  const handleOnChange = (e) => {
+    setValue(e.target.value);
+    setCount(value)
+  }
 
   return (
     <>
@@ -129,7 +129,7 @@ function ProductDetails({handleAddProduct}) {
       <Box mt={5} mb={20}>
         <Divider mt={5} mb={5} borderColor="#C4C4C4" orientation="horizontal" />
       </Box>  
-      {/* <Box mt={30}>
+      <Box mt={30}>
         <Stat> 
           <StatLabel fontFamily="monospace" fontSize="14px">
            Quantity
@@ -144,7 +144,7 @@ function ProductDetails({handleAddProduct}) {
         <InputRightAddon onClick={handleIncrease} backgroundColor="transparent">
           <Icon as={MdAdd} />
         </InputRightAddon>
-      </InputGroup></Box> */}
+      </InputGroup></Box>
 
       <HStack mb={10} mt={10}>
         <Button
@@ -154,6 +154,7 @@ function ProductDetails({handleAddProduct}) {
           backgroundColor="#1D1C1C"
           width="200px"
           height="38px"
+          onClick={() => { handleBuyProductNow(product, count); history.push("/checkout")}}
         >
           Buy Now
         </Button>

@@ -10,7 +10,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/breadcrum
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const ProductDetailsPage = ({handleAddProduct,cartItems})=> {
+const ProductDetailsPage = ({handleAddProduct,cartItems,handleBuyProductNow})=> {
     const productReducer = useSelector(({ productReducer }) => productReducer);
 
     return(
@@ -45,7 +45,7 @@ const ProductDetailsPage = ({handleAddProduct,cartItems})=> {
                 <Spacer/>
                 <Flex bgColor="#E9F6FF" alignItems="flex-start" width="50%" flexDir="column">
                     <Box ml={5}>
-                    <ProductDetails handleAddProduct={handleAddProduct} />
+                    <ProductDetails handleBuyProductNow={handleBuyProductNow} handleAddProduct={handleAddProduct} />
                     </Box>
                 </Flex>
             </Flex>
