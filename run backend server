@@ -4,8 +4,11 @@
     if you are using vscode open the vscode terminal
     run this command to install a virtual environment:
       $ virtualenv venv
+
     then activate the virtual environment from the directory you have installed the venv, in our case the current directory
-       $ . venv/bin/activate
+      $ . venv/bin/activate (for Linux)
+      $ . venv/scripts/activate (for Windows OS)
+
     run the following command to install django in your virtual environment
       $ pip install django (might say requirement satisfied)
       

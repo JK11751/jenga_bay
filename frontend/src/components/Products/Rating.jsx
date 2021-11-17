@@ -25,9 +25,9 @@ export default function Rating({ rating, numReviews, styling }) {
             }
             return <BsStar {...styling} key={i} style={{ marginLeft: '1' }} />;
           })}
-        {/* <Box as="span" ml="2" color="gray.600" fontSize="sm">
+        {numReviews > 0 && <Box as="span" ml="2" color="gray.600" fontSize="sm">
           {numReviews} review{numReviews > 1 && 's'}
-        </Box> */}
+        </Box>}
       </Box>
     );
   }

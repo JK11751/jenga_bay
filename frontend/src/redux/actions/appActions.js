@@ -1,5 +1,5 @@
 import APIServices from "../../utils/apiServices";
-import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS, GET_SELLER_DETAILS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_SELLER_ITEMS } from "./types";
+import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS, GET_SELLER_DETAILS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_SELLER_ITEMS, GET_SELLER_PROFILE } from "./types";
 
 // Redux actions are called here with an underscore before the name (convention)
 
@@ -89,6 +89,21 @@ export const handleGetSellerDetails = (seller_id) => async(dispatch) => {
     await dispatch(getSellerDetails(data));
   } catch (error) {
     console.log(`Error from handleGetSellerDetails: ${error}`);
+  }
+}
+
+//Getting a specific seller's profile
+const getSellerProfile = (sellerProfile) => ({
+  type: GET_SELLER_PROFILE,
+  payload: sellerProfile,
+});
+
+export const handleGetSellerProfile = (seller_id) => async(dispatch) => {
+  try {
+    const { data } = await APIServices.getSellerProfile(seller_id);
+    await dispatch(getSellerProfile(data));
+  } catch (error) {
+    console.log(`Error from handleGetSellerProfile: ${error}`);
   }
 }
 

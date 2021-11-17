@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
   Flex,
   Circle,
@@ -8,6 +7,7 @@ import {
   useColorModeValue,
   // Icon,
   // chakra,
+  Text,
   Tooltip,
   HStack,
 } from "@chakra-ui/react";
@@ -26,7 +26,7 @@ const data = {
   name: "JengaBay Product",
   price: 4.5,
   rating: 4.2,
-  numReviews: 34,
+  numReviews: 0,
 };
 
 function ProductCard(props) {
@@ -91,28 +91,27 @@ function ProductCard(props) {
               </HStack>
             </Box>
 
-            <Box
+            <Text
               mt="1"
               justifyContent="space-between"
               alignContent="center"
               fontSize="md"
               fontWeight="semibold"
-              as="span"
               lineHeight="tight"
               isTruncated
-              
+              textOverflow="ellipsis"
             >
               {props.name}
-            </Box>
-            <Flex mt="5px" justifyContent="space-between" alignContent="center">
+            </Text>
+            <Flex mt="3px" justifyContent="space-between" alignContent="center">
               <Box
                 fontSize="lg"
                 color={useColorModeValue("gray.800", "white")}
               >
                 <Box as="span" color={"gray.600"} fontSize="md">
-                  £
+                  Ksh.
                 </Box>
-                {data.price.toFixed(2)}
+                {props.price}
               </Box>
               <Tooltip
                 label="Add to cart"
@@ -126,7 +125,7 @@ function ProductCard(props) {
                 {/* </chakra.a> */}
               </Tooltip>
             </Flex>
-            <Rating rating={data.rating} />
+            <Rating rating={data.rating} numReviews={data.numReviews}/>
           </Box>
         </MotionBox>
       {/* </Link> */}

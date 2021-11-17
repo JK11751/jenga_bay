@@ -9,6 +9,7 @@ export const GET_PRODUCTS_IN_SPECIFIC_CATEGORY = "GET_PRODUCTS_IN_SPECIFIC_CATEG
 
 //seller action types
 export const GET_SELLER_DETAILS = "GET_SELLER_DETAILS"
+export const GET_SELLER_PROFILE = "GET_SELLER_PROFILE"
 export const GET_SELLER_ITEMS = "GET_SELLER_ITEMS"
 
 //cart action types

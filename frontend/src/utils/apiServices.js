@@ -41,6 +41,11 @@ class APIServices {
     return api.get(`/sellers/${seller_id}`);
   }
 
+  //getting profile of a specific seller
+  async getSellerProfile(seller_id){
+    return api.get(`/sellers/${seller_id}/profile`);
+  }
+
   //Getting all items belonging to a specific seller
   async getSellerItems(seller_id){
     return api.get(`/sellers/${seller_id}/items`)

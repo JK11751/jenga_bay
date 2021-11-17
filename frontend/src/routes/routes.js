@@ -11,6 +11,8 @@ import CompanyProductUploadPage from "../pages/CompanyProductUploadPage/CompanyP
 import CompanyProductPage from "../pages/CompanyProductPage/CompanyProductPage.js";
 import { CategoryPage } from "../pages/CategoriesPage/CategoryPage.js";
 import { Cart } from "../pages/Cart/Cart.js";
+import NotFound from "../pages/NotFound.js";
+import { CompanyProfilePage } from "../pages/CompanyProfilePage/CompanyProfilePage.js";
 import CheckoutPage from "../pages/CheckoutPage.js/CheckoutPage.js";
 
 const Routes =({cartItems, handleAddProduct, handleRemoveProduct, clearCart})=>{
@@ -38,14 +40,20 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, clearCart})=>{
             <Route exact path="/sellers/:sellerId/items">
                 <CompanyProductPage cartItems={cartItems} handleAddProduct={handleAddProduct} />
             </Route>
+            <Route exact path="/seller/:sellerId/profile">
+                <CompanyProfilePage cartItems={cartItems} handleAddProduct={handleAddProduct}/>
+            </Route>
             <Route exact path="/categories/:categoryName">
                 <CategoryPage cartItems={cartItems} />
             </Route>
             <Route exact path="/cart">
                 <Cart clearCart={clearCart} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems} />
             </Route>
+            <Route exact path="*">
+                <NotFound cartItems={cartItems}/>
+            </Route>
             <Route exact path="/checkout">
-                <CheckoutPage />
+                <CheckoutPage/>
             </Route>
         </Switch>
         </div>
