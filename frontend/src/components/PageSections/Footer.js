@@ -11,6 +11,7 @@ import {
     Image,
   } from '@chakra-ui/react';
 import logo from "../../assets/JengaBay.png"
+import NewsLetter from './Newsletter';
   
   const ListHeader = ({ children }) => {
     return (
@@ -24,7 +25,12 @@ import logo from "../../assets/JengaBay.png"
     return (
       <Box
         bg={useColorModeValue('gray.50', 'gray.900')}
-        color={useColorModeValue('gray.700', 'gray.200')}>
+        color={useColorModeValue('gray.700', 'gray.200')}
+        mt={10}>
+        <Container>
+          <NewsLetter/>
+        </Container>
+
         <Container as={Stack} maxW={'6xl'} py={10}>
           <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
             <Stack align={'flex-start'}>
@@ -40,31 +46,25 @@ import logo from "../../assets/JengaBay.png"
                   New
                 </Tag>
               </Stack>
-              <Link href={'#'}>Tutorials</Link>
               <Link href={'#'}>Pricing</Link>
               <Link href={'#'}>Releases</Link>
             </Stack>
             <Stack align={'flex-start'}>
               <ListHeader>Company</ListHeader>
               <Link href={'#'}>About Us</Link>
-              <Link href={'#'}>Press</Link>
-              <Link href={'#'}>Careers</Link>
               <Link href={'#'}>Contact Us</Link>
-              <Link href={'#'}>Partners</Link>
+              <Link href={'#'}>Founders</Link>
             </Stack>
             <Stack align={'flex-start'}>
               <ListHeader>Legal</ListHeader>
               <Link href={'#'}>Cookies Policy</Link>
               <Link href={'#'}>Privacy Policy</Link>
               <Link href={'#'}>Terms of Service</Link>
-              <Link href={'#'}>Law Enforcement</Link>
-              <Link href={'#'}>Status</Link>
             </Stack>
             <Stack align={'flex-start'}>
               <ListHeader>Follow Us</ListHeader>
               <Link href={'#'}>Facebook</Link>
               <Link href={'#'}>Twitter</Link>
-              <Link href={'#'}>Dribbble</Link>
               <Link href={'#'}>Instagram</Link>
               <Link href={'#'}>LinkedIn</Link>
             </Stack>

@@ -52,7 +52,7 @@ const SignInForm= () => {
             </VStack>
             <Flex mb={4} alignContent="center" pl={20} pr={20} >
             <Spacer/>
-            <Button variant="link" color="black" fontSize="xs">Forgot Password?</Button>
+            <Button onClick={() => history.push("/forgot-password")} variant="link" color="black" fontSize="xs">Forgot Password?</Button>
             </Flex>
             <Button alignSelf='center' padding="10px" background="#007ACC" borderRadius="50px" width="300px" height="35px" color="#ffffff" onClick={()=> history.push("/")}>Sign In</Button>
             <Text align="center" mt={4} fontSize="xs">Don't have an account?<Link to="/sign-up"><Box as="span" textColor="#007ACC">{" "}Sign up </Box></Link></Text>
