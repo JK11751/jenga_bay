@@ -1,4 +1,5 @@
 import React from "react";
+import { Textarea } from "@chakra-ui/react"
 import { Flex, Box, HStack, VStack } from "@chakra-ui/layout";
 import {
   Text,
@@ -48,7 +49,7 @@ const UploadForm =() =>{
         <HStack mb="20px">
           <FormControl id="product-description" isRequired>
             <FormLabel>Product description</FormLabel>
-            <Input variant="filled" width="900px" height="300px"/>
+            <Textarea variant="filled" width="800px" height="220px"/>
           </FormControl>
         </HStack>
       </Box>
