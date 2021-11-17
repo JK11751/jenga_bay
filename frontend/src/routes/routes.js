@@ -17,7 +17,7 @@ import CheckoutPage from "../pages/CheckoutPage.js/CheckoutPage.js";
 import { ForgotPassword } from "../pages/ForgotPassword/ForgotPassword.js";
 import { ResetPassword } from "../pages/ForgotPassword/ResetPassword.js";
 
-const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQuantity, clearCart})=>{
+const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQuantity, handleBuyProductNow, clearCart})=>{
     return(
         <div>
         <Switch>
@@ -34,7 +34,7 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQu
                 <RegistrationPage />
             </Route>
             <Route exact path="/product-details/:productId">
-                <ProductDetailsPage cartItems={cartItems} handleAddProduct={handleAddProduct} />
+                <ProductDetailsPage cartItems={cartItems} handleAddProduct={handleAddProduct} handleBuyProductNow={handleBuyProductNow}/>
             </Route>
             <Route exact path="/upload">
                 <CompanyProductUploadPage cartItems={cartItems} />

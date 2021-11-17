@@ -40,6 +40,27 @@ const handleAddProduct = (product) => {
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 };
 
+const handleBuyProductNow = (product,quantity) => {
+  //checking of product already exists
+  const ProductExist = cartItems.find((item) => item.id === product.id);
+  if (ProductExist) {
+    setCartItems([...cartItems, {...product, quantity: ProductExist.quantity + quantity }]);
+    toast.success("Product quantity increased", {
+      position: "bottom-left",
+      autoClose: 1000,
+      hideProgressBar: true,
+    });
+  } else {
+    setCartItems([...cartItems, {...product, quantity: quantity }]);
+    toast.success("Product added to cart", {
+      position: "bottom-left",
+      autoClose: 1000,
+      hideProgressBar: true,
+    });
+  }
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+};
+
 const handleUpdateQuantity = (product) => {
   const ProductExist = cartItems.find((item) => item.id === product.id);
   if (ProductExist.quantity === 1) {
@@ -91,7 +112,7 @@ const clearCart = () => {
         <Router >
           <ToastContainer />
           <Switch>
-            <Routes clearCart={clearCart} handleUpdateQuantity={handleUpdateQuantity} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems}/>
+            <Routes clearCart={clearCart} handleBuyProductNow={handleBuyProductNow} handleUpdateQuantity={handleUpdateQuantity} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems}/>
           </Switch>
         </Router>
         </Provider>
