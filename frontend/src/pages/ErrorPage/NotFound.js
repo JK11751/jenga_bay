@@ -1,7 +1,7 @@
 import { Box, Heading, Text, Button, Center, Image } from '@chakra-ui/react';
-import error from "../assets/404Error.png"
+import error from "../../assets/404Error.png"
 import { Link } from 'react-router-dom';
-import NavBar from "../components/PageSections/NavBar";
+import NavBar from "../../components/PageSections/NavBar";
 
 const NotFound = ({cartItems}) => {
   return (

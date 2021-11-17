@@ -2,7 +2,7 @@ import { Box, Flex, Spacer } from "@chakra-ui/layout";
 import React from "react"
 import NavBar from "../../components/PageSections/NavBar";
 // import ProductDetailsCard from "./subs/ProductDetailsCard";
-import ProductDetails from "../ProductPage/subs/ProductDetails"
+import ProductDetails from "./subs/ProductDetails"
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import {MdKeyboardArrowRight} from "react-icons/md"
 // import Footer from "../../components/PageSections/Footer"
@@ -10,7 +10,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/breadcrum
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const ProductPage = ({handleAddProduct,cartItems})=> {
+const ProductDetailsPage = ({handleAddProduct,cartItems})=> {
     const productReducer = useSelector(({ productReducer }) => productReducer);
 
     return(
@@ -54,4 +54,4 @@ const ProductPage = ({handleAddProduct,cartItems})=> {
     )
 }
 
-export default ProductPage;
+export default ProductDetailsPage;
