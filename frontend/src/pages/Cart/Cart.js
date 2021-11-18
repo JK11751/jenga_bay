@@ -73,7 +73,7 @@ export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, handleUp
                     <Button ml="31%" onClick={()=> clearCart()} size="md" fontWeight="normal" fontFamily="sans-serif" color="white" bg="#555" borderRadius="50px">Clear Cart</Button>
                 </Box>)}
            </Box>
-           <Box height="100vh" position="sticky" width="35%" bg="#E9F6FF"  right={0}>
+           <Box height="100vh" position="absolute" width="35%" bg="#E9F6FF"  right={0}>
            <Box
                 w="sm"
                 mx="auto"

@@ -5,7 +5,7 @@ import NavBar from "../../components/PageSections/NavBar";
 import ProductDetails from "./subs/ProductDetails"
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import {MdKeyboardArrowRight} from "react-icons/md"
-// import Footer from "../../components/PageSections/Footer"
+import Footer from "../../components/PageSections/Footer"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/breadcrumb";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -49,6 +49,7 @@ const ProductDetailsPage = ({handleAddProduct,cartItems,handleBuyProductNow})=> 
                     </Box>
                 </Flex>
             </Flex>
+            <Footer />
         </Box>
         
     )

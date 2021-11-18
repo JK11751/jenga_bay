@@ -16,7 +16,7 @@ import { CompanyProfilePage } from "../pages/CompanyProfilePage/CompanyProfilePa
 import CheckoutPage from "../pages/CheckoutPage.js/CheckoutPage.js";
 import { ForgotPassword } from "../pages/ForgotPassword/ForgotPassword.js";
 import { ResetPassword } from "../pages/ForgotPassword/ResetPassword.js";
-import CartIcon from "../components/Products/cartIcon.js";
+import { CategoryFilters } from "../components/Categories/CategoryFilters.jsx";
 
 const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQuantity, handleBuyProductNow, clearCart})=>{
     return(
@@ -47,7 +47,7 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQu
                 <CompanyProfilePage cartItems={cartItems} handleAddProduct={handleAddProduct}/>
             </Route>
             <Route exact path="/categories/:categoryName">
-                <CategoryPage cartItems={cartItems} />
+                <CategoryPage cartItems={cartItems} handleAddProduct={handleAddProduct}/>
             </Route>
             <Route exact path="/cart">
                 <Cart clearCart={clearCart} handleUpdateQuantity={handleUpdateQuantity} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems} />
@@ -62,7 +62,7 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQu
                 <ResetPassword />
             </Route>
             <Route exact path="/test">
-                <CartIcon />
+                <CategoryFilters/>
             </Route>
             {/* No route should be added after this not found page */}
             <Route exact path="*">

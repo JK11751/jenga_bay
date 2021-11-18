@@ -39,7 +39,7 @@ function ProductCard(props) {
         <MotionBox
           bg={useColorModeValue("white", "gray.800")}
           width="180px"
-          height="300px"
+          height="290px"
           borderWidth="1px"
           rounded="lg"
           shadow="lg"
@@ -103,10 +103,13 @@ function ProductCard(props) {
             >
               {props.name}
             </Text>
+            <Rating rating={data.rating} numReviews={data.numReviews}/>
+
             <Flex mt="3px" justifyContent="space-between" alignContent="center">
               <Box
                 fontSize="lg"
                 color={useColorModeValue("gray.800", "white")}
+                alignItems="center"
               >
                 <Box as="span" color={"gray.600"} fontSize="md">
                   Ksh.
@@ -121,11 +124,10 @@ function ProductCard(props) {
                 fontSize={"1.2em"}
               >
                 {/* <chakra.a href={"#"} display={"flex"}> */}
-                  <IconButton variant="unstyled" _hover={{cursor:"pointer"}} onClick={() => {props.handleAddProduct(props.product)}} icon={<Icon as={FiShoppingCart} h={7} w={7}/>} alignSelf={"center"} />
+                  <IconButton h={5} w={4} variant="solid" _hover={{cursor:"pointer"}} onClick={() => {props.handleAddProduct(props.product)}} icon={<Icon as={FiShoppingCart} h={5} w={5}/>} alignSelf={"center"} />
                 {/* </chakra.a> */}
               </Tooltip>
             </Flex>
-            <Rating rating={data.rating} numReviews={data.numReviews}/>
           </Box>
         </MotionBox>
       {/* </Link> */}
