@@ -13,7 +13,7 @@ import {ChevronDownIcon} from "@chakra-ui/icons"
 import ProductCard from '../../components/Products/ProductCard';
 // import CategoryChips from '../../components/Categories/CategoryChips';
 import { CategoryFilters } from "../../components/Categories/CategoryFilters"
-import { handleGetSellerItems, handleGetSellerDetails } from '../../redux/actions/appActions';
+import { handleGetSellerItems, handleGetSellerDetails, handleGetAllSellers  } from '../../redux/actions/appActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/breadcrumb";
@@ -22,10 +22,25 @@ import { Link } from 'react-router-dom'
 
 const  CompanyProductPage=({cartItems,handleAddProduct})=> {
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
+    // const allSellers = useSelector((state) => state.sellerReducer).allSellers
+    // const [seller_id, setSeller_id] = useState({})
     const {sellerId} = useParams()
+    // const {sellerName} = useParams()
     const dispatch = useDispatch()
 
+    // function findArrayElementByTitle(allSellers, business_name) {
+    //     return allSellers.find((element) => {
+    //       return element.business_name === business_name;
+        
+    //     })
+    // }
+
     useEffect(() => { 
+        dispatch(handleGetAllSellers())
+        // console.log("This is the element",findArrayElementByTitle(allSellers, sellerName))
+        // console.log("This is the seller name", sellerName)
+        // setSeller_id(findArrayElementByTitle(allSellers, sellerName))
+        // console.log("this is seller element",seller_id)
         dispatch(handleGetSellerDetails(sellerId))
         dispatch(handleGetSellerItems(sellerId))
     }, [sellerId,dispatch])

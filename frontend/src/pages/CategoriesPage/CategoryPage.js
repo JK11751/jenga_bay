@@ -39,11 +39,12 @@ export const CategoryPage = ({cartItems, handleAddProduct}) => {
         dispatch(handleGetAllSellers())
     }, [dispatch])
 
+    
 
     return (
         <Box>
             <NavBar cartItems={cartItems}/>
-            <Breadcrumb mt="80px" textSize="1.5em" fontFamily="monospace" textTransform="uppercase" ml={20} spacing="8px" separator={<MdKeyboardArrowRight color="gray.500" />}>
+            <Breadcrumb mt="30px" textSize="1.5em" fontFamily="monospace" textTransform="uppercase" ml={20} spacing="8px" separator={<MdKeyboardArrowRight color="gray.500" />}>
                 <BreadcrumbItem>
                     <BreadcrumbLink as={Link} to={{pathname: `/`}}>Home</BreadcrumbLink>
                 </BreadcrumbItem>
