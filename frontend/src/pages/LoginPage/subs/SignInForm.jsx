@@ -20,7 +20,7 @@ const SignInForm= () => {
     
     return(
         <Flex flexDirection="column" >
-            <Text align="center" fontSize="4xl" mt={10}>Sign In to Your Account</Text>
+            <Text align="center" fontSize="4xl" mt={20}>Sign In to Your Account</Text>
             <HStack alignSelf="center" mt={3} mb={3}>
                 <Image src={facebookIcon} />
                 <Image src={googleIcon} />

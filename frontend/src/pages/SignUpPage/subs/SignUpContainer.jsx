@@ -5,26 +5,23 @@ import SignUpForm from "./SignUpForm";
 import { Image } from "@chakra-ui/image";
 import { Button } from "@chakra-ui/button";
 import logo from "../../../assets/JengaBay.png"
+import shopping from "../../../assets/shopping.gif"
 import { useHistory } from 'react-router-dom';
 
 const SignUpContainer = () => {
     const history = useHistory();
     return( 
-        <Box ml="15vw" mt="2vh">
+        <Box>
             <Flex width="70vw" boxShadow="lg">
-                <Box borderRadius="10px 0px 0px 10px" height="90vh" width="40%" background="#007ACC">
-                    <Image ml={5} mt={5} src={logo} alt="logo" />
-                    <Box mt="150px">   
-                        <VStack spacing="2px" top="20px"> 
-                            <Text color="#ffffff" fontSize="5xl">Hello There</Text>
-                            <Text color="#ffffff" fontSize="md">Enter your details and start your </Text>
-                            <Text color="#ffffff" fontSize="md">journey shopping for construction </Text>
-                            <Text color="#ffffff" fontSize="md" pb={5}>and building materials with us</Text>
-                            <Button variant="link" color="#ffffff" fontSize="xs" onClick={()=> history.push("/registration")} >Register as a seller instead?</Button>   
-                        </VStack>
-                    </Box>
+                <Box borderLeftRadius="10px" height="90vh" width="40%" background="#007ACC">
+                    <VStack p={2} mx="auto" borderRadius="10px 10px 10px 10px" height="80vh"  background="#007ACC">
+                        <Image mt={20} src={logo} _hover={{cursor:"pointer"}} onClick={() => history.push("/")}  alt="logo" /> 
+                        <Image h="300px" src={shopping} alt="logo" />
+                        <Text color="#ffffff" fontSize="2em">Hello There!</Text>
+                        <Button variant="link" _hover={{cursor:"pointer"}} onClick={() => history.push("/registration")} fontWeight="bold" color="#0BC5EA" fontSize='xs'>Register as a seller instead?</Button>  
+                    </VStack>
                 </Box>
-                <Box height="90vh" width="70%" bg="#ffffff" borderRadius="0px 10px 10px 0px">
+                <Box height="90vh" width="70%" bg="#ffffff" borderRightRadius="10px">
                     <SignUpForm alignSelf="center"/>
                 </Box>
             </Flex>

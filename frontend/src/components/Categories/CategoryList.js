@@ -61,7 +61,7 @@ const CategoryList = [
     },
     {
         id:16,
-        value:"telecomunications equipment"
+        value:"telecommunications equipment"
     },
     {
         id:17,

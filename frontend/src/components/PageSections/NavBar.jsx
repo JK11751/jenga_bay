@@ -1,27 +1,44 @@
 import React from "react";
-import { VStack, Flex, HStack, Spacer,Box, Circle, Text } from "@chakra-ui/layout";
-import { Image } from "@chakra-ui/image";
+import CartIcon from "../Products/cartIcon";
+import { FiMenu, FiHelpCircle } from "react-icons/fi"
 import icon from "../../assets/JengaBay.png";
-import { Button } from "@chakra-ui/button";
-import { Link } from "react-router-dom";
-import SearchBar from "../SearchBar/SearchBar";
-
-import { BiCartAlt } from "react-icons/bi";
-import { FiMenu } from "react-icons/fi"
+import { Image } from "@chakra-ui/image";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdOutlineAccountCircle } from "react-icons/md";
-import { IoMdNotificationsOutline } from "react-icons/io";
+import { Link } from "react-router-dom";
 import { Icon } from "@chakra-ui/icon";
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverBody,
-} from "@chakra-ui/react";
 import SideBar from "./SideBar";
+import {
+  chakra,
+  Box,
+  Flex,
+  useColorModeValue,
+  VisuallyHidden,
+  HStack,
+  Button,
+  useDisclosure,
+  VStack,
+  IconButton,
+  CloseButton,
+//   Avatar,
+  Center,
+} from "@chakra-ui/react";
+import {
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    MenuGroup,
+    MenuDivider,
+  } from "@chakra-ui/react"
+import { AiOutlineMenu } from "react-icons/ai";
 import { useHistory } from "react-router";
+import SearchBar from "../SearchBar/SearchBar";
 
 const NavBar = ({cartItems}) => {
+  const bg = useColorModeValue("white", "gray.800");
+  const mobileNav = useDisclosure();
+
   const history= useHistory()
   const [show, setShow] = React.useState(false)
   const handleToggle = (setting) => setShow(setting)
@@ -31,78 +48,143 @@ const NavBar = ({cartItems}) => {
   }
 
   return (
-    <>
-      <Flex
-        position="sticky"
-        top={0}
-        zIndex="100"
-        pl={3}
-        pr={3}
-        shadow="lg"
-        alignItems="center"
+    <React.Fragment>
+      <chakra.header
         background="#007ACC"
-        flexDir="column"
+        w="full"
+        px={{ base: 2, sm: 4 }}
+        py={4}
+        shadow="md"
+        top={0}
+        zIndex="10000"
+        position="sticky"
       >
-      <Flex alignSelf="flex-start" alignItems="center" height="60px" flexDir="row" mr="2.5vw" ml="2.5vw">
-        <Box > 
-          <Icon
-            onClick={() => handleToggle(true)}
-            color="#fff"
-            _hover={{cursor:"pointer"}}
-            as={FiMenu}
-            h={10}
-            w={7}
-            mr={6}
-            mb={1}
-          />
-        </Box>
-        <Flex alignSelf="center" flexShrink={0}>
-          <Link to="/">
-            <Image src={icon} />
-          </Link>
-        </Flex>
-
-        <SearchBar />
-        <Spacer />
-        <HStack ml="12vw" spacing="20px">
-          <Icon color="#fff" h={7} w={7} as={IoMdNotificationsOutline} />
-          <Box>
-            <Icon onClick={handleOpenCart} _hover={{cursor:"pointer"}} color="#fff" h={7} w={7} as={BiCartAlt} />
-            { cartItems.length > 0 &&
-            <Circle alignItems="center" p={2} right={36} position="absolute" top={4} size="15px" bg="#FFA90A"><Text fontWeight="bold" fontSize="10px" color="white">{cartItems.length}</Text></Circle>
-            }
-          </Box>
-          <Popover mr={5} isLazy>
-            <PopoverTrigger>
-              <Button variant="ghost">
-                <HStack>
-                  <Icon
-                    color="#fff"
-                    h={7}
-                    w={7}
-                    as={MdOutlineAccountCircle}
-                  />
-                  <Icon color="#fff" h={5} w={4} as={IoIosArrowDown} />
-                </HStack>
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent width="200px">
-              <PopoverBody>
-                <VStack spacing="10px">
-                  <Link to="/sign-up">
-                    <Button
-                      h="30px"
-                      alignItems="center"
-                      fontWeight="500"
-                      fontSize="13px"
-                      w="130px"
-                      textColor="#18A0FB"
-                      background="#fff"
-                      variant="outline"
-                    >
-                      Sign Up
-                    </Button>
+        <Flex alignItems="center" justifyContent="space-between" >
+          <HStack display="flex" spacing={3} alignItems="center">
+            <Box display={{ base: "inline-flex", md: "none" }}>
+              <IconButton
+                display={{ base: "flex", md: "none" }}
+                aria-label="Open menu"
+                fontSize="20px"
+                color={useColorModeValue("gray.800", "inherit")}
+                variant="ghost"
+                icon={<AiOutlineMenu />}
+                onClick={mobileNav.onOpen}
+              />
+              <VStack
+                pos="absolute"
+                top={0}
+                left={0}
+                right={0}
+                display={mobileNav.isOpen ? "flex" : "none"}
+                flexDirection="column"
+                p={2}
+                pb={4}
+                m={2}
+                bg={bg}
+                spacing={3}
+                rounded="sm"
+                shadow="sm"
+              >
+                <CloseButton
+                  aria-label="Close menu"
+                  justifySelf="self-start"
+                  onClick={mobileNav.onClose}
+                />
+              </VStack>
+            </Box>
+            <chakra.a
+              href="/"
+              title="Choc Home Page"
+              display="flex"
+              alignItems="center"
+            >
+              <Icon
+                  onClick={() => handleToggle(true)}
+                  color="#fff"
+                  _hover={{cursor:"pointer"}}
+                  as={FiMenu}
+                  h={10}
+                  w={7}
+                  // mr={6}
+                  // mb={1}
+              />
+              <VisuallyHidden>Choc</VisuallyHidden>
+            </chakra.a>
+            <HStack spacing={3} display={{ base: "none", md: "inline-flex" }}>    
+              <Flex w="full" alignSelf="center" flexShrink={0}>
+                  <Link to="/">
+                      <Image src={icon} />
                   </Link>
+              </Flex>
+            </HStack>
+          </HStack>
+          <Center>
+            <SearchBar/>
+          </Center>
+          <HStack
+            spacing={3}
+            display={mobileNav.isOpen ? "none" : "flex"}
+            alignItems="center"
+            pr={4}
+          >
+
+            <chakra.a
+              pl={3}
+              color={useColorModeValue("gray.800", "inherit")}
+              rounded="sm"
+              _hover={{ color: useColorModeValue("gray.800", "gray.600") }}
+            >
+              <Icon color="#fff" h={6} w={6} as={FiHelpCircle} />
+              <VisuallyHidden>Shopping Cart</VisuallyHidden>
+            </chakra.a>
+            <chakra.a
+              p={3}
+              color={useColorModeValue("gray.800", "inherit")}
+              rounded="sm"
+              _hover={{ color: useColorModeValue("gray.800", "gray.600") }}
+            >
+              <CartIcon handleOpenCart={() => handleOpenCart()} number={cartItems.length}
+               />
+              <VisuallyHidden>Shopping Cart</VisuallyHidden>
+            </chakra.a>
+            <Menu isLazy>
+            <MenuButton p={0} as={Button} icon={MdOutlineAccountCircle} bg="transparent">
+              <Icon
+                color="#fff"
+                h={7}
+                w={7}
+                as={MdOutlineAccountCircle}
+              />
+              <Icon color="#fff" h={5} w={4} as={IoIosArrowDown} />
+            </MenuButton>
+            <MenuList>
+              <MenuGroup title="Profile">
+                <MenuItem>My Account</MenuItem>
+                <MenuItem>Edit Profile</MenuItem>
+              </MenuGroup>
+              <MenuDivider />
+              <MenuGroup title="Help">
+                <MenuItem>Docs</MenuItem>
+                <MenuItem>FAQ</MenuItem>
+              </MenuGroup>
+              <MenuItem alignItems="center">
+                <Link to="/sign-up">
+                  <Button
+                    h="30px"
+                    alignItems="center"
+                    fontWeight="500"
+                    fontSize="13px"
+                    w="130px"
+                    textColor="#18A0FB"
+                    background="#fff"
+                    variant="outline"
+                  >
+                    Sign Up
+                  </Button>
+                </Link>
+              </MenuItem>
+                <MenuItem alignItems="center">
                   <Link to="/sign-in">
                     <Button
                       h="30px"
@@ -118,16 +200,22 @@ const NavBar = ({cartItems}) => {
                       Login
                     </Button>
                   </Link>
-                </VStack>
-              </PopoverBody>
-            </PopoverContent>
-          </Popover>
-        </HStack>
+                </MenuItem>
+              <MenuDivider />
+              <MenuItem>LOG OUT</MenuItem>
+            </MenuList>
+          </Menu>
+            {/* <Avatar
+              size="sm"
+              name="Dan Abrahmov"
+              src="https://bit.ly/dan-abramov"
+            /> */}
+          </HStack>
         </Flex>
-      </Flex>
+      </chakra.header>
       <SideBar show={show} handleToggle={handleToggle} />
-    </>
+    </React.Fragment>
   );
-};
+}
 
 export default NavBar;

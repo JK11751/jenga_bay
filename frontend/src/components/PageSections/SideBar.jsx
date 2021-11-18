@@ -34,12 +34,13 @@ const LinkItems = [
   { name: 'Settings', icon: FiSettings },
 ];
 
-const SidebarContent = ({ onClose, handleToggle, ...rest }) => {
+const SidebarContent = ({ onClose, handleToggle,ref, ...rest }) => {
 
   const history = useHistory()
 
   return (
     <Box
+      ref={ref}
       bg={useColorModeValue('white', 'gray.900')}
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
@@ -158,9 +159,10 @@ const SideBar = ({ show, handleToggle }) => {
     <Slide
       direction="left"
       in={show}
-      style={{ height: "100vh", width: "300px", zIndex: 100 }}
+      ref={boxRef}
+      style={{ height: "100vh", width: "300px", zIndex: 10000 }}
     >
-      <SidebarContent handleToggle={handleToggle}/>
+      <SidebarContent ref={boxRef} handleToggle={handleToggle}/>
     </Slide>}</>
   );
 };

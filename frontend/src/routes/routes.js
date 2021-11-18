@@ -39,14 +39,14 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQu
             <Route exact path="/upload">
                 <CompanyProductUploadPage cartItems={cartItems} />
             </Route>
-            <Route exact path="/sellers/:sellerId/items">
+            <Route exact path="/sellers/:sellerId/:sellerName">
                 <CompanyProductPage cartItems={cartItems} handleAddProduct={handleAddProduct} />
             </Route>
             <Route exact path="/seller/:sellerId/profile">
                 <CompanyProfilePage cartItems={cartItems} handleAddProduct={handleAddProduct}/>
             </Route>
             <Route exact path="/categories/:categoryName">
-                <CategoryPage cartItems={cartItems} />
+                <CategoryPage cartItems={cartItems} handleAddProduct={handleAddProduct}/>
             </Route>
             <Route exact path="/cart">
                 <Cart clearCart={clearCart} handleUpdateQuantity={handleUpdateQuantity} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems} />

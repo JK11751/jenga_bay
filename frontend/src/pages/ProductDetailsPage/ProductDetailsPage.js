@@ -5,7 +5,7 @@ import NavBar from "../../components/PageSections/NavBar";
 import ProductDetails from "./subs/ProductDetails"
 import ImageSlider from "../../components/ImageSlider/ImageSlider";
 import {MdKeyboardArrowRight} from "react-icons/md"
-// import Footer from "../../components/PageSections/Footer"
+import Footer from "../../components/PageSections/Footer"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/breadcrumb";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -29,7 +29,7 @@ const ProductDetailsPage = ({handleAddProduct,cartItems,handleBuyProductNow})=> 
                             <BreadcrumbLink>Products</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbItem >
-                            <BreadcrumbLink as={Link} to={{pathname: `/sellers/${product.item_seller.id}/items`}}>{product.item_seller.business_name}</BreadcrumbLink>
+                            <BreadcrumbLink as={Link} to={{pathname: `/sellers/${product.item_seller.id}/${product.item_seller.business_name}`}}>{product.item_seller.business_name}</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbItem >
                             <BreadcrumbLink as={Link} to={{pathname: `/categories/${product.category}`}}>{product.category}</BreadcrumbLink>
@@ -49,6 +49,7 @@ const ProductDetailsPage = ({handleAddProduct,cartItems,handleBuyProductNow})=> 
                     </Box>
                 </Flex>
             </Flex>
+            <Footer />
         </Box>
         
     )

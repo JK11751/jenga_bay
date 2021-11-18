@@ -104,7 +104,7 @@ function ProductDetails({handleAddProduct,handleBuyProductNow}) {
         <Text _hover={{cursor:"pointer"}} onClick={() => history.push(`/seller/${product.item_seller.id}/profile`)} fontFamily="sans-serif" color="#555" fontSize="12px">
           Brand: {product.item_seller.business_name}
         </Text>
-        <Text _hover={{cursor:"pointer"}} onClick={() => history.push(`/sellers/${product.item_seller.id}/items`)} fontFamily="sans-serif" color="#555" fontSize="12px">
+        <Text _hover={{cursor:"pointer"}} onClick={() => history.push(`/sellers/${product.item_seller.id}/${product.item_seller.business_name}`)} fontFamily="sans-serif" color="#555" fontSize="12px">
           Visit Brand Store
         </Text>
       </HStack>
