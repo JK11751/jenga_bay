@@ -40,7 +40,7 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQu
             <Route exact path="/upload">
                 <CompanyProductUploadPage cartItems={cartItems} />
             </Route>
-            <Route exact path="/sellers/:sellerId/items">
+            <Route exact path="/sellers/:sellerId/:sellerName">
                 <CompanyProductPage cartItems={cartItems} handleAddProduct={handleAddProduct} />
             </Route>
             <Route exact path="/seller/:sellerId/profile">

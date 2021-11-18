@@ -33,7 +33,7 @@ export const CategoryFilters = ({categoryName, sellerReducer}) => {
                     <>
                         <HStack>
                             <input type="checkbox"></input>
-                            <Text onClick={()=> history.push(`/sellers/${seller.id}/items`)} _hover={{cursor:"pointer"}} ml={2} padding="2px" key={seller.id}>{seller.business_name}</Text>
+                            <Text onClick={()=> history.push(`/sellers/${seller.id}/${seller.business_name}`)} _hover={{cursor:"pointer"}} ml={2} padding="2px" key={seller.id}>{seller.business_name}</Text>
                         </HStack>
                     </>
                 )
