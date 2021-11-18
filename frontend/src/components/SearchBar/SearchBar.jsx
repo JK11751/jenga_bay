@@ -5,10 +5,24 @@ import {BiSearchAlt2} from "react-icons/bi"
 import {Flex} from "@chakra-ui/layout"
 import SearchedUsersDropdown from "./SearchedItemsDropDown"
 import CategoryList from "../Categories/CategoryList";
-
+import { useHistory } from "react-router-dom"
 
 const SearchBar = () => {
-    
+    //dealing with appending query to the url
+    const [query, setQuery] = useState("")
+    const history = useHistory()
+
+    useEffect(() => {
+        const params = new URLSearchParams()
+        if (query) {
+          params.append("search", query)
+        } else {
+          params.delete("search")
+        }
+        history.push({search: params.toString()})
+      }, [query, history])
+
+
     const [options, setOptions] = useState([])
     const [searchModalOpen, setSearchModalOpen] = useState("")
 
@@ -16,6 +30,7 @@ const SearchBar = () => {
     const onInputChange = (event) => {
         const searchInput = event.target.value
         console.log(searchInput)
+        setQuery(event.target.value)
 
         if (searchInput) {
             setSearchModalOpen(true);
@@ -50,7 +65,7 @@ const SearchBar = () => {
     return(
         <Flex flexDir="column">
             <InputGroup ml="10vw">
-                <Input borderWidth="1.9px" ref={myRef} onChange={onInputChange} onClick={(e) => {setClickedOutside(false)}} focusBorderColor = "blue" background="#ffffff" borderRadius="5px" width="554px" placeholder="Search products, categories and brands..." size="md"/>
+                <Input value={query} borderWidth="1.9px" ref={myRef} onChange={onInputChange} onClick={(e) => {setClickedOutside(false)}} focusBorderColor = "blue" background="#ffffff" borderRadius="5px" width="554px" placeholder="Search products, categories and brands..." size="md"/>
                 {/* <InputRightElement
                     pointerEvents="none"
                     children={<MdClose color="#fff"/>}

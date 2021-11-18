@@ -17,7 +17,7 @@ const ProductDetailsPage = ({handleAddProduct,cartItems,handleBuyProductNow})=> 
        
         <Box height="100vh">
             <NavBar cartItems={cartItems}/>
-            <Flex overflowY="hidden" flexDir="row">
+            <Flex mt="60px" overflowY="hidden" flexDir="row">
                 <Flex flexDir="column">
                     {productReducer.productDetails.map((product)=>{
                         return(

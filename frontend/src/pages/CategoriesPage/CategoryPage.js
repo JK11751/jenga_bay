@@ -31,14 +31,14 @@ export const CategoryPage = ({cartItems}) => {
     return (
         <Box>
             <NavBar cartItems={cartItems}/>
-            <Flex flexDir="row">
+            <Flex mt="60px" flexDir="row">
                 <Box
                     height="auto"
                     width="20%"
                     background="#F8f8f8"
                 >
                 <Text>Other Categories</Text>
-                {CategoryList.map((category) =>
+                { CategoryList && CategoryList.map((category) =>
                     (
                         <><HStack>
                         <input type="checkbox"></input>
