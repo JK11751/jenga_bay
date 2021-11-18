@@ -93,12 +93,7 @@ const NavBar = ({cartItems}) => {
                 />
               </VStack>
             </Box>
-            <chakra.a
-              href="/"
-              title="Choc Home Page"
-              display="flex"
-              alignItems="center"
-            >
+
               <Icon
                   onClick={() => handleToggle(true)}
                   color="#fff"
@@ -110,7 +105,7 @@ const NavBar = ({cartItems}) => {
                   // mb={1}
               />
               <VisuallyHidden>Choc</VisuallyHidden>
-            </chakra.a>
+
             <HStack spacing={3} display={{ base: "none", md: "inline-flex" }}>    
               <Flex w="full" alignSelf="center" flexShrink={0}>
                   <Link to="/">

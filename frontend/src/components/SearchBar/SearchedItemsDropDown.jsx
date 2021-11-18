@@ -5,7 +5,7 @@ import React from "react";
 const SearchedUsersDropdown = ({options}) => {
 
     return(
-        <Box shadow="lg" borderTopWidth="1.9px" borderTopColor="gray.100" borderBottomRadius="10px" zIndex={1000}  width="600px" bg="white" position="absolute" top="6.6vh" left="28vw">
+        <Box shadow="lg" borderTopWidth="1.9px" borderTopColor="gray.100" borderBottomRadius="10px" zIndex={1000}  width="43.3vw" bg="white" position="absolute" top="7.7vh" left="29.9vw">
             <List>
             {!options.length && (
                 <>
