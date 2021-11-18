@@ -16,7 +16,6 @@ import { CompanyProfilePage } from "../pages/CompanyProfilePage/CompanyProfilePa
 import CheckoutPage from "../pages/CheckoutPage.js/CheckoutPage.js";
 import { ForgotPassword } from "../pages/ForgotPassword/ForgotPassword.js";
 import { ResetPassword } from "../pages/ForgotPassword/ResetPassword.js";
-import { CategoryFilters } from "../components/Categories/CategoryFilters.jsx";
 
 const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQuantity, handleBuyProductNow, clearCart})=>{
     return(
@@ -60,9 +59,6 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQu
             </Route>
             <Route exact path="/reset-password">
                 <ResetPassword />
-            </Route>
-            <Route exact path="/test">
-                <CategoryFilters/>
             </Route>
             {/* No route should be added after this not found page */}
             <Route exact path="*">

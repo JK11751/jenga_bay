@@ -5,13 +5,11 @@ import ProductCard from "../../components/Products/ProductCard";
 import CategoryChips from "../../components/Categories/CategoryChips"
 import Footer from "../../components/PageSections/Footer";
 import AdsCarousel from "./AdsCarousel";
-// import ProductList from "../shared/ProductList";
 import { handleGetProducts } from "../../redux/actions/appActions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Home = ({handleAddProduct, cartItems}) => {
 
-    // const [productList, setProductList] = useState([])
 
     //fetching data from the api
     const dispatch = useDispatch();
@@ -22,7 +20,6 @@ const Home = ({handleAddProduct, cartItems}) => {
         dispatch(handleGetProducts())// dispatches the action to get the data from the api    
     }, [dispatch]);
 
-    // setProductList(productReducer.products)
     localStorage.setItem("Allproducts", JSON.stringify(productReducer));console.log("Allproducts")
     return(
         <Box alignItems="center" bgColor="#fff" flexDir="column" width="100vw" height="100vh">

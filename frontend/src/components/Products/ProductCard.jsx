@@ -124,7 +124,7 @@ function ProductCard(props) {
                 fontSize={"1.2em"}
               >
                 {/* <chakra.a href={"#"} display={"flex"}> */}
-                  <IconButton h={5} w={4} variant="solid" _hover={{cursor:"pointer"}} onClick={() => {props.handleAddProduct(props.product)}} icon={<Icon as={FiShoppingCart} h={5} w={5}/>} alignSelf={"center"} />
+                  <IconButton h={5} w={4} variant="solid" bg="transparent" _hover={{cursor:"pointer"}} onClick={() => {props.handleAddProduct(props.product)}} icon={<Icon as={FiShoppingCart} h={5} w={5}/>} alignSelf={"center"} />
                 {/* </chakra.a> */}
               </Tooltip>
             </Flex>

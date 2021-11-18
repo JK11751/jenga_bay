@@ -30,7 +30,7 @@ export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, handleUp
     return (
         <Box maxH="100vh">
            <NavBar cartItems={cartItems} /> 
-           <Flex mt="60px" height="auto">
+           <Flex height="auto">
            <Box p={10} width="100%" position="absolute" left={0}>
                 <Box
                     p={2}

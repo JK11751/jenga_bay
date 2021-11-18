@@ -37,10 +37,10 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
             {sellerReducer.sellerDetails.map((seller) => {
                 return(
                     <>
-                        <Box mt="60px">
+                        <Box>
                             <Box height="300px" width="100vw" bg="#000" />
                             <Center>
-                                <Box mt={5} mb={5} textAlign="center" pos="absolute" top={10}  color="white" p={4} as="span" fontFamily="sans-serif" textTransform="uppercase" fontSize="4em">{seller.business_name}</Box>
+                                <Box mt={5} mb={5} textAlign="center" pos="absolute" top={40}  color="white" p={4} as="span" fontFamily="sans-serif" textTransform="uppercase" fontSize="4em">{seller.business_name}</Box>
                             </Center>
                         </Box>
                         {/* <CategoryChips /> */}
