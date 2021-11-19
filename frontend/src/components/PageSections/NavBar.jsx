@@ -51,7 +51,7 @@ const NavBar = ({cartItems}) => {
     <React.Fragment>
       <chakra.header
         background="#007ACC"
-        w="full"
+        w="100%"
         px={{ base: 2, sm: 4 }}
         py={4}
         shadow="md"

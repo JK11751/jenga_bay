@@ -17,6 +17,8 @@ import CheckoutPage from "../pages/CheckoutPage.js/CheckoutPage.js";
 import { ForgotPassword } from "../pages/ForgotPassword/ForgotPassword.js";
 import { ResetPassword } from "../pages/ForgotPassword/ResetPassword.js";
 import { SearchResults } from "../pages/SearchResults/SearchResults.js";
+import ProductContainer from "../pages/Home/subs/RegisterAsASeller.jsx";
+import CategoryCard from "../pages/Home/subs/CategoryCard.jsx";
 
 const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQuantity, handleBuyProductNow, clearCart})=>{
     return(
@@ -36,9 +38,6 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQu
             </Route>
             <Route exact path="/product-details/:productId">
                 <ProductDetailsPage cartItems={cartItems} handleAddProduct={handleAddProduct} handleBuyProductNow={handleBuyProductNow}/>
-            </Route>
-            <Route exact path="/search/:categoryName">
-                <SearchResults cartItems={cartItems} handleAddProduct={handleAddProduct} handleBuyProductNow={handleBuyProductNow}/>
             </Route>
             <Route exact path="/products/:searchQuery">
                 <SearchResults cartItems={cartItems} handleAddProduct={handleAddProduct} handleBuyProductNow={handleBuyProductNow}/>
@@ -66,6 +65,12 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQu
             </Route>
             <Route exact path="/reset-password">
                 <ResetPassword />
+            </Route>
+            <Route exact path="/test">
+                <ProductContainer cartItems={cartItems} />
+            </Route>
+            <Route exact path="/test2">
+                <CategoryCard cartItems={cartItems} />
             </Route>
             {/* No route should be added after this not found page */}
             <Route exact path="*">

@@ -47,13 +47,13 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
 
     
     return(
-        <Box flexDir="column" width="100vw" height="100vh">
+        <Box flexDir="column" width="100%" height="100vh">
             <NavBar cartItems={cartItems} />
             {sellerReducer.sellerDetails.map((seller) => {
                 return(
                     <>
                         <Box>
-                            <Box height="300px" width="100vw" bg="#000" />
+                            <Box height="300px" width="100%" bg="#000" />
                             <Center>
                                 <Box mt={5} mb={5} textAlign="center" pos="absolute" top={40}  color="white" p={4} as="span" fontFamily="sans-serif" textTransform="uppercase" fontSize="4em">{seller.business_name}</Box>
                             </Center>
