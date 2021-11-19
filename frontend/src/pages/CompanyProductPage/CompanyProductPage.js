@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import NavBar from '../../components/PageSections/NavBar';
 import Footer from '../../components/PageSections/Footer';
-import { Box, Flex, Center, Text , Divider, HStack , Spacer, Button, Input,InputGroup,InputLeftElement} from "@chakra-ui/react";
+import { Box, Flex, Center, Text , Divider, HStack , Spacer, Button } from "@chakra-ui/react";
 import {
     Menu,
     MenuButton,
     MenuList,
     MenuItem,
 } from "@chakra-ui/react"
-import {AiOutlineSearch} from "react-icons/ai"
 import {ChevronDownIcon} from "@chakra-ui/icons"
 import ProductCard from '../../components/Products/ProductCard';
 // import CategoryChips from '../../components/Categories/CategoryChips';
@@ -19,6 +18,7 @@ import { useParams } from 'react-router';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/breadcrumb";
 import {MdKeyboardArrowRight} from "react-icons/md"
 import { Link } from 'react-router-dom'
+import { Search } from './subs/search';
 
 const  CompanyProductPage=({cartItems,handleAddProduct})=> {
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
@@ -92,15 +92,7 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
                             <Flex>
                                 <Text p={4} fontWeight="bold">{sellerReducer.sellerItems.length} items found</Text>
                                 <Spacer />
-                                <HStack spacing={3} alignItems="center">
-                                    <InputGroup display={{ base: "none", lg: "block" }} ml="auto">
-                                        <InputLeftElement
-                                        pointerEvents="none"
-                                        children={<AiOutlineSearch />}
-                                        />
-                                        <Input type="tel" placeholder="Search by category..." />
-                                    </InputGroup>
-                                    </HStack>
+                                <Search/>
                             </Flex>
                             <Divider width="63vw" mb={2} />
                             <Flex flexWrap="wrap">

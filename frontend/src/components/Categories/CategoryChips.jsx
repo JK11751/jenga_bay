@@ -29,12 +29,12 @@ const CategoryChips = () => {
 
   const slideLeft =()=>{
     var slider = document.getElementById("category-slider");
-    sideScroll(slider,'left',25,100,10);
+    sideScroll(slider,'left',25,100,30);
   }
 
   const slideRight =()=>{
     var slider = document.getElementById("category-slider");
-    sideScroll(slider,'right',25,100,10);
+    sideScroll(slider,'right',25,100,30);
   }
 
 
