@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
   Flex,
   Circle,
@@ -8,6 +7,7 @@ import {
   useColorModeValue,
   // Icon,
   // chakra,
+  Text,
   Tooltip,
   HStack,
 } from "@chakra-ui/react";
@@ -26,7 +26,7 @@ const data = {
   name: "JengaBay Product",
   price: 4.5,
   rating: 4.2,
-  numReviews: 34,
+  numReviews: 0,
 };
 
 function ProductCard(props) {
@@ -39,7 +39,7 @@ function ProductCard(props) {
         <MotionBox
           bg={useColorModeValue("white", "gray.800")}
           width="180px"
-          height="300px"
+          height="290px"
           borderWidth="1px"
           rounded="lg"
           shadow="lg"
@@ -69,7 +69,7 @@ function ProductCard(props) {
             roundedTop="lg"
           />
           <Box pl="4" pr="6" pt="3">
-            <Box onClick={() => history.push(`/sellers/${props.sellerId}/items`)} _hover={{cursor:"pointer"}}  d="flex" alignItems="baseline">
+            <Box onClick={() => history.push(`/sellers/${props.sellerId}/props.companyName`)} _hover={{cursor:"pointer"}}  d="flex" alignItems="baseline">
               <HStack>
               <Tooltip
                 label="View more products from seller"
@@ -91,28 +91,30 @@ function ProductCard(props) {
               </HStack>
             </Box>
 
-            <Box
+            <Text
               mt="1"
               justifyContent="space-between"
               alignContent="center"
               fontSize="md"
               fontWeight="semibold"
-              as="span"
               lineHeight="tight"
               isTruncated
-              
+              textOverflow="ellipsis"
             >
               {props.name}
-            </Box>
-            <Flex mt="5px" justifyContent="space-between" alignContent="center">
+            </Text>
+            <Rating rating={data.rating} numReviews={data.numReviews}/>
+
+            <Flex mt="3px" justifyContent="space-between" alignContent="center">
               <Box
                 fontSize="lg"
                 color={useColorModeValue("gray.800", "white")}
+                alignItems="center"
               >
                 <Box as="span" color={"gray.600"} fontSize="md">
-                  £
+                  Ksh.
                 </Box>
-                {data.price.toFixed(2)}
+                {props.price}
               </Box>
               <Tooltip
                 label="Add to cart"
@@ -122,11 +124,10 @@ function ProductCard(props) {
                 fontSize={"1.2em"}
               >
                 {/* <chakra.a href={"#"} display={"flex"}> */}
-                  <IconButton variant="unstyled" _hover={{cursor:"pointer"}} onClick={() => {props.handleAddProduct(props.product)}} icon={<Icon as={FiShoppingCart} h={7} w={7}/>} alignSelf={"center"} />
+                  <IconButton h={5} w={4} variant="solid" bg="transparent" _hover={{cursor:"pointer"}} onClick={() => {props.handleAddProduct(props.product)}} icon={<Icon as={FiShoppingCart} h={5} w={5}/>} alignSelf={"center"} />
                 {/* </chakra.a> */}
               </Tooltip>
             </Flex>
-            <Rating rating={data.rating} />
           </Box>
         </MotionBox>
       {/* </Link> */}

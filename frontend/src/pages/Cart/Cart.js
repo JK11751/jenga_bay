@@ -1,11 +1,14 @@
 import React from 'react'
-import { Box, Divider, HStack, Text, VStack } from '@chakra-ui/layout'
+import { Box, Divider, HStack, Text, VStack, Flex, Center } from '@chakra-ui/layout'
 import NavBar from '../../components/PageSections/NavBar'
 import { Icon } from '@chakra-ui/icon'
-import { BsArrowLeftShort, BsArrowDown } from 'react-icons/bs'
+import { BsArrowDown } from 'react-icons/bs'
+import {IoIosArrowBack} from "react-icons/io"
 import { Input } from '@chakra-ui/input'
 import { Button } from '@chakra-ui/button'
 import { CartItem } from './CartItem'
+import { useHistory } from 'react-router'
+import { useColorModeValue } from '@chakra-ui/color-mode'
 
 const style ={
     color:"#C4C4C4",
@@ -19,13 +22,15 @@ const otherStyles = {
     fontFamily:"monospace"
 }
 
-export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, clearCart}) => {
+export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQuantity, clearCart}) => {
 
+    const history = useHistory()
     const TotalPrice = cartItems.reduce((price, item) => price + item.quantity * item.item_price, 0)
     
     return (
-        <Box>
+        <Box maxH="100vh">
            <NavBar cartItems={cartItems} /> 
+           <Flex height="auto">
            <Box p={10} width="100%" position="absolute" left={0}>
                 <Box
                     p={2}
@@ -36,8 +41,10 @@ export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, clearCar
                     fontSize="15px"
                     color="#555"
                     mb={3}
+                    overflowY="scroll"
+                    onClick={() => history.push(`/`)}
                 >
-                    <Icon as={BsArrowLeftShort}/> 
+                    <Icon as={IoIosArrowBack}/> 
                     Continue Shopping
                 </Box>
                 <Divider width="60vw" borderColor="gray.400" />
@@ -48,10 +55,16 @@ export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, clearCar
                         <Text>Sort by: price <Icon as={BsArrowDown}/></Text>
                     </HStack>
                 </VStack>
+                <HStack p={4} pl={10} spacing="8vw">
+                    <Text fontWeight="bold" fontFamily="sans-serif">PRODUCT</Text>
+                    <Text fontWeight="bold" fontFamily="sans-serif">PRICE</Text>
+                    <Text fontWeight="bold" fontFamily="sans-serif">QUANTITY</Text>
+                    <Text fontWeight="bold" fontFamily="sans-serif">ITEM TOTAL</Text>
+                </HStack>
                 <Box width="80%">
                     {cartItems.length === 0 && (<Text> There are no items in the cart</Text>)}
                     {cartItems.map((item) => (
-                        <CartItem name={item.item_name} unit={item.item_measurement_unit} image={item.item_main_image} price={item.item_price} quantity={item.quantity} item={item} handleAddProduct={handleAddProduct} handleRemoveProduct={handleRemoveProduct}/>   
+                        <CartItem name={item.item_name} unit={item.item_measurement_unit} image={item.item_main_image} price={item.item_price} quantity={item.quantity} item={item} handleUpdateQuantity={handleUpdateQuantity} handleAddProduct={handleAddProduct} handleRemoveProduct={handleRemoveProduct}/>   
                     ))}
                 </Box>    
                {cartItems.length !== 0 && ( <Box p={5}>
@@ -60,20 +73,43 @@ export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, clearCar
                     <Button ml="31%" onClick={()=> clearCart()} size="md" fontWeight="normal" fontFamily="sans-serif" color="white" bg="#555" borderRadius="50px">Clear Cart</Button>
                 </Box>)}
            </Box>
-           <Box height="100vh" width="35%" bg="#E9F6FF" position="absolute" right={0}>
+           <Box height="100vh" position="absolute" width="35%" bg="#E9F6FF"  right={0}>
+           <Box
+                w="sm"
+                mx="auto"
+                mt={10}
+                bg={useColorModeValue("white", "gray.800")}
+                shadow="lg"
+                rounded="lg"
+                p={5}
+                overflow="hidden"
+            >
+                <Center>
+                <VStack>
+                <Text fontWeight="bold" fontFamily="sans-serif">ORDER SUMMARY</Text>
+                <Divider width="xs" mb={10} borderWidth="2px" borderColor="black"  />
+                <Text {...otherStyles}>ITEMS IN CART: {cartItems.length}</Text>
+                <Text {...otherStyles}>ESTIMATED DELIVERY FEE: KSH.0</Text>
+                <Text {...otherStyles}>DISCOUNT</Text>
+                <Text {...otherStyles}>TOTAL CART AMOUNT:      {TotalPrice}</Text>
+                <Button onClick={() => history.push("/checkout")} size="md" fontWeight="normal" fontFamily="sans-serif" color="white" bg="#555" borderRadius="50px">CHECKOUT NOW</Button>
+                </VStack>
+                </Center>
+            </Box>
                 <VStack spacing ="30px" p={5}>
-                    <Divider width="200px" mb={10} borderWidth="2px" borderColor="black"  />
+                   
                     <VStack>
-                        <Text {...otherStyles}>TOTAL CART AMOUNT:{TotalPrice}</Text>
+                       
                         <Text mb={10} {...style}>Shipping and taxes calculated at checkout</Text>
                     </VStack>
                     <HStack>
                         <input type="checkbox"></input>
                         <Text mb={5} {...style}>I agree to Terms & Conditions</Text>
                     </HStack>
-                    <Button size="md" fontWeight="normal" fontFamily="sans-serif" color="white" bg="#555" borderRadius="50px">CHECKOUT</Button>
+                    
                 </VStack>   
            </Box>
+           </Flex>
         </Box>
     )
 }

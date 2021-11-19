@@ -4,6 +4,7 @@ import { Image } from '@chakra-ui/image'
 import {MdDelete} from "react-icons/md"
 import Icon from '@chakra-ui/icon'
 import { Button } from '@chakra-ui/button'
+import { Flex } from '@chakra-ui/react'
 
 
 
@@ -18,34 +19,30 @@ export const CartItem = (props) => {
           
         return (
           <HStack maxW="320px">
-            <Button variant="unstyled" onClick={add}>+</Button>
-            <span width="50px">{quantity}</span>
             <Button variant="unstyled" onClick={remove}>-</Button>
+            <span width="50px">{quantity}</span>
+            <Button variant="unstyled" onClick={add}>+</Button>
           </HStack>
         )
     }  
 
     return (
         <Box borderRadius="10px" width="80%" shadow="lg">
-            <HStack p={4} spacing="5vw">
-                <HStack>
-                    <Image objectFit="cover" borderRadius="10px" width="70px" height="70px" src={props.image} alt="product"/>
-                    <VStack alignItems="left" spacing="2px">
-                        <Text fontWeight="bold" {...mystyle}>{props.name}</Text>
-                        <Text {...mystyle}>{props.unit}</Text>
-                    </VStack>
-                </HStack>    
-                <VStack alignItems="center" spacing="10px" p={5}>
-                    <Text {...mystyle}>Item Price: {props.price}</Text>    
-                </VStack>
-                <VStack alignItems="center" spacing="10px" p={5}>
-                    <NumberStepper add={() => props.handleAddProduct(props.item)} remove={() => props.handleRemoveProduct(props.item)} quantity ={props.quantity} />
-                </VStack>
-                <VStack alignItems="center" spacing="10px" p={5}>
-                   <Text>{props.quantity} * {props.price} </Text>
-                </VStack>
-                <Icon _hover={{cursor:"pointer"}} onClick={() => props.handleRemoveProduct(props.item)} as={MdDelete}/>
-            </HStack>     
+
+            <HStack flexGrow={0} p={4} spacing="9vw">
+                <Flex flexShrink={0} alignItems="left">
+                    <Image objectFit="cover" borderRadius="5px" width="100px" height="100px" src={props.image} alt="product"/>
+                </Flex>
+                <Text {...mystyle}>{props.price}</Text>    
+                <NumberStepper add={() => props.handleAddProduct(props.item)} remove={() => props.handleUpdateQuantity(props.item)} quantity ={props.quantity} />
+                <Text>{props.quantity} * {props.price} </Text>
+                <Icon _hover={{cursor:"pointer"}} onClick={() => props.handleRemoveProduct(props.item)} as={MdDelete}/>   
+            </HStack>  
+            <VStack alignSelf="left" pl={4} pb={2} alignItems="left" spacing="2px">
+                    <Text fontWeight="bold" text {...mystyle}>{props.name}</Text>
+                    <Text {...mystyle}>{props.unit}</Text>
+            </VStack>
+ 
         </Box>
     )
 }

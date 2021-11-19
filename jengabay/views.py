@@ -3,6 +3,8 @@ from rest_framework.views import APIView
 from .serializers import *
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .models import *
+from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 # Create your views here.
 class SellerListCreateView(ListCreateAPIView):
@@ -36,7 +38,7 @@ class SpecificItemView(ListAPIView):
 class SpecificSellerSpecificItemView(RetrieveUpdateDestroyAPIView):
     """api used to get, update and delete a specific item in a specific seller page"""
 
-    serializer_class = ItemViewSerializer
+    serializer_class = ItemSerializer
     queryset = Item.objects.all()
 
 class AllItemsListView(ListAPIView):
@@ -44,27 +46,26 @@ class AllItemsListView(ListAPIView):
 
     serializer_class = ItemViewSerializer
     queryset = Item.objects.all()
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend,]
+    search_fields = [
+        'item_seller__business_name', 'item_seller__sub_county__subcounty_name',
+        'item_seller__sub_county__county__county_name', 'item_seller__local_area_name',
+        'item_seller__town', 'item_seller__building', 'item_seller__street',
+        'item_name', 'item_description', 'category',]
+        
+    filterset_fields = ['category',]
 
 class SpecificSellerItemsView(ListCreateAPIView):
     """api for listing and creating items belonging to a specific seller"""
-    
-    serializer_class = ItemViewSerializer
+
+    serializer_class = ItemSerializer
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend,]
+    search_fields = ['item_name', 'item_description', 'category',]
+    filterset_fields = ['category',]
+
+
     def get_queryset(self):
         return Item.objects.all().filter(item_seller=self.kwargs['pk'])
-
-class HomePageItemsCategoryView(ListAPIView):
-    """api listing all items belonging to a certain category in the home page"""
-    
-    serializer_class = ItemViewSerializer
-    def get_queryset(self):
-        return Item.objects.all().filter(category=self.kwargs['category'])
-
-class SellerPageItemsCategoryView(ListAPIView):
-    """api listing all items belonging to a certain category in a specific seller page"""
-    
-    serializer_class = ItemViewSerializer
-    def get_queryset(self):
-        return Item.objects.all().filter(category=self.kwargs['category']).filter(item_seller=self.kwargs['pk'])
 
 class OrderListCreateView(ListCreateAPIView):
     serializer_class = OrderSerializer

@@ -4,8 +4,11 @@
     if you are using vscode open the vscode terminal
     run this command to install a virtual environment:
       $ virtualenv venv
+
     then activate the virtual environment from the directory you have installed the venv, in our case the current directory
-       $ . venv/bin/activate
+      $ . venv/bin/activate (for Linux)
+      $ . venv/scripts/activate (for Windows OS)
+
     run the following command to install django in your virtual environment
       $ pip install django (might say requirement satisfied)
       
@@ -28,8 +31,17 @@
     http://localhost:8000/sellers/seller-id/profile  (to get, update or delete a specific seller)
     http://localhost:8000/items  (api end point for all items in the database)
     http://localhost:8000/items/item_id   (api end point to view a specific item)
-    http://localhost:8000/items/category/category_name  (to get all items in a specific category)
     http://localhost:8000/sellers/seller-id/items   (to get all items belonging to a specific seller)
     http://localhost:8000/sellers/seller-id/items/item_id   (to get, update and delete a specific item belonging to a specific seller)
-    http://localhost:8000/sellers/seller-id/items/category/category_name   (to get items belonging to a specific category in a specific seller page)
     http://localhost:8000/order   (to add create an order and get order information)
+
+    to view items belonging to a certain category append a query parameter to the url as shown below:
+      e.g:
+            http://localhost:8000/items?category=paints
+            http://localhost:8000/sellers/seller-id/items?category=paints
+
+    to view search for based on any query string, append a query parameter with a 'search' keyword to the url as shown below:
+      e.g:
+            http://localhost:8000/items?search=jengabay
+            http://localhost:8000/sellers/seller-id/items?search=cement
+

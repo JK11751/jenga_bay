@@ -60,3 +60,14 @@
     transition-duration: 1s;
     transform: scale(1.08);
 }
+.img-wrapper{
+    overflow:hidden;
+}
+
+img.hover-zoom {
+    transition: all 0.3s ease 0s;
+}
+
+img.hover-zoom:hover {
+    transform: scale(1.08);
+}

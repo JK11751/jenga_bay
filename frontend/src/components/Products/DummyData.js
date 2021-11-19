@@ -1,23 +1,23 @@
 const dummyData = [
     {
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/GoldenGateBridge-001.jpg/1200px-GoldenGateBridge-001.jpg",
-      caption: "San Francisco"
+      image: "https://media.istockphoto.com/photos/house-construction-framing-gradating-into-finished-kitchen-build-picture-id1292475721?b=1&k=20&m=1292475721&s=170667a&w=0&h=g4ppIqoqSelzR4UtZ160-TxGDgbELScZ_aQV_gyXbp4=",
+      // caption: "San Francisco"
     },
     {
-      image: "https://cdn.britannica.com/s:800x450,c:crop/35/204435-138-2F2B745A/Time-lapse-hyper-lapse-Isle-Skye-Scotland.jpg",
-      caption: "Scotland"
+      image: "https://media.istockphoto.com/photos/concept-of-construction-modular-house-exterior-3d-illustration-picture-id1337488092?b=1&k=20&m=1337488092&s=170667a&w=0&h=ArTgu5TAeN7IqFfxe7LlvhWbtYNcBwLItrk3ChjEb8c=",
+      // caption: "Scotland"
     },
     {
-      image: "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg",
-      caption: "Darjeeling"
+      image: "https://media.istockphoto.com/photos/engineer-architect-construction-worker-on-construction-site-with-picture-id1277749962?b=1&k=20&m=1277749962&s=170667a&w=0&h=t3e7fgshn1xCM1mPuoskaSm6atLPhpZN07ImxDN7rgQ=",
+      // caption: "Darjeeling"
     },
     {
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Palace_of_Fine_Arts_%2816794p%29.jpg/1200px-Palace_of_Fine_Arts_%2816794p%29.jpg",
-      caption: "San Francisco"
+      image: "https://images.unsplash.com/photo-1593313637552-29c2c0dacd35?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8Y29uc3RydWN0aW9ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      // caption: "San Francisco"
     },
     {
-      image: "https://i.natgeofe.com/n/f7732389-a045-402c-bf39-cb4eda39e786/scotland_travel_4x3.jpg",
-      caption: "Scotland"
+      image: "https://images.unsplash.com/photo-1535732759880-bbd5c7265e3f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y29uc3RydWN0aW9ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      // caption: "Scotland"
     },
 ];
 

@@ -26,11 +26,14 @@ import { FormHelperText } from "@chakra-ui/form-control";
 import facebookIcon from "../../../assets/facebook.png";
 import googleIcon from "../../../assets/Google.png";
 import linkedInIcon from "../../../assets/linkedin.png";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import { useForm } from "../../../utils/useForm";
 
-
+const style ={
+  color:"red",
+}
 
 const SignUpForm = () => {
   const history = useHistory();
@@ -70,7 +73,10 @@ const SignUpForm = () => {
     },
 
     onSubmit: () => {
-      alert('User submitted!');
+      toast.success("Sign up successful", {
+        position: "bottom-left",
+      });
+      // alert('User submitted!');
       history.push("/");
     }
   });
@@ -133,7 +139,7 @@ const SignUpForm = () => {
               onChange={handleChange("email")}
             />
           </InputGroup>
-          {errors.email && <FormHelperText>{errors.email}</FormHelperText>}
+          {errors.email && <FormHelperText {...style}>{errors.email}</FormHelperText>}
         </FormControl>
         <FormControl id="phoneNumber" isRequired>
           <InputGroup>
@@ -150,7 +156,7 @@ const SignUpForm = () => {
               onChange={handleChange("phoneNumber")}
             />
           </InputGroup>
-          {errors.phoneNumber && <FormHelperText>{errors.phoneNumber}</FormHelperText>}
+          {errors.phoneNumber && <FormHelperText {...style}>{errors.phoneNumber}</FormHelperText>}
         </FormControl>
         <FormControl id="password" isRequired>
           <InputGroup>
@@ -187,7 +193,7 @@ const SignUpForm = () => {
               )}
             </InputRightElement>
           </InputGroup>
-          {errors.password && <FormHelperText>{errors.password}</FormHelperText>}
+          {errors.password && <FormHelperText {...style}>{errors.password}</FormHelperText>}
         </FormControl>
         
       </VStack>
