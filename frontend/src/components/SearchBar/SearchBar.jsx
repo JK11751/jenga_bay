@@ -28,16 +28,15 @@ const SearchBar = () => {
     //dealing with appending query to the url
     const [query, setQuery] = useState("")
     const history = useHistory()
-    
-    useEffect(() => {
-        const params = new URLSearchParams()
+    const params = new URLSearchParams()
+    useEffect(() => {  
         if (query) {
           params.append("search", query)
         } else {
           params.delete("search")
         }
         // history.push({pathname: window.location.pathname ,search: params.toString()})
-    }, [query, history])
+    }, [query])
 
     
     
@@ -84,6 +83,7 @@ const SearchBar = () => {
                         .includes(event.target.value) ||  
                 product.item_seller.business_name
                         .toLowerCase()
+                        .concat(` ${product.item_name.toLowerCase()}`)
                         .includes(event.target.value) ||
                 product.item_seller.building
                         .toLowerCase()
@@ -143,7 +143,7 @@ const SearchBar = () => {
 
     const onKeyEvent = (e) => {
         if (e.keyCode === 13) {
-            history.replace(`/products/${query}`)
+            history.push({pathname: "/products" ,search: params.toString()})
             setSearchModalOpen(true);
         }
     };

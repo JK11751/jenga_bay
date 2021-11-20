@@ -12,25 +12,27 @@ import {
     MenuItem,
   } from "@chakra-ui/react"
 import {ChevronDownIcon} from "@chakra-ui/icons"
-import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { handleGetAllSellers, handleGetProductsFromSearch} from "../../redux/actions/appActions";
 import { Link } from 'react-router-dom'
 import { CategoryFilters } from '../../components/Categories/CategoryFilters'
 import { Divider } from '@chakra-ui/react';
 
-export const SearchResults = ({cartItems, handleAddProduct}) => {
+export const SearchResultsProducts = ({cartItems, handleAddProduct}) => {
     // const productReducer = useSelector(({ productReducer }) => productReducer);
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
     const itemList = useSelector((state) => state.productReducer).searchedItems
     const [searchedItems,setSearchedItems] = useState([])
-    // const { search } =  new URLSearchParams(window.location.search)
-    const {searchQuery} = useParams()
+    // getting the search parameter from the url
+    const query = new URLSearchParams(window.location.search);
+    const search = query.get('search')
+
+    // const {searchQuery} = useParams()
     const dispatch = useDispatch()
 
     useEffect(() => { 
-        dispatch(handleGetProductsFromSearch(searchQuery))
-    }, [searchQuery,dispatch])
+        dispatch(handleGetProductsFromSearch(search))
+    }, [search,dispatch])
     
     useEffect(() => {
         setSearchedItems(itemList)
@@ -53,19 +55,19 @@ export const SearchResults = ({cartItems, handleAddProduct}) => {
                     <BreadcrumbLink>All Products</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink>{searchQuery}</BreadcrumbLink>
+                    <BreadcrumbLink>{search}</BreadcrumbLink>
                 </BreadcrumbItem>
             </Breadcrumb>
             <Center>
-                <Box mt={5} mb={5} textAlign="center" w="90vw" bg="#E9F6FF" p={4} as="span" fontSize="lg">1-{searchedItems.length} of {searchedItems.length} search results for <Box as="span" color="#FFA90A">"{searchQuery}"</Box></Box>
+                <Box mt={5} mb={5} textAlign="center" w="90vw" bg="#E9F6FF" p={4} as="span" fontSize="lg">1-{searchedItems.length} of {searchedItems.length} search results for <Box as="span" color="#FFA90A">"{search}"</Box></Box>
             </Center>
             <Center>
                 <HStack spacing="20px" mt={2} alignItems="top">
-                    <CategoryFilters sellerReducer={sellerReducer} categoryName={searchQuery}/>
+                    <CategoryFilters sellerReducer={sellerReducer} categoryName={search}/>
                     <Flex p={4} height="auto" bg="#F5F5F5" borderRadius="10px" width="65vw" flexWrap="wrap" >
                         <Flex flexDir="column">
                             <Flex p={2}>
-                                <Text p={2} fontWeight="bold">Search results for "{searchQuery}"</Text>
+                                <Text p={2} fontWeight="bold">Search results for "{search}"</Text>
                                 <Spacer />
                                 <Menu>
                                     <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>

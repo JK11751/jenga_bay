@@ -47,7 +47,7 @@ const SearchedUsersDropdown = ({options, categories, brands}) => {
                         padding="5px" key={brand.id}>
                         <HStack>
                             <Image objectFit="cover" borderRadius="5px" h="30px" w="30px" src={brand.profile_pic}/>
-                            <Text>{brand.business_name} <Text color="#c4c4c4">Brand</Text></Text>
+                            <Text>{brand.business_name} <Text color="#c4c4c4">Brand Store</Text></Text>
                         </HStack>
                         </ListItem>
                     </>

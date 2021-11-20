@@ -82,15 +82,14 @@ class APIServices {
   }
 
   //Getting items belonging to a specific category from a specific seller
-  async getSellerItemInSpecificCategory(seller_id, category_name){
+  async getSellerItemsInSpecificCategory(seller_id, category_name){
     return api.get(`/sellers/${seller_id}/items?category=${category_name}`)
   }
 
   //Searching for anything belonging to a specific seller
-  async searchingSellerItemInSpecificCategory(seller_id, query_string){
+  async searchingSellerItems(seller_id, query_string){
     return api.get(`/sellers/${seller_id}/items?search=${query_string}`)
   }
-
   //Updating details of a specific item belonging to a specific seller
   async updateSellerItem(seller_id, item_id){
     return api.put(`/sellers/${seller_id}/items/${item_id}`)

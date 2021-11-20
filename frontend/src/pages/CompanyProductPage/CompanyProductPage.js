@@ -67,46 +67,46 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
                                 <BreadcrumbLink>{seller.business_name}</BreadcrumbLink>
                             </BreadcrumbItem>
                         </Breadcrumb>
-            <Center>
-                <HStack spacing="20px" mt={2} alignItems="top">
-                    <CategoryFilters />
-                    <Flex p={4} height="auto" bg="#F5F5F5" borderRadius="10px" width="65vw" flexWrap="wrap" >
-                        <Flex flexDir="column">
-                            <Flex p={2}>
-                                <Text p={2} fontWeight="bold">{seller.business_name}</Text>
-                                <Spacer />
-                                <Menu>
-                                    <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                                        Sort by: Popularity
-                                    </MenuButton>
-                                    <MenuList>
-                                        <MenuItem>A-Z</MenuItem>
-                                        <MenuItem>Z-A</MenuItem>
-                                        <MenuItem>Price: High To Low</MenuItem>
-                                        <MenuItem>Product Rating</MenuItem>
-                                        <MenuItem>Price: Low To High</MenuItem>
-                                    </MenuList>
-                                </Menu>
+                <Center>
+                    <HStack spacing="20px" mt={2} alignItems="top">
+                        <CategoryFilters />
+                        <Flex p={4} height="auto" bg="#F5F5F5" borderRadius="10px" width="65vw" flexWrap="wrap" >
+                            <Flex flexDir="column">
+                                <Flex p={2}>
+                                    <Text p={2} fontWeight="bold">{seller.business_name}</Text>
+                                    <Spacer />
+                                    <Menu>
+                                        <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                                            Sort by: Popularity
+                                        </MenuButton>
+                                        <MenuList>
+                                            <MenuItem>A-Z</MenuItem>
+                                            <MenuItem>Z-A</MenuItem>
+                                            <MenuItem>Price: High To Low</MenuItem>
+                                            <MenuItem>Product Rating</MenuItem>
+                                            <MenuItem>Price: Low To High</MenuItem>
+                                        </MenuList>
+                                    </Menu>
+                                </Flex>
+                                <Divider width="63vw" />
+                                <Flex>
+                                    <Text p={4} fontWeight="bold">{sellerReducer.sellerItems.length} items found</Text>
+                                    <Spacer />
+                                    <Search/>
+                                </Flex>
+                                <Divider width="63vw" mb={2} />
+                                <Flex flexWrap="wrap">
+                                {sellerReducer.sellerItems.map((product)=>{ 
+                                    return(
+                                        <ProductCard price={product.item_price} sellerId={product.item_seller.id} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
+                                    )
+                                })}</Flex>
                             </Flex>
-                            <Divider width="63vw" />
-                            <Flex>
-                                <Text p={4} fontWeight="bold">{sellerReducer.sellerItems.length} items found</Text>
-                                <Spacer />
-                                <Search/>
-                            </Flex>
-                            <Divider width="63vw" mb={2} />
-                            <Flex flexWrap="wrap">
-                            {sellerReducer.sellerItems.map((product)=>{ 
-                                return(
-                                    <ProductCard price={product.item_price} sellerId={product.item_seller.id} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
-                                )
-                            })}</Flex>
+                            {sellerReducer.sellerItems.length === 0 && <Text p={20}>There are no products here</Text> }
+                            
                         </Flex>
-                        {sellerReducer.sellerItems.length === 0 && <Text p={20}>There are no products here</Text> }
-                        
-                    </Flex>
-                </HStack>
-            </Center>
+                    </HStack>
+                </Center>
             </>
             )})}
             <Footer /> 
