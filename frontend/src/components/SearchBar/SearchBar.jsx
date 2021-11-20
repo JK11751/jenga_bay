@@ -27,14 +27,17 @@ const SearchBar = () => {
 
     //dealing with appending query to the url
     const [query, setQuery] = useState("")
+    const [searchQuery, setSearchQuery] = React.useState("")
     const history = useHistory()
-    const params = new URLSearchParams()
-    useEffect(() => {  
+    
+    useEffect(() => { 
+        const params = new URLSearchParams() 
         if (query) {
           params.append("search", query)
         } else {
           params.delete("search")
         }
+        setSearchQuery(params)
         // history.push({pathname: window.location.pathname ,search: params.toString()})
     }, [query])
 
@@ -143,7 +146,7 @@ const SearchBar = () => {
 
     const onKeyEvent = (e) => {
         if (e.keyCode === 13) {
-            history.push({pathname: "/products" ,search: params.toString()})
+            history.push({pathname: "/products" ,search: searchQuery.toString()})
             setSearchModalOpen(true);
         }
     };

@@ -18,7 +18,8 @@ import { handleGetAllSellers, handleGetSellerProductsFromSearch,handleGetSellerD
 import { Link } from 'react-router-dom'
 import { CategoryFilters } from '../../components/Categories/CategoryFilters'
 import { Divider } from '@chakra-ui/react';
-import { Search } from './search';
+// import { Search } from './search';
+
 
 export const SearchResultsSellers = ({cartItems, handleAddProduct}) => {
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
@@ -26,8 +27,8 @@ export const SearchResultsSellers = ({cartItems, handleAddProduct}) => {
     const [searchedItems,setSearchedItems] = useState([])
 
     // getting the search parameter from the url
-    const query = new URLSearchParams(window.location.search);
-    const searchQuery = query.get('search')
+    const query_param = new URLSearchParams(window.location.search);
+    const searchQuery = query_param.get('search')
 
 
     const {sellerId} = useParams()
@@ -46,7 +47,6 @@ export const SearchResultsSellers = ({cartItems, handleAddProduct}) => {
         dispatch(handleGetAllSellers())
     }, [dispatch])
 
-    
 
     return (
         <Box>
@@ -60,23 +60,21 @@ export const SearchResultsSellers = ({cartItems, handleAddProduct}) => {
                                 <Box mt={5} mb={5} textAlign="center" pos="absolute" top={40}  color="white" p={4} as="span" fontFamily="sans-serif" textTransform="uppercase" fontSize="4em">{seller.business_name}</Box>
                             </Center>
                         </Box>
-                        <Flex alignItems="center">
-                            <Breadcrumb mt="30px" textSize="1.5em" fontFamily="monospace" textTransform="uppercase" ml={20} spacing="8px" separator={<MdKeyboardArrowRight color="gray.500" />}>
-                                <BreadcrumbItem>
-                                    <BreadcrumbLink as={Link} to={{pathname: `/`}}>Home</BreadcrumbLink>
-                                </BreadcrumbItem>
-                                <BreadcrumbItem>
-                                    <BreadcrumbLink>{seller.business_name}</BreadcrumbLink>
-                                </BreadcrumbItem>
-                                <BreadcrumbItem isCurrentPage>
-                                    <BreadcrumbLink>{searchQuery}</BreadcrumbLink>
-                                </BreadcrumbItem>
-                            </Breadcrumb>
-                            <Spacer/>
-                            <Box mt="20px" mr={10}>
-                                <Search sellerId={seller.id}/>
-                            </Box>    
-                        </Flex>    
+                        
+                        <Breadcrumb mt="30px" textSize="1.5em" fontFamily="monospace" textTransform="uppercase" ml={20} spacing="8px" separator={<MdKeyboardArrowRight color="gray.500" />}>
+                            <BreadcrumbItem>
+                                <BreadcrumbLink as={Link} to={{pathname: `/`}}>Home</BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbItem>
+                                <BreadcrumbLink as={Link} to={{pathname: `/sellers/${seller.id}/${seller.business_name}`}}>{seller.business_name}</BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbItem isCurrentPage>
+                                <BreadcrumbLink>SearchResults</BreadcrumbLink>
+                            </BreadcrumbItem>
+                            {/* <BreadcrumbItem isCurrentPage>
+                                <BreadcrumbLink>{searchQuery}</BreadcrumbLink>
+                            </BreadcrumbItem> */}
+                        </Breadcrumb>    
             <Center>
                 <Box mt={5} mb={5} textAlign="center" w="90vw" bg="#E9F6FF" p={4} as="span" fontSize="lg">1-{searchedItems.length} of {searchedItems.length} search results for <Box as="span" color="#FFA90A">"{searchQuery}"</Box></Box>
             </Center>
@@ -102,7 +100,7 @@ export const SearchResultsSellers = ({cartItems, handleAddProduct}) => {
                                 </Menu>
                             </Flex>
                             <Divider width="63vw" />
-                            <Text p={4} fontWeight="bold">{sellerReducer.sellerItems.length} items found</Text>
+                            <Text p={4} fontWeight="bold">{searchedItems.length} items found</Text>
                             <Divider width="63vw" mb={2} />
                             <Flex flexWrap="wrap">
                             {searchedItems.map((product)=>{ 

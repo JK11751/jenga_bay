@@ -1,10 +1,28 @@
 import React from 'react'
-import { Box, useColorModeValue, HStack, Text } from '@chakra-ui/react'
-import CategoryList from './CategoryList'
+import { Box, useColorModeValue, VStack, HStack, Text, InputGroup, Input, Flex, Spacer } from '@chakra-ui/react'
+import {MdGraphicEq} from "react-icons/md"
+import Rating from '../Products/Rating'
 import { useHistory } from 'react-router'
+import { Radio, RadioGroup } from "@chakra-ui/react"
+import {
+    RangeSlider,
+    RangeSliderTrack,
+    RangeSliderFilledTrack,
+    RangeSliderThumb,
+  } from "@chakra-ui/react"
 
-export const CategoryFilters = ({categoryName, sellerReducer}) => {
+const ratingData = [
+    { key:1, rating: 4 },
+    { key:2, rating: 3 },
+    { key:3, rating: 2 },
+    { key:4, rating: 1 },
+]
+
+export const CategoryFilters = ({ CategoryList, categoryName, sellerReducer, categoriesList }) => {
     const history = useHistory()
+    const [value, setValue] = React.useState("")
+    const [priceRange, setPriceRange] = React.useState([0, 500])
+
     return (
         <Box
             w="xs"
@@ -14,20 +32,20 @@ export const CategoryFilters = ({categoryName, sellerReducer}) => {
             rounded="lg"
             p={5}
         >
-        <Text fontWeight="bold">CATEGORY</Text>
+        {CategoryList && categoryName && <><Text fontWeight="bold">CATEGORY</Text>
         <Text ml={2} mb={4} textTransform="capitalize">{categoryName}</Text>
         <Text fontWeight="bold">OTHER CATEGORIES</Text>
         <Box overflow="hidden" overflowY="scroll" h="sm">
-            { CategoryList && CategoryList.map((category) =>
+            { CategoryList.map((category) =>
                 (
 
                     <Text onClick={()=> history.push(`/categories/${category.value}`)} _hover={{cursor:"pointer"}} ml={2} padding="2px" key={category.id}>{category.value}</Text>
 
                 )
             )}
-        </Box>
-        { sellerReducer &&<Box>
-            <Text fontWeight="bold">BRANDS</Text>
+        </Box></>}
+        { sellerReducer && <Box>
+            <Text mt={2} fontWeight="bold">FEATURED BRANDS</Text>
             { sellerReducer && sellerReducer.allSellers.map((seller) =>{
                 return(
                     <>
@@ -39,7 +57,57 @@ export const CategoryFilters = ({categoryName, sellerReducer}) => {
                 )
             })}</Box>
         }
-        <Text fontWeight="bold">FILTERS</Text>
+        {categoriesList && <><Text fontWeight="bold">CATEGORIES</Text>
+        <Box overflow="hidden" overflowY="scroll" mb={4} h="auto">
+            {categoriesList.map((product) =>
+                (
+
+                    <Text onClick={()=> history.push(`/categories/${product.category}`)} _hover={{cursor:"pointer"}} ml={2} padding="2px" key={product.id}>{product.category}</Text>
+
+                )
+            )}
+        </Box></>}
+        <Text fontWeight="bold">PRODUCT RATING</Text>
+        <VStack mb={4} p={2} alignItems="left" spacing="10px">
+            {ratingData.map((rating, index) =>{
+            return(
+                <RadioGroup onChange={() => setValue(index)} value={value}>
+                    <HStack>
+                        <Radio key={index} value={index}>
+                            <HStack direction="row">
+                                <Rating rating={rating.rating} />
+                                <Text> & above</Text>
+                            </HStack>    
+                        </Radio>
+                    </HStack>
+                </RadioGroup>    
+            )})}
+        </VStack>
+        <Text fontWeight="bold">PRICE</Text>
+        <RangeSlider aria-label={["min", "max"]} onChangeEnd={(val) => setPriceRange(val)} min={0} max={5000} defaultValue={[30, 500]}>
+            <RangeSliderTrack bg="red.100">
+                <RangeSliderFilledTrack bg="tomato" />
+            </RangeSliderTrack>
+            <RangeSliderThumb boxSize={6} index={0}>
+                <Box color="tomato" as={MdGraphicEq} />
+            </RangeSliderThumb>
+            <RangeSliderThumb boxSize={6} index={1}>
+                <Box color="tomato" as={MdGraphicEq} />
+            </RangeSliderThumb>
+        </RangeSlider>
+        {/* {priceRange.map((price) => { */}
+            {/* return( */}
+        <InputGroup>
+            <Flex>
+                <Input isReadOnly width="10vw" value={priceRange[0]}/>
+                <Spacer/>
+                <Text textAlign="match-parent">{"  "}to{"  "}</Text>
+                <Spacer/>
+                <Input isReadOnly width="10vw" value={priceRange[1]}/>
+            </Flex>    
+        </InputGroup>
+        {/* )})} */}
+        {/* <Text fontWeight="bold">FILTERS</Text> */}
         </Box>
     )
 }

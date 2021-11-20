@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import NavBar from '../../components/PageSections/NavBar';
 import Footer from '../../components/PageSections/Footer';
-import { Box, Flex, Center, Text , Divider, HStack , Spacer, Button } from "@chakra-ui/react";
+import { Box, Flex, Center, Text , Divider, HStack , Spacer, Button,Input, InputLeftElement, InputGroup } from "@chakra-ui/react";
 import {
     Menu,
     MenuButton,
@@ -9,6 +9,7 @@ import {
     MenuItem,
 } from "@chakra-ui/react"
 import {ChevronDownIcon} from "@chakra-ui/icons"
+import { AiOutlineSearch } from "react-icons/ai"
 import ProductCard from '../../components/Products/ProductCard';
 // import CategoryChips from '../../components/Categories/CategoryChips';
 import { CategoryFilters } from "../../components/Categories/CategoryFilters"
@@ -18,15 +19,15 @@ import { useParams } from 'react-router';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/breadcrumb";
 import {MdKeyboardArrowRight} from "react-icons/md"
 import { Link } from 'react-router-dom'
-import { Search } from './subs/search';
+import { useHistory } from 'react-router';
 
 const  CompanyProductPage=({cartItems,handleAddProduct})=> {
-    const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
+
     // const allSellers = useSelector((state) => state.sellerReducer).allSellers
     // const [seller_id, setSeller_id] = useState({})
-    const {sellerId} = useParams()
+    
     // const {sellerName} = useParams()
-    const dispatch = useDispatch()
+    
 
     // function findArrayElementByTitle(allSellers, business_name) {
     //     return allSellers.find((element) => {
@@ -35,6 +36,13 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
     //     })
     // }
 
+    const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
+    const itemList = useSelector((state) => state.sellerReducer).sellerItems
+    const [searchedItems,setSearchedItems] = React.useState([])
+
+    
+    const {sellerId} = useParams()
+    const dispatch = useDispatch()
     useEffect(() => { 
         dispatch(handleGetAllSellers())
         // console.log("This is the element",findArrayElementByTitle(allSellers, sellerName))
@@ -45,6 +53,50 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
         dispatch(handleGetSellerItems(sellerId))
     }, [sellerId,dispatch])
 
+    useEffect(() => {
+        setSearchedItems(itemList)
+    }, [itemList])
+
+    const [query, setQuery] = React.useState("")
+    const history = useHistory()
+    const [searchBarQuery, setSearchBarQuery] = React.useState("")
+
+    
+
+    React.useEffect(() => {
+        const params = new URLSearchParams()
+        if (query) {
+          params.append("search", query)
+        } else {
+          params.delete("search")
+        }
+        setSearchBarQuery(params)
+        // history.push({pathname:"/products" ,search: params.toString()})
+    }, [query, history])
+
+    const handleOnChange = (event) => {
+        setQuery(event.target.value)
+        // const searchInput = event.target.value
+
+        const newOptions = itemList.filter((product) => 
+                product.item_name
+                        .toLowerCase()
+                        .includes(event.target.value) ||
+                product.category
+                        .toLowerCase()
+                        .includes(event.target.value) ||
+                product.item_description  
+                        .toLowerCase()
+                        .includes(event.target.value)        
+        )
+
+        setSearchedItems(newOptions)
+    }
+    const onKeyEvent = (e) => {
+        if (e.keyCode === 13) {
+            history.push({pathname: `/sellers/${sellerId}/items` ,search: searchBarQuery.toString()})
+        }
+    };
     
     return(
         <Box flexDir="column" width="100%" height="100vh">
@@ -59,17 +111,32 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
                             </Center>
                         </Box>
                         {/* <CategoryChips /> */}
-                        <Breadcrumb p={5} textSize="1.5em" fontFamily="monospace" textTransform="uppercase" ml={20} spacing="8px" separator={<MdKeyboardArrowRight color="gray.500" />}>
-                            <BreadcrumbItem>
-                                <BreadcrumbLink as={Link} to={{pathname: `/`}}>Home</BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbItem isCurrentPage>
-                                <BreadcrumbLink>{seller.business_name}</BreadcrumbLink>
-                            </BreadcrumbItem>
-                        </Breadcrumb>
+                        <Flex alignItems="center">
+                            <Breadcrumb p={5} textSize="1.5em" fontFamily="monospace" textTransform="uppercase" ml={20} spacing="8px" separator={<MdKeyboardArrowRight color="gray.500" />}>
+                                <BreadcrumbItem>
+                                    <BreadcrumbLink as={Link} to={{pathname: `/`}}>Home</BreadcrumbLink>
+                                </BreadcrumbItem>
+                                <BreadcrumbItem isCurrentPage>
+                                    <BreadcrumbLink>{seller.business_name}</BreadcrumbLink>
+                                </BreadcrumbItem>
+                            </Breadcrumb>
+                            <Spacer/>
+                                {/* Search bar */}
+                                <Box mt="20px" mr={20}>
+                                    <HStack spacing={3} alignItems="center">
+                                        <InputGroup display={{ base: "none", lg: "block" }} ml="auto">
+                                            <InputLeftElement
+                                                pointerEvents="none"
+                                                children={<AiOutlineSearch />}
+                                            />
+                                            <Input w="30vw" value={query} onKeyDown={onKeyEvent} onChange={(event) => handleOnChange(event)} type="tel" placeholder="Search..." />
+                                        </InputGroup>
+                                    </HStack>
+                                </Box>
+                        </Flex>
                 <Center>
                     <HStack spacing="20px" mt={2} alignItems="top">
-                        <CategoryFilters />
+                        <CategoryFilters categoriesList={sellerReducer.sellerItems} />
                         <Flex p={4} height="auto" bg="#F5F5F5" borderRadius="10px" width="65vw" flexWrap="wrap" >
                             <Flex flexDir="column">
                                 <Flex p={2}>
@@ -89,14 +156,10 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
                                     </Menu>
                                 </Flex>
                                 <Divider width="63vw" />
-                                <Flex>
-                                    <Text p={4} fontWeight="bold">{sellerReducer.sellerItems.length} items found</Text>
-                                    <Spacer />
-                                    <Search/>
-                                </Flex>
+                                <Text p={4} fontWeight="bold">{searchedItems.length} items found</Text>
                                 <Divider width="63vw" mb={2} />
                                 <Flex flexWrap="wrap">
-                                {sellerReducer.sellerItems.map((product)=>{ 
+                                {searchedItems.map((product)=>{ 
                                     return(
                                         <ProductCard price={product.item_price} sellerId={product.item_seller.id} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
                                     )
