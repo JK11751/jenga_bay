@@ -4,9 +4,9 @@ import {BiSearchAlt2} from "react-icons/bi"
 // import {MdClose} from "react-icons/md"
 import {Flex} from "@chakra-ui/layout"
 import SearchedUsersDropdown from "./SearchedItemsDropDown"
-// import CategoryList from "../Categories/CategoryList";
+import CategoryList from "../Categories/CategoryList";
 import { useHistory } from "react-router-dom"
-import { handleGetProducts } from "../../redux/actions/appActions";
+import { handleGetProducts, handleGetAllSellers } from "../../redux/actions/appActions";
 import { useDispatch, useSelector } from "react-redux";
 
 const SearchBar = () => {
@@ -14,13 +14,16 @@ const SearchBar = () => {
     //fetching data from the api
     const dispatch = useDispatch();
     const productReducer = useSelector(({ productReducer }) => productReducer);
+    const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
     // setting the value of product Reducer to the data fetched from the api
 
     useEffect(() => {
-        dispatch(handleGetProducts())// dispatches the action to get the data from the api    
+        dispatch(handleGetProducts())// dispatches the action to get the data from the api 
+        dispatch(handleGetAllSellers())   
     }, [dispatch]);
 
-    localStorage.setItem("Allproducts", JSON.stringify(productReducer));console.log("Allproducts")
+    // localStorage.setItem("Allproducts", JSON.stringify(productReducer));
+    // console.log("Allproducts")
 
     //dealing with appending query to the url
     const [query, setQuery] = useState("")
@@ -33,18 +36,21 @@ const SearchBar = () => {
         } else {
           params.delete("search")
         }
-        history.push({pathname: window.location.pathname ,search: params.toString()})
+        // history.push({pathname: window.location.pathname ,search: params.toString()})
     }, [query, history])
 
     
     
     const [options, setOptions] = useState([])
+    const [categoriesList, setcategoriesList] = useState([])
+    const [brands, setBrands] = useState([])
     const [searchModalOpen, setSearchModalOpen] = useState("")
 
     //handles change in input
     const onInputChange = (event) => {
+
         const searchInput = event.target.value
-        console.log(searchInput)
+        // console.log(searchInput)
         setQuery(event.target.value)
 
         if (searchInput) {
@@ -52,44 +58,56 @@ const SearchBar = () => {
         } else {
             setSearchModalOpen(false);
         }
-    //    const newOptions = CategoryList.filter((category) => 
-    //         category.value.toLowerCase().includes(event.target.value))
-    const newOptions = productReducer.products.filter(
-        (product) => 
-            product.item_name
+        const categories = CategoryList.filter((category) => 
+            category.value
                     .toLowerCase()
-                    .includes(event.target.value) ||
-            product.category
-                    .toLowerCase()
-                    .includes(event.target.value) ||
-            product.item_description  
-                    .toLowerCase()
-                    .includes(event.target.value) ||  
-            product.item_seller.business_name
-                    .toLowerCase()
-                    .includes(event.target.value) ||
-            product.item_seller.building
-                    .toLowerCase()
-                    .includes(event.target.value) ||
-            product.item_seller.street
-                    .toLowerCase()
-                    .includes(event.target.value) ||
-            product.item_seller.town
-                    .toLowerCase()
-                    .includes(event.target.value) || 
-            product.item_seller.local_area_name        
-                    .toLowerCase()
-                    .includes(event.target.value) || 
-            product.item_seller.sub_county.county.county_name           
-                    .toLowerCase()
-                    .includes(event.target.value) ||
-            product.item_seller.sub_county.subcounty_name           
-                    .toLowerCase()
-                    .includes(event.target.value)                               
-        );
+                    .includes(event.target.value)
+        )
 
- 
-       setOptions(newOptions)
+        const sellers = sellerReducer.allSellers.filter(
+            (seller) => 
+                seller.business_name
+                        .toLowerCase()
+                        .includes(event.target.value)
+        )
+
+        const newOptions = productReducer.products.filter(
+            (product) => 
+                product.item_name
+                        .toLowerCase()
+                        .includes(event.target.value) ||
+                product.category
+                        .toLowerCase()
+                        .includes(event.target.value) ||
+                product.item_description  
+                        .toLowerCase()
+                        .includes(event.target.value) ||  
+                product.item_seller.business_name
+                        .toLowerCase()
+                        .includes(event.target.value) ||
+                product.item_seller.building
+                        .toLowerCase()
+                        .includes(event.target.value) ||
+                product.item_seller.street
+                        .toLowerCase()
+                        .includes(event.target.value) ||
+                product.item_seller.town
+                        .toLowerCase()
+                        .includes(event.target.value) || 
+                product.item_seller.local_area_name        
+                        .toLowerCase()
+                        .includes(event.target.value) || 
+                product.item_seller.sub_county.county.county_name           
+                        .toLowerCase()
+                        .includes(event.target.value) ||
+                product.item_seller.sub_county.subcounty_name           
+                        .toLowerCase()
+                        .includes(event.target.value)                               
+            );
+
+            setcategoriesList(categories)
+            setBrands(sellers)
+            setOptions(newOptions)
     }
     // const filterUser = (searchInput, allUsers) => {
     //     const newFilteredUsers = allUsers.filter(
@@ -149,7 +167,7 @@ const SearchBar = () => {
                 />
             </InputGroup>
             <div ref={myRef}>
-             { !clickedOutside && searchModalOpen && <SearchedUsersDropdown options={options} />}
+             { !clickedOutside && searchModalOpen && <SearchedUsersDropdown options={options} brands={brands} categories={categoriesList}/>}
             </div>
         </Flex>
     )

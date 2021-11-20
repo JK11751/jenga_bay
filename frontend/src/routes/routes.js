@@ -37,9 +37,6 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQu
             <Route exact path="/product-details/:productId">
                 <ProductDetailsPage cartItems={cartItems} handleAddProduct={handleAddProduct} handleBuyProductNow={handleBuyProductNow}/>
             </Route>
-            <Route exact path="/search/:categoryName">
-                <SearchResults cartItems={cartItems} handleAddProduct={handleAddProduct} handleBuyProductNow={handleBuyProductNow}/>
-            </Route>
             <Route exact path="/products/:searchQuery">
                 <SearchResults cartItems={cartItems} handleAddProduct={handleAddProduct} handleBuyProductNow={handleBuyProductNow}/>
             </Route>

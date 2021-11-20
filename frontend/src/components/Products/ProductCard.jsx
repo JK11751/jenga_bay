@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { FiShoppingCart } from "react-icons/fi";
 import Rating from "./Rating";
-import {motion} from "framer-motion"
+import { motion } from "framer-motion"
 import { Badge } from "@chakra-ui/layout";
 import { IconButton } from "@chakra-ui/button";
 import { Icon } from "@chakra-ui/icon";
@@ -31,10 +31,10 @@ const data = {
 
 function ProductCard(props) {
   const history = useHistory();
-
+  // const [showCartIcon, setshowCartIcon] = useState(true)
   const MotionBox = motion(Box)
   return (
-    <Flex onClick={() => history.push(`/product-details/${props.id}`) } flexDir="row" p={2}  mr={1} >
+    <Flex flexDir="row" p={2}  >
       {/* <Link to={{ pathname: `/product-details/${props.id}`}}> */}
         <MotionBox
           bg={useColorModeValue("white", "gray.800")}
@@ -69,7 +69,7 @@ function ProductCard(props) {
             roundedTop="lg"
           />
           <Box pl="4" pr="6" pt="3">
-            <Box onClick={() => history.push(`/sellers/${props.sellerId}/props.companyName`)} _hover={{cursor:"pointer"}}  d="flex" alignItems="baseline">
+            <Box onClick={() => history.push(`/sellers/${props.sellerId}/items`)} _hover={{cursor:"pointer"}}  d="flex" alignItems="baseline">
               <HStack>
               <Tooltip
                 label="View more products from seller"
@@ -83,10 +83,10 @@ function ProductCard(props) {
                 </Box>
                 </Tooltip>
                  {data.isNew && (
-                      <Circle
-                        size="8px"
-                        bg="#1EE164"
-                      />
+                    <Circle
+                      size="8px"
+                      bg="#1EE164"
+                    />
                   )}
               </HStack>
             </Box>
@@ -100,6 +100,8 @@ function ProductCard(props) {
               lineHeight="tight"
               isTruncated
               textOverflow="ellipsis"
+              _hover={{cursor:"pointer", color:"#007ACC"}}
+              onClick={() => history.push(`/product-details/${props.id}`)}
             >
               {props.name}
             </Text>
@@ -123,9 +125,7 @@ function ProductCard(props) {
                 color={"gray.800"}
                 fontSize={"1.2em"}
               >
-                {/* <chakra.a href={"#"} display={"flex"}> */}
-                  <IconButton h={5} w={4} variant="solid" bg="transparent" _hover={{cursor:"pointer"}} onClick={() => {props.handleAddProduct(props.product)}} icon={<Icon as={FiShoppingCart} h={5} w={5}/>} alignSelf={"center"} />
-                {/* </chakra.a> */}
+                <IconButton h={5} w={4} variant="solid" bg="transparent" _hover={{cursor:"pointer"}} onClick={() => {props.handleAddProduct(props.product)}} icon={<Icon as={FiShoppingCart} h={5} w={5}/>} alignSelf={"center"} />
               </Tooltip>
             </Flex>
           </Box>

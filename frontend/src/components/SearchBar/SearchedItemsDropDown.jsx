@@ -1,26 +1,55 @@
-import { Box, List, ListItem } from "@chakra-ui/react";
+import { Box, List, ListItem, Image, HStack, Text } from "@chakra-ui/react";
 import React from "react";
 import { useHistory } from "react-router";
 
-
-const SearchedUsersDropdown = ({options}) => {
+const SearchedUsersDropdown = ({options, categories, brands}) => {
     const history = useHistory()
     return(
-        <Box shadow="lg" borderTopWidth="1.9px" borderTopColor="gray.100" borderBottomRadius="10px" zIndex={1000}  width="43.3vw" bg="white" position="absolute" top="7.7vh" left="29.9vw">
-            <List>
-            {!options.length && (
+        <Box shadow="lg" overflowY="scroll" maxH="lg" borderTopWidth="1.9px" borderTopColor="gray.100" borderTopRadius="2px" borderBottomRadius="10px" zIndex={1000}  width="43.3vw" bg="white" position="absolute" top="8.25vh" left="29.4vw">
+            <List px={6} py={4}>
+            {(!options.length && !categories.length && !brands.length) && (
                 <>
-                    <Box as="span">     </Box>
+                    <Box as="span">{"   "}</Box>
                     <p className='notFound-text'>No matches Found</p>
                 </>
             )}
             {options.map((option) =>
                 (   
                     <>
-                        <Box as="span">     </Box>
-                        <ListItem 
+                        <Box as="span">{"   "}</Box>
+                        <ListItem  _hover={{cursor:"pointer", bg:"#24A8FF", borderRadius:"5px", color:"white"}} _focus={{bg:"#24A8FF", borderRadius:"5px", color:"white"}}
                         onClick={() => history.push(`/products/${option.item_name}`)} 
                         padding="5px" key={option.id}>{option.item_name}</ListItem>
+                    </>
+                )
+            )}
+            {categories.map((category) =>
+                (   
+                    <>
+                        <Box as="span">     </Box>
+                        <ListItem  _hover={{cursor:"pointer", bg:"#24A8FF", borderRadius:"5px", color:"white"}} _focus={{bg:"#24A8FF", borderRadius:"5px", color:"white"}}
+                        onClick={() => history.push(`/categories/${category.value}`)} 
+                        padding="5px" key={category.id}>
+                        <HStack>
+                            <Text>{category.value}</Text>
+                            <Text color="#c4c4c4">Category</Text>
+                        </HStack>
+                        </ListItem>
+                    </>
+                )
+            )}
+            {brands.map((brand) =>
+                (   
+                    <>
+                        <Box as="span">{"   "}</Box>
+                        <ListItem  _hover={{cursor:"pointer", bg:"#24A8FF", borderRadius:"5px", color:"white"}} _focus={{bg:"#24A8FF", borderRadius:"5px", color:"white"}}
+                        onClick={() => history.push(`/sellers/${brand.id}/items`)} 
+                        padding="5px" key={brand.id}>
+                        <HStack>
+                            <Image objectFit="cover" borderRadius="5px" h="30px" w="30px" src={brand.profile_pic}/>
+                            <Text>{brand.business_name} <Text color="#c4c4c4">Brand</Text></Text>
+                        </HStack>
+                        </ListItem>
                     </>
                 )
             )}
