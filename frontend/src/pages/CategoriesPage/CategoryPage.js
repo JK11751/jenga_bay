@@ -18,7 +18,7 @@ import { handleGetItemsInCategory, handleGetAllSellers} from "../../redux/action
 import { Link } from 'react-router-dom'
 import { CategoryFilters } from '../../components/Categories/CategoryFilters'
 import { Divider } from '@chakra-ui/react';
-
+import CategoryList from '../../components/Categories/CategoryList';
 export const CategoryPage = ({cartItems, handleAddProduct}) => {
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
     const itemList = useSelector((state) => state.productReducer).itemsInCategory
@@ -57,7 +57,7 @@ export const CategoryPage = ({cartItems, handleAddProduct}) => {
             </Center>
             <Center>
                 <HStack spacing="20px" mt={2} alignItems="top">
-                    <CategoryFilters sellerReducer={sellerReducer} categoryName={categoryName}/>
+                    <CategoryFilters sellerReducer={sellerReducer} categoryName={categoryName} CategoryList={CategoryList}/>
                     <Flex p={4} height="auto" bg="#F5F5F5" borderRadius="10px" width="65vw" flexWrap="wrap" >
                         <Flex flexDir="column">
                             <Flex p={2}>

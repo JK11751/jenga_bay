@@ -1,13 +1,13 @@
 import React from "react";
 import { chakra, Box, useColorModeValue, Link } from "@chakra-ui/react";
 import { useHistory } from "react-router";
-import seller from "../../../assets/seller.jpg"
+import seller from "../../../assets/seller2.jpg"
 
 const RegisterAsASeller = () => {
   const history = useHistory()
   return (
       <Box
-        bg={useColorModeValue("white", "gray.800")}
+        // bg={useColorModeValue("white", "gray.800")}
         mx={{ lg: 8 }}
         display={{ lg: "flex" }}
         // maxW={{ lg: "9xl" }}
@@ -61,7 +61,7 @@ const RegisterAsASeller = () => {
               
               bg="#007ACC"
               color="gray.100"
-              px={5}
+              px={10}
               py={3}
               fontFamily="sans-serif"
               fontWeight="semibold"

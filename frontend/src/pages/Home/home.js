@@ -55,9 +55,9 @@ const Home = ({handleAddProduct, cartItems}) => {
                 </Center>
                 <Center>
                     <Flex  borderRadius="10px" width="90vw" alignSelf="center" flexWrap="wrap">  
-                        {CategoryList.slice(0, 10).map((category) =>
+                        {CategoryList.slice(0, 10).map((category, index) =>
                             (
-                            <CategoryCard category_name={category.value}/>
+                            <CategoryCard key={index} category_name={category.value}/>
                             )
                         )}
                     </Flex>
@@ -114,7 +114,7 @@ const Home = ({handleAddProduct, cartItems}) => {
                     )
                 })}
             </Flex>   
-            <Box p={3}>
+            <Box >
                 <Footer/>
             </Box>   
         </Box>}
