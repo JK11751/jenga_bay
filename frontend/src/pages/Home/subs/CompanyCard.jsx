@@ -18,7 +18,7 @@ const CompanyCard = ({company_name, image, seller_id}) => {
         shadow="lg"
         rounded="lg"
         whileHover={{ scale: 1.03 }}
-        onClick={() => history.push(`/sellers/${seller_id}/items`)}
+        onClick={() => history.push(`/sellers/${seller_id}/${company_name}`)}
       >
         {/* <Box px={4} py={2}>
           <chakra.h1

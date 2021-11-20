@@ -69,7 +69,7 @@ function ProductCard(props) {
             roundedTop="lg"
           />
           <Box pl="4" pr="6" pt="3">
-            <Box onClick={() => history.push(`/sellers/${props.sellerId}/items`)} _hover={{cursor:"pointer"}}  d="flex" alignItems="baseline">
+            <Box onClick={() => history.push(`/sellers/${props.sellerId}/${props.companyName}`)} _hover={{cursor:"pointer"}}  d="flex" alignItems="baseline">
               <HStack>
               <Tooltip
                 label="View more products from seller"

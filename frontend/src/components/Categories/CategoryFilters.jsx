@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, useColorModeValue, VStack, HStack, Text, InputGroup, Input, Flex, Spacer } from '@chakra-ui/react'
+import { Box, useColorModeValue, VStack, HStack, Text, InputGroup, Input, Button, Spacer } from '@chakra-ui/react'
 import {MdGraphicEq} from "react-icons/md"
 import Rating from '../Products/Rating'
 import { useHistory } from 'react-router'
@@ -18,7 +18,7 @@ const ratingData = [
     { key:4, rating: 1 },
 ]
 
-export const CategoryFilters = ({ CategoryList, categoryName, sellerReducer, categoriesList }) => {
+export const CategoryFilters = ({ CategoryList, categoryName, sellerReducer, categoriesList, seller_name }) => {
     const history = useHistory()
     const [value, setValue] = React.useState("")
     const [priceRange, setPriceRange] = React.useState([0, 500])
@@ -39,7 +39,7 @@ export const CategoryFilters = ({ CategoryList, categoryName, sellerReducer, cat
             { CategoryList.map((category) =>
                 (
 
-                    <Text onClick={()=> history.push(`/categories/${category.value}`)} _hover={{cursor:"pointer"}} ml={2} padding="2px" key={category.id}>{category.value}</Text>
+                    <Text _hover={{cursor:"pointer", bg:"#24A8FF", borderRadius:"5px", color:"white"}} _focus={{bg:"#24A8FF", borderRadius:"5px", color:"white"}} onClick={()=> history.push(`/categories/${category.value}`)} ml={2} padding="2px" key={category.id}>{category.value}</Text>
 
                 )
             )}
@@ -62,7 +62,7 @@ export const CategoryFilters = ({ CategoryList, categoryName, sellerReducer, cat
             {categoriesList.map((product) =>
                 (
 
-                    <Text onClick={()=> history.push(`/categories/${product.category}`)} _hover={{cursor:"pointer"}} ml={2} padding="2px" key={product.id}>{product.category}</Text>
+                    <Text _hover={{cursor:"pointer", bg:"#24A8FF", borderRadius:"5px", color:"white"}} _focus={{bg:"#24A8FF", borderRadius:"5px", color:"white"}} onClick={()=> history.push(`/sellers/${product.item_seller}/${seller_name}/${product.category}`)} ml={2} padding="2px" key={product.id}>{product.category}</Text>
 
                 )
             )}
@@ -83,8 +83,12 @@ export const CategoryFilters = ({ CategoryList, categoryName, sellerReducer, cat
                 </RadioGroup>    
             )})}
         </VStack>
-        <Text fontWeight="bold">PRICE</Text>
-        <RangeSlider aria-label="range Slider" onChangeEnd={(val) => setPriceRange(val)} min={0} max={5000} defaultValue={[30, 500]}>
+        <HStack width="100%">
+            <Text fontWeight="bold">PRICE</Text>
+            <Spacer/>
+            <Button variant="outline" colorScheme="cyan">Apply Filter</Button>
+        </HStack>    
+        <RangeSlider my={4} aria-label="range Slider" onChangeEnd={(val) => setPriceRange(val)} min={0} max={5000} defaultValue={[30, 500]}>
             <RangeSliderTrack bg="red.100">
                 <RangeSliderFilledTrack bg="tomato" />
             </RangeSliderTrack>
@@ -98,13 +102,13 @@ export const CategoryFilters = ({ CategoryList, categoryName, sellerReducer, cat
         {/* {priceRange.map((price) => { */}
             {/* return( */}
         <InputGroup>
-            <Flex>
-                <Input isReadOnly width="10vw" value={priceRange[0]}/>
+            <HStack my={2} width="100%" alignItems="center" spacing="5px">
+                <Input isReadOnly width="8vw" value={priceRange[0]}/>
                 <Spacer/>
                 <Text textAlign="match-parent">{"  "}to{"  "}</Text>
                 <Spacer/>
-                <Input isReadOnly width="10vw" value={priceRange[1]}/>
-            </Flex>    
+                <Input isReadOnly width="8vw" value={priceRange[1]}/>
+            </HStack>    
         </InputGroup>
         {/* )})} */}
         {/* <Text fontWeight="bold">FILTERS</Text> */}

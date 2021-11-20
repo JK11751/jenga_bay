@@ -18,6 +18,7 @@ import { ForgotPassword } from "../pages/ForgotPassword/ForgotPassword.js";
 import { ResetPassword } from "../pages/ForgotPassword/ResetPassword.js";
 import { SearchResultsProducts } from "../pages/SearchResults/SearchResultsProducts.js";
 import { SearchResultsSellers } from "../pages/SearchResults/SearchResultsSellers.js";
+import { SearchResultsCategories } from "../pages/SearchResults/SearchResultsCategories.js";
 
 
 const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQuantity, handleBuyProductNow, clearCart})=>{
@@ -56,6 +57,9 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQu
             </Route>
             <Route exact path="/categories/:categoryName">
                 <CategoryPage cartItems={cartItems} handleAddProduct={handleAddProduct}/>
+            </Route>
+            <Route exact path="/sellers/:sellerId/:sellerName/:categoryName">
+                <SearchResultsCategories cartItems={cartItems} handleAddProduct={handleAddProduct}/>
             </Route>
             <Route exact path="/cart">
                 <Cart clearCart={clearCart} handleUpdateQuantity={handleUpdateQuantity} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems} />
