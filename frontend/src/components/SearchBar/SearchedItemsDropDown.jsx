@@ -43,7 +43,7 @@ const SearchedUsersDropdown = ({options, categories, brands}) => {
                     <>
                         <Box as="span">{"   "}</Box>
                         <ListItem  _hover={{cursor:"pointer", bg:"#24A8FF", borderRadius:"5px", color:"white"}} _focus={{bg:"#24A8FF", borderRadius:"5px", color:"white"}}
-                        onClick={() => history.push(`/sellers/${brand.id}/items`)} 
+                        onClick={() => history.push(`/sellers/${brand.id}/${brand.business_name}`)} 
                         padding="5px" key={brand.id}>
                         <HStack>
                             <Image objectFit="cover" borderRadius="5px" h="30px" w="30px" src={brand.profile_pic}/>

@@ -1,60 +1,43 @@
-import React, { useEffect } from 'react';
-import NavBar from '../../components/PageSections/NavBar';
-import Footer from '../../components/PageSections/Footer';
-import { Box, Flex, Center, Text , Divider, HStack , Spacer, Button,Input, InputLeftElement, InputGroup } from "@chakra-ui/react";
+import React, {useEffect, useState} from 'react'
+import NavBar from '../../components/PageSections/NavBar'
+import Footer from "../../components/PageSections/Footer"
+import ProductCard from '../../components/Products/ProductCard';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/breadcrumb";
+import {MdKeyboardArrowRight} from "react-icons/md"
+import { Box, Center, Flex, HStack, Text, Button, Spacer,Input, InputLeftElement, InputGroup } from '@chakra-ui/react'
 import {
     Menu,
     MenuButton,
     MenuList,
     MenuItem,
-} from "@chakra-ui/react"
+  } from "@chakra-ui/react"
 import {ChevronDownIcon} from "@chakra-ui/icons"
-import { AiOutlineSearch } from "react-icons/ai"
-import ProductCard from '../../components/Products/ProductCard';
-// import CategoryChips from '../../components/Categories/CategoryChips';
-import { CategoryFilters } from "../../components/Categories/CategoryFilters"
-import { handleGetSellerItems, handleGetSellerDetails, handleGetAllSellers  } from '../../redux/actions/appActions';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/breadcrumb";
-import {MdKeyboardArrowRight} from "react-icons/md"
+import { useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { handleSearchSellerProductsFromSpecificCategory, handleGetSellerItems, handleGetSellerDetails, handleGetAllSellers} from "../../redux/actions/appActions";
 import { Link } from 'react-router-dom'
+import { CategoryFilters } from '../../components/Categories/CategoryFilters'
+import { Divider } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
+import { AiOutlineSearch } from "react-icons/ai"
 
-const  CompanyProductPage=({cartItems,handleAddProduct})=> {
-
-    // const allSellers = useSelector((state) => state.sellerReducer).allSellers
-    // const [seller_id, setSeller_id] = useState({})
-    
-    // const {sellerName} = useParams()
-    
-
-    // function findArrayElementByTitle(allSellers, business_name) {
-    //     return allSellers.find((element) => {
-    //       return element.business_name === business_name;
-        
-    //     })
-    // }
-
+export const SearchResultsCategories = ({cartItems, handleAddProduct}) => {
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
-    const itemList = useSelector((state) => state.sellerReducer).sellerItems
-    const [searchedItems,setSearchedItems] = React.useState([])
+    const itemList = useSelector((state) => state.sellerReducer).categoryItems
+    const [itemsInCategoryList,setItemsInCategoryList] = useState([])
 
-    
-    const {sellerId} = useParams()
+    const {categoryName, sellerId} = useParams()
     const dispatch = useDispatch()
+
     useEffect(() => { 
-        dispatch(handleGetAllSellers())
-        // console.log("This is the element",findArrayElementByTitle(allSellers, sellerName))
-        // console.log("This is the seller name", sellerName)
-        // setSeller_id(findArrayElementByTitle(allSellers, sellerName))
-        // console.log("this is seller element",seller_id)
+        dispatch(handleSearchSellerProductsFromSpecificCategory(sellerId, categoryName))
         dispatch(handleGetSellerDetails(sellerId))
         dispatch(handleGetSellerItems(sellerId))
-    }, [sellerId,dispatch])
-
+        dispatch(handleGetAllSellers())
+    }, [categoryName, sellerId, dispatch])
+    
     useEffect(() => {
-        setSearchedItems(itemList)
+        setItemsInCategoryList(itemList)
     }, [itemList])
 
     const [query, setQuery] = React.useState("")
@@ -90,7 +73,7 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
                         .includes(event.target.value)        
         )
 
-        setSearchedItems(newOptions)
+        setItemsInCategoryList(newOptions)
     }
     const onKeyEvent = (e) => {
         if (e.keyCode === 13) {
@@ -116,8 +99,11 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
                                 <BreadcrumbItem>
                                     <BreadcrumbLink as={Link} to={{pathname: `/`}}>Home</BreadcrumbLink>
                                 </BreadcrumbItem>
-                                <BreadcrumbItem isCurrentPage>
+                                <BreadcrumbItem as={Link} to={{pathname: `sellers/${seller.id}/${seller.business_name}`}}>
                                     <BreadcrumbLink>{seller.business_name}</BreadcrumbLink>
+                                </BreadcrumbItem>
+                                <BreadcrumbItem isCurrentPage>
+                                    <BreadcrumbLink>{categoryName}</BreadcrumbLink>
                                 </BreadcrumbItem>
                             </Breadcrumb>
                             <Spacer/>
@@ -156,16 +142,16 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
                                     </Menu>
                                 </Flex>
                                 <Divider width="63vw" />
-                                <Text p={4} fontWeight="bold">{searchedItems.length} items found</Text>
+                                <Text p={4} fontWeight="bold">{itemsInCategoryList.length} items found</Text>
                                 <Divider width="63vw" mb={2} />
                                 <Flex flexWrap="wrap">
-                                {searchedItems.map((product)=>{ 
+                                {itemsInCategoryList.map((product)=>{ 
                                     return(
                                         <ProductCard price={product.item_price} sellerId={seller.id} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
                                     )
                                 })}</Flex>
                             </Flex>
-                            {sellerReducer.sellerItems.length === 0 && <Text p={20}>There are no products here</Text> }
+                            {sellerReducer.categoryItems.length === 0 && <Text p={20}>There are no products here</Text> }
                             
                         </Flex>
                     </HStack>
@@ -175,5 +161,4 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
             <Footer /> 
         </Box>
     )
-}
-export default CompanyProductPage;
+}    

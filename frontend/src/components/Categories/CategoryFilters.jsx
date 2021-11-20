@@ -18,7 +18,7 @@ const ratingData = [
     { key:4, rating: 1 },
 ]
 
-export const CategoryFilters = ({ CategoryList, categoryName, sellerReducer, categoriesList }) => {
+export const CategoryFilters = ({ CategoryList, categoryName, sellerReducer, categoriesList, seller_name }) => {
     const history = useHistory()
     const [value, setValue] = React.useState("")
     const [priceRange, setPriceRange] = React.useState([0, 500])
@@ -62,7 +62,7 @@ export const CategoryFilters = ({ CategoryList, categoryName, sellerReducer, cat
             {categoriesList.map((product) =>
                 (
 
-                    <Text onClick={()=> history.push(`/categories/${product.category}`)} _hover={{cursor:"pointer"}} ml={2} padding="2px" key={product.id}>{product.category}</Text>
+                    <Text onClick={()=> history.push(`/sellers/${product.item_seller}/${seller_name}/${product.category}`)} _hover={{cursor:"pointer"}} ml={2} padding="2px" key={product.id}>{product.category}</Text>
 
                 )
             )}
