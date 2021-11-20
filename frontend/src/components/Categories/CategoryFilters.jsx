@@ -84,7 +84,7 @@ export const CategoryFilters = ({ CategoryList, categoryName, sellerReducer, cat
             )})}
         </VStack>
         <Text fontWeight="bold">PRICE</Text>
-        <RangeSlider aria-label={["min", "max"]} onChangeEnd={(val) => setPriceRange(val)} min={0} max={5000} defaultValue={[30, 500]}>
+        <RangeSlider aria-label="range Slider" onChangeEnd={(val) => setPriceRange(val)} min={0} max={5000} defaultValue={[30, 500]}>
             <RangeSliderTrack bg="red.100">
                 <RangeSliderFilledTrack bg="tomato" />
             </RangeSliderTrack>

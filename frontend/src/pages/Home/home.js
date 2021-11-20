@@ -114,7 +114,7 @@ const Home = ({handleAddProduct, cartItems}) => {
                     )
                 })}
             </Flex>   
-            <Box p={3}>
+            <Box >
                 <Footer/>
             </Box>   
         </Box>}
