@@ -26,14 +26,44 @@
       $ python manage.py runserver
       
     access the api endpoints from:
-    http://localhost:8000/sellers   (to add a seller and get all sellers information)
-    http://localhost:8000/sellers/seller-id (to get a specific seller information)
+
+    Authentication and password reset:
+    http://localhost:8000/accounts/login/ (to login a user)
+    http://localhost:8000/accounts/logout/ (to logout a user)
+
+    http://localhost:8000/accounts/password_reset/ (to get a password reset token)
+
+    Now post token and password to:
+    accounts/password_reset/confirm/
+    eg. as:
+      {
+        "token":"3339e80fe05e5ca9fc74799213f81a093d1f",
+        "password":"Password@123"
+      }
+
+    In Response you will get:
+
+      {
+        "status": "OK"
+      }
+
+    other apis:
+    http://localhost:8000/create_seller_account (to create a seller account)
+    http://localhost:8000/sellers   (get all registered sellers)
+    http://localhost:8000/sellers/seller-id (to get a specific seller)
     http://localhost:8000/sellers/seller-id/profile  (to get, update or delete a specific seller)
     http://localhost:8000/items  (api end point for all items in the database)
     http://localhost:8000/items/item_id   (api end point to view a specific item)
+    http://localhost:8000/sellers/seller-id/items/add_item  (where a seller can add an item to their shop)
     http://localhost:8000/sellers/seller-id/items   (to get all items belonging to a specific seller)
     http://localhost:8000/sellers/seller-id/items/item_id   (to get, update and delete a specific item belonging to a specific seller)
-    http://localhost:8000/order   (to add create an order and get order information)
+    http://localhost:8000/create_buyer (create a new buyer account)
+    http://localhost:8000/buyers/buyer_id/profile (retreive, update and delete a buyer account)
+    http://localhost:8000/buyers/buyer_id (view a specific buyer)
+    http://localhost:8000/submit_order (create an order)
+    http://localhost:8000/sellers/sellr_id/orders (view all orders related to a specific seller)
+    http://localhost:8000/sellers/seller_id/orders/order_id (seller and a buyer can view a specific order in which they are both involved)
+    http://localhost:8000/sellers/seller_id/orders/order_id/edit (seller can view, update or delete a specific order)
 
     to view items belonging to a certain category append a query parameter to the url as shown below:
       e.g:
@@ -44,4 +74,4 @@
       e.g:
             http://localhost:8000/items?search=jengabay
             http://localhost:8000/sellers/seller-id/items?search=cement
-
+            
