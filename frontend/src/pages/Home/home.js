@@ -28,7 +28,7 @@ const Home = () => {
         setisLoading(false)  
     }, [dispatch]);
 
-    localStorage.setItem("Allproducts", JSON.stringify(productReducer));console.log("Allproducts")
+    localStorage.setItem("Allproducts", JSON.stringify(productReducer));
     return(
         <>
         {isLoading ? 
@@ -97,9 +97,9 @@ const Home = () => {
                     </Center>
                 <Center>
                 <Flex px="3" borderRadius="10px" width="90vw" alignSelf="center" flexWrap="wrap">
-                        {Companies.map((company) => {
+                        {Companies.map((company, index) => {
                             return(
-                            <CompanyCard seller_id={1} company_name={company.name} image={image}/>
+                            <CompanyCard key={index} seller_id={1} company_name={company.name} image={image}/>
                         )})}
                     </Flex>
                 </Center>  

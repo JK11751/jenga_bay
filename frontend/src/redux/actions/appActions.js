@@ -40,8 +40,8 @@ export const handleLoginUser = (userData) => async (dispatch) => {
     toast.success("Login successful", {
       position: "bottom-left",
     });
-    const token = response.data
-    localStorage.setItem("token", JSON.stringify(response.data));
+    const token = response.data.key
+    localStorage.setItem("token", JSON.stringify(token));
     console.log("This is the token", token)
     // Result is sent to the store via dispatch (Pass payload if needed)
   } catch (error) {

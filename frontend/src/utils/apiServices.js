@@ -7,8 +7,9 @@ const apiConfig = {
     timeout: 30000000,
     headers: {
       'Content-Type': 'application/json',
-      "Access-Control-Allow-Origin": 'http://localhost:8000/',
-      // "Access-Control-Allow-Methods": "GET , PUT , POST , DELETE",
+      // "Access-Control-Allow-Origin": '*',
+      // "Access-Control-Expose-Headers": "Content-Length, X-JSON",
+      // // Access-Control-Allow-Methods: 'HEAD, GET, POST, PUT, PATCH, DELETE'
       // "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
     },
     validateStatus: function (status) {
@@ -17,17 +18,19 @@ const apiConfig = {
   };
   
 const api = axios.create({ ...apiConfig });
-
-//token authentification
+//getting user token from local storage
+const userToken = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : " ";
+console.log("userToken", userToken)
+// token authentification
 // axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}` 
-// api.interceptors.request.use(
-//   (config) => {
-//     const token = ""; // Whatever the token is
-//     if (token) config.headers.Authorization = `Bearer ${token}`;
-//     return config;
-//   },
-//   (err) => Promise.reject(err)
-// );
+api.interceptors.request.use(
+  (config) => {
+    const token = userToken; // Whatever the token is
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  },
+  (err) => Promise.reject("Error from auth token",err)
+);
 
 class APIServices {
 
@@ -42,22 +45,22 @@ class APIServices {
 
   // @desc End Point Example
   async loginUser(data) {
-    return api.post(`/accounts/login`, data);
+    return api.post(`/accounts/login/`, data);
   }
 
   // @desc End Point Example
   async logoutUser(data) {
-    return api.post(`/accounts/logout`, data);
+    return api.post(`/accounts/logout/`, data);
   }
 
   // @desc End Point Example
   async passwordReset(data) {
-    return api.post(`/accounts/password_reset`, data);
+    return api.post(`/accounts/password_reset/`, data);
   }
 
   // @desc End Point Example
   async passwordResetConfirm(data) {
-    return api.post(`/accounts/password_reset/confirm`, data);
+    return api.post(`/accounts/password_reset/confirm/`, data);
   }
 
 /*----------------------------------CLIENTS-------------------------------------- */  

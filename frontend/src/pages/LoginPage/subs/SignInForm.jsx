@@ -31,7 +31,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { useForm } from "../../../utils/useForm";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { handleLoginUser } from "../../../redux/actions/appActions";
 
 const style ={
@@ -107,14 +107,14 @@ const SignInForm = () => {
       };
 
       dispatch(handleLoginUser(data));
-      // Store token in localstorage
-      // sessionStorage.setItem("user_id", data.InsertedId);
-      // localStorage.setItem("newUserEmail", JSON.stringify(email));
-      // localStorage.setItem("userUserPassword", JSON.stringify(password));
+    //   Store token in localstorage
+    //   sessionStorage.setItem("user_id", data.InsertedId);
+      localStorage.setItem("newUserEmail", JSON.stringify(user.email));
+      localStorage.setItem("userUserPassword", JSON.stringify(user.password));
 
-    //   toast.success("Login successful", {
-    //     position: "bottom-left",
-    //   });
+      toast.success("Login successful", {
+        position: "bottom-left",
+      });
       history.push("/");
     },
   });
