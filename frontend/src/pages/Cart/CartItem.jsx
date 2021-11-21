@@ -5,10 +5,12 @@ import {MdDelete} from "react-icons/md"
 import Icon from '@chakra-ui/icon'
 import { Button } from '@chakra-ui/button'
 import { Flex } from '@chakra-ui/react'
-
+import { useDispatch } from 'react-redux'
+import { handleAddToCart, handleRemoveFromCart } from '../../redux/actions/appActions'
 
 
 export const CartItem = (props) => {
+    const dispatch = useDispatch()
     console.log(props.key)
 
     const mystyle = {
@@ -34,9 +36,9 @@ export const CartItem = (props) => {
                     <Image objectFit="cover" borderRadius="5px" width="100px" height="100px" src={props.image} alt="product"/>
                 </Flex>
                 <Text {...mystyle}>{props.price}</Text>    
-                <NumberStepper add={() => props.handleAddProduct(props.item)} remove={() => props.handleUpdateQuantity(props.item)} quantity ={props.quantity} />
-                <Text>{props.quantity} * {props.price} </Text>
-                <Icon _hover={{cursor:"pointer"}} onClick={() => props.handleRemoveProduct(props.item)} as={MdDelete}/>   
+                <NumberStepper add={() => dispatch(handleAddToCart(props.item))} remove={() => dispatch(handleRemoveFromCart(props.item))} quantity ={props.quantity} />
+                <Text>Ksh. {props.quantity * props.price} </Text>
+                <Icon _hover={{cursor:"pointer"}} onClick={() => dispatch(handleRemoveFromCart(props.item))} as={MdDelete}/>   
             </HStack>  
             <VStack alignSelf="left" pl={4} pb={2} alignItems="left" spacing="2px">
                     <Text fontWeight="bold" text {...mystyle}>{props.name}</Text>
