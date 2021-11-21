@@ -21,48 +21,48 @@ import { SearchResultsSellers } from "../pages/SearchResults/SearchResultsSeller
 import { SearchResultsCategories } from "../pages/SearchResults/SearchResultsCategories.js";
 
 
-const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQuantity, handleBuyProductNow, clearCart})=>{
+const Routes =()=>{
     return(
         <div>
         <Switch>
             <Route exact path="/">
-                <Home cartItems={cartItems} handleAddProduct={handleAddProduct} />
+                <Home />
             </Route>
             <Route exact path="/sign-up">
-                <SignUpPage cartItems={cartItems} />
+                <SignUpPage />
             </Route>
             <Route exact path="/sign-in">
-                <SignInPage cartItems={cartItems} />
+                <SignInPage />
             </Route>
             <Route exact path="/registration">
                 <RegistrationPage />
             </Route>
             <Route exact path="/product-details/:productId">
-                <ProductDetailsPage cartItems={cartItems} handleAddProduct={handleAddProduct} handleBuyProductNow={handleBuyProductNow}/>
+                <ProductDetailsPage />
             </Route>
             <Route exact path="/products">
-                <SearchResultsProducts cartItems={cartItems} handleAddProduct={handleAddProduct} handleBuyProductNow={handleBuyProductNow}/>
+                <SearchResultsProducts />
             </Route>
             <Route exact path="/sellers/:sellerId/items">
-                <SearchResultsSellers cartItems={cartItems} handleAddProduct={handleAddProduct} handleBuyProductNow={handleBuyProductNow}/>
+                <SearchResultsSellers />
             </Route>
             <Route exact path="/upload">
-                <CompanyProductUploadPage cartItems={cartItems} />
+                <CompanyProductUploadPage />
             </Route>
             <Route exact path="/sellers/:sellerId/:sellerName">
-                <CompanyProductPage cartItems={cartItems} handleAddProduct={handleAddProduct} />
+                <CompanyProductPage />
             </Route>
             <Route exact path="/seller/:sellerId/profile">
-                <CompanyProfilePage cartItems={cartItems} handleAddProduct={handleAddProduct}/>
+                <CompanyProfilePage />
             </Route>
             <Route exact path="/categories/:categoryName">
-                <CategoryPage cartItems={cartItems} handleAddProduct={handleAddProduct}/>
+                <CategoryPage />
             </Route>
             <Route exact path="/sellers/:sellerId/:sellerName/:categoryName">
-                <SearchResultsCategories cartItems={cartItems} handleAddProduct={handleAddProduct}/>
+                <SearchResultsCategories />
             </Route>
             <Route exact path="/cart">
-                <Cart clearCart={clearCart} handleUpdateQuantity={handleUpdateQuantity} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems} />
+                <Cart />
             </Route>
             <Route exact path="/checkout">
                 <CheckoutPage/>
@@ -75,7 +75,7 @@ const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQu
             </Route>
             {/* No route should be added after this not found page */}
             <Route exact path="*">
-                <NotFound cartItems={cartItems}/>
+                <NotFound />
             </Route>
         </Switch>
         </div>

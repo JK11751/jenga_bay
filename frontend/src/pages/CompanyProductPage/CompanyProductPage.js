@@ -21,7 +21,7 @@ import {MdKeyboardArrowRight} from "react-icons/md"
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router';
 
-const  CompanyProductPage=({cartItems,handleAddProduct})=> {
+const  CompanyProductPage=()=> {
 
     // const allSellers = useSelector((state) => state.sellerReducer).allSellers
     // const [seller_id, setSeller_id] = useState({})
@@ -100,7 +100,7 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
     
     return(
         <Box flexDir="column" width="100%" height="100vh">
-            <NavBar cartItems={cartItems} />
+            <NavBar />
             {sellerReducer.sellerDetails.map((seller) => {
                 return(
                     <>
@@ -161,7 +161,7 @@ const  CompanyProductPage=({cartItems,handleAddProduct})=> {
                                 <Flex flexWrap="wrap">
                                 {searchedItems.map((product)=>{ 
                                     return(
-                                        <ProductCard price={product.item_price} sellerId={seller.id} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
+                                        <ProductCard price={product.item_price} sellerId={seller.id} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
                                     )
                                 })}</Flex>
                             </Flex>

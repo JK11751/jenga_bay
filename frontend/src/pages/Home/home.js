@@ -15,7 +15,7 @@ import image from "../../assets/bamburi.jpg"
 import CompanyCard from "./subs/CompanyCard";
 import RegisterAsASeller from "./subs/RegisterAsASeller";
 
-const Home = ({handleAddProduct, cartItems}) => {
+const Home = () => {
 
     const [isLoading, setisLoading] = React.useState(true)
     
@@ -42,7 +42,7 @@ const Home = ({handleAddProduct, cartItems}) => {
         </Center>
         :
         <Box alignItems="center" bgColor="#fff" flexDir="column" width="full" height="100vh">
-            <NavBar cartItems={cartItems} />
+            <NavBar />
             <Center mt={5}>
                 <AdsCarousel alignSelf="center"/>
             </Center>
@@ -78,7 +78,7 @@ const Home = ({handleAddProduct, cartItems}) => {
                     <Flex pl={8} py={5}>
                     {productReducer.products.slice(0, 6).map((product,key)=>{ 
                         return(
-                            <ProductCard sellerId={product.item_seller.id} price={product.item_price} key={key} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
+                            <ProductCard sellerId={product.item_seller.id} price={product.item_price} key={key} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
                         )
                     })}</Flex>
                 </Flex>  
@@ -110,7 +110,7 @@ const Home = ({handleAddProduct, cartItems}) => {
             <Flex ml="5vw" pl={6} borderRadius="10px" width="90vw" alignSelf="center" flexWrap="wrap">
                 {productReducer.products.map((product,key)=>{ 
                     return(
-                        <ProductCard price={product.item_price} key={key} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
+                        <ProductCard price={product.item_price} key={key} product={product}  id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
                     )
                 })}
             </Flex>   

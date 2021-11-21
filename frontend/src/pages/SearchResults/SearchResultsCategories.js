@@ -21,7 +21,7 @@ import { Divider } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 import { AiOutlineSearch } from "react-icons/ai"
 
-export const SearchResultsCategories = ({cartItems, handleAddProduct}) => {
+export const SearchResultsCategories = () => {
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
     const itemList = useSelector((state) => state.sellerReducer).categoryItems
     const [itemsInCategoryList,setItemsInCategoryList] = useState([])
@@ -83,7 +83,7 @@ export const SearchResultsCategories = ({cartItems, handleAddProduct}) => {
     
     return(
         <Box flexDir="column" width="100%" height="100vh">
-            <NavBar cartItems={cartItems} />
+            <NavBar />
             {sellerReducer.sellerDetails.map((seller) => {
                 return(
                     <>
@@ -147,7 +147,7 @@ export const SearchResultsCategories = ({cartItems, handleAddProduct}) => {
                                 <Flex flexWrap="wrap">
                                 {itemsInCategoryList.map((product)=>{ 
                                     return(
-                                        <ProductCard price={product.item_price} sellerId={seller.id} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
+                                        <ProductCard price={product.item_price} sellerId={seller.id} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
                                     )
                                 })}</Flex>
                             </Flex>

@@ -10,7 +10,7 @@ import { CartItem } from './CartItem'
 import { useHistory } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { useColorModeValue } from '@chakra-ui/color-mode'
-import { handleRemoveFromCart, handleClearCart } from '../../redux/actions/appActions'
+import { handleRemoveFromCart, handleClearCart, handleUpdateQuantity } from '../../redux/actions/appActions'
 
 const style ={
     color:"#C4C4C4",
@@ -24,7 +24,7 @@ const otherStyles = {
     fontFamily:"monospace"
 }
 
-export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQuantity, clearCart}) => {
+export const Cart = () => {
     const dispatch = useDispatch()
     const cart = useSelector(({ cartReducer }) => cartReducer);
     const history = useHistory()
@@ -32,7 +32,7 @@ export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, handleUp
     
     return (
         <Box maxH="100vh">
-           <NavBar cartItems={cartItems} /> 
+           <NavBar /> 
            <Flex height="auto">
            <Box p={10} width="100%" position="absolute" left={0}>
                 <Box
@@ -67,7 +67,7 @@ export const Cart = ({cartItems, handleAddProduct, handleRemoveProduct, handleUp
                 <Box width="80%">
                     {cart.cartItems.length === 0 && (<Text> There are no items in the cart</Text>)}
                     {cart.cartItems.map((item) => (
-                        <CartItem name={item.item_name} unit={item.item_measurement_unit} image={item.item_main_image} price={item.item_price} quantity={item.quantity} item={item} handleUpdateQuantity={handleUpdateQuantity} handleAddProduct={handleAddProduct} handleRemoveProduct={handleRemoveFromCart}/>   
+                        <CartItem name={item.item_name} unit={item.item_measurement_unit} image={item.item_main_image} price={item.item_price} quantity={item.quantity} item={item} handleUpdateQuantity={handleUpdateQuantity} handleRemoveProduct={handleRemoveFromCart}/>   
                     ))}
                 </Box>    
                {cart.cartItems.length !== 0 && ( <Box p={5}>
