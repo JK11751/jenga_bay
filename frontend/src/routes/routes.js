@@ -1,4 +1,5 @@
-import React from "react"
+import React, {useEffect} from "react"
+import { useSelector } from "react-redux";
 import {Route, Switch} from "react-router-dom"
 
 //All Page imports
@@ -20,8 +21,14 @@ import { SearchResultsProducts } from "../pages/SearchResults/SearchResultsProdu
 import { SearchResultsSellers } from "../pages/SearchResults/SearchResultsSellers.js";
 import { CompanyCategoryPage } from "../pages/CompanyProductPage/CompanyCategoryPage.js";
 
-
 const Routes =()=>{
+
+    //globally setting cart items in localStorage for data persistence
+    const cart = useSelector(({ cartReducer }) => cartReducer);
+
+    useEffect(() => {
+        localStorage.setItem("cartItems", JSON.stringify(cart.cartItems));
+    }, [cart.cartItems])
     return(
         <div>
         <Switch>

@@ -8,7 +8,8 @@ import { Provider } from 'react-redux';
 import store from "./redux/store"
 import Routes from './routes/routes';
 
-const App = () => {  
+const App = () => {
+
   return (
     <div>
     <ChakraProvider theme={theme}>
