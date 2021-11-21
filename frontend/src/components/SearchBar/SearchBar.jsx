@@ -6,7 +6,8 @@ import {Flex} from "@chakra-ui/layout"
 import SearchedUsersDropdown from "./SearchedItemsDropDown"
 import CategoryList from "../Categories/CategoryList";
 import { useHistory } from "react-router-dom"
-import { handleGetProducts, handleGetAllSellers } from "../../redux/actions/appActions";
+import { handleGetProducts } from "../../redux/actions/productActions";
+import { handleGetAllSellers } from "../../redux/actions/sellerActions";
 import { useDispatch, useSelector } from "react-redux";
 
 const SearchBar = () => {

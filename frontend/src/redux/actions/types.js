@@ -1,6 +1,13 @@
 // STEP 1
 //user action types
 export const GET_USERS ="GET_USERS";
+export const LOGIN_USER ="LOGIN_USER";
+export const SET_IS_AUTHENTICATED ="SET_IS_AUTHENTICATED";
+export const PASSWORD_RESET ="PASSWORD_RESET";
+export const PASSWORD_RESET_CONFIRM ="PASSWORD_RESET_CONFIRM";
+
+//client action types
+export const REGISTER_CLIENT ="REGISTER_CLIENT";
 
 //product action types
 export const GET_PRODUCTS ="GET_PRODUCTS";

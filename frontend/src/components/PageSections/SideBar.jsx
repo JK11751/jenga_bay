@@ -40,7 +40,7 @@ const SidebarContent = ({ onClose, handleToggle,ref, ...rest }) => {
 
   return (
     <Box
-      ref={ref}
+      // forwardRef={ref}
       bg={useColorModeValue('white', 'gray.900')}
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
@@ -162,7 +162,7 @@ const SideBar = ({ show, handleToggle }) => {
       ref={boxRef}
       style={{ height: "100vh", width: "300px", zIndex: 10000 }}
     >
-      <SidebarContent ref={boxRef} handleToggle={handleToggle}/>
+      <SidebarContent handleToggle={handleToggle}/>
     </Slide>}</>
   );
 };

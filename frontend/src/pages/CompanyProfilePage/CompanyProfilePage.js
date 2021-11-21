@@ -9,7 +9,7 @@ import { Icon } from '@chakra-ui/icon';
 import {MdCheckCircle, MdLocationOn} from "react-icons/md"
 import { BiImageAdd } from 'react-icons/bi';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react"
-import { handleGetSellerItems, handleGetSellerProfile } from '../../redux/actions/appActions';
+import { handleGetSellerItems, handleGetSellerProfile } from '../../redux/actions/sellerActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import Reviews from './subs/Reviews';

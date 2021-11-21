@@ -2,7 +2,7 @@ import React from "react";
 import { chakra, Box, Flex, useColorModeValue, HStack, Icon, Spacer, Button, Image } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { useDispatch } from "react-redux";
-import { handleAddToCart, handleRemoveFromCart } from '../../redux/actions/appActions'
+import { handleAddToCart, handleRemoveFromCart } from '../../redux/actions/cartActions'
 
 
 function NumberStepper({quantity, add, remove}) {

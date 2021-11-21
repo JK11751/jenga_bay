@@ -106,7 +106,7 @@ const NavBar = ({cartItems}) => {
                   // mr={6}
                   // mb={1}
               />
-              <VisuallyHidden>Choc</VisuallyHidden>
+              <VisuallyHidden>Menu</VisuallyHidden>
 
             <HStack spacing={3} display={{ base: "none", md: "inline-flex" }}>    
               <Flex w="full" alignSelf="center" flexShrink={0}>
@@ -146,7 +146,7 @@ const NavBar = ({cartItems}) => {
               <VisuallyHidden>Shopping Cart</VisuallyHidden>
             </chakra.a>
             <Menu isLazy>
-            <MenuButton p={0} as={Button} icon={MdOutlineAccountCircle} bg="transparent">
+            <MenuButton p={0} bg="transparent">
               <Icon
                 color="#fff"
                 h={7}

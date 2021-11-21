@@ -8,8 +8,30 @@ import {
     Stack,
     useColorModeValue,
   } from '@chakra-ui/react';
+
+    import { useDispatch } from 'react-redux';
+  import { useHistory } from 'react-router';
+  import { useState } from 'react';
+import { handleResetPasswordConfirm } from '../../redux/actions/userActions';
   
   export const ResetPassword = () => {
+
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const [password, setPassword] = useState("")
+    // const [passwordResetToken, setPassworeResetToken] = useState("")
+
+    const handleSubmit = (e) => {
+      const data = {
+        password: password,
+        token: "3339e80fe05e5ca9fc74799213f81a093d1f",
+      }
+      dispatch(handleResetPasswordConfirm(data))
+      history.push(`/sign-in`)
+    }
+
+    // const token = localStorage.getItem("passwordResetToken") ? JSON.parse(localStorage.getItem("passwordResetToken")) : " ";
+    // setPassworeResetToken(token)
     return (
       <Flex
         minH={'100vh'}
@@ -42,10 +64,11 @@ import {
           </FormControl>
           <FormControl id="password" isRequired>
             <FormLabel>Confirm New Password</FormLabel>
-            <Input type="password" />
+            <Input type="password" onChange={(e) => setPassword(e.target.value)} />
           </FormControl>
           <Stack spacing={6}>
             <Button
+              onClick={handleSubmit}
               bg={'blue.400'}
               color={'white'}
               _hover={{

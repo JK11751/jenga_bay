@@ -9,7 +9,7 @@ import { Button } from '@chakra-ui/button'
 import { useHistory } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { useColorModeValue } from '@chakra-ui/color-mode'
-import { handleRemoveFromCart, handleClearCart, handleUpdateQuantity } from '../../redux/actions/appActions'
+import { handleRemoveFromCart, handleClearCart, handleUpdateQuantity } from '../../redux/actions/cartActions'
 import CartItem from './CartItem'
 
 const style ={

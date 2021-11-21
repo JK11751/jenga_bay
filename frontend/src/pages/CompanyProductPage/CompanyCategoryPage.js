@@ -14,7 +14,7 @@ import {
 import {ChevronDownIcon} from "@chakra-ui/icons"
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { handleSearchSellerProductsFromSpecificCategory, handleGetSellerItems, handleGetSellerDetails, handleGetAllSellers} from "../../redux/actions/appActions";
+import { handleSearchSellerProductsFromSpecificCategory, handleGetSellerItems, handleGetSellerDetails, handleGetAllSellers} from "../../redux/actions/sellerActions";
 import { Link } from 'react-router-dom'
 import { CategoryFilters } from '../../components/Categories/CategoryFilters'
 import { Divider } from '@chakra-ui/react';
@@ -99,7 +99,7 @@ export const CompanyCategoryPage = () => {
                                 <BreadcrumbItem>
                                     <BreadcrumbLink as={Link} to={{pathname: `/`}}>Home</BreadcrumbLink>
                                 </BreadcrumbItem>
-                                <BreadcrumbItem as={Link} to={{pathname: `sellers/${seller.id}/${seller.business_name}`}}>
+                                <BreadcrumbItem as={Link} to={{pathname: `/sellers/${seller.id}/${seller.business_name}`}}>
                                     <BreadcrumbLink>{seller.business_name}</BreadcrumbLink>
                                 </BreadcrumbItem>
                                 <BreadcrumbItem isCurrentPage>
