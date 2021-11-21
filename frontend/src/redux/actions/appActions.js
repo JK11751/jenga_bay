@@ -1,5 +1,5 @@
 import APIServices from "../../utils/apiServices";
-import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS, GET_SELLER_DETAILS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_SELLER_ITEMS, GET_SELLER_PROFILE, GET_ALL_SELLERS, SEARCH_PRODUCTS, SEARCH_SELLER_PRODUCTS, GET_SELLER_PRODUCTS_IN_SPECIFIC_CATEGORY } from "./types";
+import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS, GET_SELLER_DETAILS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_SELLER_ITEMS, GET_SELLER_PROFILE, GET_ALL_SELLERS, SEARCH_PRODUCTS, SEARCH_SELLER_PRODUCTS, GET_SELLER_PRODUCTS_IN_SPECIFIC_CATEGORY, UPDATE_PRODUCT_QUANTITY, REMOVE_FROM_CART, ADD_TO_CART, CLEAR_CART, BUY_PRODUCTS_NOW } from "./types";
 
 // Redux actions are called here with an underscore before the name (convention)
 
@@ -181,3 +181,48 @@ export const handleSearchSellerProductsFromSpecificCategory = (seller_id, catego
     console.log(`Error from handleSearchSellerProductsFromSpecificCategory: ${error}`);
   }
 };
+
+/*---------------------------------------------CART----------------------------------------------------- */
+
+export const handleAddToCart = (item) => {
+  return {
+    type: ADD_TO_CART,
+    payload: item,
+  };
+};
+
+export const handleRemoveFromCart = (item) => {
+  return {
+    type: REMOVE_FROM_CART,
+    payload: item
+  };
+};
+
+export const handleClearCart = () => {
+  return {
+    type: CLEAR_CART,
+  };
+};
+
+export const handleUpdateQuantity = (item) => {
+  return {
+    type: UPDATE_PRODUCT_QUANTITY,
+    payload: item,
+  };
+};
+
+export const handleBuyProductNow = (item, quantity) => {
+  return {
+    type: BUY_PRODUCTS_NOW,
+    payload:{
+      item:item, 
+      quantity:quantity,
+    } 
+  };
+};
+
+// export const handleGetCartTotals = () => {
+//   return {
+//     type: GET_CART_TOTALS,
+//   };
+// };

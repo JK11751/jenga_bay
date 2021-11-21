@@ -18,6 +18,8 @@ import { Badge } from "@chakra-ui/layout";
 import { IconButton } from "@chakra-ui/button";
 import { Icon } from "@chakra-ui/icon";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { handleAddToCart } from "../../redux/actions/appActions";
 
 const data = {
   isNew: true,
@@ -31,6 +33,7 @@ const data = {
 
 function ProductCard(props) {
   const history = useHistory();
+  const dispatch = useDispatch()
   // const [showCartIcon, setshowCartIcon] = useState(true)
   const MotionBox = motion(Box)
   return (
@@ -125,7 +128,7 @@ function ProductCard(props) {
                 color={"gray.800"}
                 fontSize={"1.2em"}
               >
-                <IconButton h={5} w={4} variant="solid" bg="transparent" _hover={{cursor:"pointer"}} onClick={() => {props.handleAddProduct(props.product)}} icon={<Icon as={FiShoppingCart} h={5} w={5}/>} alignSelf={"center"} />
+                <IconButton h={5} w={4} variant="solid" bg="transparent" _hover={{cursor:"pointer"}} onClick={() => {dispatch(handleAddToCart(props.product))}} icon={<Icon as={FiShoppingCart} h={5} w={5}/>} alignSelf={"center"} />
               </Tooltip>
             </Flex>
           </Box>

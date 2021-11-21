@@ -19,7 +19,7 @@ StatLabel,
 import { Tag, TagLabel } from '@chakra-ui/tag';
 import {IoIosArrowBack} from "react-icons/io"
 import Rating from "../../../components/Products/Rating";
-import { handleGetProductDetails } from '../../../redux/actions/appActions';
+import { handleGetProductDetails, handleAddToCart, handleBuyProductNow } from '../../../redux/actions/appActions';
 import {useDispatch,useSelector} from "react-redux"
 import {useParams} from "react-router";
 import { useHistory } from 'react-router';
@@ -30,7 +30,7 @@ const data = {
 };
 
 
-function ProductDetails({handleAddProduct,handleBuyProductNow}) {
+function ProductDetails({handleAddProduct}) {
   let { productId } = useParams()
   const dispatch = useDispatch()
   const history = useHistory()
@@ -154,7 +154,7 @@ function ProductDetails({handleAddProduct,handleBuyProductNow}) {
           backgroundColor="#1D1C1C"
           width="200px"
           height="38px"
-          onClick={() => { handleBuyProductNow(product, count); history.push("/checkout")}}
+          onClick={() => { dispatch(handleBuyProductNow(product, count)); history.push("/checkout")}}
         >
           Buy Now
         </Button>
@@ -167,7 +167,7 @@ function ProductDetails({handleAddProduct,handleBuyProductNow}) {
           backgroundColor="transparent"
           width="200px"
           height="38px"
-          onClick={() => handleAddProduct(product)}
+          onClick={() => dispatch(handleAddToCart(product))}
         >
          Add to Cart 
         </Button>

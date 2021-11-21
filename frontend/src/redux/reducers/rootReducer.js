@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
     userReducer,
     productReducer,
     sellerReducer,
-    cart:cartReducer,
+    cartReducer,
 });
 
 export default rootReducer;

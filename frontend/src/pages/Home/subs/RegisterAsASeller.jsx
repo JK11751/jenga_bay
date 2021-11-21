@@ -41,7 +41,7 @@ const RegisterAsASeller = () => {
               Seller
             </chakra.span>
           </chakra.h2>
-          <chakra.p mt={4} color={useColorModeValue("gray.600", "gray.400")}>
+          <chakra.p mt={4} h={{lg:"50%"}} textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }} color={useColorModeValue("gray.600", "gray.400")}>
           Do you have a specific or a variety of products that you sell?
            Do you have a physical store or you only have a storage room you 
            keep them in? How many customers do you reach out to monthly? How
