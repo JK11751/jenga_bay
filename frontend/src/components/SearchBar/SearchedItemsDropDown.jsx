@@ -31,7 +31,7 @@ const SearchedUsersDropdown = ({options, categories, brands}) => {
                         onClick={() => history.push(`/categories/${category.value}`)} 
                         padding="5px" key={category.id}>
                         <HStack>
-                            <Text>{category.value}</Text>
+                            <Text>{category.name}</Text>
                             <Text color="#c4c4c4">Category</Text>
                         </HStack>
                         </ListItem>
