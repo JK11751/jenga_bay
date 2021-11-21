@@ -17,6 +17,15 @@
       
     run the following command to install cors-headers
       $ python -m pip install django-cors-headers
+
+    New!!:
+    run the following command to install authentication packages
+      $ pip install django-rest-auth
+      $ pip install django-all-auth
+      $ pip install django-allauth
+      $ pip istallpip install django-rest-passwordreset
+
+      remember to run migrations as below after installing them
       
     next run the commands below to migrate models to the database
       $ python manage.py makemigrations
