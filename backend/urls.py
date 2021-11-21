@@ -22,6 +22,10 @@ import jengabay
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('jengabay.urls')),
+    path('accounts/', include('rest_auth.urls')),
+    path('accounts/registration/', include('rest_auth.registration.urls')),
+    path('accounts/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
+
 ]
 
 if settings.DEBUG:
