@@ -1,22 +1,22 @@
-import { LOGIN_USER } from "../actions/types";
+import { REGISTER_CLIENT } from "../actions/types";
 
 //STEP 2 - stating initial state and defining actions
 //This is the default state
 const initialState ={
-    loggedInUser:{},
+    createClientData:{},
 };
 
-const userReducer = (state = initialState, action) => {
+const clientReducer = (state = initialState, action) => {
     const {type, payload} = action 
     switch (type) {
-    case LOGIN_USER:
+    case REGISTER_CLIENT:
         return{
             ...state,
-            loggedInUser: payload
+            createClientData: payload
         }     
 
     default:
         return state;//returns default state if no data is fetched
     }
 }
-export default userReducer;
+export default clientReducer;

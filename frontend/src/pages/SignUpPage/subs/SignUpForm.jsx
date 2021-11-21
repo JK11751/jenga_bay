@@ -30,6 +30,8 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import { useForm } from "../../../utils/useForm";
+import { handleRegisterClient } from "../../../redux/actions/appActions";
+import { useDispatch } from "react-redux";
 
 const style ={
   color:"red",
@@ -37,11 +39,12 @@ const style ={
 
 const SignUpForm = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   //handling form submission
   const { handleSubmit, handleChange, data: user, errors } = useForm({
     validations: {
-      name: {
+      username: {
         pattern: {
           value: '^[A-Za-z]*$',
           message: "You're not allowed to use special characters or numbers in your name.",
@@ -53,7 +56,7 @@ const SignUpForm = () => {
           message:"Please enter a valid email address"
         }
       },
-      phoneNumber:{
+      phone_number:{
         pattern:{
           value: '^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$',
           message:"Please enter a valid phone number"
@@ -73,11 +76,52 @@ const SignUpForm = () => {
     },
 
     onSubmit: () => {
+      //  await axios
+      // .post("https://api.zuri.chat/users", {
+      //   first_name,
+      //   last_name: other_name,
+      //   email,
+      //   password
+      // })
+      // .then(response => {
+      //   const { data, message } = response.data;
+
+      //   //Store token in localstorage
+      //   sessionStorage.setItem("user_id", data.InsertedId);
+      //   localStorage.setItem("newUserEmail", JSON.stringify(email));
+      //   localStorage.setItem("userUserPassword", JSON.stringify(password));
+
+      // })
+      // .catch(error => {
+      //   const { data } = error.response;
+      //   setShowDialog(false);
+
+      //   RegExp(/Users with email/).test(data.message) &&
+      //     setemailerror("This email is already in use");
+
+      //   !RegExp("Users with email").test(data.message) &&
+      //     seterror(data.message);
+      // });
+      const data = {
+        profile:{
+          username: user.username,
+          email: user.email,
+          password: user.password,
+        },
+
+        phone_number: user.phone_number,
+      }
+      dispatch(handleRegisterClient(data));
+      // Store token in localstorage
+        // sessionStorage.setItem("user_id", data.InsertedId);
+        // localStorage.setItem("newUserEmail", JSON.stringify(email));
+        // localStorage.setItem("userUserPassword", JSON.stringify(password));
+
+ 
       toast.success("Sign up successful", {
         position: "bottom-left",
       });
-      // alert('User submitted!');
-      history.push("/");
+      history.push("/sign-in");
     }
   });
 
@@ -118,11 +162,11 @@ const SignUpForm = () => {
               size="md"
               placeholder="Username"
               type="text"
-              value={user.name || ""}
-              onChange={handleChange("name")} 
+              value={user.username || ""}
+              onChange={handleChange("username")} 
             />
           </InputGroup>
-          {errors.name && <FormHelperText>{errors.name}</FormHelperText>}
+          {errors.username && <FormHelperText>{errors.username}</FormHelperText>}
         </FormControl>
         <FormControl id="email" isRequired>
           <InputGroup>
@@ -141,7 +185,7 @@ const SignUpForm = () => {
           </InputGroup>
           {errors.email && <FormHelperText {...style}>{errors.email}</FormHelperText>}
         </FormControl>
-        <FormControl id="phoneNumber" isRequired>
+        <FormControl id="phone_number" isRequired>
           <InputGroup>
             <InputLeftElement
               pointerEvents="none"
@@ -152,11 +196,11 @@ const SignUpForm = () => {
               size="md"
               placeholder="Enter your phone number"
               type="text"
-              value={user.phoneNumber || ""}
-              onChange={handleChange("phoneNumber")}
+              value={user.phone_number || ""}
+              onChange={handleChange("phone_number")}
             />
           </InputGroup>
-          {errors.phoneNumber && <FormHelperText {...style}>{errors.phoneNumber}</FormHelperText>}
+          {errors.phone_number && <FormHelperText {...style}>{errors.phone_number}</FormHelperText>}
         </FormControl>
         <FormControl id="password" isRequired>
           <InputGroup>
@@ -177,7 +221,7 @@ const SignUpForm = () => {
               {show ? (
                 <IconButton
                   as={BiShowAlt}
-                  variant="untyled"
+                  variant="unstyled"
                   h={5}
                   w={5}
                   onClick={handleClick}

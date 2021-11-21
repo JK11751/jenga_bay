@@ -1,6 +1,6 @@
 import APIServices from "../../utils/apiServices";
-import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS, GET_SELLER_DETAILS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_SELLER_ITEMS, GET_SELLER_PROFILE, GET_ALL_SELLERS, SEARCH_PRODUCTS, SEARCH_SELLER_PRODUCTS, GET_SELLER_PRODUCTS_IN_SPECIFIC_CATEGORY, UPDATE_PRODUCT_QUANTITY, REMOVE_FROM_CART, ADD_TO_CART, CLEAR_CART, BUY_PRODUCTS_NOW } from "./types";
-
+import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS, GET_SELLER_DETAILS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_SELLER_ITEMS, GET_SELLER_PROFILE, GET_ALL_SELLERS, SEARCH_PRODUCTS, SEARCH_SELLER_PRODUCTS, GET_SELLER_PRODUCTS_IN_SPECIFIC_CATEGORY, UPDATE_PRODUCT_QUANTITY, REMOVE_FROM_CART, ADD_TO_CART, CLEAR_CART, BUY_PRODUCTS_NOW, REGISTER_CLIENT, LOGIN_USER } from "./types";
+import { toast } from "react-toastify";
 // Redux actions are called here with an underscore before the name (convention)
 
 // STEP FOUR
@@ -25,6 +25,47 @@ export const handleGetUsers = (params) => async (dispatch) => {
   } catch (error) {
     // Handle exceptions here
     console.log(`Error from handleGetRooms: ${error}`);
+  }
+};
+
+// Registering a buyer to the system
+export const handleLoginUser = (userData) => async (dispatch) => {
+  try {
+      // Result comes from the endpoint
+      // Let's assume an array of objects is returned from the endpoint
+    const response = await APIServices.loginUser(userData);
+    console.log("This is the Logged in user", response.data);
+
+    await dispatch({ type: LOGIN_USER, payload: response.data });
+    toast.success("Login successful", {
+      position: "bottom-left",
+    });
+    const token = response.data
+    localStorage.setItem("token", JSON.stringify(response.data));
+    console.log("This is the token", token)
+    // Result is sent to the store via dispatch (Pass payload if needed)
+  } catch (error) {
+    // Handle exceptions here
+    console.log(`Error from handleLoginUser: ${error}`);
+  }
+};
+
+/*-----------------------------------------------CLIENTS----------------------------------------------------- */
+
+// Registering a buyer to the system
+export const handleRegisterClient = (userData) => async (dispatch) => {
+  try {
+      // Result comes from the endpoint
+      // Let's assume an array of objects is returned from the endpoint
+    const response = await APIServices.createClient(userData);
+    console.log("This is the registered client",response.data);
+
+    await dispatch({ type: REGISTER_CLIENT, payload: response.data });
+    // localStorage.setItem("token", JSON.stringify(response.data));
+    // Result is sent to the store via dispatch (Pass payload if needed)
+  } catch (error) {
+    // Handle exceptions here
+    console.log(`Error from handleRegisterClient: ${error}`);
   }
 };
 

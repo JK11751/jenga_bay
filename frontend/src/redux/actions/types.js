@@ -1,6 +1,10 @@
 // STEP 1
 //user action types
 export const GET_USERS ="GET_USERS";
+export const LOGIN_USER ="LOGIN_USER";
+
+//client action types
+export const REGISTER_CLIENT ="REGISTER_CLIENT";
 
 //product action types
 export const GET_PRODUCTS ="GET_PRODUCTS";

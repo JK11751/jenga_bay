@@ -99,7 +99,7 @@ export const CompanyCategoryPage = () => {
                                 <BreadcrumbItem>
                                     <BreadcrumbLink as={Link} to={{pathname: `/`}}>Home</BreadcrumbLink>
                                 </BreadcrumbItem>
-                                <BreadcrumbItem as={Link} to={{pathname: `sellers/${seller.id}/${seller.business_name}`}}>
+                                <BreadcrumbItem as={Link} to={{pathname: `/sellers/${seller.id}/${seller.business_name}`}}>
                                     <BreadcrumbLink>{seller.business_name}</BreadcrumbLink>
                                 </BreadcrumbItem>
                                 <BreadcrumbItem isCurrentPage>
