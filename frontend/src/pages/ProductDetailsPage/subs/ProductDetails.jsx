@@ -19,7 +19,8 @@ StatLabel,
 import { Tag, TagLabel } from '@chakra-ui/tag';
 import {IoIosArrowBack} from "react-icons/io"
 import Rating from "../../../components/Products/Rating";
-import { handleGetProductDetails, handleAddToCart, handleBuyProductNow } from '../../../redux/actions/appActions';
+import { handleGetProductDetails } from '../../../redux/actions/productActions';
+import { handleAddToCart, handleBuyProductNow } from '../../../redux/actions/cartActions';
 import {useDispatch,useSelector} from "react-redux"
 import {useParams} from "react-router";
 import { useHistory } from 'react-router';

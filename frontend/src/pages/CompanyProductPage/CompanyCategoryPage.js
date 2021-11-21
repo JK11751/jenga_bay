@@ -14,7 +14,7 @@ import {
 import {ChevronDownIcon} from "@chakra-ui/icons"
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { handleSearchSellerProductsFromSpecificCategory, handleGetSellerItems, handleGetSellerDetails, handleGetAllSellers} from "../../redux/actions/appActions";
+import { handleSearchSellerProductsFromSpecificCategory, handleGetSellerItems, handleGetSellerDetails, handleGetAllSellers} from "../../redux/actions/sellerActions";
 import { Link } from 'react-router-dom'
 import { CategoryFilters } from '../../components/Categories/CategoryFilters'
 import { Divider } from '@chakra-ui/react';

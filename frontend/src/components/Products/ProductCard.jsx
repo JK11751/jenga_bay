@@ -19,7 +19,7 @@ import { IconButton } from "@chakra-ui/button";
 import { Icon } from "@chakra-ui/icon";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
-import { handleAddToCart } from "../../redux/actions/appActions";
+import { handleAddToCart } from "../../redux/actions/cartActions";
 
 const data = {
   isNew: true,

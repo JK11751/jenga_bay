@@ -7,7 +7,7 @@ import CategoryList from "../../components/Categories/CategoryList";
 import CategoryChips from "../../components/Categories/CategoryChips"
 import Footer from "../../components/PageSections/Footer";
 import AdsCarousel from "./subs/AdsCarousel";
-import { handleGetProducts } from "../../redux/actions/appActions";
+import { handleGetProducts } from "../../redux/actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import CategoryCard from "./subs/CategoryCard";
 import { Companies } from "./subs/Companies";
