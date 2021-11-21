@@ -38,7 +38,7 @@ export default function NewsLetter() {
           textAlign={'center'}
           mb={5}>
           New to JengaBay?
-          Subscribe to our Newsletterto get updates on our latest stocks and offers
+          Subscribe to our Newsletter to get updates on our latest stocks and offers
         </Heading>
         <Stack
           direction={{ base: 'column', md: 'row' }}

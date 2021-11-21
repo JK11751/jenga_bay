@@ -30,9 +30,12 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
 
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
     const seller = useSelector((state) => state.sellerReducer).sellerProfile
+    
     const {sellerId} = useParams()
+    
     const dispatch = useDispatch()
     const [clicked, setClicked] = useState(false)
+    const [followers, setFollowers] = useState(13)
     const inputFile = useRef(null) 
 
     useEffect(() => { 
@@ -52,7 +55,12 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
         target.style.backgroundColor = count === 1 ? "#c4c4c4" : '#FFA90A';
         target.style.color = count === 1 ? "#000000" : '#FFFFFF';
         target.dataset.count = count === 1 ? 0 : 1;
-         /* 
+        if (count === 1) {
+            setFollowers(13)
+        }else{
+            setFollowers(14)
+        }
+        /* 
       
          () : ? - this is conditional (ternary) operator - equals 
       
@@ -72,28 +80,27 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
     const onFollowClick = (e) => {
         setColor(e)
         setClicked(!clicked)
-
     }
 
     return (
         <>
             <input type='file' id='file' ref={inputFile} style={{display: 'none'}}/>
             <NavBar cartItems={cartItems} />
-            <Flex flexDir="column">
+            <Flex bg="#f5f5f5" pb="7vh" flexDir="column" borderBottomRadius="10px">
                 <Center>
-                    <Image mt={1} borderRadius="10px" height="300px" width="70vw" src={img} />
+                    <Image borderBottomRadius="10px" height="200px" width="70vw" src={img} />
                 </Center>
-                <Box position="absolute" top="45vh" left="17vw">
+                <Box position="absolute" top="30vh" left="17vw">
                     <Avatar borderColor="#0095F8" borderWidth="5px" height="180px" width="180px" name={seller.business_name} src={seller.profile_pic}>
                     <AvatarBadge
-                  as={IconButton}
-                  onClick={onButtonClick}
-                  size="sm"
-                  rounded="full"
-                  bottom="20px"
-                  colorScheme="blue"
-                  aria-label="remove Image"
-                  icon={<BiImageAdd color="#fff" />}
+                        as={IconButton}
+                        onClick={onButtonClick}
+                        size="sm"
+                        rounded="full"
+                        bottom="20px"
+                        colorScheme="blue"
+                        aria-label="remove Image"
+                        icon={<BiImageAdd color="#fff" />}
                 />
                     </Avatar>
                 </Box>
@@ -105,8 +112,6 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
                                 <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">{seller.business_name}</Text>
                                 <Icon color="green" as={MdCheckCircle}/>
                             </HStack>
-                            {/* <Text>Company Email</Text>
-                            <Text>Company Phone Number</Text> */}
                             <HStack>
                                 <Icon as={MdLocationOn}/>
                                 <Text>{seller.local_area_name}, {seller.town}</Text>
@@ -116,39 +121,34 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
                             <Button onClick={(e) => onFollowClick(e)} id="followButton" ml="1vw" _focus={{borderColor:"none", bg:"#FFA90A"}}>{clicked ? "Following" : "Follow"}</Button>
                         </Box>
                     </HStack>
-                        {/* <HStack>
-                            <button>follow</button>
-                            <button>followers</button>
-                        </HStack> */}
                         <HStack spacing="20px" alignItems="left">
                             <VStack>
-                                <Text>13k</Text>
+                                <Text>{followers}</Text>
                                 <Text fontFamily="sans-serif" fontWeight="bold">Followers</Text>
                             </VStack>
                             <VStack>
-                                <Text>13k</Text>
+                                <Text>{sellerReducer.sellerItems.length}</Text>
                                 <Text fontFamily="sans-serif" fontWeight="bold">Products</Text>
                             </VStack>
                             <VStack>
-                                <Text>13k</Text>
+                                <Text>3</Text>
                                 <Text fontFamily="sans-serif" fontWeight="bold">Reviews</Text>
                             </VStack>
                         </HStack>  
                     </HStack>
                 </Box>
                 <Center>
-                    <Divider borderColor="#c4c4c4" pos="absolute" top="74vh" width="70vw" />
+                    <Divider ml={3} borderColor="#c4c4c4" pos="absolute" top="68vh" width="80vw" />
                 </Center>
             </Flex>
-            <Center  alignItems="left">  
+            <Center alignItems="left">  
             <Box width="70vw"> 
-                <Tabs defaultIndex={0} mt="10vh" variant="soft-rounded" colorScheme="green" isLazy>
+                <Tabs defaultIndex={0} mt="1vh" variant="soft-rounded" colorScheme="green" isLazy>
                     <TabList>
                         <Tab _focus={{borderColor:"none"}}>Home</Tab>
                         <Tab _focus={{borderColor:"none"}}>About</Tab>
                         <Tab _focus={{borderColor:"none"}}>Reviews</Tab>
                         <Tab _focus={{borderColor:"none"}}>Products</Tab>
-                        {/* <Tab _focus={{borderColor:"none"}}> */}
                             <Menu isLazy placement="right" closeOnSelect>
                                 <MenuButton 
                                     variant="unstyled"
@@ -175,9 +175,8 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
                                     <MenuItem>Find Support or Report Page</MenuItem>
                                 </MenuList>
                             </Menu>
-                        {/* </Tab> */}
                     </TabList>
-                    <TabPanels>
+                    <TabPanels mt={5}>
                         <TabPanel>
                             <Flex>
                                 <Box

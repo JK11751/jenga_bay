@@ -1,7 +1,6 @@
 import {
     Box,
     Container,
-    Link,
     SimpleGrid,
     Stack,
     Text,
@@ -12,6 +11,7 @@ import {
   } from '@chakra-ui/react';
 import logo from "../../assets/JengaBay.png"
 import NewsLetter from './Newsletter';
+import { Link } from 'react-router-dom';
   
   const ListHeader = ({ children }) => {
     return (
@@ -24,14 +24,17 @@ import NewsLetter from './Newsletter';
   export default function Footer() {
     return (
       <Box
-        bg={useColorModeValue('gray.50', 'gray.900')}
-        color={useColorModeValue('gray.700', 'gray.200')}
-        mt={10}>
-        <Container>
+        bg="#232F3E"
+        w="100%"
+        mt={20}
+        // bg={useColorModeValue('gray.50', 'gray.900')}
+        // color={useColorModeValue('gray.700', 'gray.200')}
+        >
+        <Box  w="100%">
           <NewsLetter/>
-        </Container>
+        </Box>
 
-        <Container as={Stack} maxW={'6xl'} py={10}>
+        <Container color="white" as={Stack} maxW={'6xl'} py={10}>
           <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
             <Stack align={'flex-start'}>
               <ListHeader>Product</ListHeader>
@@ -88,9 +91,10 @@ import NewsLetter from './Newsletter';
               ml: 8,
             }}>
             {/* <Logo /> */}
-            <Image src={logo}/>
+            <Link to="/">
+            <Image src={logo}/></Link>
           </Flex>
-          <Text pt={6} fontSize={'sm'} textAlign={'center'}>
+          <Text color="white" pt={6} fontSize={'sm'} textAlign={'center'}>
             © 2021 JengaBay. All rights reserved
           </Text>
         </Box>

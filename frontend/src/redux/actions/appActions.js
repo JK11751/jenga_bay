@@ -1,5 +1,5 @@
 import APIServices from "../../utils/apiServices";
-import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS, GET_SELLER_DETAILS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_SELLER_ITEMS, GET_SELLER_PROFILE } from "./types";
+import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS, GET_SELLER_DETAILS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_SELLER_ITEMS, GET_SELLER_PROFILE, GET_ALL_SELLERS, SEARCH_PRODUCTS, SEARCH_SELLER_PRODUCTS, GET_SELLER_PRODUCTS_IN_SPECIFIC_CATEGORY } from "./types";
 
 // Redux actions are called here with an underscore before the name (convention)
 
@@ -75,7 +75,37 @@ export const handleGetItemsInCategory = (category_name) => async(dispatch) => {
   }
 }
 
+// Getting products from search
+const getProductsFromSearch = (products) => ({
+  type: SEARCH_PRODUCTS,
+  payload: products,
+});
+
+export const handleGetProductsFromSearch = (searchQuery) => async (dispatch) => {
+  try {
+    const { data } = await APIServices.searchItems(searchQuery);
+    await dispatch(getProductsFromSearch(data));
+  } catch (error) {
+    console.log(`Error from handleGetProductsFromSearch: ${error}`);
+  }
+};
+
 /*---------------------------------------------SELLERS----------------------------------------------------- */
+
+//Getting all sellers
+const getAllSellers = (allSellers) => ({
+  type: GET_ALL_SELLERS,
+  payload: allSellers,
+});
+
+export const handleGetAllSellers = () => async(dispatch) => {
+  try {
+    const { data } = await APIServices.getAllSellers();
+    await dispatch(getAllSellers(data));
+  } catch (error) {
+    console.log(`Error from handleGetAllSellers: ${error}`);
+  }
+}
 
 //Getting a specific seller details
 const getSellerDetails = (sellerDetails) => ({
@@ -122,67 +152,32 @@ export const handleGetSellerItems = (seller_id) => async(dispatch) => {
   }
 }
 
-/*------------------------------------------------CART----------------------------------------------------- */
+// Searching products from a specific seller
+const getSellerProductsFromSearch = (searchedProducts) => ({
+  type: SEARCH_SELLER_PRODUCTS,
+  payload: searchedProducts,
+});
 
-//Adding Items to cart
-// export function addToCartAction(product) {
-//   return {
-//     type: ADD_TO_CART,
-//     payload: product.id
-//   };
-// }
+export const handleGetSellerProductsFromSearch = (seller_id, searchQuery) => async (dispatch) => {
+  try {
+    const { data } = await APIServices.searchingSellerItems(seller_id, searchQuery);
+    await dispatch(getSellerProductsFromSearch(data));
+  } catch (error) {
+    console.log(`Error from handleGetSellerProductsFromSearch: ${error}`);
+  }
+};
 
-// //Removing an item from Cart
-// export function removeFromCartAction(item_id) {
-//   return {
-//     type: REMOVE_FROM_CART,
-//     productId: item_id
-//   };
-// }
+// Searching products in a specific category from a specific seller
+const searchSellerProductsFromSpecificCategory = (categoryItems) => ({
+  type: GET_SELLER_PRODUCTS_IN_SPECIFIC_CATEGORY,
+  payload: categoryItems,
+});
 
-//Updating Quantity of cart item
-// export function updateItemQuantity(payload) {
-//   return {
-//     type: UPDATE_QUANTITY,
-//     payload
-//   };
-// }
-
-// /*GET NUMBER CART*/
-// export function GetNumberCart(){
-//   return{
-//       type:NUMBER_OF_ITEMS_IN_CART
-//   }
-// }
-
-// export function AddCart(payload){
-//   return {
-//       type:ADD_TO_CART,
-//       payload
-//   }
-// }
-// export function UpdateCart(payload){
-//   return {
-//       type: UPDATE_CART,
-//       payload
-//   }
-// }
-// export function DeleteCart(payload){
-//   return{
-//       type:DELETE_CART,
-//       payload
-//   }
-// }
-
-// export function IncreaseQuantity(payload){
-//   return{
-//       type: INCREASE_QUANTITY,
-//       payload
-//   }
-// }
-// export function DecreaseQuantity(payload){
-//   return{
-//       type: DECREASE_QUANTITY,
-//       payload
-//   }
-// }
+export const handleSearchSellerProductsFromSpecificCategory = (seller_id, category_name) => async (dispatch) => {
+  try {
+    const { data } = await APIServices.getSellerItemsInSpecificCategory(seller_id, category_name);
+    await dispatch(searchSellerProductsFromSpecificCategory(data));
+  } catch (error) {
+    console.log(`Error from handleSearchSellerProductsFromSpecificCategory: ${error}`);
+  }
+};

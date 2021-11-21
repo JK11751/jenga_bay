@@ -2,7 +2,11 @@ import { ADD_TO_CART,REMOVE_FROM_CART } from "../actions/types";
 // import { addItemToCart, removeItemFromCart } from "../../utils/cart.utils";
 
 const initialState = {
-    cartItems:[],
+    cartItems: localStorage.getItem("cartItems")
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [],
+    cartTotalQuantity: 0,
+    cartTotalAmount: 0,
 };
 
 const cartReducer = (state = initialState, action) => {

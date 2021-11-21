@@ -8,7 +8,7 @@ const NotFound = ({cartItems}) => {
     <>
       <NavBar cartItems={cartItems} />
       <Center>
-        <Box alignSelf="center" textAlign="center"  px={6}>
+        <Box mt="60px" alignSelf="center" textAlign="center"  px={6}>
         {/* <Text fontSize="18px" mt={3} mb={2}>
           Page Not Found
         </Text> */}

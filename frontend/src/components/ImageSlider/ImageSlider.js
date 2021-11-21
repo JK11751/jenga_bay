@@ -89,8 +89,6 @@ const ImageSlider = () => {
             {/* Image Slider Component */}
             <section className="slider">
                 <Dots slides={SliderData} activeSlide={current} />
-                {/* <Arrow direction="left" handleClick={prevSlide} />
-                <Arrow direction="right" handleClick={nextSlide} />   */}
                 <Slide className="slide" current={current} SliderData={SliderData} />   
             </section>
         </Flex>
