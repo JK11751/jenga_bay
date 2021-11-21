@@ -80,7 +80,7 @@ const SidebarContent = ({ onClose, handleToggle,ref, ...rest }) => {
             </h2>
             <AccordionPanel pb={4}>
             {CategoryList.map((category) =>
-              (<Text fontSize="1em" p={2} _hover={{cursor:"pointer"}} onClick={() => history.push(`/categories/${category.value}`)} key={category.id}>{category.value}</Text>)
+              (<Text fontSize="1em" p={2} _hover={{cursor:"pointer"}} onClick={() => history.push(`/categories/${category.value}`)} key={category.id}>{category.name}</Text>)
             )}
             </AccordionPanel>
           </AccordionItem>

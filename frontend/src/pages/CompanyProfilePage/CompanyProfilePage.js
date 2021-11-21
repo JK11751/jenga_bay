@@ -25,7 +25,7 @@ import {ChevronDownIcon } from "@chakra-ui/icons"
 import { Button } from '@chakra-ui/button';
 import Stats from './subs/Stats';
 
-export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
+export const CompanyProfilePage = () => {
     const img = "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg"
 
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
@@ -85,7 +85,7 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
     return (
         <>
             <input type='file' id='file' ref={inputFile} style={{display: 'none'}}/>
-            <NavBar cartItems={cartItems} />
+            <NavBar />
             <Flex bg="#f5f5f5" pb="7vh" flexDir="column" borderBottomRadius="10px">
                 <Center>
                     <Image borderBottomRadius="10px" height="200px" width="70vw" src={img} />
@@ -190,19 +190,19 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
                                     <VStack alignItems="left" p={5}>
                                         <HStack spacing="50px">
                                             <Text p={3}>Followers</Text>
-                                            <Circle alignItems="center" p={2} size="20px" bg="#FFA90A"><Text fontWeight="bold" fontSize="10px" color="white">{cartItems.length}</Text></Circle>
+                                            <Circle alignItems="center" p={2} size="20px" bg="#FFA90A"><Text fontWeight="bold" fontSize="10px" color="white">10</Text></Circle>
                                         </HStack>
                                         <HStack spacing="50px">
                                             <Text p={3}>Reviews</Text>
-                                            <Circle alignItems="center" p={2} size="20px" bg="#FFA90A"><Text fontWeight="bold" fontSize="10px" color="white">{cartItems.length}</Text></Circle>
+                                            <Circle alignItems="center" p={2} size="20px" bg="#FFA90A"><Text fontWeight="bold" fontSize="10px" color="white">10</Text></Circle>
                                         </HStack>
                                         <HStack spacing="50px">
                                             <Text p={3}>Completed Orders</Text>
-                                            <Circle alignItems="center" p={2} size="20px" bg="#FFA90A"><Text fontWeight="bold" fontSize="10px" color="white">{cartItems.length}</Text></Circle>
+                                            <Circle alignItems="center" p={2} size="20px" bg="#FFA90A"><Text fontWeight="bold" fontSize="10px" color="white">10</Text></Circle>
                                         </HStack>
                                         <HStack spacing="50px">
                                             <Text p={3}>Completed Order</Text>
-                                            <Circle alignItems="center" p={2} size="20px" bg="#FFA90A"><Text fontWeight="bold" fontSize="10px" color="white">{cartItems.length}</Text></Circle>
+                                            <Circle alignItems="center" p={2} size="20px" bg="#FFA90A"><Text fontWeight="bold" fontSize="10px" color="white">10</Text></Circle>
                                         </HStack>
                                     </VStack>
                                 </Box>
@@ -269,7 +269,7 @@ export const CompanyProfilePage = ({cartItems, handleAddProduct}) => {
                             <Flex borderRadius="10px" width="80vw" alignSelf="center" flexWrap="wrap" >
                                 {sellerReducer.sellerItems.map((product,key)=>{ 
                                 return(
-                                    <ProductCard key={key} price={product.item_price} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
+                                    <ProductCard key={key} price={product.item_price} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
                                 )
                                 })}
                             </Flex>

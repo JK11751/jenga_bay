@@ -21,7 +21,7 @@ import { Divider } from '@chakra-ui/react';
 // import { Search } from './search';
 
 
-export const SearchResultsSellers = ({cartItems, handleAddProduct}) => {
+export const SearchResultsSellers = () => {
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
     const itemList = useSelector((state) => state.sellerReducer).searchedProducts
     const [searchedItems,setSearchedItems] = useState([])
@@ -50,7 +50,7 @@ export const SearchResultsSellers = ({cartItems, handleAddProduct}) => {
 
     return (
         <Box>
-            <NavBar cartItems={cartItems}/>
+            <NavBar />
             {sellerReducer.sellerDetails.map((seller)=>{ 
                 return(
                     <>
@@ -105,7 +105,7 @@ export const SearchResultsSellers = ({cartItems, handleAddProduct}) => {
                             <Flex flexWrap="wrap">
                             {searchedItems.map((product)=>{ 
                                 return(
-                                    <ProductCard seller price={product.item_price} sellerId={product.item_seller.id} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
+                                    <ProductCard seller price={product.item_price} sellerId={product.item_seller.id} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
                                 )
                             })}</Flex>
                         </Flex>
