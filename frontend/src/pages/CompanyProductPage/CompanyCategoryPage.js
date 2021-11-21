@@ -21,7 +21,7 @@ import { Divider } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 import { AiOutlineSearch } from "react-icons/ai"
 
-export const SearchResultsCategories = () => {
+export const CompanyCategoryPage = () => {
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
     const itemList = useSelector((state) => state.sellerReducer).categoryItems
     const [itemsInCategoryList,setItemsInCategoryList] = useState([])

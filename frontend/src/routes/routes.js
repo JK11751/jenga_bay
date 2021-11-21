@@ -18,7 +18,7 @@ import { ForgotPassword } from "../pages/ForgotPassword/ForgotPassword.js";
 import { ResetPassword } from "../pages/ForgotPassword/ResetPassword.js";
 import { SearchResultsProducts } from "../pages/SearchResults/SearchResultsProducts.js";
 import { SearchResultsSellers } from "../pages/SearchResults/SearchResultsSellers.js";
-import { SearchResultsCategories } from "../pages/SearchResults/SearchResultsCategories.js";
+import { CompanyCategoryPage } from "../pages/CompanyProductPage/CompanyCategoryPage.js";
 
 
 const Routes =()=>{
@@ -59,7 +59,7 @@ const Routes =()=>{
                 <CategoryPage />
             </Route>
             <Route exact path="/sellers/:sellerId/:sellerName/:categoryName">
-                <SearchResultsCategories />
+                <CompanyCategoryPage />
             </Route>
             <Route exact path="/cart">
                 <Cart />
