@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_PRODUCT_DETAILS, SEARCH_PRODUCTS } from "../actions/types";
+import { GET_PRODUCTS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_PRODUCT_DETAILS, SEARCH_PRODUCTS } from "../App/actionTypes";
 
 //STEP 2 - stating initial state and defining actions
 //Thi sis the default state

@@ -1,4 +1,4 @@
-import { SET_IS_AUTHENTICATED, LOGIN_USER, PASSWORD_RESET, PASSWORD_RESET_CONFIRM } from "../actions/types";
+import { SET_IS_AUTHENTICATED, LOGIN_USER, PASSWORD_RESET, PASSWORD_RESET_CONFIRM } from "../App/actionTypes";
 
 //STEP 2 - stating initial state and defining actions
 //This is the default state

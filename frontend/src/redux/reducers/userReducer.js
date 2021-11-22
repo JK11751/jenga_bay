@@ -1,4 +1,4 @@
-import { REGISTER_CLIENT } from "../actions/types";
+import { REGISTER_CLIENT } from "../App/actionTypes";
 
 //STEP 2 - stating initial state and defining actions
 //This is the default state

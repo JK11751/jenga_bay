@@ -13,7 +13,7 @@ import ProductDetailsPage from "../pages/ProductDetailsPage/ProductDetailsPage.j
 import RegistrationPage from "../pages/CompanyRegistration/RegistrationPage.js";
 import CompanyProductUploadPage from "../pages/CompanyProductUploadPage/CompanyProductUploadPage.js";
 import CompanyProductPage from "../pages/CompanyProductPage/CompanyProductPage.js";
-import { CategoryPage } from "../pages/CategoriesPage/CategoryPage.js";
+import { CategoryPage } from "../pages/Categories/CategoryPage.js";
 import { Cart } from "../pages/Cart/Cart.js";
 import NotFound from "../pages/ErrorPage/NotFound.js";
 import { CompanyProfilePage } from "../pages/CompanyProfilePage/CompanyProfilePage.js";
