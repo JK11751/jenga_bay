@@ -194,15 +194,19 @@ class CustomAuthToken(ObtainAuthToken):
             token.save()
 
         if Seller.objects.filter(profile=user).exists():
+            account_id = Seller.objects.get(profile=user).id
             session_status = 'seller'
         elif Buyer.objects.filter(profile=user).exists():
+            account_id = Seller.objects.get(profile=user).id
             session_status = 'buyer'
         else:
+            account_id = None
             session_status = None
 
         return Response({
             'token': token.key,
             'user_id': user.pk,
             'email': user.email,
-            'session_status': session_status
+            'session_status': session_status,
+            'account_id': account_id
         })
