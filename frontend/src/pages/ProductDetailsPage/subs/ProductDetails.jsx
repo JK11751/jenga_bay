@@ -102,10 +102,10 @@ function ProductDetails({handleAddProduct}) {
       </Text>
         <Rating rating={data.rating} numReviews={data.numReviews} />
       <HStack>
-        <Text _hover={{cursor:"pointer"}} onClick={() => history.push(`/seller/${product.item_seller.id}/profile`)} fontFamily="sans-serif" color="#555" fontSize="12px">
+        <Text _hover={{cursor:"pointer", color:"#077ACC", textDecoration:"ActiveBorder"}} onClick={() => history.push(`/seller/${product.item_seller.id}/profile`)} fontFamily="sans-serif" color="#555" fontSize="12px">
           Brand: {product.item_seller.business_name}
         </Text>
-        <Text _hover={{cursor:"pointer"}} onClick={() => history.push(`/sellers/${product.item_seller.id}/${product.item_seller.business_name}`)} fontFamily="sans-serif" color="#555" fontSize="12px">
+        <Text _hover={{cursor:"pointer", color:"#077ACC"}} onClick={() => history.push(`/sellers/${product.item_seller.id}/${product.item_seller.business_name}`)} fontFamily="sans-serif" color="#555" fontSize="12px">
           Visit Brand Store
         </Text>
       </HStack>

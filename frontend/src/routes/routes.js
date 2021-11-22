@@ -20,6 +20,7 @@ import { ResetPassword } from "../pages/ForgotPassword/ResetPassword.js";
 import { SearchResultsProducts } from "../pages/SearchResults/SearchResultsProducts.js";
 import { SearchResultsSellers } from "../pages/SearchResults/SearchResultsSellers.js";
 import { CompanyCategoryPage } from "../pages/CompanyProductPage/CompanyCategoryPage.js";
+import PrivateRoute from "../utils/PrivateRoute.js";
 
 const Routes =()=>{
 
@@ -71,9 +72,7 @@ const Routes =()=>{
             <Route exact path="/cart">
                 <Cart />
             </Route>
-            <Route exact path="/checkout">
-                <CheckoutPage/>
-            </Route>
+            <PrivateRoute component={CheckoutPage} exact path="/checkout" />
             <Route exact path="/forgot-password">
                 <ForgotPassword/>
             </Route>
