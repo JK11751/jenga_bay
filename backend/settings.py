@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
     'django_rest_passwordreset',
+    'allauth.socialaccount',
 ]
 
 
