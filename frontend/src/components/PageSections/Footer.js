@@ -38,9 +38,9 @@ import { Link } from 'react-router-dom';
           <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
             <Stack align={'flex-start'}>
               <ListHeader>Product</ListHeader>
-              <Link href={'#'}>Overview</Link>
+              <Link to="/">Overview</Link>
               <Stack direction={'row'} align={'center'} spacing={2}>
-                <Link href={'#'}>Features</Link>
+                <Link to="/">Features</Link>
                 <Tag
                   size={'sm'}
                   bg={useColorModeValue('green.300', 'green.800')}
@@ -49,27 +49,27 @@ import { Link } from 'react-router-dom';
                   New
                 </Tag>
               </Stack>
-              <Link href={'#'}>Pricing</Link>
-              <Link href={'#'}>Releases</Link>
+              <Link to="/">Pricing</Link>
+              <Link to="/">Releases</Link>
             </Stack>
             <Stack align={'flex-start'}>
               <ListHeader>Company</ListHeader>
-              <Link href={'#'}>About Us</Link>
-              <Link href={'#'}>Contact Us</Link>
-              <Link href={'#'}>Founders</Link>
+              <Link to="/">About Us</Link>
+              <Link to="/">Contact Us</Link>
+              <Link to="/">Founders</Link>
             </Stack>
             <Stack align={'flex-start'}>
               <ListHeader>Legal</ListHeader>
-              <Link href={'#'}>Cookies Policy</Link>
-              <Link href={'#'}>Privacy Policy</Link>
-              <Link href={'#'}>Terms of Service</Link>
+              <Link to="/">Cookies Policy</Link>
+              <Link to="/">Privacy Policy</Link>
+              <Link to="/">Terms of Service</Link>
             </Stack>
             <Stack align={'flex-start'}>
               <ListHeader>Follow Us</ListHeader>
-              <Link href={'#'}>Facebook</Link>
-              <Link href={'#'}>Twitter</Link>
-              <Link href={'#'}>Instagram</Link>
-              <Link href={'#'}>LinkedIn</Link>
+              <Link to="/">Facebook</Link>
+              <Link to="/">Twitter</Link>
+              <Link to="/">Instagram</Link>
+              <Link to="/">LinkedIn</Link>
             </Stack>
           </SimpleGrid>
         </Container>

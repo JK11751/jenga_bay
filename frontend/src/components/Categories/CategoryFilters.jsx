@@ -39,7 +39,7 @@ export const CategoryFilters = ({ CategoryList, categoryName, sellerReducer, cat
             { CategoryList.map((category) =>
                 (
 
-                    <Text _hover={{cursor:"pointer", bg:"#24A8FF", borderRadius:"5px", color:"white"}} _focus={{bg:"#24A8FF", borderRadius:"5px", color:"white"}} onClick={()=> history.push(`/categories/${category.value}`)} ml={2} padding="2px" key={category.id}>{category.value}</Text>
+                    <Text _hover={{cursor:"pointer", bg:"#24A8FF", borderRadius:"5px", color:"white"}} _focus={{bg:"#24A8FF", borderRadius:"5px", color:"white"}} onClick={()=> history.push(`/categories/${category.value}`)} ml={2} padding="2px" key={category.id}>{category.name}</Text>
 
                 )
             )}
