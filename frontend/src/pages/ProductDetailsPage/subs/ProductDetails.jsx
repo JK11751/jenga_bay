@@ -19,8 +19,7 @@ StatLabel,
 import { Tag, TagLabel } from '@chakra-ui/tag';
 import {IoIosArrowBack} from "react-icons/io"
 import Rating from "../../../components/Products/Rating";
-import { handleGetProductDetails } from '../../../redux/actions/productActions';
-import { handleAddToCart, handleBuyProductNow } from '../../../redux/actions/cartActions';
+import { handleGetProductDetails } from '../../../redux/actions/appActions';
 import {useDispatch,useSelector} from "react-redux"
 import {useParams} from "react-router";
 import { useHistory } from 'react-router';
@@ -31,7 +30,7 @@ const data = {
 };
 
 
-function ProductDetails({handleAddProduct}) {
+function ProductDetails({handleAddProduct,handleBuyProductNow}) {
   let { productId } = useParams()
   const dispatch = useDispatch()
   const history = useHistory()
@@ -102,10 +101,10 @@ function ProductDetails({handleAddProduct}) {
       </Text>
         <Rating rating={data.rating} numReviews={data.numReviews} />
       <HStack>
-        <Text _hover={{cursor:"pointer", color:"#077ACC", textDecoration:"ActiveBorder"}} onClick={() => history.push(`/seller/${product.item_seller.id}/profile`)} fontFamily="sans-serif" color="#555" fontSize="12px">
+        <Text _hover={{cursor:"pointer"}} onClick={() => history.push(`/seller/${product.item_seller.id}/profile`)} fontFamily="sans-serif" color="#555" fontSize="12px">
           Brand: {product.item_seller.business_name}
         </Text>
-        <Text _hover={{cursor:"pointer", color:"#077ACC"}} onClick={() => history.push(`/sellers/${product.item_seller.id}/${product.item_seller.business_name}`)} fontFamily="sans-serif" color="#555" fontSize="12px">
+        <Text _hover={{cursor:"pointer"}} onClick={() => history.push(`/sellers/${product.item_seller.id}/${product.item_seller.business_name}`)} fontFamily="sans-serif" color="#555" fontSize="12px">
           Visit Brand Store
         </Text>
       </HStack>
@@ -155,7 +154,7 @@ function ProductDetails({handleAddProduct}) {
           backgroundColor="#1D1C1C"
           width="200px"
           height="38px"
-          onClick={() => { dispatch(handleBuyProductNow(product, count)); history.push("/checkout")}}
+          onClick={() => { handleBuyProductNow(product, count); history.push("/checkout")}}
         >
           Buy Now
         </Button>
@@ -168,7 +167,7 @@ function ProductDetails({handleAddProduct}) {
           backgroundColor="transparent"
           width="200px"
           height="38px"
-          onClick={() => dispatch(handleAddToCart(product))}
+          onClick={() => handleAddProduct(product)}
         >
          Add to Cart 
         </Button>

@@ -14,14 +14,14 @@ import {
 import {ChevronDownIcon} from "@chakra-ui/icons"
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { handleSearchSellerProductsFromSpecificCategory, handleGetSellerItems, handleGetSellerDetails, handleGetAllSellers} from "../../redux/actions/sellerActions";
+import { handleSearchSellerProductsFromSpecificCategory, handleGetSellerItems, handleGetSellerDetails, handleGetAllSellers} from "../../redux/actions/appActions";
 import { Link } from 'react-router-dom'
 import { CategoryFilters } from '../../components/Categories/CategoryFilters'
 import { Divider } from '@chakra-ui/react';
 import { useHistory } from 'react-router';
 import { AiOutlineSearch } from "react-icons/ai"
 
-export const CompanyCategoryPage = () => {
+export const SearchResultsCategories = ({cartItems, handleAddProduct}) => {
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
     const itemList = useSelector((state) => state.sellerReducer).categoryItems
     const [itemsInCategoryList,setItemsInCategoryList] = useState([])
@@ -83,7 +83,7 @@ export const CompanyCategoryPage = () => {
     
     return(
         <Box flexDir="column" width="100%" height="100vh">
-            <NavBar />
+            <NavBar cartItems={cartItems} />
             {sellerReducer.sellerDetails.map((seller) => {
                 return(
                     <>
@@ -99,7 +99,7 @@ export const CompanyCategoryPage = () => {
                                 <BreadcrumbItem>
                                     <BreadcrumbLink as={Link} to={{pathname: `/`}}>Home</BreadcrumbLink>
                                 </BreadcrumbItem>
-                                <BreadcrumbItem as={Link} to={{pathname: `/sellers/${seller.id}/${seller.business_name}`}}>
+                                <BreadcrumbItem as={Link} to={{pathname: `sellers/${seller.id}/${seller.business_name}`}}>
                                     <BreadcrumbLink>{seller.business_name}</BreadcrumbLink>
                                 </BreadcrumbItem>
                                 <BreadcrumbItem isCurrentPage>
@@ -147,7 +147,7 @@ export const CompanyCategoryPage = () => {
                                 <Flex flexWrap="wrap">
                                 {itemsInCategoryList.map((product)=>{ 
                                     return(
-                                        <ProductCard price={product.item_price} sellerId={seller.id} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
+                                        <ProductCard price={product.item_price} sellerId={seller.id} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
                                     )
                                 })}</Flex>
                             </Flex>

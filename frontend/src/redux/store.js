@@ -15,5 +15,4 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(...middleware))
 );// Note: this API requires redux@>=3.1.0
 
-
 export default store;

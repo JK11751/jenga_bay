@@ -1,33 +1,25 @@
-import { LOGIN_USER, PASSWORD_RESET, PASSWORD_RESET_CONFIRM } from "../actions/types";
+import { GET_USERS } from "../actions/types";
 
 //STEP 2 - stating initial state and defining actions
-//This is the default state
+//Thi sis the default state
 const initialState ={
-    loggedInUser:{},
-    passwordResetToken: {},
-    passwordResetConfirmation:{},
+    users:[]
 };
 
 const userReducer = (state = initialState, action) => {
     const {type, payload} = action 
+    // STEP THREE
+    // A new state is returned with the data from the endpoint
+    // The GET USERS case is handled here
     switch (type) {
-        case LOGIN_USER:
-            return{
-                ...state,
-                loggedInUser: payload,
-            }     
-        case PASSWORD_RESET:
-            return{
-                ...state,
-                passwordResetToken: payload,
-            }
-        case PASSWORD_RESET_CONFIRM:
-            return{
-                ...state,
-                passwordResetConfirmation: payload,
-            }     
-        default:
-            return state;//returns default state if no data is fetched
+    case GET_USERS:
+        return{
+            ...state,
+            users:payload
+        }     
+
+    default:
+        return state;//returns deafult state if no data is fetched
     }
 }
 export default userReducer;

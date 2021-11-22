@@ -7,7 +7,7 @@ import CategoryList from "../../components/Categories/CategoryList";
 import CategoryChips from "../../components/Categories/CategoryChips"
 import Footer from "../../components/PageSections/Footer";
 import AdsCarousel from "./subs/AdsCarousel";
-import { handleGetProducts } from "../../redux/actions/productActions";
+import { handleGetProducts } from "../../redux/actions/appActions";
 import { useDispatch, useSelector } from "react-redux";
 import CategoryCard from "./subs/CategoryCard";
 import { Companies } from "./subs/Companies";
@@ -15,7 +15,7 @@ import image from "../../assets/bamburi.jpg"
 import CompanyCard from "./subs/CompanyCard";
 import RegisterAsASeller from "./subs/RegisterAsASeller";
 
-const Home = () => {
+const Home = ({handleAddProduct, cartItems}) => {
 
     const [isLoading, setisLoading] = React.useState(true)
     
@@ -28,7 +28,7 @@ const Home = () => {
         setisLoading(false)  
     }, [dispatch]);
 
-    localStorage.setItem("Allproducts", JSON.stringify(productReducer));
+    localStorage.setItem("Allproducts", JSON.stringify(productReducer));console.log("Allproducts")
     return(
         <>
         {isLoading ? 
@@ -42,7 +42,7 @@ const Home = () => {
         </Center>
         :
         <Box alignItems="center" bgColor="#fff" flexDir="column" width="full" height="100vh">
-            <NavBar />
+            <NavBar cartItems={cartItems} />
             <Center mt={5}>
                 <AdsCarousel alignSelf="center"/>
             </Center>
@@ -57,7 +57,7 @@ const Home = () => {
                     <Flex  borderRadius="10px" width="90vw" alignSelf="center" flexWrap="wrap">  
                         {CategoryList.slice(0, 10).map((category, index) =>
                             (
-                            <CategoryCard key={index} category_name={category.name} category_value={category.value}/>
+                            <CategoryCard key={index} category_name={category.value}/>
                             )
                         )}
                     </Flex>
@@ -75,10 +75,10 @@ const Home = () => {
                             </HStack>
                         </Flex> 
                     </Flex>
-                    <Flex overflowX="hidden" pl={8} py={5}>
+                    <Flex pl={8} py={5}>
                     {productReducer.products.slice(0, 6).map((product,key)=>{ 
                         return(
-                            <ProductCard sellerId={product.item_seller.id} price={product.item_price} key={key} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
+                            <ProductCard sellerId={product.item_seller.id} price={product.item_price} key={key} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
                         )
                     })}</Flex>
                 </Flex>  
@@ -97,9 +97,9 @@ const Home = () => {
                     </Center>
                 <Center>
                 <Flex px="3" borderRadius="10px" width="90vw" alignSelf="center" flexWrap="wrap">
-                        {Companies.map((company, index) => {
+                        {Companies.map((company) => {
                             return(
-                            <CompanyCard key={index} seller_id={1} company_name={company.name} image={image}/>
+                            <CompanyCard seller_id={1} company_name={company.name} image={image}/>
                         )})}
                     </Flex>
                 </Center>  
@@ -110,7 +110,7 @@ const Home = () => {
             <Flex ml="5vw" pl={6} borderRadius="10px" width="90vw" alignSelf="center" flexWrap="wrap">
                 {productReducer.products.map((product,key)=>{ 
                     return(
-                        <ProductCard price={product.item_price} key={key} product={product}  id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
+                        <ProductCard price={product.item_price} key={key} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
                     )
                 })}
             </Flex>   

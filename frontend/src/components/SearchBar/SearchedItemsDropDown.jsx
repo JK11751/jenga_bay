@@ -18,13 +18,8 @@ const SearchedUsersDropdown = ({options, categories, brands}) => {
                     <>
                         <Box as="span">{"   "}</Box>
                         <ListItem  _hover={{cursor:"pointer", bg:"#24A8FF", borderRadius:"5px", color:"white"}} _focus={{bg:"#24A8FF", borderRadius:"5px", color:"white"}}
-                        onClick={() => history.push(`/product-details/${option.id}`)} 
-                        padding="5px" key={option.id}>
-                        <HStack>
-                            <Text>{option.item_name}</Text>
-                            <Text color="#c4c4c4">Product</Text>
-                        </HStack>
-                        </ListItem>
+                        onClick={() => history.push(`/products/${option.item_name}`)} 
+                        padding="5px" key={option.id}>{option.item_name}</ListItem>
                     </>
                 )
             )}
@@ -36,7 +31,7 @@ const SearchedUsersDropdown = ({options, categories, brands}) => {
                         onClick={() => history.push(`/categories/${category.value}`)} 
                         padding="5px" key={category.id}>
                         <HStack>
-                            <Text>{category.name}</Text>
+                            <Text>{category.value}</Text>
                             <Text color="#c4c4c4">Category</Text>
                         </HStack>
                         </ListItem>

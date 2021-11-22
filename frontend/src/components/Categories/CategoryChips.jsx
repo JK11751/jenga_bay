@@ -46,7 +46,7 @@ const CategoryChips = () => {
           <div id="category-slider">  
             {CategoryList.map((category) =>
             
-              (<Tag _hover={{cursor:"pointer"}} onClick={() => history.push(`/categories/${category.value}`)} pl={4} pr={4} height="30px" width="auto" borderRadius="full" variant="solid" backgroundColor="#24A8FF" key={category.id} mr={4}><TagLabel>{category.name}</TagLabel></Tag>)
+              (<Tag _hover={{cursor:"pointer"}} onClick={() => history.push(`/categories/${category.value}`)} pl={4} pr={4} height="30px" width="auto" borderRadius="full" variant="solid" backgroundColor="#24A8FF" key={category.id} mr={4}><TagLabel>{category.value}</TagLabel></Tag>)
             )}  
           </div>
           <button id="category-button right" onClick={slideRight}>

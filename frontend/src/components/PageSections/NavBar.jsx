@@ -34,7 +34,6 @@ import {
 import { AiOutlineMenu } from "react-icons/ai";
 import { useHistory } from "react-router";
 import SearchBar from "../SearchBar/SearchBar";
-import { useSelector } from "react-redux";
 
 const NavBar = ({cartItems}) => {
   const bg = useColorModeValue("white", "gray.800");
@@ -43,7 +42,6 @@ const NavBar = ({cartItems}) => {
   const history= useHistory()
   const [show, setShow] = React.useState(false)
   const handleToggle = (setting) => setShow(setting)
-  const cart = useSelector(({ cartReducer }) => cartReducer);
 
   const handleOpenCart = () => {
     history.push("/cart")
@@ -106,7 +104,7 @@ const NavBar = ({cartItems}) => {
                   // mr={6}
                   // mb={1}
               />
-              <VisuallyHidden>Menu</VisuallyHidden>
+              <VisuallyHidden>Choc</VisuallyHidden>
 
             <HStack spacing={3} display={{ base: "none", md: "inline-flex" }}>    
               <Flex w="full" alignSelf="center" flexShrink={0}>
@@ -141,12 +139,12 @@ const NavBar = ({cartItems}) => {
               rounded="sm"
               _hover={{ color: useColorModeValue("gray.800", "gray.600") }}
             >
-              <CartIcon handleOpenCart={() => handleOpenCart()} number={cart.cartItems.length}
+              <CartIcon handleOpenCart={() => handleOpenCart()} number={cartItems.length}
                />
               <VisuallyHidden>Shopping Cart</VisuallyHidden>
             </chakra.a>
             <Menu isLazy>
-            <MenuButton p={0} bg="transparent">
+            <MenuButton p={0} as={Button} icon={MdOutlineAccountCircle} bg="transparent">
               <Icon
                 color="#fff"
                 h={7}

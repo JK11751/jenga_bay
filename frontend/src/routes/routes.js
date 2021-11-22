@@ -1,5 +1,4 @@
-import React, {useEffect} from "react"
-import { useSelector } from "react-redux";
+import React from "react"
 import {Route, Switch} from "react-router-dom"
 
 //All Page imports
@@ -19,60 +18,55 @@ import { ForgotPassword } from "../pages/ForgotPassword/ForgotPassword.js";
 import { ResetPassword } from "../pages/ForgotPassword/ResetPassword.js";
 import { SearchResultsProducts } from "../pages/SearchResults/SearchResultsProducts.js";
 import { SearchResultsSellers } from "../pages/SearchResults/SearchResultsSellers.js";
-import { CompanyCategoryPage } from "../pages/CompanyProductPage/CompanyCategoryPage.js";
-import PrivateRoute from "../utils/PrivateRoute.js";
+import { SearchResultsCategories } from "../pages/SearchResults/SearchResultsCategories.js";
 
-const Routes =()=>{
 
-    //globally setting cart items in localStorage for data persistence
-    const cart = useSelector(({ cartReducer }) => cartReducer);
-
-    useEffect(() => {
-        localStorage.setItem("cartItems", JSON.stringify(cart.cartItems));
-    }, [cart.cartItems])
+const Routes =({cartItems, handleAddProduct, handleRemoveProduct, handleUpdateQuantity, handleBuyProductNow, clearCart})=>{
     return(
         <div>
         <Switch>
             <Route exact path="/">
-                <Home />
+                <Home cartItems={cartItems} handleAddProduct={handleAddProduct} />
             </Route>
             <Route exact path="/sign-up">
-                <SignUpPage />
+                <SignUpPage cartItems={cartItems} />
             </Route>
             <Route exact path="/sign-in">
-                <SignInPage />
+                <SignInPage cartItems={cartItems} />
             </Route>
             <Route exact path="/registration">
                 <RegistrationPage />
             </Route>
             <Route exact path="/product-details/:productId">
-                <ProductDetailsPage />
+                <ProductDetailsPage cartItems={cartItems} handleAddProduct={handleAddProduct} handleBuyProductNow={handleBuyProductNow}/>
             </Route>
             <Route exact path="/products">
-                <SearchResultsProducts />
+                <SearchResultsProducts cartItems={cartItems} handleAddProduct={handleAddProduct} handleBuyProductNow={handleBuyProductNow}/>
             </Route>
             <Route exact path="/sellers/:sellerId/items">
-                <SearchResultsSellers />
+                <SearchResultsSellers cartItems={cartItems} handleAddProduct={handleAddProduct} handleBuyProductNow={handleBuyProductNow}/>
             </Route>
             <Route exact path="/upload">
-                <CompanyProductUploadPage />
+                <CompanyProductUploadPage cartItems={cartItems} />
             </Route>
             <Route exact path="/sellers/:sellerId/:sellerName">
-                <CompanyProductPage />
+                <CompanyProductPage cartItems={cartItems} handleAddProduct={handleAddProduct} />
             </Route>
             <Route exact path="/seller/:sellerId/profile">
-                <CompanyProfilePage />
+                <CompanyProfilePage cartItems={cartItems} handleAddProduct={handleAddProduct}/>
             </Route>
             <Route exact path="/categories/:categoryName">
-                <CategoryPage />
+                <CategoryPage cartItems={cartItems} handleAddProduct={handleAddProduct}/>
             </Route>
             <Route exact path="/sellers/:sellerId/:sellerName/:categoryName">
-                <CompanyCategoryPage />
+                <SearchResultsCategories cartItems={cartItems} handleAddProduct={handleAddProduct}/>
             </Route>
             <Route exact path="/cart">
-                <Cart />
+                <Cart clearCart={clearCart} handleUpdateQuantity={handleUpdateQuantity} handleRemoveProduct={handleRemoveProduct} handleAddProduct={handleAddProduct} cartItems={cartItems} />
             </Route>
-            <PrivateRoute component={CheckoutPage} exact path="/checkout" />
+            <Route exact path="/checkout">
+                <CheckoutPage/>
+            </Route>
             <Route exact path="/forgot-password">
                 <ForgotPassword/>
             </Route>
@@ -81,7 +75,7 @@ const Routes =()=>{
             </Route>
             {/* No route should be added after this not found page */}
             <Route exact path="*">
-                <NotFound />
+                <NotFound cartItems={cartItems}/>
             </Route>
         </Switch>
         </div>

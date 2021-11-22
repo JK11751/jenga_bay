@@ -40,7 +40,7 @@ const SidebarContent = ({ onClose, handleToggle,ref, ...rest }) => {
 
   return (
     <Box
-      // forwardRef={ref}
+      ref={ref}
       bg={useColorModeValue('white', 'gray.900')}
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
@@ -80,7 +80,7 @@ const SidebarContent = ({ onClose, handleToggle,ref, ...rest }) => {
             </h2>
             <AccordionPanel pb={4}>
             {CategoryList.map((category) =>
-              (<Text fontSize="1em" p={2} _hover={{cursor:"pointer"}} onClick={() => history.push(`/categories/${category.value}`)} key={category.id}>{category.name}</Text>)
+              (<Text fontSize="1em" p={2} _hover={{cursor:"pointer"}} onClick={() => history.push(`/categories/${category.value}`)} key={category.id}>{category.value}</Text>)
             )}
             </AccordionPanel>
           </AccordionItem>
@@ -162,7 +162,7 @@ const SideBar = ({ show, handleToggle }) => {
       ref={boxRef}
       style={{ height: "100vh", width: "300px", zIndex: 10000 }}
     >
-      <SidebarContent handleToggle={handleToggle}/>
+      <SidebarContent ref={boxRef} handleToggle={handleToggle}/>
     </Slide>}</>
   );
 };
