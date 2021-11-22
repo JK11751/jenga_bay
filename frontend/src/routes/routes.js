@@ -2,6 +2,9 @@ import React, {useEffect} from "react"
 import { useSelector } from "react-redux";
 import {Route, Switch} from "react-router-dom"
 
+//utility imports
+import PrivateRoute from "../utils/PrivateRoute.js";
+
 //All Page imports
 import Home from "../pages/Home/home.js";
 import SignUpPage from "../pages/SignUpPage/SignUpPage.js";
@@ -20,7 +23,7 @@ import { ResetPassword } from "../pages/ForgotPassword/ResetPassword.js";
 import { SearchResultsProducts } from "../pages/SearchResults/SearchResultsProducts.js";
 import { SearchResultsSellers } from "../pages/SearchResults/SearchResultsSellers.js";
 import { CompanyCategoryPage } from "../pages/CompanyProductPage/CompanyCategoryPage.js";
-import PrivateRoute from "../utils/PrivateRoute.js";
+import { EditCompanyProfile } from "../pages/EditProfile/EditCompanyProfile.js";
 
 const Routes =()=>{
 
@@ -62,6 +65,12 @@ const Routes =()=>{
             </Route>
             <Route exact path="/seller/:sellerId/profile">
                 <CompanyProfilePage />
+            </Route>
+            {/* <Route exact path="/seller/:sellerId/profile/edit">
+                <EditCompanyProfile />
+            </Route> */}
+            <Route exact path="/seller/profile/edit">
+                <EditCompanyProfile />
             </Route>
             <Route exact path="/categories/:categoryName">
                 <CategoryPage />

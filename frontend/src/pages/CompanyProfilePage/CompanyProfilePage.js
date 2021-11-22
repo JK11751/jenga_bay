@@ -9,7 +9,7 @@ import { Icon } from '@chakra-ui/icon';
 import {MdCheckCircle, MdLocationOn} from "react-icons/md"
 import { BiImageAdd } from 'react-icons/bi';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react"
-import { handleGetSellerItems, handleGetSellerProfile } from '../../redux/actions/sellerActions';
+import { handleGetSellerItems, handleGetSellerDetails } from '../../redux/actions/sellerActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import Reviews from './subs/Reviews';
@@ -18,7 +18,6 @@ import {
     MenuButton,
     MenuList,
     MenuItem,
-    useColorModeValue,
     Circle,
 } from "@chakra-ui/react"
 import {ChevronDownIcon } from "@chakra-ui/icons"
@@ -29,7 +28,7 @@ export const CompanyProfilePage = () => {
     const img = "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg"
 
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
-    const seller = useSelector((state) => state.sellerReducer).sellerProfile
+    const sellerDetails = useSelector((state) => state.sellerReducer).sellerDetails
     
     const {sellerId} = useParams()
     
@@ -40,7 +39,7 @@ export const CompanyProfilePage = () => {
 
     useEffect(() => { 
         dispatch(handleGetSellerItems(sellerId))
-        dispatch(handleGetSellerProfile(sellerId))
+        dispatch(handleGetSellerDetails(sellerId))
     }, [sellerId,dispatch])
 
     const onButtonClick = () => {
@@ -83,9 +82,12 @@ export const CompanyProfilePage = () => {
     }
 
     return (
-        <>
+        <Box>
             <input type='file' id='file' ref={inputFile} style={{display: 'none'}}/>
             <NavBar />
+            {sellerDetails.map((seller) => {
+                return(
+                    <>
             <Flex bg="#f5f5f5" pb="7vh" flexDir="column" borderBottomRadius="10px">
                 <Center>
                     <Image borderBottomRadius="10px" height="200px" width="70vw" src={img} />
@@ -180,7 +182,7 @@ export const CompanyProfilePage = () => {
                         <TabPanel>
                             <Flex>
                                 <Box
-                                    bg={useColorModeValue("white", "gray.800")}
+                                    bg="white"
                                     width="300px"
                                     height="300px"
                                     borderWidth="1px"
@@ -211,7 +213,7 @@ export const CompanyProfilePage = () => {
                         </TabPanel>
                         <TabPanel>
                         <Box
-                            bg={useColorModeValue("white", "gray.800")}
+                            bg="white"
                             width="100%"
                             height="auto"
                             borderWidth="1px"
@@ -277,8 +279,8 @@ export const CompanyProfilePage = () => {
                     </TabPanels>
                 </Tabs>
                 </Box>
-            </Center> 
+            </Center> </>)})}
             <Footer />
-        </>
+        </Box>
     )
 }
