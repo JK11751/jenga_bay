@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Text, Box, Flex, Image } from "@chakra-ui/react";
 import Arrow from "../../../components/ImageSlider/Arrow"
 import "../../../components/ImageSlider/ImageSlider.css"
-import dummyData from "../../../components/Products/DummyData";
+import dummyData from "../../../data/DummyData";
 
 const Component = () => {
   

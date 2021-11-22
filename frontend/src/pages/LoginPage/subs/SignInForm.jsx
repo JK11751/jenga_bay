@@ -32,7 +32,7 @@ import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { useForm } from "../../../utils/useForm";
 import { toast } from "react-toastify";
-import { handleLoginUser } from "../../../redux/actions/userActions";
+import { handleLoginUser } from "../../../redux/actions/authActions";
 
 const style ={
     color:"red",
@@ -55,7 +55,7 @@ const SignInForm = () => {
     validations: {
     username: {
       custom: {
-        isValid: (value) => value.length > 6,
+        isValid: (value) => value.length > 1,
         message: "The password needs to be at least 6 characters long.",
       },
         // pattern: {

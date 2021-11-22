@@ -47,7 +47,7 @@ class APIServices {
 
   // @desc End Point Example
   async loginUser(data) {
-    return api.post(`/accounts/login/`, data);
+    return api.post(`/login`, data);
   }
 
   // @desc End Point Example

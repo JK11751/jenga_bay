@@ -11,7 +11,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useState } from 'react';
-import { handleResetPassword } from '../../redux/actions/userActions';
+import { handleResetPassword } from '../../redux/actions/authActions';
 
   
   export const ForgotPassword = () => {
