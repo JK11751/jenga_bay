@@ -19,7 +19,7 @@ import { handleGetAllSellers} from "../../redux/actions/sellerActions";
 import { Link } from 'react-router-dom'
 import { CategoryFilters } from '../../components/Categories/CategoryFilters'
 import { Divider } from '@chakra-ui/react';
-import CategoryList from '../../components/Categories/CategoryList';
+import CategoryList from '../../data/CategoryList';
 
 
 export const CategoryPage = () => {

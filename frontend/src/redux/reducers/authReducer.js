@@ -1,22 +1,40 @@
-import { SET_IS_AUTHENTICATED } from "../actions/types";
+import { SET_IS_AUTHENTICATED, LOGIN_USER, PASSWORD_RESET, PASSWORD_RESET_CONFIRM } from "../actions/types";
 
 //STEP 2 - stating initial state and defining actions
 //This is the default state
 const initialState ={
     isAuthenticated: false,
+    loggedInUser:{},
+    passwordResetToken: {},
+    passwordResetConfirmation:{},
 };
 
 const authReducer = (state = initialState, action) => {
     const {type, payload} = action 
     switch (type) {
-    case SET_IS_AUTHENTICATED:
-        return{
-            ...state,
-            isauthenticated: payload
-        }     
+        case LOGIN_USER:
+            return{
+                ...state,
+                loggedInUser: payload,
+            }     
+        case PASSWORD_RESET:
+            return{
+                ...state,
+                passwordResetToken: payload,
+            }
+        case PASSWORD_RESET_CONFIRM:
+            return{
+                ...state,
+                passwordResetConfirmation: payload,
+            }  
 
-    default:
-        return state;//returns default state if no data is fetched
+        case SET_IS_AUTHENTICATED:
+            return{
+                ...state,
+                isauthenticated: payload
+            }     
+        default:
+            return state;//returns default state if no data is fetched
     }
 }
 export default authReducer;
