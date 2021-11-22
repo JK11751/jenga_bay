@@ -18,7 +18,7 @@ const SearchedUsersDropdown = ({options, categories, brands}) => {
                     <>
                         <Box as="span">{"   "}</Box>
                         <ListItem  _hover={{cursor:"pointer", bg:"#24A8FF", borderRadius:"5px", color:"white"}} _focus={{bg:"#24A8FF", borderRadius:"5px", color:"white"}}
-                        onClick={() => history.push(`/products/${option.item_name}`)} 
+                        onClick={() => history.push(`/product-details/${option.id}`)} 
                         padding="5px" key={option.id}>
                         <HStack>
                             <Text>{option.item_name}</Text>

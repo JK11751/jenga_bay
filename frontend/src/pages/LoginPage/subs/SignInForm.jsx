@@ -54,10 +54,14 @@ const SignInForm = () => {
   } = useForm({
     validations: {
     username: {
-        pattern: {
-            value: '^[A-Za-z]*$',
-            message: "You're not allowed to use special characters or numbers in your name.",
-        },
+      custom: {
+        isValid: (value) => value.length > 6,
+        message: "The password needs to be at least 6 characters long.",
+      },
+        // pattern: {
+        //     value: '^[A-Za-z]*$',
+        //     message: "You're not allowed to use special characters or numbers in your name.",
+        // },
         },
       email: {
         pattern: {
@@ -74,32 +78,6 @@ const SignInForm = () => {
     },
 
     onSubmit: () => {
-      //  await axios
-      // .post("https://api.zuri.chat/users", {
-      //   first_name,
-      //   last_name: other_name,
-      //   email,
-      //   password
-      // })
-      // .then(response => {
-      //   const { data, message } = response.data;
-
-      //   //Store token in localstorage
-      //   sessionStorage.setItem("user_id", data.InsertedId);
-      //   localStorage.setItem("newUserEmail", JSON.stringify(email));
-      //   localStorage.setItem("userUserPassword", JSON.stringify(password));
-
-      // })
-      // .catch(error => {
-      //   const { data } = error.response;
-      //   setShowDialog(false);
-
-      //   RegExp(/Users with email/).test(data.message) &&
-      //     setemailerror("This email is already in use");
-
-      //   !RegExp("Users with email").test(data.message) &&
-      //     seterror(data.message);
-      // });
       const data = {
         username: user.username,
         // email: user.email,
@@ -114,10 +92,19 @@ const SignInForm = () => {
 
       toast.success("Login successful", {
         position: "bottom-left",
-      });
-      history.push("/");
+      })
+      history.push("/")
     },
   });
+
+  
+
+
+      // const handleEnterKey = (e) => {
+      //   if (e.keyCode === 13) {
+      //       handleSubmit();
+      //   }
+      // }
 
   return (
     <Flex flexDirection="column">

@@ -1,4 +1,5 @@
 import axios from "axios"
+import { getToken } from "./useToken";
 
 const baseURL = 'http://localhost:8000';// base url for all endpoints
 
@@ -19,13 +20,15 @@ const apiConfig = {
   
 const api = axios.create({ ...apiConfig });
 //getting user token from local storage
-const userToken = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : " ";
-console.log("userToken", userToken)
+// const userToken = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : " ";
+// console.log("userToken", userToken)
 // token authentification
-// axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}` 
+const token = getToken(); 
+// api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
 api.interceptors.request.use(
   (config) => {
-    const token = userToken; // Whatever the token is
+     // Whatever the token is
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
@@ -33,7 +36,6 @@ api.interceptors.request.use(
 );
 
 class APIServices {
-
 /*----------------------------------EXAMPLE-------------------------------------- */ 
 
   // @desc End Point Example
@@ -115,9 +117,10 @@ class APIServices {
 /*----------------------------------SELLERS-------------------------------------- */
 
   //getting all sellers
-  async getAllSellers(){
-    return api.get(`/sellers`);
-  }
+  async getAllSellers()
+      {
+        return api.get(`/sellers/`);
+      }
 
   //Creating a seller in th db
   async createSeller(data){
