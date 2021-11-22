@@ -3,10 +3,10 @@ import error from "../../assets/404Error.png"
 import { Link } from 'react-router-dom';
 import NavBar from "../../components/PageSections/NavBar";
 
-const NotFound = ({cartItems}) => {
+const NotFound = () => {
   return (
     <>
-      <NavBar cartItems={cartItems} />
+      <NavBar />
       <Center>
         <Box mt="60px" alignSelf="center" textAlign="center"  px={6}>
         {/* <Text fontSize="18px" mt={3} mb={2}>

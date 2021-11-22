@@ -1,13 +1,10 @@
 from django.shortcuts import render
 from .serializers import *
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .models import *
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 from . permissions import *
-from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.authtoken.models import Token
-from rest_framework.response import Response
 
 class SellerCreateView(CreateAPIView):
     """api for creating new sellers"""
@@ -179,30 +176,3 @@ class SpecificTransactionView(ListAPIView):
 
     def get_queryset(self):
         return Transaction.objects.all().filter(id=self.kwargs['pk'])
-
-class CustomAuthToken(ObtainAuthToken):
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data,
-                                       context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        token, created = Token.objects.get_or_create(user=user)
-        if not created:
-            # update the created time of the token to keep it valid
-            token.created = datetime.utcnow()
-            token.save()
-
-        if Seller.objects.filter(profile=user).exists():
-            session_status = 'seller'
-        elif Buyer.objects.filter(profile=user).exists():
-            session_status = 'buyer'
-        else:
-            session_status = None
-
-        return Response({
-            'token': token.key,
-            'user_id': user.pk,
-            'email': user.email,
-            'session_status': session_status
-        })

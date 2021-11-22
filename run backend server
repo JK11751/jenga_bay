@@ -37,7 +37,7 @@
     access the api endpoints from:
 
     Authentication and password reset:
-    http://localhost:8000/login (to login a user)
+    http://localhost:8000/accounts/login/ (to login a user)
     http://localhost:8000/accounts/logout/ (to logout a user)
 
     http://localhost:8000/accounts/password_reset/ (to get a password reset token)

@@ -1,99 +1,123 @@
 const CategoryList = [
     {
         id:1,
-        value:"metal and steel work"
+        name: "Metal and Steel Work",
+        value:"metal and steel work",
     },
     {
         id:2,
-        value:"tools"
+        name: "Tools",
+        value:"tools",
     },
     {
         id:3,
-        value:"electrical systems"
+        name: "Electrical Systems",
+        value:"electrical systems",
     },
     {
         id:4,
-        value:"paints"
+        name: "Paints",
+        value:"paints",
     },
     {
         id:5,
-        value:"glass"
+        name: "Glass",
+        value:"glass",
     },
     {
         id:6,
-        value:"fabricators"
+        name: "Fabricators",
+        value:"fabricators",
     },
     {
         id:7,
-        value:"bricks and masonry"
+        name: "Bricks and Masonry",
+        value:"bricks and masonry",
     },
     {
         id:8,
-        value:"sand and stone"
+        name: "Sand and Stone",
+        value:"sand and stone",
     },
     {
         id:9,
-        value:"wood and timber"
+        name: "Wood and Timber",
+        value:"wood and timber",
     },
     {
         id:10,
-        value:"plastics"
+        name: "plastics",
+        value:"plastics",
     },
     {
         id:11,
-        value:"ceramics"
+        name:"Ceramics",
+        value:"ceramics",
     },
     {
         id:12,
-        value:"cement"
+        name: "Cement",
+        value:"cement",
     },
     {
         id:13,
-        value:"plumbing"
+        name: "Plumbing",
+        value:"plumbing",
     },
     {
         id:14,
-        value:"security systems"
+        name: "Security Systems",
+        value:"security systems",
     },
     {
         id:15,
-        value:"doors and windows"
+        name: "Doors and Windows",
+        value:"doors and windows",
     },
     {
         id:16,
-        value:"telecommunications equipment"
+        name : "Telecomunications Equipment",
+        value:"telecommunications equipment",
     },
     {
         id:17,
-        value:"building safety"
+        name:"Building Safety", 
+        value:"building safety",
     },
     {
         id:18,
-        value: "furniture"
+        name: "Furniture",
+        value: "furniture",
     },
     {
         id:19,
-        value:"protection"
+        name: "Protection",
+        value:"protection",
     },
     {
         id:20,
-        value:"roofing"
+        name: "Roofing",
+        value:"roofing",
     },
     {
         id:21,
-        value:"conveyor systems"
+        name: "Conveyor Systems",
+        value:"conveyor systems",
     },
     {
         id:22,
-        value:"composites"
+        name : "Composites",
+        value:"composites",
     },
     {
         id:23,
-        value:"adhesives"
+        name: "Adhesives",
+        value:"adhesives",
     },
     {
         id:24,
-        value:"others"
+        name: "Others",
+        value:"others",
     },
 ]
 

@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { useHistory } from "react-router";
 import category from "../../../assets/category.jpg"
 
-const CategoryCard = ({category_name}) => {
+const CategoryCard = ({category_name, category_value}) => {
     const history = useHistory()
     const MotionFlex = motion(Flex)
 
@@ -17,7 +17,7 @@ const CategoryCard = ({category_name}) => {
         mx="auto"
         mt={5}
         whileHover={{ scale: 1.03 }}
-        onClick={() => history.push(`/categories/${category_name}`)}
+        onClick={() => history.push(`/categories/${category_value}`)}
       >
         <Box
           bg="gray.300"

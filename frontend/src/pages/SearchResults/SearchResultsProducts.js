@@ -13,12 +13,13 @@ import {
   } from "@chakra-ui/react"
 import {ChevronDownIcon} from "@chakra-ui/icons"
 import { useDispatch, useSelector } from "react-redux";
-import { handleGetAllSellers, handleGetProductsFromSearch} from "../../redux/actions/appActions";
+import { handleGetProductsFromSearch} from "../../redux/actions/productActions";
+import { handleGetAllSellers} from "../../redux/actions/sellerActions";
 import { Link } from 'react-router-dom'
 import { CategoryFilters } from '../../components/Categories/CategoryFilters'
 import { Divider } from '@chakra-ui/react';
 
-export const SearchResultsProducts = ({cartItems, handleAddProduct}) => {
+export const SearchResultsProducts = () => {
     // const productReducer = useSelector(({ productReducer }) => productReducer);
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
     const itemList = useSelector((state) => state.productReducer).searchedItems
@@ -46,7 +47,7 @@ export const SearchResultsProducts = ({cartItems, handleAddProduct}) => {
 
     return (
         <Box>
-            <NavBar cartItems={cartItems}/>
+            <NavBar />
             <Breadcrumb mt="30px" textSize="1.5em" fontFamily="monospace" textTransform="uppercase" ml={20} spacing="8px" separator={<MdKeyboardArrowRight color="gray.500" />}>
                 <BreadcrumbItem>
                     <BreadcrumbLink as={Link} to={{pathname: `/`}}>Home</BreadcrumbLink>
@@ -88,7 +89,7 @@ export const SearchResultsProducts = ({cartItems, handleAddProduct}) => {
                             <Flex flexWrap="wrap">
                             {searchedItems.map((product)=>{ 
                                 return(
-                                    <ProductCard price={product.item_price} sellerId={product.item_seller.id} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
+                                    <ProductCard price={product.item_price} sellerId={product.item_seller.id} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
                                 )
                             })}</Flex>
                         </Flex>

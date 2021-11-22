@@ -137,9 +137,8 @@ dmypy.json
 #migrations
 jengabay/migrations/0006_auto_20211113_1008.py
 jengabay/migrations/0006_auto_20211117_0926.py
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+jengabay/migrations/0007_auto_20211121_1709.py
+
 # dependencies
 /frontend/node_modules
 /backend/node_modules
@@ -147,4 +146,9 @@ yarn-error.log*
 /node_modules
 /.pnp
 .pnp.js
+
+#yarn logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 

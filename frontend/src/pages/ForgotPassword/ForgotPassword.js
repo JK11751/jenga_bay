@@ -8,10 +8,26 @@ import {
     Text,
     useColorModeValue,
   } from '@chakra-ui/react';
-  
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
+import { useState } from 'react';
+import { handleResetPassword } from '../../redux/actions/userActions';
 
   
   export const ForgotPassword = () => {
+
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const [email, setEmail] = useState("")
+
+    const handleSubmit = (e) => {
+      const data = {
+        email: email,
+      }
+      dispatch(handleResetPassword(data))
+      history.push(`/reset-password`)
+    }
+
     return (
       <Flex
         minH={'100vh'}
@@ -41,10 +57,12 @@ import {
               placeholder="your-email@example.com"
               _placeholder={{ color: 'gray.500' }}
               type="email"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </FormControl>
           <Stack spacing={6}>
             <Button
+              onClick={handleSubmit}
               bg={'blue.400'}
               color={'white'}
               _hover={{

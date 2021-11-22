@@ -1,5 +1,6 @@
-import { ADD_TO_CART,REMOVE_FROM_CART } from "../actions/types";
-// import { addItemToCart, removeItemFromCart } from "../../utils/cart.utils";
+// import { toast } from "react-toastify";
+import { addItemToCart, buyProductNow, clearCart, removeItemFromCart, updateProductQuantity } from "../../utils/cart.utils";
+import { ADD_TO_CART, BUY_PRODUCTS_NOW, CLEAR_CART, REMOVE_FROM_CART, UPDATE_PRODUCT_QUANTITY } from "../actions/types";
 
 const initialState = {
     cartItems: localStorage.getItem("cartItems")
@@ -10,22 +11,43 @@ const initialState = {
 };
 
 const cartReducer = (state = initialState, action) => {
-    const {type, payload} = action 
 
-    switch (type) {   
+    switch (action.type) {
         case ADD_TO_CART:
             return {
-                ...state,payload,
-                // cartItems: addItemToCart(state.cartItems, payload)
+                ...state,
+                cartItems: addItemToCart(state.cartItems, action.payload)
             };
         case REMOVE_FROM_CART:
             return {
                 ...state,
-                payload,
-                // cartItems: removeItemFromCart(state.cartItems, payload)
-            }
+                cartItems: removeItemFromCart(state.cartItems, action.payload),
+            };
+        case CLEAR_CART:
+            return {
+                ...state,
+                cartItems: clearCart(state.cartItems),
+            };    
+        case BUY_PRODUCTS_NOW:
+            return {
+                ...state,
+                cartItems: buyProductNow(state.cartItems, action.payload.item, action.payload.quantity),
+            };
+        case UPDATE_PRODUCT_QUANTITY:
+            return {
+                ...state,
+                cartItems: updateProductQuantity(state.cartItems, action.payload),
+            };        
+        // case GET_CART_TOTALS:
+        //     return {
+        //         ...state,
+        //         cartItems: getTotals(state, action),
+        //     };
         default:
-            return state;//returns defult state if no data is fetched
-        }
+            return state;
+        }     
+
+
 }
+
 export default cartReducer;
