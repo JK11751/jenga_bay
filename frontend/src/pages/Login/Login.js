@@ -3,7 +3,7 @@ import { Box, Center } from "@chakra-ui/layout";
 import SignInContainer from "./subs/SignInContainer";
 
 
-const SignInPage =()=>{
+const Login =()=>{
     return(
         <Box width="100vw" h="100vh" backgroundColor="#F8F8F8">
             <Center pt="5%">
@@ -13,4 +13,4 @@ const SignInPage =()=>{
     )
 }
 
-export default SignInPage;
+export default Login;

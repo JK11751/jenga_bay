@@ -3,7 +3,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/image";
 import UploadForm from "./UploadForm";
 import logo from "../../assets/JengaBay.png"
-const CompanyProductUploadPage=()=> {
+const AddProduct=()=> {
   return (
     <Box >
       <Flex width="70vw">
@@ -15,10 +15,10 @@ const CompanyProductUploadPage=()=> {
           <Image ml={5} mt={5} src={logo} alt="logo" />
         </Box>
         <Box height="100vh" width="70%" bg="#ffffff" >
-                    <UploadForm alignSelf="center"/>
-            </Box>
+            <UploadForm alignSelf="center"/>
+        </Box>
       </Flex>
     </Box>
   );
 }
-export default CompanyProductUploadPage;
+export default AddProduct;

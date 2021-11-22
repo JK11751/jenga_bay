@@ -27,7 +27,7 @@ import { handleResetPasswordConfirm } from '../../redux/appActions/authActions';
         token: "3339e80fe05e5ca9fc74799213f81a093d1f",
       }
       dispatch(handleResetPasswordConfirm(data))
-      history.push(`/sign-in`)
+      history.push(`/login`)
     }
 
     // const token = localStorage.getItem("passwordResetToken") ? JSON.parse(localStorage.getItem("passwordResetToken")) : " ";
