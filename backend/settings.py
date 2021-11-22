@@ -156,8 +156,12 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+<<<<<<< HEAD
         'jengabay.token_authentication.ExpiringTokenAuthentication',
         #'rest_framework.authentication.SessionAuthentication',
+=======
+        'rest_framework.authentication.SessionAuthentication',
+>>>>>>> 64f042623e2a271c741554bd5ceeb6ab6609cb42
     ],
     'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny',]
 }
