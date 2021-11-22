@@ -4,7 +4,7 @@ import {BiSearchAlt2} from "react-icons/bi"
 // import {MdClose} from "react-icons/md"
 import {Flex} from "@chakra-ui/layout"
 import SearchedUsersDropdown from "./SearchedItemsDropDown"
-import CategoryList from "../Categories/CategoryList";
+import CategoryList from "../../data/CategoryList"
 import { useHistory } from "react-router-dom"
 import { handleGetProducts } from "../../redux/actions/productActions";
 import { handleGetAllSellers } from "../../redux/actions/sellerActions";

@@ -23,7 +23,7 @@ import {
 } from 'react-icons/fi';
 import {BiCategory} from "react-icons/bi"
 
-import CategoryList from "../Categories/CategoryList";
+import CategoryList from "../../data/CategoryList";
 import { useHistory } from "react-router";
 
 const LinkItems = [

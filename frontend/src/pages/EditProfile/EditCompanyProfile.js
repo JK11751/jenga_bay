@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useRef} from 'react'
 import {
   chakra,
   Box,
@@ -22,10 +22,55 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { FaUser } from "react-icons/fa";
+import countyData from "../../data/Counties.json"
 
 export const EditCompanyProfile = () => {
+  const inputFile = useRef(null) 
+  const onButtonClick = () => {
+    // `current` points to the mounted file input element
+   inputFile.current.click();
+  };
+
+  /** "selected" here is state variable which will hold the
+   * value of currently selected dropdown.
+   */
+   const [selected, setSelected] = React.useState("Nairobi");
+   const [options, setOptions] = React.useState("");
+  
+   /** Function that will set different values to state variable
+    * based on which dropdown is selected
+    */
+   const changeSelectOptionHandler = (event) => {
+     setSelected(event.target.value);
+   };
+
+   useEffect(() => {
+    setOptions(findCountyByTitle(countyData,selected))
+   }, [selected])
+
+  //finds county by name from select and returns a list of subcounties
+  function findCountyByTitle(countyData, county_name) {
+
+    //looks for the county in the json file
+    const existingCounty = countyData.find(
+      county => county.name === county_name
+    )
+
+    /*
+      if the county exists then it reaturns the values of 
+      subcounties from the array of subcounties
+    */
+    if (existingCounty){
+
+      return existingCounty.sub_counties.map((sub_county, index) => {
+        return(
+        <option key={index}>{sub_county}</option>)})
+    }
+  }
+
   return (
     <Box bg={useColorModeValue("gray.50", "inherit")} p={10}>
+    <input type='file' id='file' ref={inputFile} style={{display: 'none'}}/>
       <Box>
             <chakra.form
 
@@ -41,90 +86,7 @@ export const EditCompanyProfile = () => {
                 spacing={6}
                 p={{ sm: 6 }}
               >
-                <SimpleGrid columns={3} spacing={6}>
-                  <FormControl as={GridItem} colSpan={[3, 2]}>
-                    <FormLabel
-                      fontSize="sm"
-                      fontWeight="md"
-                      color={useColorModeValue("gray.700", "gray.50")}
-                    >
-                      Website
-                    </FormLabel>
-                    <InputGroup size="sm">
-                      <InputLeftAddon
-                        children="http://"
-                        bg={useColorModeValue("gray.50", "gray.800")}
-                        color={useColorModeValue("gray.500", "gay.50")}
-                        rounded="md"
-                      />
-                      <Input
-                        type="tel"
-                        placeholder="www.example.com"
-                        focusBorderColor="brand.400"
-                        rounded="md"
-                      />
-                    </InputGroup>
-                  </FormControl>
-                </SimpleGrid>
-
-                <div>
-                  <FormControl id="email" mt={1}>
-                    <FormLabel
-                      fontSize="sm"
-                      fontWeight="md"
-                      color={useColorModeValue("gray.700", "gray.50")}
-                    >
-                      About
-                    </FormLabel>
-                    <Textarea
-                      placeholder="you@example.com"
-                      mt={1}
-                      rows={3}
-                      shadow="sm"
-                      focusBorderColor="brand.400"
-                      fontSize={{ sm: "sm" }}
-                    />
-                    <FormHelperText>
-                      Brief description for your profile. URLs are hyperlinked.
-                    </FormHelperText>
-                  </FormControl>
-                </div>
-
-                <FormControl>
-                  <FormLabel
-                    fontSize="sm"
-                    fontWeight="md"
-                    color={useColorModeValue("gray.700", "gray.50")}
-                  >
-                    Photo
-                  </FormLabel>
-                  <Flex alignItems="center" mt={1}>
-                    <Avatar
-                      boxSize={12}
-                      bg={useColorModeValue("gray.100", "gray.800")}
-                      icon={
-                        <Icon
-                          as={FaUser}
-                          boxSize={9}
-                          mt={3}
-                          rounded="full"
-                          color={useColorModeValue("gray.300", "gray.700")}
-                        />
-                      }
-                    />
-                    <Button
-                      type="button"
-                      ml={5}
-                      variant="outline"
-                      size="sm"
-                      fontWeight="medium"
-                      _focus={{ shadow: "none" }}
-                    >
-                      Change
-                    </Button>
-                  </Flex>
-                </FormControl>
-
+                {/* <SimpleGrid columns={3} spacing={6}> */}
                 <FormControl>
                   <FormLabel
                     fontSize="sm"
@@ -197,6 +159,92 @@ export const EditCompanyProfile = () => {
                     </Stack>
                   </Flex>
                 </FormControl>
+                <FormControl>
+                  <FormLabel
+                    fontSize="sm"
+                    fontWeight="md"
+                    color={useColorModeValue("gray.700", "gray.50")}
+                  >
+                    Company Profile Photo
+                  </FormLabel>
+                  <Flex alignItems="center" mt={1}>
+                    <Avatar
+                      boxSize={12}
+                      bg={useColorModeValue("gray.100", "gray.800")}
+                      icon={
+                        <Icon
+                          as={FaUser}
+                          boxSize={9}
+                          mt={3}
+                          rounded="full"
+                          color={useColorModeValue("gray.300", "gray.700")}
+                        />
+                      }
+                    />
+                    <Button
+                      type="button"
+                      ml={5}
+                      variant="outline"
+                      size="sm"
+                      fontWeight="medium"
+                      _focus={{ shadow: "none" }}
+                      onClick={onButtonClick}
+                    >
+                      Change
+                    </Button>
+                  </Flex>
+                </FormControl>
+                  <FormControl as={GridItem} colSpan={[3, 2]}>
+                    <FormLabel
+                      fontSize="sm"
+                      fontWeight="md"
+                      color={useColorModeValue("gray.700", "gray.50")}
+                    >
+                      Website
+                    </FormLabel>
+                    <InputGroup size="sm">
+                      <InputLeftAddon
+                        children="http://"
+                        bg={useColorModeValue("gray.50", "gray.800")}
+                        color={useColorModeValue("gray.500", "gay.50")}
+                        rounded="md"
+                      />
+                      <Input
+                        type="tel"
+                        placeholder="www.example.com"
+                        focusBorderColor="brand.400"
+                        rounded="md"
+                      />
+                    </InputGroup>
+                  </FormControl>
+                {/* </SimpleGrid> */}
+
+                <div>
+                  <FormControl id="email" mt={1}>
+                    <FormLabel
+                      fontSize="sm"
+                      fontWeight="md"
+                      color={useColorModeValue("gray.700", "gray.50")}
+                    >
+                      About
+                    </FormLabel>
+                    <Textarea
+                      placeholder="you@example.com"
+                      mt={1}
+                      rows={3}
+                      shadow="sm"
+                      focusBorderColor="brand.400"
+                      fontSize={{ sm: "sm" }}
+                    />
+                    <FormHelperText>
+                      Brief description for your profile. URLs are hyperlinked.
+                    </FormHelperText>
+                  </FormControl>
+                </div>
+
+                
+
+                
               <Stack
                 px={4}
                 py={5}
@@ -212,7 +260,7 @@ export const EditCompanyProfile = () => {
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
                     >
-                      First name
+                      Business Name
                     </FormLabel>
                     <Input
                       type="text"
@@ -230,18 +278,18 @@ export const EditCompanyProfile = () => {
 
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="last_name"
+                      htmlFor="email_address"
                       fontSize="sm"
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
                     >
-                      Last name
+                      Business Email
                     </FormLabel>
                     <Input
-                      type="text"
-                      name="last_name"
-                      id="last_name"
-                      autoComplete="family-name"
+                      type="email"
+                      name="email_address"
+                      id="email_address"
+                      autoComplete="email"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
@@ -258,7 +306,7 @@ export const EditCompanyProfile = () => {
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
                     >
-                      Email address
+                      Phone Number
                     </FormLabel>
                     <Input
                       type="text"
@@ -281,7 +329,34 @@ export const EditCompanyProfile = () => {
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
                     >
-                      Country / Region
+                      County
+                    </FormLabel>
+                    <Select
+                      id="country"
+                      name="country"
+                      autoComplete="country"
+                      placeholder="Select option"
+                      mt={1}
+                      focusBorderColor="brand.400"
+                      shadow="sm"
+                      size="sm"
+                      w="full"
+                      rounded="md"
+                      onChange={changeSelectOptionHandler}
+                    >
+                    {countyData.map((county) => {
+                      return(
+                      <option key={county.code}>{county.name}</option>)})}
+                    </Select>
+                  </FormControl>
+                  <FormControl as={GridItem} colSpan={[6, 3]}>
+                    <FormLabel
+                      htmlFor="country"
+                      fontSize="sm"
+                      fontWeight="md"
+                      color={useColorModeValue("gray.700", "gray.50")}
+                    >
+                      sub_county
                     </FormLabel>
                     <Select
                       id="country"
@@ -295,9 +370,8 @@ export const EditCompanyProfile = () => {
                       w="full"
                       rounded="md"
                     >
-                      <option>United States</option>
-                      <option>Canada</option>
-                      <option>Mexico</option>
+                     {/* This is where we have used our options variable */}
+                    {options}
                     </Select>
                   </FormControl>
 
@@ -308,7 +382,30 @@ export const EditCompanyProfile = () => {
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
                     >
-                      Street address
+                      Password
+                    </FormLabel>
+                    <Input
+                      type="text"
+                      name="street_address"
+                      id="street_address"
+                      autoComplete="street-address"
+                      mt={1}
+                      focusBorderColor="brand.400"
+                      shadow="sm"
+                      size="sm"
+                      w="full"
+                      rounded="md"
+                    />
+                  </FormControl>
+
+                  <FormControl as={GridItem} colSpan={6}>
+                    <FormLabel
+                      htmlFor="street_address"
+                      fontSize="sm"
+                      fontWeight="md"
+                      color={useColorModeValue("gray.700", "gray.50")}
+                    >
+                      Street Address
                     </FormLabel>
                     <Input
                       type="text"
@@ -331,7 +428,7 @@ export const EditCompanyProfile = () => {
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
                     >
-                      City
+                      Building
                     </FormLabel>
                     <Input
                       type="text"
@@ -354,7 +451,7 @@ export const EditCompanyProfile = () => {
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
                     >
-                      State / Province
+                      Local Area Name
                     </FormLabel>
                     <Input
                       type="text"
@@ -377,7 +474,7 @@ export const EditCompanyProfile = () => {
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
                     >
-                      ZIP / Postal
+                      Town
                     </FormLabel>
                     <Input
                       type="text"

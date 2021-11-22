@@ -1,4 +1,4 @@
-import image from "../../../assets/product.jpg"
+import image from "../assets/product.jpg"
 
 export const Companies = [
     {

@@ -1,6 +1,6 @@
 // import { Button } from "@chakra-ui/button";
 import { Box } from "@chakra-ui/layout";
-import CategoryList from "./CategoryList";
+import CategoryList from "../../data/CategoryList";
 import { Tag, TagLabel } from "@chakra-ui/tag";
 import "./CategoryChips.css"
 import {MdOutlineKeyboardArrowRight, MdOutlineKeyboardArrowLeft} from "react-icons/md"

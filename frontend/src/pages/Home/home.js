@@ -3,14 +3,14 @@ import { Box, Flex, Center, Spacer, Text, Icon, HStack, Spinner } from "@chakra-
 import {ChevronRightIcon} from "@chakra-ui/icons"
 import NavBar from "../../components/PageSections/NavBar";
 import ProductCard from "../../components/Products/ProductCard";
-import CategoryList from "../../components/Categories/CategoryList";
+import CategoryList from "../../data/CategoryList";
 import CategoryChips from "../../components/Categories/CategoryChips"
 import Footer from "../../components/PageSections/Footer";
 import AdsCarousel from "./subs/AdsCarousel";
 import { handleGetProducts } from "../../redux/actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import CategoryCard from "./subs/CategoryCard";
-import { Companies } from "./subs/Companies";
+import { Companies } from "../../data/Companies";
 import image from "../../assets/bamburi.jpg"
 import CompanyCard from "./subs/CompanyCard";
 import RegisterAsASeller from "./subs/RegisterAsASeller";
