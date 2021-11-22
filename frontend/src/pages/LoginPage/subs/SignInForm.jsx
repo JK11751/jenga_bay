@@ -32,7 +32,7 @@ import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { useForm } from "../../../utils/useForm";
 import { toast } from "react-toastify";
-import { handleLoginUser } from "../../../redux/actions/authActions";
+import { handleLoginUser } from "../../../redux/appActions/authActions";
 
 const style ={
     color:"red",

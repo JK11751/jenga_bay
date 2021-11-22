@@ -12,7 +12,7 @@ import {
     import { useDispatch } from 'react-redux';
   import { useHistory } from 'react-router';
   import { useState } from 'react';
-import { handleResetPasswordConfirm } from '../../redux/actions/authActions';
+import { handleResetPasswordConfirm } from '../../redux/appActions/authActions';
   
   export const ResetPassword = () => {
 

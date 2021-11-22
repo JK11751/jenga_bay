@@ -30,7 +30,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import { useForm } from "../../../utils/useForm";
-import { handleRegisterClient } from "../../../redux/actions/userActions";
+import { handleRegisterClient } from "../../../redux/appActions/userActions";
 import { useDispatch } from "react-redux";
 
 const style ={
