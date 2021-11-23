@@ -1,5 +1,5 @@
 #category-slider{
-    width: 60vw;
+    width: 80vw;
     /* height: 100%; */
     white-space: nowrap;
     overflow-x: scroll;
@@ -9,7 +9,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
     border-left-color: black;
-    border-right-color: blac
+    border-right-color: black;
     /* background-color: #555; */
     /* box-shadow: 0 0 14px 0 #555; */
 }

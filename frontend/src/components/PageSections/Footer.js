@@ -1,7 +1,6 @@
 import {
     Box,
     Container,
-    Link,
     SimpleGrid,
     Stack,
     Text,
@@ -11,6 +10,8 @@ import {
     Image,
   } from '@chakra-ui/react';
 import logo from "../../assets/JengaBay.png"
+import NewsLetter from './Newsletter';
+import { Link } from 'react-router-dom';
   
   const ListHeader = ({ children }) => {
     return (
@@ -23,15 +24,23 @@ import logo from "../../assets/JengaBay.png"
   export default function Footer() {
     return (
       <Box
-        bg={useColorModeValue('gray.50', 'gray.900')}
-        color={useColorModeValue('gray.700', 'gray.200')}>
-        <Container as={Stack} maxW={'6xl'} py={10}>
+        bg="#232F3E"
+        w="100%"
+        mt={20}
+        // bg={useColorModeValue('gray.50', 'gray.900')}
+        // color={useColorModeValue('gray.700', 'gray.200')}
+        >
+        <Box  w="100%">
+          <NewsLetter/>
+        </Box>
+
+        <Container color="white" as={Stack} maxW={'6xl'} py={10}>
           <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
             <Stack align={'flex-start'}>
               <ListHeader>Product</ListHeader>
-              <Link href={'#'}>Overview</Link>
+              <Link to="/">Overview</Link>
               <Stack direction={'row'} align={'center'} spacing={2}>
-                <Link href={'#'}>Features</Link>
+                <Link to="/">Features</Link>
                 <Tag
                   size={'sm'}
                   bg={useColorModeValue('green.300', 'green.800')}
@@ -40,33 +49,27 @@ import logo from "../../assets/JengaBay.png"
                   New
                 </Tag>
               </Stack>
-              <Link href={'#'}>Tutorials</Link>
-              <Link href={'#'}>Pricing</Link>
-              <Link href={'#'}>Releases</Link>
+              <Link to="/">Pricing</Link>
+              <Link to="/">Releases</Link>
             </Stack>
             <Stack align={'flex-start'}>
               <ListHeader>Company</ListHeader>
-              <Link href={'#'}>About Us</Link>
-              <Link href={'#'}>Press</Link>
-              <Link href={'#'}>Careers</Link>
-              <Link href={'#'}>Contact Us</Link>
-              <Link href={'#'}>Partners</Link>
+              <Link to="/">About Us</Link>
+              <Link to="/">Contact Us</Link>
+              <Link to="/">Founders</Link>
             </Stack>
             <Stack align={'flex-start'}>
               <ListHeader>Legal</ListHeader>
-              <Link href={'#'}>Cookies Policy</Link>
-              <Link href={'#'}>Privacy Policy</Link>
-              <Link href={'#'}>Terms of Service</Link>
-              <Link href={'#'}>Law Enforcement</Link>
-              <Link href={'#'}>Status</Link>
+              <Link to="/">Cookies Policy</Link>
+              <Link to="/">Privacy Policy</Link>
+              <Link to="/">Terms of Service</Link>
             </Stack>
             <Stack align={'flex-start'}>
               <ListHeader>Follow Us</ListHeader>
-              <Link href={'#'}>Facebook</Link>
-              <Link href={'#'}>Twitter</Link>
-              <Link href={'#'}>Dribbble</Link>
-              <Link href={'#'}>Instagram</Link>
-              <Link href={'#'}>LinkedIn</Link>
+              <Link to="/">Facebook</Link>
+              <Link to="/">Twitter</Link>
+              <Link to="/">Instagram</Link>
+              <Link to="/">LinkedIn</Link>
             </Stack>
           </SimpleGrid>
         </Container>
@@ -88,9 +91,10 @@ import logo from "../../assets/JengaBay.png"
               ml: 8,
             }}>
             {/* <Logo /> */}
-            <Image src={logo}/>
+            <Link to="/">
+            <Image src={logo}/></Link>
           </Flex>
-          <Text pt={6} fontSize={'sm'} textAlign={'center'}>
+          <Text color="white" pt={6} fontSize={'sm'} textAlign={'center'}>
             © 2021 JengaBay. All rights reserved
           </Text>
         </Box>

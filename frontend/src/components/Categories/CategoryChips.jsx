@@ -1,6 +1,6 @@
 // import { Button } from "@chakra-ui/button";
 import { Box } from "@chakra-ui/layout";
-import CategoryList from "./CategoryList";
+import CategoryList from "../../data/CategoryList";
 import { Tag, TagLabel } from "@chakra-ui/tag";
 import "./CategoryChips.css"
 import {MdOutlineKeyboardArrowRight, MdOutlineKeyboardArrowLeft} from "react-icons/md"
@@ -29,12 +29,12 @@ const CategoryChips = () => {
 
   const slideLeft =()=>{
     var slider = document.getElementById("category-slider");
-    sideScroll(slider,'left',25,100,10);
+    sideScroll(slider,'left',25,100,30);
   }
 
   const slideRight =()=>{
     var slider = document.getElementById("category-slider");
-    sideScroll(slider,'right',25,100,10);
+    sideScroll(slider,'right',25,100,30);
   }
 
 
@@ -46,7 +46,7 @@ const CategoryChips = () => {
           <div id="category-slider">  
             {CategoryList.map((category) =>
             
-              (<Tag _hover={{cursor:"pointer"}} onClick={() => history.push(`/categories/${category.value}`)} pl={4} pr={4} height="30px" width="auto" borderRadius="full" variant="solid" backgroundColor="#24A8FF" key={category.id} mr={4}><TagLabel>{category.value}</TagLabel></Tag>)
+              (<Tag _hover={{cursor:"pointer"}} onClick={() => history.push(`/categories/${category.value}`)} pl={4} pr={4} height="30px" width="auto" borderRadius="full" variant="solid" backgroundColor="#24A8FF" key={category.id} mr={4}><TagLabel>{category.name}</TagLabel></Tag>)
             )}  
           </div>
           <button id="category-button right" onClick={slideRight}>

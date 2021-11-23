@@ -1,49 +1,124 @@
-import React, {useEffect, useState } from "react"
-import { Box, Flex } from "@chakra-ui/layout";
+import React, { useEffect } from "react"
+import { Box, Flex, Center, Spacer, Text, Icon, HStack, Spinner } from "@chakra-ui/react";
+import {ChevronRightIcon} from "@chakra-ui/icons"
 import NavBar from "../../components/PageSections/NavBar";
 import ProductCard from "../../components/Products/ProductCard";
+import CategoryList from "../../data/CategoryList";
 import CategoryChips from "../../components/Categories/CategoryChips"
 import Footer from "../../components/PageSections/Footer";
-import AdsCarousel from "./AdsCarousel";
-// import ProductList from "../shared/ProductList";
-import { handleGetProducts } from "../../redux/actions/appActions";
+import AdsCarousel from "./subs/AdsCarousel";
+import { handleGetProducts } from "../../redux/appActions/productActions";
 import { useDispatch, useSelector } from "react-redux";
+import CategoryCard from "./subs/CategoryCard";
+import { Companies } from "../../data/Companies";
+import image from "../../assets/bamburi.jpg"
+import CompanyCard from "./subs/CompanyCard";
+import RegisterAsASeller from "./subs/RegisterAsASeller";
 
-const Home = ({handleAddProduct, cartItems}) => {
+const Home = () => {
 
-    const [productList, setProductList] = useState([])
+    const [isLoading, setisLoading] = React.useState(true)
+    
+    const dispatch = useDispatch();
+    const productReducer = useSelector(({ productReducer }) => productReducer);// setting the value of product Reducer to the data fetched from the api
 
     //fetching data from the api
-    const dispatch = useDispatch();
-    const productReducer = useSelector(({ productReducer }) => productReducer);
-    // setting the value of product Reducer to the data fetched from the api
     useEffect(() => {
-        dispatch(handleGetProducts())// dispatches the action to get the data from the api
-        
-        
-    }, []);
+        dispatch(handleGetProducts())// dispatches the action to get the data from the api  
+        setisLoading(false)  
+    }, [dispatch]);
 
-    // setProductList(productReducer.products)
-    // localStorage.setItem("products", JSON.stringify(productReducer));console.log("products")
+    localStorage.setItem("Allproducts", JSON.stringify(productReducer));
     return(
-        <Box alignItems="center" bgColor="#fff" flexDir="column" width="100vw" height="100vh">
-            <NavBar cartItems={cartItems} />
-            <Box alignSelf="center" ml="5vw" mt={5}>
+        <>
+        {isLoading ? 
+        <Center>
+            <Spinner thickness="4px"
+                mt="45vh"
+                speed="0.65s"
+                emptyColor="gray.200"
+                color="blue.500"
+                size="xl"/>
+        </Center>
+        :
+        <Box alignItems="center" bgColor="#fff" flexDir="column" width="full" height="100vh">
+            <NavBar />
+            <Center mt={5}>
                 <AdsCarousel alignSelf="center"/>
+            </Center>
+            <Center>
+                <CategoryChips />
+            </Center>
+            <Box mb={10}>
+                <Center>
+                    <Box mt={5} mb={5} textAlign="center" w="90vw" bg="#E9F6FF" p={4} as="span" fontSize="lg" textTransform="uppercase">POPULAR CATEGORIES</Box>
+                </Center>
+                <Center>
+                    <Flex  borderRadius="10px" width="90vw" alignSelf="center" flexWrap="wrap">  
+                        {CategoryList.slice(0, 10).map((category, index) =>
+                            (
+                            <CategoryCard key={index} category_name={category.name} category_value={category.value}/>
+                            )
+                        )}
+                    </Flex>
+                </Center>
+            </Box> 
+            <Center> 
+                <Flex shadow="lg" height="auto" bg="#fff" borderRadius="10px" width="90vw" flexWrap="wrap" >
+                    <Flex p={2} bg="#E9F6FF" borderTopRadius="10px"  width="inherit" color="#000" flexDir="column">
+                        <Flex p={2}>
+                            <Text p={2} fontWeight="bold">POPULAR PRODUCTS THIS WEEK</Text>
+                            <Spacer />
+                            <HStack>
+                                <Text>See More products</Text>
+                                <Icon as={ChevronRightIcon}/>
+                            </HStack>
+                        </Flex> 
+                    </Flex>
+                    <Flex overflowX="hidden" pl={8} py={5}>
+                    {productReducer.products.slice(0, 6).map((product,key)=>{ 
+                        return(
+                            <ProductCard sellerId={product.item_seller.id} price={product.item_price} key={key} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
+                        )
+                    })}</Flex>
+                </Flex>  
+            </Center>   
+            <Box my={10}>
+                {/* <Center>
+                    <Box mt={5} mb={5} textAlign="center" w="90vw" bg="#E9F6FF" p={4} as="span" fontSize="lg" textTransform="uppercase">POPULAR CATEGORIES</Box>
+                </Center> */}
+                <Center>
+                    <RegisterAsASeller/>
+                </Center>
+            </Box> 
+            <Box my={10}>
+                <Center>
+                        <Box mt={5} mb={5} textAlign="center" w="90vw" bg="#E9F6FF" p={4} as="span" fontSize="lg" textTransform="uppercase">BRAND PARTNERS</Box>
+                    </Center>
+                <Center>
+                <Flex px="3" borderRadius="10px" width="90vw" alignSelf="center" flexWrap="wrap">
+                        {Companies.map((company, index) => {
+                            return(
+                            <CompanyCard key={index} seller_id={1} company_name={company.name} image={image}/>
+                        )})}
+                    </Flex>
+                </Center>  
             </Box>
-            
-            <CategoryChips />
-            <Flex ml="5vw" borderRadius="10px" width="90vw" alignSelf="center" flexWrap="wrap" pl={3} pr={3}>
-            {productReducer.products.map((product,key)=>{ 
-            return(
-                <ProductCard key={key} product={product} handleAddProduct={handleAddProduct} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
-            )
-            })}</Flex>
-            <Box p={3}>
-            <Footer/>
-            </Box>
-            
-        </Box>
+            <Center>
+                <Box mt={5} mb={5} textAlign="center" w="90vw" bg="#E9F6FF" p={4} as="span" fontSize="lg" textTransform="uppercase">You May Also Like</Box>
+            </Center>
+            <Flex ml="5vw" pl={6} borderRadius="10px" width="90vw" alignSelf="center" flexWrap="wrap">
+                {productReducer.products.map((product,key)=>{ 
+                    return(
+                        <ProductCard price={product.item_price} key={key} product={product}  id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
+                    )
+                })}
+            </Flex>   
+            <Box >
+                <Footer/>
+            </Box>   
+        </Box>}
+        </>
     )
 }
 export default Home;

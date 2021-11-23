@@ -1,25 +1,22 @@
-import { GET_USERS } from "../actions/types";
+import { REGISTER_CLIENT } from "../App/actionTypes";
 
 //STEP 2 - stating initial state and defining actions
-//Thi sis the default state
+//This is the default state
 const initialState ={
-    users:[]
+    createClientData:{},
 };
 
 const userReducer = (state = initialState, action) => {
     const {type, payload} = action 
-    // STEP THREE
-    // A new state is returned with the data from the endpoint
-    // The GET USERS case is handled here
     switch (type) {
-    case GET_USERS:
+    case REGISTER_CLIENT:
         return{
             ...state,
-            users:payload
+            createClientData: payload
         }     
 
     default:
-        return state;//returns deafult state if no data is fetched
+        return state;//returns default state if no data is fetched
     }
 }
 export default userReducer;

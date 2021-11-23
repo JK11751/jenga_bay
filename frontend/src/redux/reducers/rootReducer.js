@@ -1,15 +1,17 @@
 import { combineReducers } from "redux";
-import userReducer from "./userReducer";
 import productReducer from "./productReducer";
 import sellerReducer from "./sellerReducer";
 import cartReducer from "./cartReducer";
+import userReducer from "./userReducer";
+import authReducer from "./authReducer";
 
 //combines all the reducers into one reducer
 const rootReducer = combineReducers({
-    userReducer,
     productReducer,
     sellerReducer,
-    cart:cartReducer,
+    cartReducer,
+    userReducer,
+    authReducer,
 });
 
 export default rootReducer;

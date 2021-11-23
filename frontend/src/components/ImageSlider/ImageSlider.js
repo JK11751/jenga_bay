@@ -5,7 +5,7 @@ import { Flex, VStack } from "@chakra-ui/layout";
 import { useSelector } from "react-redux";
 
 //component imports
-// import Dots from "./Dots";
+import Dots from "./Dots";
 // import Arrow from "./Arrow";
 import Slide from "./Slide";
 import { Image } from "@chakra-ui/image";
@@ -88,9 +88,7 @@ const ImageSlider = () => {
             </VStack>
             {/* Image Slider Component */}
             <section className="slider">
-                {/* <Dots slides={SliderData} activeSlide={current} /> */}
-                {/* <Arrow direction="left" handleClick={prevSlide} />
-                <Arrow direction="right" handleClick={nextSlide} />   */}
+                <Dots slides={SliderData} activeSlide={current} />
                 <Slide className="slide" current={current} SliderData={SliderData} />   
             </section>
         </Flex>

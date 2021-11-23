@@ -1,7 +1,8 @@
 from django.db import models
-from django.db.models.deletion import CASCADE, PROTECT
+from django.db.models.deletion import CASCADE, PROTECT, SET_NULL
 from datetime import datetime, timezone
-
+from django.contrib.auth.models import User
+from django.db.models.fields.related import ForeignKey
 class County(models.Model):
     '''Creates county entity instances'''
     county_name = models.CharField(max_length=100)
@@ -24,19 +25,17 @@ class SubCounty(models.Model):
 
 class Seller(models.Model):
     '''Creates seller entity instances'''
+    profile = models.OneToOneField(User, on_delete=models.CASCADE)
     business_name = models.CharField(max_length=200, null=False)
     business_reg_no = models.CharField(max_length=100, null=False)
-    email = models.EmailField(null=False)
     phone_number = models.CharField(max_length=15, null=False)
     sub_county = models.ForeignKey(SubCounty,null=False, on_delete=PROTECT)
     town = models.CharField(max_length=50, null=False)
     local_area_name = models.CharField(max_length=100, null=False)
     street = models.CharField(max_length=100, null=False)
     building = models.CharField(max_length=100, null=False)
-    password = models.CharField(max_length=500, null=False)
     business_reg_doc = models.ImageField(upload_to='images/profile', default='images/profile/profile.jpg')
     profile_pic = models.ImageField(upload_to='images/profile', default='images/profile/profile.jpg')
-    is_registered = models.BooleanField(default=False, null=False)
     registration_date = models.DateTimeField(null=True, default=datetime.now)
 
     def __str__(self):
@@ -46,14 +45,12 @@ class Seller(models.Model):
 
 class Buyer(models.Model):
     '''Creates buyer entity instances'''
-    buyer_name = models.CharField(max_length=100, null=False)
-    email_address = models.EmailField(null=False)
+    profile = models.OneToOneField(User, on_delete=CASCADE)
     phone_number = models.CharField(max_length=15, null=False)
-    password = models.CharField(max_length=500, null=False)
 
     def __str__(self):
         '''returns a string representation of an instance of this model'''
-        return self.buyer_name
+        return self.profile.username
 
 
 class Item(models.Model):
@@ -116,18 +113,17 @@ class Transaction(models.Model):
     )
 
     transaction_mode = models.CharField(max_length=100, choices=t_mode, null=False)
-    date = models.DateTimeField(default=datetime.now, null=False)
     amount = models.FloatField(null=False)
     transaction_code = models.CharField(max_length=200, null=False)
+    recipient = models.ForeignKey(Seller, null=False, on_delete=CASCADE)
+    payer = models.ForeignKey(Buyer, on_delete=SET_NULL, null=True)
 
 class Order(models.Model):
     """Creats an instance of an order entity"""
 
-    customer = models.ForeignKey(Buyer, null=False, on_delete=PROTECT)
     ordered_items = models.ManyToManyField(Item)
     date_placed = models.DateTimeField(default=datetime.now, null=True)
     total_amount_payable = models.FloatField(null=False)
-    seller = models.ForeignKey(Seller, null=False, on_delete=PROTECT)
     is_delivered = models.BooleanField(default=False, null=False)
     date_delivered = models.DateTimeField(null=True)
-    payment_transaction = models.ForeignKey(Transaction, on_delete=PROTECT, null=True)
+    payment_transaction = models.ForeignKey(Transaction, on_delete=SET_NULL, null=True)
