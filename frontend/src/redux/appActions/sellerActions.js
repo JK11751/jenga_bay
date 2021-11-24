@@ -1,6 +1,6 @@
 import APIServices from "../../utils/apiServices";
 // import { toast } from "react-toastify";
-import { GET_SELLER_DETAILS,GET_SELLER_ITEMS, GET_SELLER_PROFILE, GET_ALL_SELLERS,SEARCH_SELLER_PRODUCTS, GET_SELLER_PRODUCTS_IN_SPECIFIC_CATEGORY,} from "./types";
+import { GET_SELLER_DETAILS,GET_SELLER_ITEMS, GET_SELLER_PROFILE, GET_ALL_SELLERS,SEARCH_SELLER_PRODUCTS, GET_SELLER_PRODUCTS_IN_SPECIFIC_CATEGORY,} from "../App/actionTypes";
 
 //Getting all sellers
 const getAllSellers = (allSellers) => ({

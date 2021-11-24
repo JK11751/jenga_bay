@@ -13,7 +13,7 @@ import { AiOutlineSearch } from "react-icons/ai"
 import ProductCard from '../../components/Products/ProductCard';
 // import CategoryChips from '../../components/Categories/CategoryChips';
 import { CategoryFilters } from "../../components/Categories/CategoryFilters"
-import { handleGetSellerItems, handleGetSellerDetails, handleGetAllSellers  } from '../../redux/actions/sellerActions';
+import { handleGetSellerItems, handleGetSellerDetails, handleGetAllSellers  } from '../../redux/appActions/sellerActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/breadcrumb";

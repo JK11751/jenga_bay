@@ -1,5 +1,5 @@
 import APIServices from "../../utils/apiServices";
-import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS,  GET_PRODUCTS_IN_SPECIFIC_CATEGORY,  SEARCH_PRODUCTS } from "./types";
+import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_USERS,  GET_PRODUCTS_IN_SPECIFIC_CATEGORY,  SEARCH_PRODUCTS } from "../App/actionTypes";
 
 // Redux actions are called here with an underscore before the name (convention)
 

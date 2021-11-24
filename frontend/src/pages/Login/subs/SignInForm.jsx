@@ -4,136 +4,112 @@ import {
   InputGroup,
   InputRightElement,
   InputLeftElement,
+
 } from "@chakra-ui/input";
 import { useState } from "react";
 import { Button, IconButton } from "@chakra-ui/button";
 import {
-  Box,
   VStack,
   Text,
   HStack,
   Stack,
   Divider,
   Flex,
-} from "@chakra-ui/layout";
-import { HiOutlineMail, HiPhone } from "react-icons/hi";
+  Spacer,
+  Box,
+  FormHelperText,
+} from "@chakra-ui/react";
+import { HiOutlineMail } from "react-icons/hi";
 import { IoIosPerson } from "react-icons/io";
 import { BiLockAlt } from "react-icons/bi";
 import { Image } from "@chakra-ui/image";
-import { Checkbox } from "@chakra-ui/checkbox";
 import { BiShowAlt, BiHide } from "react-icons/bi";
-import { FormHelperText } from "@chakra-ui/form-control";
 import facebookIcon from "../../../assets/facebook.png";
 import googleIcon from "../../../assets/Google.png";
 import linkedInIcon from "../../../assets/linkedin.png";
-import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
-import { useForm } from "../../../utils/useForm";
-import { handleRegisterClient } from "../../../redux/actions/userActions";
 import { useDispatch } from "react-redux";
+import { useForm } from "../../../utils/useForm";
+import { toast } from "react-toastify";
+import { handleLoginUser } from "../../../redux/appActions/authActions";
 
 const style ={
-  color:"red",
-}
+    color:"red",
+  }
 
-const SignUpForm = () => {
+const SignInForm = () => {
   const history = useHistory();
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
+
   const dispatch = useDispatch();
 
   //handling form submission
-  const { handleSubmit, handleChange, data: user, errors } = useForm({
+  const {
+    handleSubmit,
+    handleChange,
+    data: user,
+    errors,
+  } = useForm({
     validations: {
-      username: {
+    username: {
+      custom: {
+        isValid: (value) => value.length > 1,
+        message: "The password needs to be at least 6 characters long.",
+      },
+        // pattern: {
+        //     value: '^[A-Za-z]*$',
+        //     message: "You're not allowed to use special characters or numbers in your name.",
+        // },
+        },
+      email: {
         pattern: {
-          value: '^[A-Za-z]*$',
-          message: "You're not allowed to use special characters or numbers in your name.",
-        },
-      },
-      email:{
-        pattern:{
-          value: '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$',
-          message:"Please enter a valid email address"
-        }
-      },
-      phone_number:{
-        pattern:{
-          value: '^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$',
-          message:"Please enter a valid phone number"
-        },
-        custom: {
-          isValid: (value) => value.length >= 10,
-          message: 'The number needs to be at least 10 characters long.',
+          value: "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$",
+          message: "Please enter a valid email address",
         },
       },
       password: {
         custom: {
           isValid: (value) => value.length > 6,
-          message: 'The password needs to be at least 6 characters long.',
+          message: "The password needs to be at least 6 characters long.",
         },
       },
-      
     },
 
     onSubmit: () => {
-      //  await axios
-      // .post("https://api.zuri.chat/users", {
-      //   first_name,
-      //   last_name: other_name,
-      //   email,
-      //   password
-      // })
-      // .then(response => {
-      //   const { data, message } = response.data;
-
-      //   //Store token in localstorage
-      //   sessionStorage.setItem("user_id", data.InsertedId);
-      //   localStorage.setItem("newUserEmail", JSON.stringify(email));
-      //   localStorage.setItem("userUserPassword", JSON.stringify(password));
-
-      // })
-      // .catch(error => {
-      //   const { data } = error.response;
-      //   setShowDialog(false);
-
-      //   RegExp(/Users with email/).test(data.message) &&
-      //     setemailerror("This email is already in use");
-
-      //   !RegExp("Users with email").test(data.message) &&
-      //     seterror(data.message);
-      // });
       const data = {
-        profile:{
-          username: user.username,
-          email: user.email,
-          password: user.password,
-        },
+        username: user.username,
+        // email: user.email,
+        password: user.password,
+      };
 
-        phone_number: user.phone_number,
-      }
-      dispatch(handleRegisterClient(data));
-      // Store token in localstorage
-        // sessionStorage.setItem("user_id", data.InsertedId);
-        // localStorage.setItem("newUserEmail", JSON.stringify(email));
-        // localStorage.setItem("userUserPassword", JSON.stringify(password));
+      dispatch(handleLoginUser(data));
+    //   Store token in localstorage
+    //   sessionStorage.setItem("user_id", data.InsertedId);
+      localStorage.setItem("newUserEmail", JSON.stringify(user.email));
+      localStorage.setItem("userUserPassword", JSON.stringify(user.password));
 
- 
-      toast.success("Sign up successful", {
+      toast.success("Login successful", {
         position: "bottom-left",
-      });
-      history.push("/sign-in");
-    }
+      })
+      history.push("/")
+    },
   });
 
   
-  const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
+
+
+      // const handleEnterKey = (e) => {
+      //   if (e.keyCode === 13) {
+      //       handleSubmit();
+      //   }
+      // }
 
   return (
-    <form onSubmit={handleSubmit}>
     <Flex flexDirection="column">
-      <Text align="center" fontSize="4xl" mt={7}>
-        Create an Account
+      <Text align="center" fontSize="4xl" mt={20}>
+        Sign In to Your Account
       </Text>
       <HStack alignSelf="center" mt={3} mb={3}>
         <Image src={facebookIcon} />
@@ -148,10 +124,10 @@ const SignUpForm = () => {
         <Divider orientation="horizontal" />
       </Stack>
       <Text align="center" fontSize="md">
-        sign up with your email address
+        Sign in with your email address
       </Text>
       <VStack spacing="15px" pl={20} pr={20} pt={4} pb={4}>
-        <FormControl id="username" isRequired>
+      <FormControl id="username" isRequired>
           <InputGroup>
             <InputLeftElement
               pointerEvents="none"
@@ -185,23 +161,6 @@ const SignUpForm = () => {
           </InputGroup>
           {errors.email && <FormHelperText {...style}>{errors.email}</FormHelperText>}
         </FormControl>
-        <FormControl id="phone_number" isRequired>
-          <InputGroup>
-            <InputLeftElement
-              pointerEvents="none"
-              children={<HiPhone color="gray.300" />}
-            />
-            <Input
-              variant="filled"
-              size="md"
-              placeholder="Enter your phone number"
-              type="text"
-              value={user.phone_number || ""}
-              onChange={handleChange("phone_number")}
-            />
-          </InputGroup>
-          {errors.phone_number && <FormHelperText {...style}>{errors.phone_number}</FormHelperText>}
-        </FormControl>
         <FormControl id="password" isRequired>
           <InputGroup>
             <InputLeftElement
@@ -221,7 +180,7 @@ const SignUpForm = () => {
               {show ? (
                 <IconButton
                   as={BiShowAlt}
-                  variant="unstyled"
+                  variant="untyled"
                   h={5}
                   w={5}
                   onClick={handleClick}
@@ -236,21 +195,22 @@ const SignUpForm = () => {
                 ></IconButton>
               )}
             </InputRightElement>
+            {errors.password && <FormHelperText {...style}>{errors.password}</FormHelperText>}
           </InputGroup>
-          {errors.password && <FormHelperText {...style}>{errors.password}</FormHelperText>}
         </FormControl>
-        
       </VStack>
       <Flex mb={4} alignContent="center" pl={20} pr={20}>
-        <Checkbox isRequired size="lg" colorScheme="green">
-          <Text mt={1} fontSize="xs">
-            By creating an account, you agree to the terms of service and
-            conditions, and Privacy Policy
-          </Text>
-        </Checkbox>
+        <Spacer />
+        <Button
+          onClick={() => history.push("/forgot-password")}
+          variant="link"
+          color="black"
+          fontSize="xs"
+        >
+          Forgot Password?
+        </Button>
       </Flex>
       <Button
-        type="submit"
         alignSelf="center"
         padding="10px"
         background="#007ACC"
@@ -260,19 +220,19 @@ const SignUpForm = () => {
         color="#ffffff"
         onClick={handleSubmit}
       >
-        Sign Up
+        Sign In
       </Button>
-      {/* <button type="submit">Submit</button> */}
       <Text align="center" mt={4} fontSize="xs">
-        Already have an account?
-        <Link to="/sign-in"><Box as="span" textColor="#007ACC">
-          {" "}
-          Log in
-        </Box></Link>
+        Don't have an account?
+        <Link to="/signup">
+          <Box as="span" textColor="#007ACC">
+            {" "}
+            Sign up{" "}
+          </Box>
+        </Link>
       </Text>
     </Flex>
-    </form>
   );
 };
 
-export default SignUpForm;
+export default SignInForm;

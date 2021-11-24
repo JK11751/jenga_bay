@@ -166,7 +166,7 @@ const NavBar = ({cartItems}) => {
                 <MenuItem>FAQ</MenuItem>
               </MenuGroup>
               <MenuItem alignItems="center">
-                <Link to="/sign-up">
+                <Link to="/signup">
                   <Button
                     h="30px"
                     alignItems="center"
@@ -182,7 +182,7 @@ const NavBar = ({cartItems}) => {
                 </Link>
               </MenuItem>
                 <MenuItem alignItems="center">
-                  <Link to="/sign-in">
+                  <Link to="/login">
                     <Button
                       h="30px"
                       w="130px"

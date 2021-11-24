@@ -1,6 +1,6 @@
 // import { toast } from "react-toastify";
 import { addItemToCart, buyProductNow, clearCart, removeItemFromCart, updateProductQuantity } from "../../utils/cart.utils";
-import { ADD_TO_CART, BUY_PRODUCTS_NOW, CLEAR_CART, REMOVE_FROM_CART, UPDATE_PRODUCT_QUANTITY } from "../actions/types";
+import { ADD_TO_CART, BUY_PRODUCTS_NOW, CLEAR_CART, REMOVE_FROM_CART, UPDATE_PRODUCT_QUANTITY } from "../App/actionTypes";
 
 const initialState = {
     cartItems: localStorage.getItem("cartItems")

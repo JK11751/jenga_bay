@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import rootReducer from "./reducers/rootReducer"
+import rootReducer from "../reducers/rootReducer"
 
 const initialState = {};
 // A thunk in this context is a function that can be dispatched to perform async

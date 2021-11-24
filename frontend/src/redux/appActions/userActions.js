@@ -1,6 +1,6 @@
 import APIServices from "../../utils/apiServices";
 // import { toast } from "react-toastify";
-import { REGISTER_CLIENT } from "./types";
+import { REGISTER_CLIENT } from "../App/actionTypes";
 
 // Registering a buyer to the system
 export const handleRegisterClient = (userData) => async (dispatch) => {

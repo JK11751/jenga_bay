@@ -6,23 +6,23 @@ import {Route, Switch} from "react-router-dom"
 import PrivateRoute from "../utils/PrivateRoute.js";
 
 //All Page imports
-import Home from "../pages/Home/home.js";
-import SignUpPage from "../pages/SignUpPage/SignUpPage.js";
-import SignInPage from "../pages/LoginPage/SignInPage.js";
-import ProductDetailsPage from "../pages/ProductDetailsPage/ProductDetailsPage.js";
+import Home from "../pages/Home/Home.js";
+import SignUp from "../pages/SignUp/SignUp.js";
+import Login from "../pages/Login/Login.js";
+import ProductDetailsPage from "../pages/ProductDetails/ProductDetailsPage.js";
 import RegistrationPage from "../pages/CompanyRegistration/RegistrationPage.js";
-import CompanyProductUploadPage from "../pages/CompanyProductUploadPage/CompanyProductUploadPage.js";
-import CompanyProductPage from "../pages/CompanyProductPage/CompanyProductPage.js";
-import { CategoryPage } from "../pages/CategoriesPage/CategoryPage.js";
+import AddProduct from "../pages/AddProduct/AddProduct.js";
+import CompanyProductPage from "../pages/CompanyProducts/CompanyProductPage.js";
+import { CategoryPage } from "../pages/Categories/CategoryPage.js";
 import { Cart } from "../pages/Cart/Cart.js";
 import NotFound from "../pages/ErrorPage/NotFound.js";
-import { CompanyProfilePage } from "../pages/CompanyProfilePage/CompanyProfilePage.js";
-import CheckoutPage from "../pages/CheckoutPage.js/CheckoutPage.js";
+import { CompanyProfilePage } from "../pages/CompanyProfile/CompanyProfilePage.js";
+import CheckoutPage from "../pages/Checkout/CheckoutPage.js";
 import { ForgotPassword } from "../pages/ForgotPassword/ForgotPassword.js";
 import { ResetPassword } from "../pages/ForgotPassword/ResetPassword.js";
 import { SearchResultsProducts } from "../pages/SearchResults/SearchResultsProducts.js";
 import { SearchResultsSellers } from "../pages/SearchResults/SearchResultsSellers.js";
-import { CompanyCategoryPage } from "../pages/CompanyProductPage/CompanyCategoryPage.js";
+import { CompanyCategoryPage } from "../pages/CompanyProducts/CompanyCategoryPage.js";
 import { EditCompanyProfile } from "../pages/EditProfile/EditCompanyProfile.js";
 
 const Routes =()=>{
@@ -39,11 +39,11 @@ const Routes =()=>{
             <Route exact path="/">
                 <Home />
             </Route>
-            <Route exact path="/sign-up">
-                <SignUpPage />
+            <Route exact path="/signup">
+                <SignUp />
             </Route>
-            <Route exact path="/sign-in">
-                <SignInPage />
+            <Route exact path="/login">
+                <Login />
             </Route>
             <Route exact path="/registration">
                 <RegistrationPage />
@@ -58,7 +58,7 @@ const Routes =()=>{
                 <SearchResultsSellers />
             </Route>
             <Route exact path="/upload">
-                <CompanyProductUploadPage />
+                <AddProduct />
             </Route>
             <Route exact path="/sellers/:sellerId/:sellerName">
                 <CompanyProductPage />

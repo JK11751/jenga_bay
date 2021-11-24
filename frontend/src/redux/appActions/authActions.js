@@ -1,6 +1,6 @@
 import APIServices from "../../utils/apiServices";
 import { toast } from "react-toastify";
-import { PASSWORD_RESET, PASSWORD_RESET_CONFIRM, LOGIN_USER } from "./types";
+import { PASSWORD_RESET, PASSWORD_RESET_CONFIRM, LOGIN_USER } from "../App/actionTypes";
 
 // Registering a buyer to the system
 export const handleLoginUser = (userData) => async (dispatch) => {

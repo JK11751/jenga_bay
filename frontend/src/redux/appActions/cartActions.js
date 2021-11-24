@@ -1,5 +1,5 @@
 // import { toast } from "react-toastify";
-import { UPDATE_PRODUCT_QUANTITY, REMOVE_FROM_CART, ADD_TO_CART, CLEAR_CART, BUY_PRODUCTS_NOW } from "./types";
+import { UPDATE_PRODUCT_QUANTITY, REMOVE_FROM_CART, ADD_TO_CART, CLEAR_CART, BUY_PRODUCTS_NOW } from "../App/actionTypes";
 
 export const handleAddToCart = (item) => {
     return {
