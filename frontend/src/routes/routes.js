@@ -69,7 +69,7 @@ const Routes =()=>{
             {/* <Route exact path="/seller/:sellerId/profile/edit">
                 <EditCompanyProfile />
             </Route> */}
-            <Route exact path="/seller/profile/edit">
+            <Route exact path="/seller/:sellerId/account/edit">
                 <EditCompanyProfile />
             </Route>
             <Route exact path="/categories/:categoryName">
