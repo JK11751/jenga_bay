@@ -26,7 +26,7 @@ class SpecificSellerProfileView(RetrieveUpdateDestroyAPIView):
     """api used to get, update and delete a specific seller
     must be logged in as a seller"""
     permission_classes = [permissions.IsAuthenticated, IsAccountOwner]
-    serializer_class = SellerProfileSerializer
+    serializer_class = SellerProfileUpdateSerializer
     queryset = Seller.objects.all()
 
 class SpecificSellerView(ListAPIView):
@@ -104,7 +104,7 @@ class SpecificBuyerProfileView(RetrieveUpdateDestroyAPIView):
     """api used to get, update and delete a specific Buyer
     must be logged in as a buyer"""
     permission_classes = [permissions.IsAuthenticated, IsAccountOwner]
-    serializer_class = BuyerProfileSerializer
+    serializer_class = BuyerProfileUpdateSerializer
     queryset = Buyer.objects.all()
 
 class SpecificBuyerView(ListAPIView):

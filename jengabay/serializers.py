@@ -20,14 +20,21 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['username', 'password', 'email']
 
-class SecureUserSerializer(serializers.ModelSerializer):
+class UpdateUserSerializer(serializers.ModelSerializer):
+    """A serializer class to bypass username validation during updates
+    a code to prevent creation of more than one similar user names has been implemented in the update
+    methods of the serializer classes where User is nested"""
     class Meta:
         model = User
         fields = ['username', 'email']
+        extra_kwargs = {
+            'username': {'validators': []},
+        }
 
 class SellerProfileSerializer(serializers.ModelSerializer):
     sub_county = SubCountySerializer(many=False)
     profile = UserSerializer(many=False)
+
     class Meta:
         model = Seller
         fields = "__all__"
@@ -59,6 +66,36 @@ class SellerProfileSerializer(serializers.ModelSerializer):
 
         return Seller.objects.create(**validated_data)
 
+class SellerProfileUpdateSerializer(serializers.ModelSerializer):
+    profile = UpdateUserSerializer(many=False)
+
+    class Meta:
+        model = Seller
+        exclude = ('business_reg_no', 'business_name', 'business_reg_doc', 'sub_county', 'registration_date')
+
+    def update(self, instance, validated_data):
+        """update method to enable updates of the seller corresponding user account(profile)"""
+        nested_serializer = self.fields['profile']
+        profile_instance = instance.profile
+        profile_update_data = validated_data.pop('profile')
+        username = profile_update_data['username']
+        if User.objects.filter(username__iexact=username).exists():
+            if not (User.objects.get(username__iexact=username)).id == (profile_instance).id:
+                raise serializers.ValidationError("A user with this username already exists.")
+        profile_update_data['username'] = profile_update_data['email']
+        nested_serializer.update(profile_instance, profile_update_data)
+
+        instance.phone_number = validated_data.get("phone_number", instance.phone_number)
+        instance.town = validated_data.get("town", instance.town)
+        instance.local_area_name = validated_data.get("local_area_name", instance.local_area_name)
+        instance.street = validated_data.get("street", instance.street)
+        instance.building = validated_data.get("biulding", instance.building)
+        instance.profile_pic = validated_data.get("profile_pic", instance.profile_pic)
+        instance.save()
+
+        return instance
+
+
 
 class SellerSerializer(serializers.ModelSerializer):
     sub_county = SubCountySerializer(many=False)
@@ -68,7 +105,7 @@ class SellerSerializer(serializers.ModelSerializer):
         exclude = ["business_reg_no", "business_reg_doc", "registration_date"]
 
 class BuyerSerializer(serializers.ModelSerializer):
-    profile = SecureUserSerializer(many=False)
+    profile = UserSerializer(many=False)
 
     class Meta:
         model = Buyer
@@ -76,7 +113,6 @@ class BuyerSerializer(serializers.ModelSerializer):
 
 class BuyerProfileSerializer(serializers.ModelSerializer):
     profile = UserSerializer(many=False)
-
     class Meta:
         model = Buyer
         fields = "__all__"
@@ -95,6 +131,28 @@ class BuyerProfileSerializer(serializers.ModelSerializer):
 
         return Buyer.objects.create(**validated_data)
 
+class BuyerProfileUpdateSerializer(serializers.ModelSerializer):
+    profile = UpdateUserSerializer(many=False)
+    class Meta:
+        model = Buyer
+        fields = "__all__"
+
+    def update(self, instance, validated_data):
+        """update method to enable updates of the Buyer corresponding user account(profile)"""
+
+        nested_serializer = self.fields['profile']
+        profile_instance = instance.profile
+        profile_update_data = validated_data.pop('profile')
+        username = profile_update_data['username']
+        if User.objects.filter(username__iexact=username).exists():
+            if not (User.objects.get(username__iexact=username)).id == (profile_instance).id:
+                raise serializers.ValidationError("A user with this username already exists.")
+        nested_serializer.update(profile_instance, profile_update_data)
+
+        instance.phone_number = validated_data.get("phone_number", instance.phone_number)
+        instance.save()
+
+        return instance
 class ItemViewSerializer(serializers.ModelSerializer):
     item_seller = SellerSerializer(many=False)
     class Meta:
