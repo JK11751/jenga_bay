@@ -14,7 +14,7 @@ const SignInContainer = (props) => {
     return(  
         <Flex my="auto" width="70vw" boxShadow="lg">
             <Box height="80vh" width="70%" bg="#ffffff" borderRadius="10px 0px 0px 10px">
-                <SignInForm location={props.location} />
+                <SignInForm location={props.location} {...props}/>
             </Box>
             <VStack p={2} mx="auto" borderRadius="0px 10px 10px 0px" height="80vh" width="40%" background="#007ACC">
                 <Image mt={10} src={logo} _hover={{cursor:"pointer"}} onClick={() => history.push("/")} alt="logo" /> 

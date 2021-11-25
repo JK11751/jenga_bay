@@ -9,10 +9,9 @@ import { Icon } from '@chakra-ui/icon';
 import {MdCheckCircle, MdLocationOn} from "react-icons/md"
 import { BiImageAdd } from 'react-icons/bi';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react"
-import { handleGetSellerItems, handleGetSellerProfile } from '../../redux/appActions/sellerActions';
+import { handleGetSellerItems, handleGetSellerDetails, handleGetSellerProfile } from '../../redux/appActions/sellerActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { useHistory } from 'react-router';
 import Reviews from './subs/Reviews';
 import {
     Menu,
@@ -24,23 +23,28 @@ import {
 import {ChevronDownIcon } from "@chakra-ui/icons"
 import { Button } from '@chakra-ui/button';
 import Stats from './subs/Stats';
+import { useDisclosure } from '@chakra-ui/hooks';
+import { EditCompanyProfile } from './subs/EditCompanyProfile';
+// import { getRoleSessionStatus, getUser } from '../../utils/useToken';
 
 export const CompanyProfilePage = () => {
     const img = "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg"
 
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
-    const seller = useSelector((state) => state.sellerReducer).sellerProfile
+    const sellerDetails = useSelector((state) => state.sellerReducer).sellerDetails;
     
+    // const role=getRoleSessionStatus()
     const {sellerId} = useParams()
-    const history = useHistory()
     const dispatch = useDispatch()
     const [clicked, setClicked] = useState(false)
     const [followers, setFollowers] = useState(13)
     const inputFile = useRef(null) 
 
     useEffect(() => { 
-        dispatch(handleGetSellerItems(sellerId))
-        dispatch(handleGetSellerProfile(sellerId))
+        dispatch(handleGetSellerDetails(sellerId))
+        dispatch(handleGetSellerItems(sellerId)) 
+        // console.log("user",getUser().account_id) 
+        // console.log("role",role) 
     }, [sellerId,dispatch])
 
     const onButtonClick = () => {
@@ -82,7 +86,13 @@ export const CompanyProfilePage = () => {
         setClicked(!clicked)
     }
 
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     return (
+        <>
+        {
+        sellerDetails.map((sellerDetails)=>{
+        return(
         <Box>
             <input type='file' id='file' ref={inputFile} style={{display: 'none'}}/>
             <NavBar />
@@ -90,9 +100,10 @@ export const CompanyProfilePage = () => {
                 <Center>
                     <Image borderBottomRadius="10px" height="200px" width="70vw" src={img} />
                 </Center>
-                <Button position="absolute" top="30vh" right="18vw" onClick={() => history.push(`/seller/${seller.id}/account/edit`)}>EditProfile</Button>
+                {/* {sellerId === getUser.account_id && <Button position="absolute" top="30vh" right="18vw" onClick={() => { onOpen(); dispatch(handleGetSellerProfile(sellerId));}}>EditProfile</Button>} */}
+                <Button position="absolute" top="30vh" right="18vw" onClick={() => { onOpen(); dispatch(handleGetSellerProfile(sellerId));}}>EditProfile</Button>
                 <Box position="absolute" top="30vh" left="17vw">
-                    <Avatar borderColor="#0095F8" borderWidth="5px" height="180px" width="180px" name={seller.business_name} src={seller.profile_pic}>
+                    <Avatar borderColor="#0095F8" borderWidth="5px" height="180px" width="180px" name={sellerDetails.business_name} src={sellerDetails.profile_pic}>
                     <AvatarBadge
                         as={IconButton}
                         onClick={onButtonClick}
@@ -110,12 +121,12 @@ export const CompanyProfilePage = () => {
                     <HStack alignItems="top">
                         <VStack alignItems="left">
                             <HStack>
-                                <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">{seller.business_name}</Text>
+                                <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">{sellerDetails.business_name}</Text>
                                 <Icon color="green" as={MdCheckCircle}/>
                             </HStack>
                             <HStack>
                                 <Icon as={MdLocationOn}/>
-                                <Text>{seller.local_area_name}, {seller.town}</Text>
+                                <Text>{sellerDetails.local_area_name}, {sellerDetails.town}</Text>
                             </HStack>  
                         </VStack>
                         <Box ml="4vw">
@@ -221,12 +232,12 @@ export const CompanyProfilePage = () => {
                             position="relative"
                             p={5}>
                             <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">GENERAL</Text>
-                                <Text p={2}>Business Name:{seller.business_name}</Text>
-                                <Text p={2}>Business Email:{seller.profile.email}</Text>
-                                <Text p={2}>Business Phone Number:{seller.phone_number}</Text>
+                                <Text p={2}>Business Name:{sellerDetails.business_name}</Text>
+                                <Text p={2}>Business Email: {sellerDetails.business_name}@gmail.com</Text>
+                                <Text p={2}>Business Phone Number:{sellerDetails.phone_number}</Text>
                                 <Text p={2}>Business Address:</Text>
-                                <Text p={2}>{seller.town}, {seller.local_area_name}</Text>
-                                <Text p={2}>{seller.street}{seller.building}</Text>
+                                <Text p={2}>{sellerDetails.town}, {sellerDetails.local_area_name}</Text>
+                                <Text p={2}>{sellerDetails.street}{sellerDetails.building}</Text>
                                 <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">COMPANY WEBSITE</Text>
                                 <Text fontFamily="sans-serif" p={2}>https://bamburicement.com/</Text>
                                 <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">MORE INFO</Text>
@@ -270,7 +281,7 @@ export const CompanyProfilePage = () => {
                             <Flex borderRadius="10px" width="80vw" alignSelf="center" flexWrap="wrap" >
                                 {sellerReducer.sellerItems.map((product,key)=>{ 
                                 return(
-                                    <ProductCard key={key} price={product.item_price} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
+                                    <ProductCard key={key} price={product.item_price} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={sellerDetails.business_name}/> 
                                 )
                                 })}
                             </Flex>
@@ -280,6 +291,7 @@ export const CompanyProfilePage = () => {
                 </Box>
             </Center>
             <Footer />
-        </Box>
+            <EditCompanyProfile isOpen={isOpen} onClose={onClose} sellerId={sellerId}/>
+        </Box>)})}</>
     )
 }
