@@ -8,13 +8,13 @@ import shopping from "../../../assets/shopping.gif"
 import SignInForm from "./SignInForm";
 import { useHistory } from "react-router";
 
-const SignInContainer = () => {
+const SignInContainer = (props) => {
     const history= useHistory()
 
     return(  
         <Flex my="auto" width="70vw" boxShadow="lg">
             <Box height="80vh" width="70%" bg="#ffffff" borderRadius="10px 0px 0px 10px">
-                <SignInForm />
+                <SignInForm location={props.location} />
             </Box>
             <VStack p={2} mx="auto" borderRadius="0px 10px 10px 0px" height="80vh" width="40%" background="#007ACC">
                 <Image mt={10} src={logo} _hover={{cursor:"pointer"}} onClick={() => history.push("/")} alt="logo" /> 

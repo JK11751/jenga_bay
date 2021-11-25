@@ -9,9 +9,10 @@ import { Icon } from '@chakra-ui/icon';
 import {MdCheckCircle, MdLocationOn} from "react-icons/md"
 import { BiImageAdd } from 'react-icons/bi';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react"
-import { handleGetSellerItems, handleGetSellerDetails } from '../../redux/appActions/sellerActions';
+import { handleGetSellerItems, handleGetSellerProfile } from '../../redux/appActions/sellerActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import { useHistory } from 'react-router';
 import Reviews from './subs/Reviews';
 import {
     Menu,
@@ -28,10 +29,10 @@ export const CompanyProfilePage = () => {
     const img = "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg"
 
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
-    const sellerDetails = useSelector((state) => state.sellerReducer).sellerDetails
+    const seller = useSelector((state) => state.sellerReducer).sellerProfile
     
     const {sellerId} = useParams()
-    
+    const history = useHistory()
     const dispatch = useDispatch()
     const [clicked, setClicked] = useState(false)
     const [followers, setFollowers] = useState(13)
@@ -39,7 +40,7 @@ export const CompanyProfilePage = () => {
 
     useEffect(() => { 
         dispatch(handleGetSellerItems(sellerId))
-        dispatch(handleGetSellerDetails(sellerId))
+        dispatch(handleGetSellerProfile(sellerId))
     }, [sellerId,dispatch])
 
     const onButtonClick = () => {
@@ -85,13 +86,11 @@ export const CompanyProfilePage = () => {
         <Box>
             <input type='file' id='file' ref={inputFile} style={{display: 'none'}}/>
             <NavBar />
-            {sellerDetails.map((seller) => {
-                return(
-                    <>
             <Flex bg="#f5f5f5" pb="7vh" flexDir="column" borderBottomRadius="10px">
                 <Center>
                     <Image borderBottomRadius="10px" height="200px" width="70vw" src={img} />
                 </Center>
+                <Button position="absolute" top="30vh" right="18vw" onClick={() => history.push(`/seller/${seller.id}/account/edit`)}>EditProfile</Button>
                 <Box position="absolute" top="30vh" left="17vw">
                     <Avatar borderColor="#0095F8" borderWidth="5px" height="180px" width="180px" name={seller.business_name} src={seller.profile_pic}>
                     <AvatarBadge
@@ -223,7 +222,7 @@ export const CompanyProfilePage = () => {
                             p={5}>
                             <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">GENERAL</Text>
                                 <Text p={2}>Business Name:{seller.business_name}</Text>
-                                <Text p={2}>Business Email:{seller.email}</Text>
+                                <Text p={2}>Business Email:{seller.profile.email}</Text>
                                 <Text p={2}>Business Phone Number:{seller.phone_number}</Text>
                                 <Text p={2}>Business Address:</Text>
                                 <Text p={2}>{seller.town}, {seller.local_area_name}</Text>
@@ -279,7 +278,7 @@ export const CompanyProfilePage = () => {
                     </TabPanels>
                 </Tabs>
                 </Box>
-            </Center> </>)})}
+            </Center>
             <Footer />
         </Box>
     )

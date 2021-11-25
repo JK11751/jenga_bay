@@ -31,14 +31,13 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { useForm } from "../../../utils/useForm";
-import { toast } from "react-toastify";
 import { handleLoginUser } from "../../../redux/appActions/authActions";
 
 const style ={
     color:"red",
   }
 
-const SignInForm = () => {
+const SignInForm = (props) => {
   const history = useHistory();
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -90,9 +89,6 @@ const SignInForm = () => {
       localStorage.setItem("newUserEmail", JSON.stringify(user.email));
       localStorage.setItem("userUserPassword", JSON.stringify(user.password));
 
-      toast.success("Login successful", {
-        position: "bottom-left",
-      })
       history.push("/")
     },
   });

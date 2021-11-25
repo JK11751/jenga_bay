@@ -10,7 +10,7 @@ const apiConfig = {
       'Content-Type': 'application/json',
       // "Access-Control-Allow-Origin": '*',
       // "Access-Control-Expose-Headers": "Content-Length, X-JSON",
-      // // Access-Control-Allow-Methods: 'HEAD, GET, POST, PUT, PATCH, DELETE'
+      // "Access-Control-Allow-Methods": 'HEAD, GET, POST, PUT, PATCH, DELETE',
       // "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
     },
     validateStatus: function (status) {
@@ -24,16 +24,16 @@ const api = axios.create({ ...apiConfig });
 // console.log("userToken", userToken)
 // token authentification
 const token = getToken(); 
-// api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+if(token) api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
-api.interceptors.request.use(
-  (config) => {
-     // Whatever the token is
-    if (token) config.headers.Authorization = `Bearer ${token}`;
-    return config;
-  },
-  (err) => Promise.reject("Error from auth token",err)
-);
+// api.interceptors.request.use(
+//   (config) => {
+//      // Whatever the token is
+//     if (token) config.headers.Authorization = `Bearer ${token}` ;
+//     return config;
+//   },
+//   (err) => Promise.reject("Error from auth token",err)
+// );
 
 class APIServices {
 /*----------------------------------EXAMPLE-------------------------------------- */ 
@@ -134,7 +134,16 @@ class APIServices {
 
   //getting profile of a specific seller
   async getSellerProfile(seller_id){
-    return api.get(`/sellers/${seller_id}/profile`);
+    return api.get(`/sellers/${seller_id}/profile`,
+     {
+        headers: {
+          Authorization: `Token ${token}`
+        }
+      }, 
+      {
+        withCredentials: true
+      }
+    );
   }
 
   //updating profile of a specific seller

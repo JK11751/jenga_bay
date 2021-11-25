@@ -23,8 +23,24 @@ import {
 } from "@chakra-ui/react";
 import { FaUser } from "react-icons/fa";
 import countyData from "../../data/Counties.json"
+import { useDispatch, useSelector } from 'react-redux';
+import { handleUpdateSellerProfile, handleGetSellerProfile } from '../../redux/appActions/sellerActions';
+import { useParams } from 'react-router';
+import NavBar from '../../components/PageSections/NavBar';
+import Footer from '../../components/PageSections/Footer';
 
 export const EditCompanyProfile = () => {
+
+  const seller = useSelector((state) => state.sellerReducer).sellerProfile
+
+  const dispatch = useDispatch();
+  const sellerId = useParams()
+
+  React.useEffect(()=>{
+    console.log("This is te seller id",sellerId.sellerId);
+    dispatch(handleGetSellerProfile(sellerId.sellerId))
+  },[sellerId, dispatch])
+  
   const inputFile = useRef(null) 
   const onButtonClick = () => {
     // `current` points to the mounted file input element
@@ -34,19 +50,63 @@ export const EditCompanyProfile = () => {
   /** "selected" here is state variable which will hold the
    * value of currently selected dropdown.
    */
-   const [selected, setSelected] = React.useState("Nairobi");
-   const [options, setOptions] = React.useState("");
-  
+   const [county, setCounty] = React.useState(seller.sub_county.county.county_name);
+   const [subCounties, setSubCounties] = React.useState("");
+   const [subCounty, setSubCounty] = React.useState("");
+   const [countyCode, setCountyCode] = React.useState(seller.sub_county.county.code);
+   const [localAreaName, setLocalAreaName] = React.useState(seller.local_area_name);
+   const [building, setBuilding] = React.useState(seller.building);
+   const [street, setStreet] = React.useState(seller.street);
+   const [town, setTown] = React.useState(seller.town);
+   const [phoneNumber,setPhoneNumber] = React.useState(seller.phone_number);
+   const [website,setWebsite] = React.useState("");
+   const [about,setAbout] = React.useState("");
+   const [email,setEmail] = React.useState(seller.profile.email);
+   const [password,setPassword] = React.useState(seller.profile.password);
+   const [coverPhoto,setCoverPhoto] = React.useState("");
+   const [profilePic,setprofilePic] = React.useState(seller.profile_pic);
+
+   const handleSubmit = (e) => {
+    const data = {
+      // "sub_county": {
+      //   "county": {
+      //     "county_name": county,
+      //     "code": countyCode,
+      //   },
+      //   "subcounty_name": subCounty,
+      // },
+      profile:{
+        username: email,
+        email: email,
+        // password: password,   
+      },
+      local_area_name: localAreaName,
+      town:town,
+      building:building,
+      street: street,
+      phone_number: phoneNumber,
+      // website: website,
+      // about: about,
+      // coverPhoto:coverPhoto,
+      // profile_pic: profilePic,
+    }
+
+    console.log("This is the data",data)
+  //  dispatch(handleUpdateSellerProfile(sellerId, data))
+  }
+
+
+
    /** Function that will set different values to state variable
     * based on which dropdown is selected
     */
    const changeSelectOptionHandler = (event) => {
-     setSelected(event.target.value);
+     setCounty(event.target.value);
    };
 
    useEffect(() => {
-    setOptions(findCountyByTitle(countyData,selected))
-   }, [selected])
+    setSubCounties(findCountyByTitle(countyData,county))
+   }, [county])
 
   //finds county by name from select and returns a list of subcounties
   function findCountyByTitle(countyData, county_name) {
@@ -57,27 +117,30 @@ export const EditCompanyProfile = () => {
     )
 
     /*
-      if the county exists then it reaturns the values of 
+      if the county exists then it returns the values of 
       subcounties from the array of subcounties
     */
     if (existingCounty){
-
+      setCountyCode(existingCounty.code)// sets the county code 
       return existingCounty.sub_counties.map((sub_county, index) => {
         return(
         <option key={index}>{sub_county}</option>)})
     }
   }
 
+  
   return (
+    <>
+    <NavBar/>
     <Box bg={useColorModeValue("gray.50", "inherit")} p={10}>
-    <input type='file' id='file' ref={inputFile} style={{display: 'none'}}/>
+    <input type='file' id='file' ref={inputFile} onChange={(e) => {setprofilePic(e.target.files[0].name); console.log(profilePic)}} style={{display: 'none'}}/>
       <Box>
             <chakra.form
-
-              method="POST"
+              // method="PUT"
               shadow="base"
               rounded={[null, "md"]}
               overflow={{ sm: "hidden" }}
+              // onSubmit={handleSubmit}
             >
               <Stack
                 px={4}
@@ -87,7 +150,7 @@ export const EditCompanyProfile = () => {
                 p={{ sm: 6 }}
               >
                 {/* <SimpleGrid columns={3} spacing={6}> */}
-                <FormControl>
+                <FormControl id="cover_photo">
                   <FormLabel
                     fontSize="sm"
                     fontWeight="md"
@@ -145,6 +208,7 @@ export const EditCompanyProfile = () => {
                               id="file-upload"
                               name="file-upload"
                               type="file"
+                              onChange={(e) => {setCoverPhoto(e.target.files[0]); console.log(coverPhoto)}}
                             />
                           </VisuallyHidden>
                         </chakra.label>
@@ -159,7 +223,7 @@ export const EditCompanyProfile = () => {
                     </Stack>
                   </Flex>
                 </FormControl>
-                <FormControl>
+                <FormControl id="profile_pic">
                   <FormLabel
                     fontSize="sm"
                     fontWeight="md"
@@ -171,15 +235,16 @@ export const EditCompanyProfile = () => {
                     <Avatar
                       boxSize={12}
                       bg={useColorModeValue("gray.100", "gray.800")}
-                      icon={
-                        <Icon
-                          as={FaUser}
-                          boxSize={9}
-                          mt={3}
-                          rounded="full"
-                          color={useColorModeValue("gray.300", "gray.700")}
-                        />
-                      }
+                      // icon={
+                      //   <Icon
+                      //     as={FaUser}
+                      //     boxSize={9}
+                      //     mt={3}
+                      //     rounded="full"
+                      //     color={useColorModeValue("gray.300", "gray.700")}
+                      //   />
+                      // }
+                      src={seller.profile_pic}
                     />
                     <Button
                       type="button"
@@ -214,13 +279,14 @@ export const EditCompanyProfile = () => {
                         placeholder="www.example.com"
                         focusBorderColor="brand.400"
                         rounded="md"
+                        onChange={(e) => setWebsite(e.target.value)}
                       />
                     </InputGroup>
                   </FormControl>
                 {/* </SimpleGrid> */}
 
                 <div>
-                  <FormControl id="email" mt={1}>
+                  <FormControl id="about" mt={1}>
                     <FormLabel
                       fontSize="sm"
                       fontWeight="md"
@@ -235,6 +301,7 @@ export const EditCompanyProfile = () => {
                       shadow="sm"
                       focusBorderColor="brand.400"
                       fontSize={{ sm: "sm" }}
+                      onChange={(e) => setAbout(e.target.value) }
                     />
                     <FormHelperText>
                       Brief description for your profile. URLs are hyperlinked.
@@ -253,9 +320,9 @@ export const EditCompanyProfile = () => {
                 spacing={6}
               >
                 <SimpleGrid columns={6} spacing={6}>
-                  <FormControl as={GridItem} colSpan={[6, 3]}>
+                  {/* <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="first_name"
+                      htmlFor="business_name"
                       fontSize="sm"
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
@@ -264,17 +331,18 @@ export const EditCompanyProfile = () => {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="first_name"
-                      id="first_name"
-                      autoComplete="given-name"
+                      name="business_name"
+                      id="business_name"
+                      autoComplete="business_name"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      onChange={(e) => setBusinessName(e.target.value)}
                     />
-                  </FormControl>
+                  </FormControl> */}
 
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
@@ -296,12 +364,14 @@ export const EditCompanyProfile = () => {
                       size="sm"
                       w="full"
                       rounded="md"
+                      value={seller.profile.email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 4]}>
                     <FormLabel
-                      htmlFor="email_address"
+                      htmlFor="phone_number"
                       fontSize="sm"
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
@@ -310,21 +380,23 @@ export const EditCompanyProfile = () => {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="email_address"
-                      id="email_address"
-                      autoComplete="email"
+                      name="phone number"
+                      id="phone_number"
+                      autoComplete="phone_number"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      value={seller.phone_number}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="country"
+                      htmlFor="county"
                       fontSize="sm"
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
@@ -332,26 +404,32 @@ export const EditCompanyProfile = () => {
                       County
                     </FormLabel>
                     <Select
-                      id="country"
-                      name="country"
-                      autoComplete="country"
-                      placeholder="Select option"
+                      id="county"
+                      name="county"
+                      autoComplete="county"
+                      placeholder="Select County"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      value={seller.sub_county.county.county_name}
                       onChange={changeSelectOptionHandler}
                     >
-                    {countyData.map((county) => {
-                      return(
-                      <option key={county.code}>{county.name}</option>)})}
+                    {
+                      countyData.map((county) => {
+                        return(
+                          
+                          <option key={county.code}>{county.name}</option>
+                        )
+                      })
+                    }
                     </Select>
                   </FormControl>
                   <FormControl as={GridItem} colSpan={[6, 3]}>
                     <FormLabel
-                      htmlFor="country"
+                      htmlFor="sub_county"
                       fontSize="sm"
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
@@ -359,25 +437,27 @@ export const EditCompanyProfile = () => {
                       sub_county
                     </FormLabel>
                     <Select
-                      id="country"
-                      name="country"
-                      autoComplete="country"
-                      placeholder="Select option"
+                      id="sub_county"
+                      name="sub_county"
+                      autoComplete="sub_county"
+                      placeholder="Select Sub County"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      value={seller.sub_county.subcounty_name}
+                      onChange={(e) => setSubCounty(e.target.value)}
                     >
                      {/* This is where we have used our options variable */}
-                    {options}
+                    {subCounties}
                     </Select>
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={6}>
                     <FormLabel
-                      htmlFor="street_address"
+                      htmlFor="password"
                       fontSize="sm"
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
@@ -385,16 +465,18 @@ export const EditCompanyProfile = () => {
                       Password
                     </FormLabel>
                     <Input
-                      type="text"
-                      name="street_address"
-                      id="street_address"
-                      autoComplete="street-address"
+                      type="password"
+                      name="password"
+                      id="password"
+                      autoComplete="password"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      value={seller.profile.password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </FormControl>
 
@@ -418,12 +500,14 @@ export const EditCompanyProfile = () => {
                       size="sm"
                       w="full"
                       rounded="md"
+                      value={seller.street}
+                      onChange={(e) => setStreet(e.target.value)}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 6, null, 2]}>
                     <FormLabel
-                      htmlFor="city"
+                      htmlFor="building"
                       fontSize="sm"
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
@@ -432,21 +516,23 @@ export const EditCompanyProfile = () => {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="city"
-                      id="city"
-                      autoComplete="city"
+                      name="building"
+                      id="building"
+                      autoComplete="building"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      value={seller.building}
+                      onChange={(e) => setBuilding(e.target.value)}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
                     <FormLabel
-                      htmlFor="state"
+                      htmlFor="localAreaName"
                       fontSize="sm"
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
@@ -455,21 +541,23 @@ export const EditCompanyProfile = () => {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="state"
-                      id="state"
-                      autoComplete="state"
+                      name="localAreaName"
+                      id="localAreaName"
+                      autoComplete="localAreaName"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      value={seller.local_area_name}
+                      onChange={(e) => setLocalAreaName(e.target.value)}
                     />
                   </FormControl>
 
                   <FormControl as={GridItem} colSpan={[6, 3, null, 2]}>
                     <FormLabel
-                      htmlFor="postal_code"
+                      htmlFor="town"
                       fontSize="sm"
                       fontWeight="md"
                       color={useColorModeValue("gray.700", "gray.50")}
@@ -478,15 +566,17 @@ export const EditCompanyProfile = () => {
                     </FormLabel>
                     <Input
                       type="text"
-                      name="postal_code"
-                      id="postal_code"
-                      autoComplete="postal-code"
+                      name="town"
+                      id="town"
+                      autoComplete="town"
                       mt={1}
                       focusBorderColor="brand.400"
                       shadow="sm"
                       size="sm"
                       w="full"
                       rounded="md"
+                      value={seller.town}
+                      onChange={(e) => setTown(e.target.value)}
                     />
                   </FormControl>
                 </SimpleGrid>
@@ -503,6 +593,7 @@ export const EditCompanyProfile = () => {
                   colorScheme="cyan"
                   _focus={{ shadow: "" }}
                   fontWeight="md"
+                  onClick={handleSubmit}
                 >
                   Save
                 </Button>
@@ -510,6 +601,8 @@ export const EditCompanyProfile = () => {
             </chakra.form>
       </Box>   
     </Box>
+    <Footer/>
+    </>
   );
 }
 

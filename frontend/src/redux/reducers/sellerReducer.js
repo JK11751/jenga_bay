@@ -1,4 +1,4 @@
-import { GET_ALL_SELLERS, GET_SELLER_DETAILS, GET_SELLER_ITEMS, GET_SELLER_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_SELLER_PROFILE, SEARCH_SELLER_PRODUCTS } from "../App/actionTypes";
+import { GET_ALL_SELLERS, GET_SELLER_DETAILS, GET_SELLER_ITEMS, GET_SELLER_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_SELLER_PROFILE, SEARCH_SELLER_PRODUCTS, UPDATE_SELLER_PROFILE } from "../App/actionTypes";
 
 const initialState = {
     allSellers: [],
@@ -7,6 +7,7 @@ const initialState = {
     searchedProducts: [],
     sellerItems: [],
     categoryItems: [],
+    updatedSellerProfile: [],
 };
 
 const sellerReducer = (state = initialState, action) => {
@@ -28,11 +29,16 @@ const sellerReducer = (state = initialState, action) => {
                 ...state,
                 sellerProfile:payload
             }
+        case UPDATE_SELLER_PROFILE:
+            return{
+                ...state,
+                updatedSellerProfile:payload
+            }
         case GET_SELLER_ITEMS:
-        return{
-            ...state,
-            sellerItems:payload
-        }
+            return{
+                ...state,
+                sellerItems:payload
+            }
         case SEARCH_SELLER_PRODUCTS:
             return{
                 ...state,
