@@ -137,7 +137,7 @@ class APIServices {
     return api.get(`/sellers/${seller_id}/profile`,
      {
         headers: {
-          Authorization: `Token ${token}`
+          Authorization: `Token ${token}`,
         }
       }, 
       {
@@ -148,7 +148,16 @@ class APIServices {
 
   //updating profile of a specific seller
   async updateSellerProfile(seller_id, data){
-    return api.put(`/sellers/${seller_id}/profile`, data);
+    return api.patch(`/sellers/${seller_id}/profile`, data,
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      }
+    }, 
+    {
+      withCredentials: true
+    }
+    );
   }
 
   //deleting profile of a specific seller

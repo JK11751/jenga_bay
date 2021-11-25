@@ -58,7 +58,7 @@ const NavBar = ({cartItems}) => {
         py={4}
         shadow="md"
         top={0}
-        zIndex="10000"
+        zIndex="200"
         position="sticky"
       >
         <Flex alignItems="center" justifyContent="space-between" >
