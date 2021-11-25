@@ -1,16 +1,12 @@
-import React, {useRef, useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
   Box,
-  Flex,
-  // useColorModeValue,
   SimpleGrid,
   GridItem,
   Stack,
   FormControl,
   FormLabel,
   Input,
-  Avatar,
-  // Icon,
   Button,
   Modal,
   ModalOverlay,
@@ -26,22 +22,39 @@ import { Loading } from '../../../components/Loading';
 import { handleUpdateSellerProfile, handleGetSellerProfile } from '../../../redux/appActions/sellerActions';
 import { useDispatch, useSelector } from 'react-redux';
 
+const initialState = {
+  profile:{
+    username: "",
+    email: "",   
+  },
+  local_area_name: "",
+  town:"",
+  building:"",
+  street:"",
+  phone_number: "",
+  profile_pic:"",
+}
+
 export const EditCompanyProfile = (props) => {
-
-  const inputFile = useRef(null) 
-  const onButtonClick = () => {
-    // `current` points to the mounted file input element
-   inputFile.current.click();
-  };
-
-  const seller = useSelector((state) => state.sellerReducer).sellerProfile;
+  const [seller, setSeller] = useState(initialState)
+  
   const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(true)
-
+  const sellerDetails = useSelector((state) => state.sellerReducer).sellerProfile
+  const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
   useEffect(() => {
-    dispatch(handleGetSellerProfile(props.sellerId))
-    setIsLoading(false)
-  }, [dispatch, props.sellerId])
+    (async () => {
+      dispatch(handleGetSellerProfile(props.sellerId))
+      setIsLoading(false)
+    })()
+   
+  }, [dispatch, props.sellerId, sellerReducer.sellerDetails])
+  
+ useEffect(() => {
+  if (sellerReducer.sellerDetails){
+    setSeller(sellerDetails)
+    console.log("seller",seller)}
+ }, [seller, sellerReducer.sellerDetails,sellerDetails])
   
 
   /** "county" here is state variable which will hold the
@@ -52,31 +65,16 @@ export const EditCompanyProfile = (props) => {
   //  const [subCounty, setSubCounty] = React.useState("");
   //  const [countyCode, setCountyCode] = React.useState("");
   
-  const [localAreaName, setLocalAreaName] = React.useState(seller.local_area_name);
-  const [building, setBuilding] = React.useState(seller.building);
-  const [street, setStreet] = React.useState(seller.street);
-  const [town, setTown] = React.useState(seller.town);
-  const [phoneNumber,setPhoneNumber] = React.useState(seller.phone_number);
-  const [email,setEmail] = React.useState("bamburicement@gmail.com");
-  const [profilePic,setprofilePic] = React.useState(seller.profile_pic);
 
+  const handleInput = (e) => {
+    console.log(e.target.name, " : ", e.target.value);
+    setSeller({ ...seller, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
-    const data = {
-      profile:{
-        username: email,
-        email: email,   
-      },
-      local_area_name: localAreaName,
-      town:town,
-      building:building,
-      street: street,
-      phone_number: phoneNumber,
-      // profile_pic: profilePic,
-    }
 
-    console.log("This is the data",data)
-   dispatch(handleUpdateSellerProfile(props.sellerId, data))
+    console.log("This is the data",seller)
+   dispatch(handleUpdateSellerProfile(props.sellerId, seller))
   }
 
   /** Function that will set different values to state variable
@@ -109,7 +107,7 @@ export const EditCompanyProfile = (props) => {
   //       <option key={index}>{sub_county}</option>)})
   //   }
   // }
-  
+
   return (
     <>
     {isLoading ? <Loading/> :
@@ -121,53 +119,8 @@ export const EditCompanyProfile = (props) => {
           <ModalHeader>Edit Profile</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-      <input type='file' id='file' ref={inputFile} onChange={(e) => {setprofilePic(e.target.files[0]); console.log(profilePic)}} style={{display: 'none'}}/>
-       {
-
-       seller &&  <Box>
-                <Stack
-                  px={4}
-                  py={5}
-                  bg="white"
-                  spacing={6}
-                  p={{ sm: 6 }}
-                >
-                  <FormControl id="profile_pic">
-                    <FormLabel
-                      fontSize="sm"
-                      fontWeight="md"
-                      color="gray.700"
-                    >
-                      Company Profile Photo
-                    </FormLabel>
-                    <Flex alignItems="center" mt={1}>
-                      <Avatar
-                        boxSize={12}
-                        bg="gray.100"
-                        // icon={
-                        //   <Icon
-                        //     as={FaUser}
-                        //     boxSize={9}
-                        //     mt={3}
-                        //     rounded="full"
-                        //     color={useColorModeValue("gray.300", "gray.700")}
-                        //   />
-                        // }
-                        src={profilePic}
-                      />
-                      <Button
-                        type="button"
-                        ml={5}
-                        variant="outline"
-                        size="sm"
-                        fontWeight="medium"
-                        _focus={{ shadow: "none" }}
-                        onClick={onButtonClick}
-                      >
-                        Change
-                      </Button>
-                    </Flex>
-                  </FormControl>       
+  <Box>
+           
                 <Stack
                   px={4}
                   py={5}
@@ -187,7 +140,7 @@ export const EditCompanyProfile = (props) => {
                       </FormLabel>
                       <Input
                         type="email"
-                        name="email_address"
+                        name="email"
                         id="email_address"
                         autoComplete="email"
                         mt={1}
@@ -196,8 +149,8 @@ export const EditCompanyProfile = (props) => {
                         size="sm"
                         w="full"
                         rounded="md"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        // value={seller ? seller.profile.email : ""}
+                        onChange={(e) => handleInput(e)}
                       />
                     </FormControl>
 
@@ -212,7 +165,7 @@ export const EditCompanyProfile = (props) => {
                       </FormLabel>
                       <Input
                         type="text"
-                        name="phone number"
+                        name="phone_number"
                         id="phone_number"
                         autoComplete="phone_number"
                         mt={1}
@@ -221,8 +174,8 @@ export const EditCompanyProfile = (props) => {
                         size="sm"
                         w="full"
                         rounded="md"
-                        value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        value={(seller.phone_number)}
+                        onChange={(e) => handleInput(e)}
                       />
                     </FormControl>
   {/* 
@@ -296,7 +249,7 @@ export const EditCompanyProfile = (props) => {
                       </FormLabel>
                       <Input
                         type="text"
-                        name="street_address"
+                        name="street"
                         id="street_address"
                         autoComplete="street-address"
                         mt={1}
@@ -305,8 +258,8 @@ export const EditCompanyProfile = (props) => {
                         size="sm"
                         w="full"
                         rounded="md"
-                        value={street}
-                        onChange={(e) => setStreet(e.target.value)}
+                        value={seller.street}
+                        onChange={(e) => handleInput(e)}
                       />
                     </FormControl>
 
@@ -330,8 +283,8 @@ export const EditCompanyProfile = (props) => {
                         size="sm"
                         w="full"
                         rounded="md"
-                        value={building}
-                        onChange={(e) => setBuilding(e.target.value)}
+                        value={seller.building}
+                        onChange={(e) => handleInput(e)}
                       />
                     </FormControl>
 
@@ -346,7 +299,7 @@ export const EditCompanyProfile = (props) => {
                       </FormLabel>
                       <Input
                         type="text"
-                        name="localAreaName"
+                        name="local_area_name"
                         id="localAreaName"
                         autoComplete="localAreaName"
                         mt={1}
@@ -355,8 +308,8 @@ export const EditCompanyProfile = (props) => {
                         size="sm"
                         w="full"
                         rounded="md"
-                        value={localAreaName}
-                        onChange={(e) => setLocalAreaName(e.target.value)}
+                        value={seller.local_area_name}
+                        onChange={(e) => handleInput(e)}
                       />
                     </FormControl>
 
@@ -380,14 +333,13 @@ export const EditCompanyProfile = (props) => {
                         size="sm"
                         w="full"
                         rounded="md"
-                        value={town}
-                        onChange={(e) => setTown(e.target.value)}
+                        value={seller.town}
+                        onChange={(e) => handleInput(e)}
                       />
                     </FormControl>
                   </SimpleGrid>
                 </Stack>
-          </Stack>
-        </Box>}
+        </Box>
       </ModalBody>
       <ModalFooter  
         px={{ base: 4, sm: 6 }}

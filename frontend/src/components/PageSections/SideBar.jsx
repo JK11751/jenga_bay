@@ -92,6 +92,9 @@ const SidebarContent = ({ onClose, handleToggle,ref, ...rest }) => {
           {link.name}
         </NavItem>
       ))}
+      <NavItem onClick={() => history.push("/registration")} icon={FiLogOut}>
+        Register as a seller
+      </NavItem>
       <NavItem onClick={() => dispatch(handleLogoutUser())} icon={FiLogOut}>
         LogOut
       </NavItem>
@@ -101,7 +104,6 @@ const SidebarContent = ({ onClose, handleToggle,ref, ...rest }) => {
 
 const NavItem = ({ icon, children, ...rest }) => {
   return (
-    <Link to="/" style={{ textDecoration: 'none' }}>
       <Flex
         align="center"
         p="4"
@@ -126,7 +128,6 @@ const NavItem = ({ icon, children, ...rest }) => {
         )}
         {children}
       </Flex>
-    </Link>
   );
 };
 
@@ -165,7 +166,7 @@ const SideBar = ({ show, handleToggle }) => {
       direction="left"
       in={show}
       ref={boxRef}
-      style={{ height: "100vh", width: "300px", zIndex: 10000 }}
+      style={{ height: "100vh", width: "20vw", zIndex: 10000 }}
     >
       <SidebarContent handleToggle={handleToggle}/>
     </Slide>}</>

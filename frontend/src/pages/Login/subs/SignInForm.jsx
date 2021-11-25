@@ -89,7 +89,9 @@ const SignInForm = (props) => {
       localStorage.setItem("newUserEmail", JSON.stringify(user.email));
       localStorage.setItem("userUserPassword", JSON.stringify(user.password));
 
-      history.push("/")
+      history.push({pathname: `${props.location.pathname}`})
+      console.log(props.location.pathname)
+      // history.push("/")
     },
   });
 

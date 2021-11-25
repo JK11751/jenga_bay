@@ -9,7 +9,7 @@ import { Icon } from '@chakra-ui/icon';
 import {MdCheckCircle, MdLocationOn} from "react-icons/md"
 import { BiImageAdd } from 'react-icons/bi';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react"
-import { handleGetSellerItems, handleGetSellerDetails } from '../../redux/appActions/sellerActions';
+import { handleGetSellerItems, handleGetSellerDetails, handleGetSellerProfile } from '../../redux/appActions/sellerActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import Reviews from './subs/Reviews';
@@ -97,7 +97,7 @@ export const CompanyProfilePage = () => {
                 <Center>
                     <Image borderBottomRadius="10px" height="200px" width="70vw" src={img} />
                 </Center>
-                <Button position="absolute" top="30vh" right="18vw" onClick={onOpen}>EditProfile</Button>
+                <Button position="absolute" top="30vh" right="18vw" onClick={() => { onOpen(); dispatch(handleGetSellerProfile(sellerId));}}>EditProfile</Button>
                 <Box position="absolute" top="30vh" left="17vw">
                     <Avatar borderColor="#0095F8" borderWidth="5px" height="180px" width="180px" name={sellerDetails.business_name} src={sellerDetails.profile_pic}>
                     <AvatarBadge

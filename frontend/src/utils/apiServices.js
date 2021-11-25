@@ -139,7 +139,7 @@ class APIServices {
     );
   }
 
-  //updating profile of a specific seller
+  //updating profile of a specific seller with patch
   async updateSellerProfile(seller_id, data){
     return api.patch(`/sellers/${seller_id}/profile`, data,
     {
@@ -150,6 +150,19 @@ class APIServices {
     {
       withCredentials: true
     }
+    );
+  }
+  //updating profile of a specific seller with patch
+  async updateSellerProfilePic(seller_id, data){
+    return api.put(`/sellers/${seller_id}/profile`, data,
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+        }
+      }, 
+      {
+        withCredentials: true
+      }
     );
   }
 

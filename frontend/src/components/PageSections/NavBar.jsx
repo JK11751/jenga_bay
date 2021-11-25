@@ -34,12 +34,13 @@ import {
 import { AiOutlineMenu } from "react-icons/ai";
 import { useHistory } from "react-router";
 import SearchBar from "../SearchBar/SearchBar";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { handleLogoutUser } from "../../redux/appActions/authActions";
 
 const NavBar = ({cartItems}) => {
   const bg = useColorModeValue("white", "gray.800");
   const mobileNav = useDisclosure();
-
+  const dispatch = useDispatch()
   const history= useHistory()
   const [show, setShow] = React.useState(false)
   const handleToggle = (setting) => setShow(setting)
@@ -199,7 +200,7 @@ const NavBar = ({cartItems}) => {
                   </Link>
                 </MenuItem>
               <MenuDivider />
-              <MenuItem>LOG OUT</MenuItem>
+              <MenuItem onClick={() => {dispatch(handleLogoutUser());history.push("/")}}>LOG OUT</MenuItem>
             </MenuList>
           </Menu>
             {/* <Avatar
