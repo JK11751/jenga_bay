@@ -15,10 +15,10 @@ export const handleLoginUser = (userData) => async (dispatch) => {
         position: "bottom-left",
       });
       const token = response.data.token
+      const session_role=response.data.session_status
       localStorage.setItem("token", token);
+      localStorage.setItem("sessionId", session_role);
       localStorage.setItem("userInfo", JSON.stringify(response.data));
-      console.log("This is the token", token)
-      console.log("UserInfo", response.data)
       // Result is sent to the store via dispatch (Pass payload if needed)
     } catch (error) {
       // Handle exceptions here
@@ -60,7 +60,7 @@ export const handleResetPassword = (userData) => async (dispatch) => {
       position: "bottom-left",
     });
     const passwordResetToken = response.data
-    localStorage.setItem("passwordResetToken", JSON.stringify(passwordResetToken));
+    sessionStorage.setItem("passwordResetToken", JSON.stringify(passwordResetToken));
     console.log("This is the passwordresettoken", passwordResetToken)
     // Result is sent to the store via dispatch (Pass payload if needed)
   } catch (error) {

@@ -28,9 +28,17 @@ export const getToken = () => {
  
  // return the user from the local storage 
 export const getUser = () => {
-  const result = JSON.parse(sessionStorage.getItem("user") || null);
-  return result;
+  const user = JSON.parse(localStorage.getItem("userInfo") || null);
+  return user;
 };
+
+ // return the user from the local storage 
+ export const getRoleSessionStatus = () => {
+  const role = localStorage.getItem("sessionId") || null;
+  return role;
+};
+
+
   
 // remove the token and user from the session storage
 export const removeUserSession = () => {
