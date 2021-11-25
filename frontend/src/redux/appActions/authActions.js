@@ -15,7 +15,7 @@ export const handleLoginUser = (userData) => async (dispatch) => {
         position: "bottom-left",
       });
       const token = response.data.token
-      localStorage.setItem("token", JSON.stringify(token));
+      localStorage.setItem("token", token);
       localStorage.setItem("userInfo", JSON.stringify(response.data));
       console.log("This is the token", token)
       console.log("UserInfo", response.data)
