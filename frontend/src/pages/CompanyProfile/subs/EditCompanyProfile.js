@@ -22,8 +22,8 @@ import {
 } from "@chakra-ui/react";
 // import { FaUser } from "react-icons/fa";
 // import countyData from "../../data/Counties.json"
-import { Loading } from '../../components/Loading';
-import { handleUpdateSellerProfile, handleGetSellerProfile } from '../../redux/appActions/sellerActions';
+import { Loading } from '../../../components/Loading';
+import { handleUpdateSellerProfile, handleGetSellerProfile } from '../../../redux/appActions/sellerActions';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const EditCompanyProfile = (props) => {

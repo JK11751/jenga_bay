@@ -24,7 +24,7 @@ import {ChevronDownIcon } from "@chakra-ui/icons"
 import { Button } from '@chakra-ui/button';
 import Stats from './subs/Stats';
 import { useDisclosure } from '@chakra-ui/hooks';
-import { EditCompanyProfile } from '../EditProfile/EditCompanyProfile';
+import { EditCompanyProfile } from './subs/EditCompanyProfile';
 
 export const CompanyProfilePage = () => {
     const img = "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg"
