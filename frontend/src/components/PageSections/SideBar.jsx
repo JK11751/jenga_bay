@@ -20,11 +20,13 @@ import {
   FiCompass,
   FiStar,
   FiSettings,
+  FiLogOut
 } from 'react-icons/fi';
 import {BiCategory} from "react-icons/bi"
-
 import CategoryList from "../../data/CategoryList";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { handleLogoutUser } from "../../redux/appActions/authActions";
 
 const LinkItems = [
   { name: 'Home', icon: FiHome },
@@ -37,7 +39,7 @@ const LinkItems = [
 const SidebarContent = ({ onClose, handleToggle,ref, ...rest }) => {
 
   const history = useHistory()
-
+  const dispatch = useDispatch()
   return (
     <Box
       // forwardRef={ref}
@@ -90,6 +92,9 @@ const SidebarContent = ({ onClose, handleToggle,ref, ...rest }) => {
           {link.name}
         </NavItem>
       ))}
+      <NavItem onClick={() => dispatch(handleLogoutUser())} icon={FiLogOut}>
+        LogOut
+      </NavItem>
     </Box>
   );
 };

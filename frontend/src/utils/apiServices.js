@@ -36,23 +36,16 @@ if(token) api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 // );
 
 class APIServices {
-/*----------------------------------EXAMPLE-------------------------------------- */ 
-
-  // @desc End Point Example
-  async getUsers(data) {
-    return api.get("/some-endpoint", data);
-  }
-
 /*----------------------------------USERS-------------------------------------- */ 
 
-  // @desc End Point Example
+  // Loging in a user
   async loginUser(data) {
     return api.post(`/login`, data);
   }
 
-  // @desc End Point Example
-  async logoutUser(data) {
-    return api.post(`/accounts/logout/`, data);
+  // Logging out a user
+  async logoutUser() {
+    return api.post(`/accounts/logout/`);
   }
 
   // @desc End Point Example
