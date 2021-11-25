@@ -6,7 +6,7 @@ import {Route, Switch} from "react-router-dom"
 import PrivateRoute from "../utils/PrivateRoute.js";
 
 //All Page imports
-import Home from "../pages/Home/Home.js";
+import Home from "../pages/Home/home.js";
 import SignUp from "../pages/SignUp/SignUp.js";
 import Login from "../pages/Login/Login.js";
 import ProductDetailsPage from "../pages/ProductDetails/ProductDetailsPage.js";
