@@ -36,6 +36,7 @@ import { useHistory } from "react-router";
 import SearchBar from "../SearchBar/SearchBar";
 import { useSelector, useDispatch } from "react-redux";
 import { handleLogoutUser } from "../../redux/appActions/authActions";
+import { useLocation } from "react-router";
 
 const NavBar = ({cartItems}) => {
   const bg = useColorModeValue("white", "gray.800");
@@ -45,6 +46,8 @@ const NavBar = ({cartItems}) => {
   const [show, setShow] = React.useState(false)
   const handleToggle = (setting) => setShow(setting)
   const cart = useSelector(({ cartReducer }) => cartReducer);
+  const location = useLocation()
+  // const value = location.state.from
 
   const handleOpenCart = () => {
     history.push("/cart")
@@ -167,7 +170,6 @@ const NavBar = ({cartItems}) => {
                 <MenuItem>FAQ</MenuItem>
               </MenuGroup>
               <MenuItem alignItems="center">
-                <Link to="/signup">
                   <Button
                     h="30px"
                     alignItems="center"
@@ -177,13 +179,12 @@ const NavBar = ({cartItems}) => {
                     textColor="#18A0FB"
                     background="#fff"
                     variant="outline"
+                    onClick={()=>history.push({pathname:"/signup", state:{from: location.pathname}})}
                   >
                     Sign Up
                   </Button>
-                </Link>
               </MenuItem>
                 <MenuItem alignItems="center">
-                  <Link to="/login">
                     <Button
                       h="30px"
                       w="130px"
@@ -194,13 +195,13 @@ const NavBar = ({cartItems}) => {
                       colorScheme="#18A0FB"
                       background="#18A0FB"
                       variant="solid"
+                      onClick={()=>history.push({pathname:"/login", state:{from: location.pathname}})}
                     >
                       Login
                     </Button>
-                  </Link>
                 </MenuItem>
               <MenuDivider />
-              <MenuItem onClick={() => {dispatch(handleLogoutUser());history.push("/")}}>LOG OUT</MenuItem>
+              <MenuItem onClick={() => {dispatch(handleLogoutUser());history.push({pathname:"/login", state:{from: location.pathname}})}}>LOG OUT</MenuItem>
             </MenuList>
           </Menu>
             {/* <Avatar
