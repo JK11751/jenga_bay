@@ -76,32 +76,8 @@ const SignUpForm = () => {
     },
 
     onSubmit: () => {
-      //  await axios
-      // .post("https://api.zuri.chat/users", {
-      //   first_name,
-      //   last_name: other_name,
-      //   email,
-      //   password
-      // })
-      // .then(response => {
-      //   const { data, message } = response.data;
+      setIsLoading(true);
 
-      //   //Store token in localstorage
-      //   sessionStorage.setItem("user_id", data.InsertedId);
-      //   localStorage.setItem("newUserEmail", JSON.stringify(email));
-      //   localStorage.setItem("userUserPassword", JSON.stringify(password));
-
-      // })
-      // .catch(error => {
-      //   const { data } = error.response;
-      //   setShowDialog(false);
-
-      //   RegExp(/Users with email/).test(data.message) &&
-      //     setemailerror("This email is already in use");
-
-      //   !RegExp("Users with email").test(data.message) &&
-      //     seterror(data.message);
-      // });
       const data = {
         profile:{
           username: user.username,
@@ -112,11 +88,7 @@ const SignUpForm = () => {
         phone_number: user.phone_number,
       }
       dispatch(handleRegisterClient(data));
-      // Store token in localstorage
-        // sessionStorage.setItem("user_id", data.InsertedId);
-        // localStorage.setItem("newUserEmail", JSON.stringify(email));
-        // localStorage.setItem("userUserPassword", JSON.stringify(password));
-
+      setIsLoading(false)
  
       toast.success("Sign up successful", {
         position: "bottom-left",
@@ -125,7 +97,7 @@ const SignUpForm = () => {
     }
   });
 
-  
+  const [isLoading, setIsLoading] = useState(false)
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
@@ -259,10 +231,11 @@ const SignUpForm = () => {
         height="35px"
         color="#ffffff"
         onClick={handleSubmit}
+        isDisabled={!user.password || !user.email || !user.username || !user.phone_number || !user.password}
+        isLoading={isLoading}
       >
         Sign Up
       </Button>
-      {/* <button type="submit">Submit</button> */}
       <Text align="center" mt={4} fontSize="xs">
         Already have an account?
         <Link to="/login"><Box as="span" textColor="#007ACC">

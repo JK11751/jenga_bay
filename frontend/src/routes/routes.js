@@ -23,7 +23,6 @@ import { ResetPassword } from "../pages/ForgotPassword/ResetPassword.js";
 import { SearchResultsProducts } from "../pages/SearchResults/SearchResultsProducts.js";
 import { SearchResultsSellers } from "../pages/SearchResults/SearchResultsSellers.js";
 import { CompanyCategoryPage } from "../pages/CompanyProducts/CompanyCategoryPage.js";
-import { EditCompanyProfile } from "../pages/EditProfile/EditCompanyProfile.js";
 
 const Routes =()=>{
 
@@ -69,9 +68,6 @@ const Routes =()=>{
             {/* <Route exact path="/seller/:sellerId/profile/edit">
                 <EditCompanyProfile />
             </Route> */}
-            <Route exact path="/seller/:sellerId/account/edit">
-                <EditCompanyProfile />
-            </Route>
             <Route exact path="/categories/:categoryName">
                 <CategoryPage />
             </Route>

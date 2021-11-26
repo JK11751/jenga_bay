@@ -36,23 +36,16 @@ if(token) api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 // );
 
 class APIServices {
-/*----------------------------------EXAMPLE-------------------------------------- */ 
-
-  // @desc End Point Example
-  async getUsers(data) {
-    return api.get("/some-endpoint", data);
-  }
-
 /*----------------------------------USERS-------------------------------------- */ 
 
-  // @desc End Point Example
+  // Loging in a user
   async loginUser(data) {
     return api.post(`/login`, data);
   }
 
-  // @desc End Point Example
-  async logoutUser(data) {
-    return api.post(`/accounts/logout/`, data);
+  // Logging out a user
+  async logoutUser() {
+    return api.post(`/accounts/logout/`);
   }
 
   // @desc End Point Example
@@ -137,7 +130,7 @@ class APIServices {
     return api.get(`/sellers/${seller_id}/profile`,
      {
         headers: {
-          Authorization: `Token ${token}`
+          Authorization: `Token ${token}`,
         }
       }, 
       {
@@ -146,9 +139,31 @@ class APIServices {
     );
   }
 
-  //updating profile of a specific seller
+  //updating profile of a specific seller with patch
   async updateSellerProfile(seller_id, data){
-    return api.put(`/sellers/${seller_id}/profile`, data);
+    return api.patch(`/sellers/${seller_id}/profile`, data,
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      }
+    }, 
+    {
+      withCredentials: true
+    }
+    );
+  }
+  //updating profile of a specific seller with patch
+  async updateSellerProfilePic(seller_id, data){
+    return api.put(`/sellers/${seller_id}/profile`, data,
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+        }
+      }, 
+      {
+        withCredentials: true
+      }
+    );
   }
 
   //deleting profile of a specific seller

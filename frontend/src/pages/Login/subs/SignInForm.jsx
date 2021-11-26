@@ -89,7 +89,8 @@ const SignInForm = (props) => {
       localStorage.setItem("newUserEmail", JSON.stringify(user.email));
       localStorage.setItem("userUserPassword", JSON.stringify(user.password));
 
-      history.push("/")
+      //routing back to the page where the user was currently viewing
+      history.push(props.location.pathname ? {pathname: `${props.location.pathname}`} : "/")
     },
   });
 
@@ -214,6 +215,7 @@ const SignInForm = (props) => {
         width="300px"
         height="35px"
         color="#ffffff"
+        isDisabled={!user.password || !user.email || !user.username}
         onClick={handleSubmit}
       >
         Sign In

@@ -1,4 +1,4 @@
-import { SET_IS_AUTHENTICATED, LOGIN_USER, PASSWORD_RESET, PASSWORD_RESET_CONFIRM } from "../App/actionTypes";
+import { SET_IS_AUTHENTICATED, LOGIN_USER, PASSWORD_RESET, PASSWORD_RESET_CONFIRM, LOGOUT_USER } from "../App/actionTypes";
 
 //STEP 2 - stating initial state and defining actions
 //This is the default state
@@ -7,6 +7,7 @@ const initialState ={
     loggedInUser:{},
     passwordResetToken: {},
     passwordResetConfirmation:{},
+    loggedOutUser: {},
 };
 
 const authReducer = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const authReducer = (state = initialState, action) => {
             return{
                 ...state,
                 loggedInUser: payload,
+            } 
+        case LOGOUT_USER:
+            return{
+                ...state,
+                loggedOutUser: payload,
             }     
         case PASSWORD_RESET:
             return{
