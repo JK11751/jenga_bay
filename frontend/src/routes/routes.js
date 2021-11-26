@@ -83,9 +83,7 @@ const Routes =()=>{
             <Route exact path="/cart">
                 <Cart />
             </Route>
-            <Route exact path="/orders">
-                <Orders />
-            </Route>
+            <PrivateRoute component={Orders} exact path="/orders" />
             <Route exact path="/order-details">
                 <OrderDetails/>
             </Route>

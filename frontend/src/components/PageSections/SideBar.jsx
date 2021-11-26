@@ -95,7 +95,7 @@ const SidebarContent = ({ onClose, handleToggle,ref, ...rest }) => {
       <NavItem onClick={() => history.push("/registration")} icon={FiLogOut}>
         Register as a seller
       </NavItem>
-      <NavItem onClick={() => dispatch(handleLogoutUser())} icon={FiLogOut}>
+      <NavItem onClick={() => {dispatch(handleLogoutUser());history.push("/login")}} icon={FiLogOut}>
         LogOut
       </NavItem>
     </Box>

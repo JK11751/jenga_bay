@@ -23,7 +23,14 @@
 
 // return the token from the local storage
 export const getToken = () => {
-  return localStorage.getItem("token") || null;
+    const tokenString = localStorage.getItem('userInfo');
+    const userToken = JSON.parse(tokenString);
+    return userToken?.token
+  // return localStorage.getItem("token") || null;
+};
+
+export const setToken = userInfo => {
+  localStorage.setItem('userInfo', JSON.stringify(userInfo));
 };
  
  // return the user from the local storage 

@@ -76,6 +76,7 @@ const Home = () => {
                         </Flex> 
                     </Flex>
                     <Flex overflowX="hidden" pl={8} py={5}>
+                    {productReducer.products.length === 0 && <Text>No items</Text>}
                     {productReducer.products.slice(0, 6).map((product,key)=>{ 
                         return(
                             <ProductCard sellerId={product.item_seller.id} price={product.item_price} key={key} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 

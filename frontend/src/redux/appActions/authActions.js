@@ -1,6 +1,7 @@
 import APIServices from "../../utils/apiServices";
 import { toast } from "react-toastify";
 import { PASSWORD_RESET, PASSWORD_RESET_CONFIRM, LOGIN_USER, LOGOUT_USER } from "../App/actionTypes";
+import { setToken } from "../../utils/useToken";
 
 // Logging in a user to the system
 export const handleLoginUser = (userData) => async (dispatch) => {
@@ -11,14 +12,8 @@ export const handleLoginUser = (userData) => async (dispatch) => {
       console.log("This is the Logged in user", response.data);
   
       await dispatch({ type: LOGIN_USER, payload: response.data });
-      toast.success("Login successful", {
-        position: "bottom-left",
-      });
-      const token = response.data.token
-      const session_role=response.data.session_status
-      localStorage.setItem("token", token);
-      localStorage.setItem("sessionId", session_role);
-      localStorage.setItem("userInfo", JSON.stringify(response.data));
+      setToken(response.data)
+      //     setToken(userToken.token);
       // Result is sent to the store via dispatch (Pass payload if needed)
     } catch (error) {
       // Handle exceptions here

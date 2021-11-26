@@ -24,16 +24,16 @@ const api = axios.create({ ...apiConfig });
 // console.log("userToken", userToken)
 // token authentification
 const token = getToken(); 
-if(token) api.defaults.headers.common['Authorization'] = `Token ${token}`
+if(token) api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
-// api.interceptors.request.use(
-//   (config) => {
-//      // Whatever the token is
-//     if (token) config.headers.Authorization = `Token ${token}` ;
-//     return config;
-//   },
-//   (err) => Promise.reject("Error from auth token",err)
-// );
+api.interceptors.request.use(
+  (config) => {
+     // Whatever the token is
+    if (token) config.headers.Authorization = `Token ${token}` ;
+    return config;
+  },
+  (err) => Promise.reject("Error from auth token",err)
+);
 
 class APIServices {
 /*----------------------------------USERS-------------------------------------- */ 
@@ -216,12 +216,28 @@ class APIServices {
 
   //Viewing orders to a specific seller
   async getSellersOrders(seller_id) {
-    return api.get(`/sellers/${seller_id}/orders`)
+    return api.get(`/sellers/${seller_id}/orders`,
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      }
+    }, 
+    {
+      withCredentials: true
+    })
   }
 
   //Viewing orders to a specific seller
   async viewOrderClient(seller_id, order_id) {
-    return api.get(`/sellers/${seller_id}/orders/${order_id}`)
+    return api.get(`/sellers/${seller_id}/orders/${order_id}`,
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      }
+    }, 
+    {
+      withCredentials: true
+    })
   }
 
   //Getting all orders made by a specific buyer

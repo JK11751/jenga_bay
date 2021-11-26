@@ -16,7 +16,7 @@ export const Orders = () => {
     const userId = getUser().user_id
 
     const orderReducer = useSelector(({ orderReducer }) => orderReducer);
-    const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
+    // const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
     const [pending, setPending] = React.useState([])
     useEffect(() => {
         dispatch(handleGetSellerOrders(userId))
@@ -69,7 +69,8 @@ export const Orders = () => {
                     </TabList>
 
                     <TabPanels>
-                        <TabPanel id="Orders">
+                      { orderReducer.sellerOrders && <TabPanel id="Orders">
+                        {orderReducer.sellerOrders.length === 0 && (<Text> There are no orders here</Text>)}
                         {/* <p>Orders from {sellerReducer.sellerDetails.map((seller) =>{ return seller.business_name})}</p> */}
                             {
                                 orderReducer.sellerOrders.map((order) => {
@@ -78,14 +79,15 @@ export const Orders = () => {
                                     )}
                                 )    
                             }
-                        </TabPanel>
-                        <TabPanel id="Pending-Orders">
+                        </TabPanel>}
+                        { orderReducer.sellerOrders !== null &&  <TabPanel id="Pending-Orders">
+                        {orderReducer.sellerOrders.length === 0 && (<Text> There are no pending orders</Text>)}
                         {/* <p>Orders from {sellerReducer.sellerDetails.map((seller) =>{ return seller.business_name})}</p> */}
                             { pending}
-                        </TabPanel>
+                        </TabPanel>}
                         <TabPanel id="Cancelled-Orders">
                         {orderReducer.cancelledOrders.length === 0 && (<Text> There are no cancelled orders</Text>)}
-                        <p>Orders from {sellerReducer.sellerDetails.map((seller) =>{ return seller.business_name})}</p>
+                        {/* <p>Orders from {sellerReducer.sellerDetails.map((seller) =>{ return seller.business_name})}</p> */}
                             {
                                 orderReducer.cancelledOrders.map((order) => {
                                     return(

@@ -201,7 +201,7 @@ const NavBar = ({cartItems}) => {
                     </Button>
                 </MenuItem>
               <MenuDivider />
-              <MenuItem onClick={() => {dispatch(handleLogoutUser());history.push("/")}}>LOG OUT</MenuItem>
+              <MenuItem onClick={() => {dispatch(handleLogoutUser());history.push({pathname:"/login", state:{from: location.pathname}})}}>LOG OUT</MenuItem>
             </MenuList>
           </Menu>
             {/* <Avatar
