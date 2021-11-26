@@ -26,6 +26,7 @@ import Stats from './subs/Stats';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { EditCompanyProfile } from './subs/EditCompanyProfile';
 import { getRoleSessionStatus, getUser } from '../../utils/useToken';
+import { useHistory } from 'react-router';
 
 export const CompanyProfilePage = () => {
     const img = "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg"
@@ -37,8 +38,10 @@ export const CompanyProfilePage = () => {
     const confirmProfile = JSON.parse(getUser().account_id)
     const {sellerId} = useParams()
     const dispatch = useDispatch()
+    const history = useHistory()
     const [clicked, setClicked] = useState(false)
     const [followers, setFollowers] = useState(13)
+    // const [defaultTab, setDefaultTab] = useState(0)
     const inputFile = useRef(null) 
 
     useEffect(() => { 
@@ -85,6 +88,11 @@ export const CompanyProfilePage = () => {
         setClicked(!clicked)
     }
 
+    const onUnfollowClick = (e) => {
+        setColor(e)
+        setClicked(!clicked)
+    }
+
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (
@@ -100,7 +108,6 @@ export const CompanyProfilePage = () => {
                     <Image borderBottomRadius="10px" height="200px" width="70vw" src={img} />
                 </Center>
                 {role === "seller" && JSON.parse(sellerId) === confirmProfile && <Button position="absolute" top="30vh" right="18vw" onClick={() => { onOpen(); dispatch(handleGetSellerProfile(sellerId));}}>EditProfile</Button>}
-                {/* <Button position="absolute" top="30vh" right="18vw" onClick={() => { onOpen(); dispatch(handleGetSellerProfile(sellerId));}}>EditProfile</Button> */}
                 <Box position="absolute" top="30vh" left="17vw">
                     <Avatar borderColor="#0095F8" borderWidth="5px" height="180px" width="180px" name={sellerDetails.business_name} src={sellerDetails.profile_pic}>
                     <AvatarBadge
@@ -129,7 +136,7 @@ export const CompanyProfilePage = () => {
                             </HStack>  
                         </VStack>
                         <Box ml="4vw">
-                            <Button onClick={(e) => onFollowClick(e)} id="followButton" ml="1vw" _focus={{borderColor:"none", bg:"#FFA90A"}}>{clicked ? "Following" : "Follow"}</Button>
+                            <Button onClick={(e) => onFollowClick(e)} id="followButton" w="100px" ml="1vw" _focus={{borderColor:"none", bg:"#FFA90A"}}>{clicked ? "Following" : "Follow"}</Button>
                         </Box>
                     </HStack>
                         <HStack spacing="20px" alignItems="left">
@@ -156,36 +163,37 @@ export const CompanyProfilePage = () => {
             <Box width="70vw"> 
                 <Tabs defaultIndex={0} mt="1vh" variant="soft-rounded" colorScheme="green" isLazy>
                     <TabList>
-                        <Tab _focus={{borderColor:"none"}}>Home</Tab>
-                        <Tab _focus={{borderColor:"none"}}>About</Tab>
-                        <Tab _focus={{borderColor:"none"}}>Reviews</Tab>
-                        <Tab _focus={{borderColor:"none"}}>Products</Tab>
-                            <Menu isLazy placement="right" closeOnSelect>
-                                <MenuButton 
-                                    variant="unstyled"
-                                    ml={3}  
-                                    px={4}
-                                    pl={5}
-                                    pr={5}
-                                    py={2}
-                                    transition="all 0.2s"
-                                    _expanded={{ colorScheme: "green" }}
-                                    _focus={{ boxShadow: "outline" }}
-                                    _hover={{borderColor:"none"}}
-                                    _active={{borderColor:"none"}}
-                                    as={Button} 
-                                    rightIcon={<ChevronDownIcon />}
-                                >
-                                    More
-                                </MenuButton>
-                                <MenuList>
-                                    <MenuItem>Unfollow</MenuItem>
-                                    <MenuItem>Share</MenuItem>
-                                    <MenuItem>View Company Store</MenuItem>
-                                    <MenuItem>See Company Website</MenuItem>
-                                    <MenuItem>Find Support or Report Page</MenuItem>
-                                </MenuList>
-                            </Menu>
+                        <Tab  _focus={{borderColor:"none"}}>Home</Tab>
+                        <Tab _focus={{borderColor:"none"}} onClick={() => history.push({search:"about"})}>About</Tab>
+                        <Tab _focus={{borderColor:"none"}} onClick={() => history.push({search:"reviews"})}>Reviews</Tab>
+                        <Tab _focus={{borderColor:"none"}} onClick={() => history.push({search:"products"})}>Products</Tab>
+                        {role === "seller" && JSON.parse(sellerId) === confirmProfile && <Tab _focus={{borderColor:"none"}} onClick={() => history.push({pathname:"/",search:"account"})}>Account</Tab>}
+                        <Menu isLazy placement="right" closeOnSelect>
+                            <MenuButton 
+                                variant="unstyled"
+                                ml={3}  
+                                px={4}
+                                pl={5}
+                                pr={5}
+                                py={2}
+                                transition="all 0.2s"
+                                _expanded={{ colorScheme: "green" }}
+                                _focus={{ boxShadow: "outline" }}
+                                _hover={{borderColor:"none"}}
+                                _active={{borderColor:"none"}}
+                                as={Button} 
+                                rightIcon={<ChevronDownIcon />}
+                            >
+                                More
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem backgroundColor="#007acc" onClick={(e) => onUnfollowClick(e)}>{clicked ? "Unfollow" : "Follow"}</MenuItem>
+                                <MenuItem>Share</MenuItem>
+                                <MenuItem onClick={()=>history.push(`/sellers/${sellerId}/${sellerDetails.business_name}`)}>View Company Store</MenuItem>
+                                <MenuItem>See Company Website</MenuItem>
+                                <MenuItem>Find Support or Report Page</MenuItem>
+                            </MenuList>
+                        </Menu>
                     </TabList>
                     <TabPanels mt={5}>
                         <TabPanel>
@@ -284,6 +292,19 @@ export const CompanyProfilePage = () => {
                                 )
                                 })}
                             </Flex>
+                        </TabPanel>
+                        <TabPanel id="account">
+                        <Box
+                            bg="white"
+                            width="100%"
+                            height="auto"
+                            borderWidth="1px"
+                            rounded="lg"
+                            shadow="lg"
+                            position="relative"
+                            p={5}>
+                                <Button>Edit Profile</Button>
+                            </Box>
                         </TabPanel>
                     </TabPanels>
                 </Tabs>

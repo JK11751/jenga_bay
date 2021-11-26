@@ -22,16 +22,25 @@ import { CompanyProfilePage } from "../pages/CompanyProfile/CompanyProfilePage.j
 import { CompanyCategoryPage } from "../pages/CompanyProducts/CompanyCategoryPage.js";
 import { Cart } from "../pages/Cart/Cart.js";
 import CheckoutPage from "../pages/Checkout/CheckoutPage.js";
+import { Orders } from "../pages/Orders/Orders.js";
+import { OrderDetails } from "../pages/Orders/subs/OrderDetails.js";
 import NotFound from "../pages/ErrorPage/NotFound.js";
 
 const Routes =()=>{
 
     //globally setting cart items in localStorage for data persistence
     const cart = useSelector(({ cartReducer }) => cartReducer);
-
+    
     useEffect(() => {
         localStorage.setItem("cartItems", JSON.stringify(cart.cartItems));
     }, [cart.cartItems])
+
+    // globally setting cancelled orders in localStorage for data persistence
+    const orderReducer = useSelector(({ orderReducer }) => orderReducer);
+    useEffect(() => {
+        localStorage.setItem("cancelledOrders", JSON.stringify(orderReducer.cancelledOrders));
+    }, [orderReducer.cancelledOrders])
+
     return(
         <div>
         <Switch>
@@ -73,6 +82,12 @@ const Routes =()=>{
             </Route>
             <Route exact path="/cart">
                 <Cart />
+            </Route>
+            <Route exact path="/orders">
+                <Orders />
+            </Route>
+            <Route exact path="/order-details">
+                <OrderDetails/>
             </Route>
             <PrivateRoute component={CheckoutPage} exact path="/checkout" />
             <Route exact path="/forgot-password">
