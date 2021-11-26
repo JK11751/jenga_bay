@@ -32,7 +32,7 @@ import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { useForm } from "../../../utils/useForm";
 import { handleLoginUser } from "../../../redux/appActions/authActions";
-
+import { useLocation } from "react-router";
 const style ={
     color:"red",
   }
@@ -41,6 +41,8 @@ const SignInForm = (props) => {
   const history = useHistory();
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+  const location = useLocation()
+  const value = location.state.from
 
   const dispatch = useDispatch();
 
@@ -90,7 +92,7 @@ const SignInForm = (props) => {
       localStorage.setItem("userUserPassword", JSON.stringify(user.password));
 
       //routing back to the page where the user was currently viewing
-      history.push(props.location.pathname ? {pathname: `${props.location.pathname}`} : "/")
+      history.push(props.location.pathname ? {pathname: `${props.location.pathname}`} : `${value}`)
     },
   });
 
@@ -199,7 +201,7 @@ const SignInForm = (props) => {
       <Flex mb={4} alignContent="center" pl={20} pr={20}>
         <Spacer />
         <Button
-          onClick={() => history.push("/forgot-password")}
+          onClick={() => history.push({pathname:"/forgot-password", state:{from: props.location.pathname ? {pathname: `${props.location.pathname}`} : `${value}`}})}
           variant="link"
           color="black"
           fontSize="xs"

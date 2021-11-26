@@ -5,7 +5,7 @@ import { useLocation } from "react-router";
 
 const Login =(props)=>{
     const location = useLocation()
-    const value = location.state ? location.state.from : "/"
+    const value = location.state.from
     return(
         <Box width="100vw" h="100vh" backgroundColor="#F8F8F8">
             <Center pt="5%">
