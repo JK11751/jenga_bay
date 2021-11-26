@@ -25,7 +25,7 @@ import { Button } from '@chakra-ui/button';
 import Stats from './subs/Stats';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { EditCompanyProfile } from './subs/EditCompanyProfile';
-// import { getRoleSessionStatus, getUser } from '../../utils/useToken';
+import { getRoleSessionStatus, getUser } from '../../utils/useToken';
 
 export const CompanyProfilePage = () => {
     const img = "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg"
@@ -33,7 +33,8 @@ export const CompanyProfilePage = () => {
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
     const sellerDetails = useSelector((state) => state.sellerReducer).sellerDetails;
     
-    // const role=getRoleSessionStatus()
+    const role=getRoleSessionStatus()
+    const confirmProfile = JSON.parse(getUser().account_id)
     const {sellerId} = useParams()
     const dispatch = useDispatch()
     const [clicked, setClicked] = useState(false)
@@ -43,8 +44,6 @@ export const CompanyProfilePage = () => {
     useEffect(() => { 
         dispatch(handleGetSellerDetails(sellerId))
         dispatch(handleGetSellerItems(sellerId)) 
-        // console.log("user",getUser().account_id) 
-        // console.log("role",role) 
     }, [sellerId,dispatch])
 
     const onButtonClick = () => {
@@ -100,8 +99,8 @@ export const CompanyProfilePage = () => {
                 <Center>
                     <Image borderBottomRadius="10px" height="200px" width="70vw" src={img} />
                 </Center>
-                {/* {sellerId === getUser.account_id && <Button position="absolute" top="30vh" right="18vw" onClick={() => { onOpen(); dispatch(handleGetSellerProfile(sellerId));}}>EditProfile</Button>} */}
-                <Button position="absolute" top="30vh" right="18vw" onClick={() => { onOpen(); dispatch(handleGetSellerProfile(sellerId));}}>EditProfile</Button>
+                {role === "seller" && JSON.parse(sellerId) === confirmProfile && <Button position="absolute" top="30vh" right="18vw" onClick={() => { onOpen(); dispatch(handleGetSellerProfile(sellerId));}}>EditProfile</Button>}
+                {/* <Button position="absolute" top="30vh" right="18vw" onClick={() => { onOpen(); dispatch(handleGetSellerProfile(sellerId));}}>EditProfile</Button> */}
                 <Box position="absolute" top="30vh" left="17vw">
                     <Avatar borderColor="#0095F8" borderWidth="5px" height="180px" width="180px" name={sellerDetails.business_name} src={sellerDetails.profile_pic}>
                     <AvatarBadge
