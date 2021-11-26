@@ -149,6 +149,16 @@ class SpecificOrderView(ListAPIView):
     def get_queryset(self):
         return Order.objects.all().filter(id=self.kwargs['pk'])
 
+class SpecificBuyerOrderView(ListAPIView):
+    """api used to view all orders made by a buyer
+    must be logged in as the buyer involved in the orders"""
+    permission_classes = [permissions.IsAuthenticated, HasBuyerOrderPermission]
+
+    serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        return Order.objects.all().filter(payment_transaction__payer=self.kwargs['pk'])
+
 
 class TransactionCreateView(CreateAPIView):
     """api for creating a new Transaction"""
@@ -181,8 +191,13 @@ class SpecificTransactionView(ListAPIView):
         return Transaction.objects.all().filter(id=self.kwargs['pk'])
 
 class CustomAuthToken(ObtainAuthToken):
+    """A Custom authentication class that creates an expiring authentication token
+    for a user who logs in"""
 
     def post(self, request, *args, **kwargs):
+        """An override of the post method that takes a login request, verifies
+        the login credentials and creates an expiring token once the user is verified"""
+        
         serializer = self.serializer_class(data=request.data,
                                        context={'request': request})
         serializer.is_valid(raise_exception=True)
