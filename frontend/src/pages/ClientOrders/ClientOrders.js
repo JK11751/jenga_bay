@@ -1,17 +1,17 @@
 import React, {useEffect} from 'react'
 import NavBar from '../../components/PageSections/NavBar'
 import Footer from '../../components/PageSections/Footer'
-import { OrderItem } from './subs/OrderItem';
+import { OrderItem } from '../../components/Orders/OrderItem';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, Box, Tabs, TabList, TabPanels, Tab, TabPanel, Center, Text  } from "@chakra-ui/react";
-import {MdKeyboardArrowRight} from "react-icons/md"
+import { MdKeyboardArrowRight } from "react-icons/md"
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleGetSellerOrders } from '../../redux/appActions/orderActions';
+import { handleGetBuyerOrders } from '../../redux/appActions/orderActions';
 import { getUser } from '../../utils/useToken';
-import { handleGetSellerDetails } from '../../redux/appActions/sellerActions';
+// import { handleGetSellerDetails } from '../../redux/appActions/sellerActions';
+// import { handleGetClientDetails } from '../../redux/appActions/userActions';
 
-export const Orders = () => {
-
+export const ClientOrders = () => {
     const dispatch = useDispatch()
     const userId = getUser().user_id
 
@@ -19,14 +19,14 @@ export const Orders = () => {
     // const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
     const [pending, setPending] = React.useState([])
     useEffect(() => {
-        dispatch(handleGetSellerOrders(userId))
-        dispatch(handleGetSellerDetails(userId))
+        dispatch(handleGetBuyerOrders(userId))
+        // dispatch(handleGetSellerDetails(userId))
         console.log("userId",userId)
     }, [dispatch, userId])
 
     useEffect(() => {
-        setPending(filterPendingOrders(orderReducer.sellerOrders, false))
-    }, [orderReducer.sellerOrders])
+        setPending(filterPendingOrders(orderReducer.buyerOrders, false))
+    }, [orderReducer.buyerOrders])
 
     // finds county by name from select and returns a list of subcounties
   function filterPendingOrders(orders, criteria) {
@@ -44,7 +44,7 @@ export const Orders = () => {
       return pendingOrders
       .map((order) => {
         return(
-        <OrderItem key={order.id}/>)})
+        <OrderItem id={order.id} seller_id={order.payment_transaction.recipient} order={order} key={order.id}/>)})
     }
   }
 
@@ -69,19 +69,19 @@ export const Orders = () => {
                     </TabList>
 
                     <TabPanels>
-                      { orderReducer.sellerOrders && <TabPanel id="Orders">
-                        {orderReducer.sellerOrders.length === 0 && (<Text> There are no orders here</Text>)}
+                      { orderReducer.buyerOrders && <TabPanel id="Orders">
+                        {orderReducer.buyerOrders.length === 0 && (<Text> There are no orders here</Text>)}
                         {/* <p>Orders from {sellerReducer.sellerDetails.map((seller) =>{ return seller.business_name})}</p> */}
                             {
-                                orderReducer.sellerOrders.map((order) => {
+                                orderReducer.buyerOrders.map((order) => {
                                     return(
-                                        <OrderItem order={order} {...order} key={order.id}/>
+                                        <OrderItem  seller_id={order.payment_transaction.recipient} id={order.id} order={order} {...order} key={order.id}/>
                                     )}
                                 )    
                             }
                         </TabPanel>}
-                        { orderReducer.sellerOrders !== null &&  <TabPanel id="Pending-Orders">
-                        {orderReducer.sellerOrders.length === 0 && (<Text> There are no pending orders</Text>)}
+                        { orderReducer.buyerOrders !== null &&  <TabPanel id="Pending-Orders">
+                        {orderReducer.buyerOrders.length === 0 && (<Text> There are no pending orders</Text>)}
                         {/* <p>Orders from {sellerReducer.sellerDetails.map((seller) =>{ return seller.business_name})}</p> */}
                             { pending}
                         </TabPanel>}
@@ -91,7 +91,7 @@ export const Orders = () => {
                             {
                                 orderReducer.cancelledOrders.map((order) => {
                                     return(
-                                        <OrderItem order={order} {...order} key={order.id}/>
+                                        <OrderItem seller_id={order.payment_transaction.recipient} id={order.id} order={order} {...order} key={order.id}/>
                                     )}
                                 )    
                             }
@@ -104,3 +104,5 @@ export const Orders = () => {
         </div>
     )
 }
+
+

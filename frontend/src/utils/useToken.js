@@ -41,8 +41,9 @@ export const getUser = () => {
 
  // return the user from the local storage 
  export const getRoleSessionStatus = () => {
-  const role = localStorage.getItem("sessionId") || null;
-  return role;
+  const userString = localStorage.getItem('userInfo');
+  const userInfo = JSON.parse(userString);
+  return userInfo?.session_status
 };
 
 

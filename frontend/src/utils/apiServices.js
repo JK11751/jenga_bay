@@ -24,16 +24,16 @@ const api = axios.create({ ...apiConfig });
 // console.log("userToken", userToken)
 // token authentification
 const token = getToken(); 
-if(token) api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+// if(token) api.defaults.headers.common['Authorization'] = `Token ${token}`
 
-api.interceptors.request.use(
-  (config) => {
-     // Whatever the token is
-    if (token) config.headers.Authorization = `Token ${token}` ;
-    return config;
-  },
-  (err) => Promise.reject("Error from auth token",err)
-);
+// api.interceptors.request.use(
+//   (config) => {
+//      // Whatever the token is
+//     if (token) config.headers.Authorization = `Token ${token}` ;
+//     return config;
+//   },
+//   (err) => Promise.reject("Error from auth token",err)
+// );
 
 class APIServices {
 /*----------------------------------USERS-------------------------------------- */ 
@@ -242,7 +242,15 @@ class APIServices {
 
   //Getting all orders made by a specific buyer
   async getAllBuyerOrders(buyer_id){
-    return api.get(`buyers/${buyer_id}/orders`)
+    return api.get(`buyers/${buyer_id}/orders`,
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      }
+    }, 
+    {
+      withCredentials: true
+    })
   }
 
   //seller can view, update or delete a specific order

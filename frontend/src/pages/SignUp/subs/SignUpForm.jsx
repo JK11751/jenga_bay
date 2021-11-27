@@ -31,7 +31,7 @@ import { useHistory } from "react-router";
 import { useForm } from "../../../utils/useForm";
 import { handleRegisterClient } from "../../../redux/appActions/userActions";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router";
+// import { useLocation } from "react-router";
 
 const style ={
   color:"red",
@@ -40,8 +40,8 @@ const style ={
 const SignUpForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const location = useLocation()
-  const value = location.state.from
+  // const location = useLocation()
+  // const value = location.state.from
 
   //handling form submission
   const { handleSubmit, handleChange, data: user, errors } = useForm({
@@ -95,7 +95,9 @@ const SignUpForm = () => {
       toast.success("Sign up successful", {
         position: "bottom-left",
       });
-      history.push({pathname:"/login", state:{from: `${value}`}})
+      history.push({pathname:"/login"
+      // , state:{from: `${value}`}
+    })
     }
   });
 
@@ -240,7 +242,9 @@ const SignUpForm = () => {
       </Button>
       <Text align="center" mt={4} fontSize="xs">
         Already have an account?
-        <Box as="span" textColor="#007ACC" onClick={() => history.push({pathname:"/login", state:{from: `${value}`}})}>
+        <Box as="span" textColor="#007ACC" onClick={() => history.push({pathname:"/login"
+        // , state:{from: `${value}`}
+        })}>
           {" "}
           Log in
         </Box>

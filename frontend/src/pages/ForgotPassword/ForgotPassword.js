@@ -12,15 +12,15 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { useState } from 'react';
 import { handleResetPassword } from '../../redux/appActions/authActions';
-import { useLocation } from 'react-router';
+// import { useLocation } from 'react-router';
   
   export const ForgotPassword = () => {
 
     const dispatch = useDispatch()
     const history = useHistory()
     const [email, setEmail] = useState("")
-    const location = useLocation()
-    const value = location.state.from
+    // const location = useLocation()
+    // const value = location.state.from
 
     const handleSubmit = (e) => {
 
@@ -29,7 +29,9 @@ import { useLocation } from 'react-router';
       }
 
       dispatch(handleResetPassword(data))
-      history.push({pathname:`/reset-password`, state:{from: `${value}`}})
+      history.push({pathname:`/reset-password`
+      // , state:{from: `${value}`}
+    })
     }
 
     return (
