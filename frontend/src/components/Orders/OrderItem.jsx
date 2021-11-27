@@ -37,7 +37,7 @@ export const OrderItem = (props) => {
             onClick={() => history.push({pathname:`/orders/order-details/${props.id}`, search:`?seller=${props.seller_id}`})}
             _hover ={{cursor:"pointer", color:"#007acc"}}
           >
-            Order #5
+            Order #{props.order.id}
           </chakra.h1>
           <Spacer/>
           <HStack>
