@@ -16,7 +16,6 @@ import {
   VisuallyHidden,
   HStack,
   Button,
-  useDisclosure,
   VStack,
   IconButton,
   CloseButton,
@@ -34,19 +33,20 @@ import {
 import { AiOutlineMenu } from "react-icons/ai";
 import { useHistory } from "react-router";
 import SearchBar from "../SearchBar/SearchBar";
-import { useSelector, useDispatch } from "react-redux";
-import { handleLogoutUser } from "../../redux/appActions/authActions";
-import { useLocation } from "react-router";
+import { useSelector } from "react-redux";
+import { LogoutDialogue } from "../LogoutDialogue";
+import { useDisclosure } from "@chakra-ui/hooks";
+// import { useLocation } from "react-router";
 
-const NavBar = ({cartItems}) => {
+const NavBar = () => {
   const bg = useColorModeValue("white", "gray.800");
   const mobileNav = useDisclosure();
-  const dispatch = useDispatch()
   const history= useHistory()
   const [show, setShow] = React.useState(false)
   const handleToggle = (setting) => setShow(setting)
   const cart = useSelector(({ cartReducer }) => cartReducer);
-  const location = useLocation()
+  const {isOpen, onOpen, onClose} = useDisclosure()
+  // const location = useLocation()
   // const value = location.state.from
 
   const handleOpenCart = () => {
@@ -179,7 +179,9 @@ const NavBar = ({cartItems}) => {
                     textColor="#18A0FB"
                     background="#fff"
                     variant="outline"
-                    onClick={()=>history.push({pathname:"/signup", state:{from: location.pathname}})}
+                    onClick={()=>history.push({pathname:"/signup"
+                    // , state:{from: location.pathname}
+                    })}
                   >
                     Sign Up
                   </Button>
@@ -195,13 +197,15 @@ const NavBar = ({cartItems}) => {
                       colorScheme="#18A0FB"
                       background="#18A0FB"
                       variant="solid"
-                      onClick={()=>history.push({pathname:"/login", state:{from: location.pathname}})}
+                      onClick={()=>history.push({pathname:"/login"
+                      // , state:{from: location.pathname}
+                      })}
                     >
                       Login
                     </Button>
                 </MenuItem>
               <MenuDivider />
-              <MenuItem onClick={() => {dispatch(handleLogoutUser());history.push({pathname:"/login", state:{from: location.pathname}})}}>LOG OUT</MenuItem>
+              <MenuItem onClick={() => onOpen()}>LOG OUT</MenuItem>
             </MenuList>
           </Menu>
             {/* <Avatar
@@ -213,6 +217,7 @@ const NavBar = ({cartItems}) => {
         </Flex>
       </chakra.header>
       <SideBar show={show} handleToggle={handleToggle} />
+      <LogoutDialogue isOpen={isOpen} onClose={onClose} />
     </React.Fragment>
   );
 }

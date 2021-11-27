@@ -167,7 +167,7 @@ export const CompanyProfilePage = () => {
                         <Tab _focus={{borderColor:"none"}} onClick={() => history.push({search:"about"})}>About</Tab>
                         <Tab _focus={{borderColor:"none"}} onClick={() => history.push({search:"reviews"})}>Reviews</Tab>
                         <Tab _focus={{borderColor:"none"}} onClick={() => history.push({search:"products"})}>Products</Tab>
-                        {role === "seller" && JSON.parse(sellerId) === confirmProfile && <Tab _focus={{borderColor:"none"}} onClick={() => history.push({pathname:"/",search:"account"})}>Account</Tab>}
+                        {role === "seller" && JSON.parse(sellerId) === confirmProfile && <Tab _focus={{borderColor:"none"}} onClick={() => history.push({search:"account"})}>Account</Tab>}
                         <Menu isLazy placement="right" closeOnSelect>
                             <MenuButton 
                                 variant="unstyled"
@@ -302,8 +302,11 @@ export const CompanyProfilePage = () => {
                             rounded="lg"
                             shadow="lg"
                             position="relative"
-                            p={5}>
-                                <Button>Edit Profile</Button>
+                            p={5}>   
+                                <Menu>
+                                <MenuItem onClick={() => onOpen()}>Edit Profile</MenuItem>
+                                <MenuItem onClick={() => history.push(`/orders`)}>View Orders</MenuItem>
+                                </Menu>
                             </Box>
                         </TabPanel>
                     </TabPanels>

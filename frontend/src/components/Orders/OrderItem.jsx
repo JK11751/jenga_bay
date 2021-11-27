@@ -1,11 +1,13 @@
 import React from 'react'
 import { chakra, Box, Flex, useColorModeValue, Button, Spacer,Avatar, Center, HStack } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
-import company from "../../../assets/bamburi.jpg"
-import { handleAddToCancelled, handleRemoveFromCancelled } from '../../../redux/appActions/orderActions';
+import { handleAddToCancelled, handleRemoveFromCancelled } from '../../redux/appActions/orderActions';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 
 export const OrderItem = (props) => {
+
+  const history = useHistory()
     const dispatch = useDispatch()
     return (
         <Flex
@@ -22,7 +24,7 @@ export const OrderItem = (props) => {
       >
         <Box w={1/4}>
             <Center >
-                <Avatar  borderWidth="2px" size="2xl" borderRadius="500px" borderColor="cyan" objectFit="cover" src={company}/>
+              <Avatar borderWidth="2px" size="2xl" borderRadius="500px" borderColor="#0095F8" objectFit="cover" src={props.sellerProfilePic}/>
             </Center>
         </Box>
 
@@ -32,6 +34,8 @@ export const OrderItem = (props) => {
             fontSize="2xl"
             fontWeight="bold"
             color={useColorModeValue("gray.800", "white")}
+            onClick={() => history.push({pathname:`/orders/order-details/${props.id}`, search:`?seller=${props.seller_id}`})}
+            _hover ={{cursor:"pointer", color:"#007acc"}}
           >
             Order #5
           </chakra.h1>
@@ -61,9 +65,9 @@ export const OrderItem = (props) => {
               letterSpacing="wide"
               fontSize="xs"
               textTransform="uppercase"
-              ml="2"
+              
             >
-              &bull; SIZE &bull; 24 items
+              {props.order.ordered_items.length} ordered items
             </Box>
           </Box>
           <chakra.p
@@ -76,27 +80,7 @@ export const OrderItem = (props) => {
           <Spacer/>
           <Flex mt={3} alignItems="center" justifyContent="space-between">
             <chakra.h1 color="black" fontWeight="bold" fontSize="lg">
-            Ksh. 2000000
-            </chakra.h1>
-            
-
-            <chakra.h1
-              px={2}
-              py={1}
-              bg="white"
-              fontSize="xs"
-              color="gray.900"
-              fontWeight="bold"
-              rounded="lg"
-              textTransform="uppercase"
-              _hover={{
-                bg: "gray.200",
-              }}
-              _focus={{
-                bg: "gray.400",
-              }}
-            >
-              {/* Item Total: Ksh. {props.quantity * props.price} */}20000
+            KSH.  {props.order.total_amount_payable}
             </chakra.h1>
           </Flex>
         </Box>

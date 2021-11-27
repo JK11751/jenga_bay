@@ -22,8 +22,9 @@ import { CompanyProfilePage } from "../pages/CompanyProfile/CompanyProfilePage.j
 import { CompanyCategoryPage } from "../pages/CompanyProducts/CompanyCategoryPage.js";
 import { Cart } from "../pages/Cart/Cart.js";
 import CheckoutPage from "../pages/Checkout/CheckoutPage.js";
-import { Orders } from "../pages/Orders/Orders.js";
-import { OrderDetails } from "../pages/Orders/subs/OrderDetails.js";
+import { CompanyOrders } from "../pages/CompanyOrders/CompanyOrders.js";
+import { ClientOrders } from "../pages/ClientOrders/ClientOrders.js";
+import { OrderDetails } from "../pages/OrderDetails/OrderDetails.js";
 import NotFound from "../pages/ErrorPage/NotFound.js";
 
 const Routes =()=>{
@@ -83,17 +84,19 @@ const Routes =()=>{
             <Route exact path="/cart">
                 <Cart />
             </Route>
-            <PrivateRoute component={Orders} exact path="/orders" />
-            <Route exact path="/order-details">
-                <OrderDetails/>
-            </Route>
-            <PrivateRoute component={CheckoutPage} exact path="/checkout" />
             <Route exact path="/forgot-password">
                 <ForgotPassword/>
             </Route>
             <Route exact path="/reset-password">
                 <ResetPassword />
             </Route>
+
+            {/* Private Routes */}
+            <PrivateRoute component={CompanyOrders} exact path="/orders" />
+            <PrivateRoute component={ClientOrders} exact path="/client/orders" />
+            <PrivateRoute component={OrderDetails} exact path="/orders/order-details/:orderId" />
+            <PrivateRoute component={CheckoutPage} exact path="/checkout" />
+        
             {/* No route should be added after this not found page */}
             <Route exact path="*">
                 <NotFound />
