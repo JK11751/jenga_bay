@@ -8,10 +8,10 @@ const apiConfig = {
     timeout: 30000000,
     headers: {
       'Content-Type': 'application/json',
-      // "Access-Control-Allow-Origin": '*',
-      // "Access-Control-Expose-Headers": "Content-Length, X-JSON",
-      // // Access-Control-Allow-Methods: 'HEAD, GET, POST, PUT, PATCH, DELETE'
-      // "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+       //"Access-Control-Allow-Origin": '*',
+     //"Access-Control-Expose-Headers": "Content-Length, X-JSON",
+     // "Access-Control-Allow-Methods": 'HEAD, GET, POST, PUT, PATCH, DELETE',
+      //"Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
     },
     validateStatus: function (status) {
       return status < 500; // Resolve only if the status code is less than 500
