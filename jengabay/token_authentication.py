@@ -1,13 +1,15 @@
 from rest_framework.authentication import TokenAuthentication, get_authorization_header
+from rest_framework.authtoken.models import Token
 from rest_framework.exceptions import AuthenticationFailed
 from datetime import datetime, timedelta
 import pytz
 
 class ExpiringTokenAuthentication(TokenAuthentication):
+    
     def authenticate_credentials(self, key):
         try:
-            token = self.model.objects.get(key=key)
-        except self.model.DoesNotExist:
+            token = Token.objects.get(key=key)
+        except Token.DoesNotExist:
             raise AuthenticationFailed('Invalid token')
 
         if not token.user.is_active:

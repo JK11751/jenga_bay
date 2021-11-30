@@ -23,31 +23,48 @@
 
 // return the token from the local storage
 export const getToken = () => {
-    return localStorage.getItem("token") || null;
-  };
+    const tokenString = localStorage.getItem('userInfo');
+    const userToken = JSON.parse(tokenString);
+    return userToken?.token
+  // return localStorage.getItem("token") || null;
+};
+
+export const setToken = userInfo => {
+  localStorage.setItem('userInfo', JSON.stringify(userInfo));
+};
+ 
+ // return the user from the local storage 
+export const getUser = () => {
+  const user = JSON.parse(localStorage.getItem("userInfo") || null);
+  return user;
+};
+
+ // return the user from the local storage 
+ export const getRoleSessionStatus = () => {
+  const userString = localStorage.getItem('userInfo');
+  const userInfo = JSON.parse(userString);
+  return userInfo?.session_status
+};
+
+
   
-  export const getUser = () => {
-    const result = JSON.parse(sessionStorage.getItem("user") || null);
-    return result;
-  };
+// remove the token and user from the session storage
+export const removeUserSession = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("userInfo");
+  localStorage.removeItem("session_id");
+};
   
-  // remove the token and user from the session storage
-  export const removeUserSession = () => {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("user");
-    sessionStorage.removeItem("session_id");
-  };
-  
-  // ================================================
-  
-  // The section of the password length
-  export const isLength = password => {
-    if (password.length < 6) return true;
-    return false;
-  };
-  
-  // The section of the confirm password
-  export const isMatch = (password, cfpassword) => {
-    if (password === cfpassword) return true;
-    return false;
-  };
+// ================================================
+
+// The section of the password length
+export const isLength = password => {
+  if (password.length < 6) return true;
+  return false;
+};
+
+// The section of the confirm password
+export const isMatch = (password, cfpassword) => {
+  if (password === cfpassword) return true;
+  return false;
+};

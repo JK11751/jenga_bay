@@ -1,13 +1,4 @@
-import { FormControl } from "@chakra-ui/react";
-import {
-  Input,
-  InputGroup,
-  InputRightElement,
-  InputLeftElement,
-
-} from "@chakra-ui/input";
 import { useState } from "react";
-import { Button, IconButton } from "@chakra-ui/button";
 import {
   VStack,
   Text,
@@ -18,7 +9,15 @@ import {
   Spacer,
   Box,
   FormHelperText,
+  Input,
+  InputGroup,
+  InputRightElement,
+  InputLeftElement,
+  Button, 
+  IconButton,
+  FormControl, 
 } from "@chakra-ui/react";
+import { toast } from "react-toastify";
 import { HiOutlineMail } from "react-icons/hi";
 import { IoIosPerson } from "react-icons/io";
 import { BiLockAlt } from "react-icons/bi";
@@ -31,17 +30,18 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { useForm } from "../../../utils/useForm";
-import { toast } from "react-toastify";
 import { handleLoginUser } from "../../../redux/appActions/authActions";
-
+import { getToken } from "../../../utils/useToken";
 const style ={
     color:"red",
   }
 
-const SignInForm = () => {
+const SignInForm = (props) => {
   const history = useHistory();
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+  // const location = useLocation()
+  // const value = location.state.from
 
   const dispatch = useDispatch();
 
@@ -88,11 +88,17 @@ const SignInForm = () => {
     //   Store token in localstorage
     //   sessionStorage.setItem("user_id", data.InsertedId);
       localStorage.setItem("newUserEmail", JSON.stringify(user.email));
-      localStorage.setItem("userUserPassword", JSON.stringify(user.password));
+      console.log(getToken())
+      //routing back to the page where the user was currently viewing
+      const token = getToken();
+      if(token){
+        toast.success("Login successful", {
+          position: "bottom-left",
+        });
+      
+    }
 
-      toast.success("Login successful", {
-        position: "bottom-left",
-      })
+    // history.push(props.location.pathname ? {pathname: `${props.location.pathname}`} : `${value}`)
       history.push("/")
     },
   });
@@ -202,7 +208,7 @@ const SignInForm = () => {
       <Flex mb={4} alignContent="center" pl={20} pr={20}>
         <Spacer />
         <Button
-          onClick={() => history.push("/forgot-password")}
+          onClick={() => history.push({pathname:"/forgot-password"})}
           variant="link"
           color="black"
           fontSize="xs"
@@ -218,6 +224,7 @@ const SignInForm = () => {
         width="300px"
         height="35px"
         color="#ffffff"
+        isDisabled={!user.password || !user.email || !user.username}
         onClick={handleSubmit}
       >
         Sign In

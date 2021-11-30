@@ -9,7 +9,7 @@ import { Icon } from '@chakra-ui/icon';
 import {MdCheckCircle, MdLocationOn} from "react-icons/md"
 import { BiImageAdd } from 'react-icons/bi';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react"
-import { handleGetSellerItems, handleGetSellerDetails } from '../../redux/appActions/sellerActions';
+import { handleGetSellerItems, handleGetSellerDetails, handleGetSellerProfile } from '../../redux/appActions/sellerActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import Reviews from './subs/Reviews';
@@ -23,23 +23,30 @@ import {
 import {ChevronDownIcon } from "@chakra-ui/icons"
 import { Button } from '@chakra-ui/button';
 import Stats from './subs/Stats';
+import { useDisclosure } from '@chakra-ui/hooks';
+import { EditCompanyProfile } from './subs/EditCompanyProfile';
+import { getRoleSessionStatus, getUser } from '../../utils/useToken';
+import { useHistory } from 'react-router';
 
 export const CompanyProfilePage = () => {
     const img = "https://static2.tripoto.com/media/filter/tst/img/735873/TripDocument/1537686560_1537686557954.jpg"
 
     const sellerReducer = useSelector(({ sellerReducer }) => sellerReducer);
-    const sellerDetails = useSelector((state) => state.sellerReducer).sellerDetails
+    const sellerDetails = useSelector((state) => state.sellerReducer).sellerDetails;
     
+    const role=getRoleSessionStatus()
+    const confirmProfile = JSON.parse(getUser().account_id)
     const {sellerId} = useParams()
-    
     const dispatch = useDispatch()
+    const history = useHistory()
     const [clicked, setClicked] = useState(false)
     const [followers, setFollowers] = useState(13)
+    // const [defaultTab, setDefaultTab] = useState(0)
     const inputFile = useRef(null) 
 
     useEffect(() => { 
-        dispatch(handleGetSellerItems(sellerId))
         dispatch(handleGetSellerDetails(sellerId))
+        dispatch(handleGetSellerItems(sellerId)) 
     }, [sellerId,dispatch])
 
     const onButtonClick = () => {
@@ -81,19 +88,28 @@ export const CompanyProfilePage = () => {
         setClicked(!clicked)
     }
 
+    const onUnfollowClick = (e) => {
+        setColor(e)
+        setClicked(!clicked)
+    }
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     return (
+        <>
+        {
+        sellerDetails.map((sellerDetails)=>{
+        return(
         <Box>
             <input type='file' id='file' ref={inputFile} style={{display: 'none'}}/>
             <NavBar />
-            {sellerDetails.map((seller) => {
-                return(
-                    <>
             <Flex bg="#f5f5f5" pb="7vh" flexDir="column" borderBottomRadius="10px">
                 <Center>
                     <Image borderBottomRadius="10px" height="200px" width="70vw" src={img} />
                 </Center>
+                {role === "seller" && JSON.parse(sellerId) === confirmProfile && <Button position="absolute" top="30vh" right="18vw" onClick={() => { onOpen(); dispatch(handleGetSellerProfile(sellerId));}}>EditProfile</Button>}
                 <Box position="absolute" top="30vh" left="17vw">
-                    <Avatar borderColor="#0095F8" borderWidth="5px" height="180px" width="180px" name={seller.business_name} src={seller.profile_pic}>
+                    <Avatar borderColor="#0095F8" borderWidth="5px" height="180px" width="180px" name={sellerDetails.business_name} src={sellerDetails.profile_pic}>
                     <AvatarBadge
                         as={IconButton}
                         onClick={onButtonClick}
@@ -111,16 +127,16 @@ export const CompanyProfilePage = () => {
                     <HStack alignItems="top">
                         <VStack alignItems="left">
                             <HStack>
-                                <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">{seller.business_name}</Text>
+                                <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">{sellerDetails.business_name}</Text>
                                 <Icon color="green" as={MdCheckCircle}/>
                             </HStack>
                             <HStack>
                                 <Icon as={MdLocationOn}/>
-                                <Text>{seller.local_area_name}, {seller.town}</Text>
+                                <Text>{sellerDetails.local_area_name}, {sellerDetails.town}</Text>
                             </HStack>  
                         </VStack>
                         <Box ml="4vw">
-                            <Button onClick={(e) => onFollowClick(e)} id="followButton" ml="1vw" _focus={{borderColor:"none", bg:"#FFA90A"}}>{clicked ? "Following" : "Follow"}</Button>
+                            <Button onClick={(e) => onFollowClick(e)} id="followButton" w="100px" ml="1vw" _focus={{borderColor:"none", bg:"#FFA90A"}}>{clicked ? "Following" : "Follow"}</Button>
                         </Box>
                     </HStack>
                         <HStack spacing="20px" alignItems="left">
@@ -147,36 +163,37 @@ export const CompanyProfilePage = () => {
             <Box width="70vw"> 
                 <Tabs defaultIndex={0} mt="1vh" variant="soft-rounded" colorScheme="green" isLazy>
                     <TabList>
-                        <Tab _focus={{borderColor:"none"}}>Home</Tab>
-                        <Tab _focus={{borderColor:"none"}}>About</Tab>
-                        <Tab _focus={{borderColor:"none"}}>Reviews</Tab>
-                        <Tab _focus={{borderColor:"none"}}>Products</Tab>
-                            <Menu isLazy placement="right" closeOnSelect>
-                                <MenuButton 
-                                    variant="unstyled"
-                                    ml={3}  
-                                    px={4}
-                                    pl={5}
-                                    pr={5}
-                                    py={2}
-                                    transition="all 0.2s"
-                                    _expanded={{ colorScheme: "green" }}
-                                    _focus={{ boxShadow: "outline" }}
-                                    _hover={{borderColor:"none"}}
-                                    _active={{borderColor:"none"}}
-                                    as={Button} 
-                                    rightIcon={<ChevronDownIcon />}
-                                >
-                                    More
-                                </MenuButton>
-                                <MenuList>
-                                    <MenuItem>Unfollow</MenuItem>
-                                    <MenuItem>Share</MenuItem>
-                                    <MenuItem>View Company Store</MenuItem>
-                                    <MenuItem>See Company Website</MenuItem>
-                                    <MenuItem>Find Support or Report Page</MenuItem>
-                                </MenuList>
-                            </Menu>
+                        <Tab  _focus={{borderColor:"none"}}>Home</Tab>
+                        <Tab _focus={{borderColor:"none"}} onClick={() => history.push({search:"about"})}>About</Tab>
+                        <Tab _focus={{borderColor:"none"}} onClick={() => history.push({search:"reviews"})}>Reviews</Tab>
+                        <Tab _focus={{borderColor:"none"}} onClick={() => history.push({search:"products"})}>Products</Tab>
+                        {role === "seller" && JSON.parse(sellerId) === confirmProfile && <Tab _focus={{borderColor:"none"}} onClick={() => history.push({search:"account"})}>Account</Tab>}
+                        <Menu isLazy placement="right" closeOnSelect>
+                            <MenuButton 
+                                variant="unstyled"
+                                ml={3}  
+                                px={4}
+                                pl={5}
+                                pr={5}
+                                py={2}
+                                transition="all 0.2s"
+                                _expanded={{ colorScheme: "green" }}
+                                _focus={{ boxShadow: "outline" }}
+                                _hover={{borderColor:"none"}}
+                                _active={{borderColor:"none"}}
+                                as={Button} 
+                                rightIcon={<ChevronDownIcon />}
+                            >
+                                More
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem backgroundColor="#007acc" onClick={(e) => onUnfollowClick(e)}>{clicked ? "Unfollow" : "Follow"}</MenuItem>
+                                <MenuItem>Share</MenuItem>
+                                <MenuItem onClick={()=>history.push(`/sellers/${sellerId}/${sellerDetails.business_name}`)}>View Company Store</MenuItem>
+                                <MenuItem>See Company Website</MenuItem>
+                                <MenuItem>Find Support or Report Page</MenuItem>
+                            </MenuList>
+                        </Menu>
                     </TabList>
                     <TabPanels mt={5}>
                         <TabPanel>
@@ -222,12 +239,12 @@ export const CompanyProfilePage = () => {
                             position="relative"
                             p={5}>
                             <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">GENERAL</Text>
-                                <Text p={2}>Business Name:{seller.business_name}</Text>
-                                <Text p={2}>Business Email:{seller.email}</Text>
-                                <Text p={2}>Business Phone Number:{seller.phone_number}</Text>
+                                <Text p={2}>Business Name:{sellerDetails.business_name}</Text>
+                                <Text p={2}>Business Email: {sellerDetails.business_name}@gmail.com</Text>
+                                <Text p={2}>Business Phone Number:{sellerDetails.phone_number}</Text>
                                 <Text p={2}>Business Address:</Text>
-                                <Text p={2}>{seller.town}, {seller.local_area_name}</Text>
-                                <Text p={2}>{seller.street}{seller.building}</Text>
+                                <Text p={2}>{sellerDetails.town}, {sellerDetails.local_area_name}</Text>
+                                <Text p={2}>{sellerDetails.street}{sellerDetails.building}</Text>
                                 <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">COMPANY WEBSITE</Text>
                                 <Text fontFamily="sans-serif" p={2}>https://bamburicement.com/</Text>
                                 <Text fontFamily="sans-serif" fontWeight="bold" fontSize="20px">MORE INFO</Text>
@@ -271,16 +288,33 @@ export const CompanyProfilePage = () => {
                             <Flex borderRadius="10px" width="80vw" alignSelf="center" flexWrap="wrap" >
                                 {sellerReducer.sellerItems.map((product,key)=>{ 
                                 return(
-                                    <ProductCard key={key} price={product.item_price} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={seller.business_name}/> 
+                                    <ProductCard key={key} price={product.item_price} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={sellerDetails.business_name}/> 
                                 )
                                 })}
                             </Flex>
                         </TabPanel>
+                        <TabPanel id="account">
+                        <Box
+                            bg="white"
+                            width="100%"
+                            height="auto"
+                            borderWidth="1px"
+                            rounded="lg"
+                            shadow="lg"
+                            position="relative"
+                            p={5}>   
+                                <Menu>
+                                <MenuItem onClick={() => onOpen()}>Edit Profile</MenuItem>
+                                <MenuItem onClick={() => history.push(`/orders`)}>View Orders</MenuItem>
+                                </Menu>
+                            </Box>
+                        </TabPanel>
                     </TabPanels>
                 </Tabs>
                 </Box>
-            </Center> </>)})}
+            </Center>
             <Footer />
-        </Box>
+            <EditCompanyProfile isOpen={isOpen} onClose={onClose} sellerId={sellerId}/>
+        </Box>)})}</>
     )
 }

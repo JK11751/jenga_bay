@@ -8,10 +8,17 @@ const apiConfig = {
     timeout: 30000000,
     headers: {
       'Content-Type': 'application/json',
+<<<<<<< HEAD
        //"Access-Control-Allow-Origin": '*',
      //"Access-Control-Expose-Headers": "Content-Length, X-JSON",
      // "Access-Control-Allow-Methods": 'HEAD, GET, POST, PUT, PATCH, DELETE',
       //"Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+=======
+      // "Access-Control-Allow-Origin": '*',
+      // "Access-Control-Expose-Headers": "Content-Length, X-JSON",
+      // "Access-Control-Allow-Methods": 'HEAD, GET, POST, PUT, PATCH, DELETE',
+      // "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+>>>>>>> 658505a5ff9c17b20e1e24fbbb69f9090a3ab6da
     },
     validateStatus: function (status) {
       return status < 500; // Resolve only if the status code is less than 500
@@ -24,35 +31,28 @@ const api = axios.create({ ...apiConfig });
 // console.log("userToken", userToken)
 // token authentification
 const token = getToken(); 
-// api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+// if(token) api.defaults.headers.common['Authorization'] = `Token ${token}`
 
-api.interceptors.request.use(
-  (config) => {
-     // Whatever the token is
-    if (token) config.headers.Authorization = `Bearer ${token}`;
-    return config;
-  },
-  (err) => Promise.reject("Error from auth token",err)
-);
+// api.interceptors.request.use(
+//   (config) => {
+//      // Whatever the token is
+//     if (token) config.headers.Authorization = `Token ${token}` ;
+//     return config;
+//   },
+//   (err) => Promise.reject("Error from auth token",err)
+// );
 
 class APIServices {
-/*----------------------------------EXAMPLE-------------------------------------- */ 
-
-  // @desc End Point Example
-  async getUsers(data) {
-    return api.get("/some-endpoint", data);
-  }
-
 /*----------------------------------USERS-------------------------------------- */ 
 
-  // @desc End Point Example
+  // Loging in a user
   async loginUser(data) {
     return api.post(`/login`, data);
   }
 
-  // @desc End Point Example
-  async logoutUser(data) {
-    return api.post(`/accounts/logout/`, data);
+  // Logging out a user
+  async logoutUser() {
+    return api.post(`/accounts/logout/`);
   }
 
   // @desc End Point Example
@@ -134,12 +134,43 @@ class APIServices {
 
   //getting profile of a specific seller
   async getSellerProfile(seller_id){
-    return api.get(`/sellers/${seller_id}/profile`);
+    return api.get(`/sellers/${seller_id}/profile`,
+     {
+        headers: {
+          Authorization: `Token ${token}`,
+        }
+      }, 
+      {
+        withCredentials: true
+      }
+    );
   }
 
-  //updating profile of a specific seller
+  //updating profile of a specific seller with patch
   async updateSellerProfile(seller_id, data){
-    return api.put(`/sellers/${seller_id}/profile`, data);
+    return api.patch(`/sellers/${seller_id}/profile`, data,
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      }
+    }, 
+    {
+      withCredentials: true
+    }
+    );
+  }
+  //updating profile of a specific seller with patch
+  async updateSellerProfilePic(seller_id, data){
+    return api.put(`/sellers/${seller_id}/profile`, data,
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+        }
+      }, 
+      {
+        withCredentials: true
+      }
+    );
   }
 
   //deleting profile of a specific seller
@@ -192,12 +223,41 @@ class APIServices {
 
   //Viewing orders to a specific seller
   async getSellersOrders(seller_id) {
-    return api.get(`/sellers/${seller_id}/orders`)
+    return api.get(`/sellers/${seller_id}/orders`,
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      }
+    }, 
+    {
+      withCredentials: true
+    })
   }
 
   //Viewing orders to a specific seller
   async viewOrderClient(seller_id, order_id) {
-    return api.get(`/sellers/${seller_id}/orders/${order_id}`)
+    return api.get(`/sellers/${seller_id}/orders/${order_id}`,
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      }
+    }, 
+    {
+      withCredentials: true
+    })
+  }
+
+  //Getting all orders made by a specific buyer
+  async getAllBuyerOrders(buyer_id){
+    return api.get(`buyers/${buyer_id}/orders`,
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      }
+    }, 
+    {
+      withCredentials: true
+    })
   }
 
   //seller can view, update or delete a specific order
