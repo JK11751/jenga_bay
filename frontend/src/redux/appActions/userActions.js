@@ -1,6 +1,7 @@
 import { GET_CLIENT_DETAILS, REGISTER_CLIENT } from "../App/actionTypes";
 import APIServices from "../../utils/apiServices";
 // import { toast } from "react-toastify";
+
 // Registering a buyer to the system
 export const handleRegisterClient = (userData) => async (dispatch) => {
     try {
@@ -8,7 +9,6 @@ export const handleRegisterClient = (userData) => async (dispatch) => {
         // Let's assume an array of objects is returned from the endpoint
       const response = await APIServices.createClient(userData);
       console.log("This is the registered client",response.data);
-      
       await dispatch({ type: REGISTER_CLIENT, payload: response.data });
       // localStorage.setItem("token", JSON.stringify(response.data));
       // Result is sent to the store via dispatch (Pass payload if needed)
@@ -17,9 +17,6 @@ export const handleRegisterClient = (userData) => async (dispatch) => {
       console.log(`Error from handleRegisterClient: ${error}`);
     }
   };
-
-
-// Registering a buyer to the system
 //Getting a specific client's details
 const getClientDetails = (clientDetails) => ({
   type: GET_CLIENT_DETAILS,

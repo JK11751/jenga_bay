@@ -6,8 +6,6 @@ const initialState = {
     searchedProducts: [],
     sellerItems: [],
     categoryItems: [],
-    newSellerDetails:[],
-    updatedSellerProfile: [],
 };
 
 const sellerReducer = (state = initialState, action) => {

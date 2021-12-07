@@ -4,7 +4,6 @@ import {Route, Switch} from "react-router-dom"
 //utility imports
 import PrivateRoute from "../utils/PrivateRoute.js";
 //All Page imports
-
 import SignUp from "../pages/SignUp/SignUp.js";
 import RegistrationPage from "../pages/CompanyRegistration/RegistrationPage.js";
 import Login from "../pages/Login/Login.js";
