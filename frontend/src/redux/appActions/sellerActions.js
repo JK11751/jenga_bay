@@ -1,6 +1,6 @@
 import APIServices from "../../utils/apiServices";
 // import { toast } from "react-toastify";
-import { GET_SELLER_DETAILS,GET_SELLER_ITEMS, GET_SELLER_PROFILE, GET_ALL_SELLERS,SEARCH_SELLER_PRODUCTS, GET_SELLER_PRODUCTS_IN_SPECIFIC_CATEGORY,} from "../App/actionTypes";
+import { GET_SELLER_DETAILS,GET_SELLER_ITEMS, GET_SELLER_PROFILE, GET_ALL_SELLERS,SEARCH_SELLER_PRODUCTS, GET_SELLER_PRODUCTS_IN_SPECIFIC_CATEGORY, UPDATE_SELLER_PROFILE,} from "../App/actionTypes";
 
 //Getting all sellers
 const getAllSellers = (allSellers) => ({
@@ -44,6 +44,21 @@ const getAllSellers = (allSellers) => ({
       await dispatch(getSellerProfile(data));
     } catch (error) {
       console.log(`Error from handleGetSellerProfile: ${error}`);
+    }
+  }
+
+  //Updating a specific seller's profile
+  const updatingSellerProfile = (updateSellerProfile) => ({
+    type: UPDATE_SELLER_PROFILE,
+    payload: updateSellerProfile,
+  });
+  
+  export const handleUpdateSellerProfile = (seller_id, sellerData) => async(dispatch) => {
+    try {
+      const { data } = await APIServices.updateSellerProfile(seller_id, sellerData);
+      await dispatch(updatingSellerProfile(data));
+    } catch (error) {
+      console.log(`Error from handleUpdateSellerProfile: ${error}`);
     }
   }
   

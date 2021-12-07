@@ -50,5 +50,8 @@ urlpatterns = [
     #api for viewing a specific order
     path('sellers/<str:seller_id>/orders/<str:pk>', views.SpecificOrderView.as_view(), name='orders'),
 
+    #api for viewing a specific order
+    path('buyers/<str:pk>/orders', views.SpecificBuyerOrderView.as_view(), name='buyer_orders'),
+
     path('login', views.CustomAuthToken.as_view(), name='login')
 ]

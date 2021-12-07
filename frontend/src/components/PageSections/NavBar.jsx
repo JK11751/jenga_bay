@@ -16,7 +16,6 @@ import {
   VisuallyHidden,
   HStack,
   Button,
-  useDisclosure,
   VStack,
   IconButton,
   CloseButton,
@@ -35,15 +34,20 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { useHistory } from "react-router";
 import SearchBar from "../SearchBar/SearchBar";
 import { useSelector } from "react-redux";
+import { LogoutDialogue } from "../LogoutDialogue";
+import { useDisclosure } from "@chakra-ui/hooks";
+// import { useLocation } from "react-router";
 
-const NavBar = ({cartItems}) => {
+const NavBar = () => {
   const bg = useColorModeValue("white", "gray.800");
   const mobileNav = useDisclosure();
-
   const history= useHistory()
   const [show, setShow] = React.useState(false)
   const handleToggle = (setting) => setShow(setting)
   const cart = useSelector(({ cartReducer }) => cartReducer);
+  const {isOpen, onOpen, onClose} = useDisclosure()
+  // const location = useLocation()
+  // const value = location.state.from
 
   const handleOpenCart = () => {
     history.push("/cart")
@@ -58,7 +62,7 @@ const NavBar = ({cartItems}) => {
         py={4}
         shadow="md"
         top={0}
-        zIndex="10000"
+        zIndex="200"
         position="sticky"
       >
         <Flex alignItems="center" justifyContent="space-between" >
@@ -166,7 +170,6 @@ const NavBar = ({cartItems}) => {
                 <MenuItem>FAQ</MenuItem>
               </MenuGroup>
               <MenuItem alignItems="center">
-                <Link to="/signup">
                   <Button
                     h="30px"
                     alignItems="center"
@@ -176,13 +179,14 @@ const NavBar = ({cartItems}) => {
                     textColor="#18A0FB"
                     background="#fff"
                     variant="outline"
+                    onClick={()=>history.push({pathname:"/signup"
+                    // , state:{from: location.pathname}
+                    })}
                   >
                     Sign Up
                   </Button>
-                </Link>
               </MenuItem>
                 <MenuItem alignItems="center">
-                  <Link to="/login">
                     <Button
                       h="30px"
                       w="130px"
@@ -193,13 +197,15 @@ const NavBar = ({cartItems}) => {
                       colorScheme="#18A0FB"
                       background="#18A0FB"
                       variant="solid"
+                      onClick={()=>history.push({pathname:"/login"
+                      // , state:{from: location.pathname}
+                      })}
                     >
                       Login
                     </Button>
-                  </Link>
                 </MenuItem>
               <MenuDivider />
-              <MenuItem>LOG OUT</MenuItem>
+              <MenuItem onClick={() => onOpen()}>LOG OUT</MenuItem>
             </MenuList>
           </Menu>
             {/* <Avatar
@@ -211,6 +217,7 @@ const NavBar = ({cartItems}) => {
         </Flex>
       </chakra.header>
       <SideBar show={show} handleToggle={handleToggle} />
+      <LogoutDialogue isOpen={isOpen} onClose={onClose} />
     </React.Fragment>
   );
 }

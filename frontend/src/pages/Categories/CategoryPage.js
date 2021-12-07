@@ -83,11 +83,12 @@ export const CategoryPage = () => {
                             <Text p={4} fontWeight="bold">{itemsInCategoryList.length} items found</Text>
                             <Divider width="63vw" mb={2} />
                             <Flex flexWrap="wrap">
-                            {itemsInCategoryList.map((product)=>{ 
-                                return(
-                                    <ProductCard price={product.item_price} sellerId={product.item_seller.id} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
-                                )
-                            })}</Flex>
+                                {itemsInCategoryList.map((product)=>{ 
+                                    return(
+                                        <ProductCard price={product.item_price} sellerId={product.item_seller.id} product={product} id={product.id} company_image={product.item_seller.profile_pic} photo={product.item_main_image} category={product.category} name={product.item_name} description={product.item_description} companyName={product.item_seller.business_name}/> 
+                                    )
+                                })}
+                            </Flex>
                         </Flex>
                         {itemsInCategoryList.length === 0 && <Text p={20}>There are no products here</Text> }
                         

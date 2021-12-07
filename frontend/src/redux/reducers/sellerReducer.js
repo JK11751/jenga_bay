@@ -1,5 +1,4 @@
-import { GET_ALL_SELLERS, GET_SELLER_DETAILS, GET_SELLER_ITEMS, GET_SELLER_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_SELLER_PROFILE, REGISTER_SELLER, SEARCH_SELLER_PRODUCTS } from "../App/actionTypes";
-
+import { GET_ALL_SELLERS, GET_SELLER_DETAILS, GET_SELLER_ITEMS, GET_SELLER_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_SELLER_PROFILE, SEARCH_SELLER_PRODUCTS, UPDATE_SELLER_PROFILE } from "../App/actionTypes";
 const initialState = {
     allSellers: [],
     sellerDetails: [],
@@ -8,6 +7,7 @@ const initialState = {
     sellerItems: [],
     categoryItems: [],
     newSellerDetails:[],
+    updatedSellerProfile: [],
 };
 
 const sellerReducer = (state = initialState, action) => {
@@ -29,11 +29,16 @@ const sellerReducer = (state = initialState, action) => {
                 ...state,
                 sellerProfile:payload
             }
+        case UPDATE_SELLER_PROFILE:
+            return{
+                ...state,
+                updatedSellerProfile:payload
+            }
         case GET_SELLER_ITEMS:
-        return{
-            ...state,
-            sellerItems:payload
-        }
+            return{
+                ...state,
+                sellerItems:payload
+            }
         case SEARCH_SELLER_PRODUCTS:
             return{
                 ...state,
@@ -44,11 +49,6 @@ const sellerReducer = (state = initialState, action) => {
                 ...state,
                 categoryItems:payload
             }    
-        case REGISTER_SELLER:
-            return{
-                ...state,
-                newSellerDetails:payload
-            }
         default:
             return state;//returns defult state if no data is fetched
         }

@@ -13,11 +13,14 @@ import {
   import { useHistory } from 'react-router';
   import { useState } from 'react';
 import { handleResetPasswordConfirm } from '../../redux/appActions/authActions';
+// import { useLocation } from "react-router";
   
   export const ResetPassword = () => {
 
     const dispatch = useDispatch()
     const history = useHistory()
+    // const location = useLocation()
+    // const value = location.state.from
     const [password, setPassword] = useState("")
     // const [passwordResetToken, setPassworeResetToken] = useState("")
 
@@ -27,7 +30,9 @@ import { handleResetPasswordConfirm } from '../../redux/appActions/authActions';
         token: "3339e80fe05e5ca9fc74799213f81a093d1f",
       }
       dispatch(handleResetPasswordConfirm(data))
-      history.push(`/login`)
+      history.push({pathname:"/login", 
+      // state:{from: `${value}`}
+    })
     }
 
     // const token = localStorage.getItem("passwordResetToken") ? JSON.parse(localStorage.getItem("passwordResetToken")) : " ";

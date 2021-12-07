@@ -112,7 +112,7 @@ const  CompanyProductPage=()=> {
                         </Box>
                         {/* <CategoryChips /> */}
                         <Flex alignItems="center">
-                            <Breadcrumb p={5} textSize="1.5em" fontFamily="monospace" textTransform="uppercase" ml={20} spacing="8px" separator={<MdKeyboardArrowRight color="gray.500" />}>
+                            <Breadcrumb p={5} fontSize="1em" fontFamily="monospace" textTransform="uppercase" ml={20} spacing="8px" separator={<MdKeyboardArrowRight color="gray.500" />}>
                                 <BreadcrumbItem>
                                     <BreadcrumbLink as={Link} to={{pathname: `/`}}>Home</BreadcrumbLink>
                                 </BreadcrumbItem>

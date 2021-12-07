@@ -20,11 +20,13 @@ import {
   FiCompass,
   FiStar,
   FiSettings,
+  FiLogOut
 } from 'react-icons/fi';
 import {BiCategory} from "react-icons/bi"
-
 import CategoryList from "../../data/CategoryList";
 import { useHistory } from "react-router";
+import { LogoutDialogue } from "../LogoutDialogue";
+import { useDisclosure } from "@chakra-ui/hooks";
 
 const LinkItems = [
   { name: 'Home', icon: FiHome },
@@ -34,7 +36,7 @@ const LinkItems = [
   { name: 'Settings', icon: FiSettings },
 ];
 
-const SidebarContent = ({ onClose, handleToggle,ref, ...rest }) => {
+const SidebarContent = ({ onClose, handleToggle, ref , onOpen, ...rest }) => {
 
   const history = useHistory()
 
@@ -90,13 +92,18 @@ const SidebarContent = ({ onClose, handleToggle,ref, ...rest }) => {
           {link.name}
         </NavItem>
       ))}
+      <NavItem onClick={() => history.push("/registration")} icon={FiLogOut}>
+        Register as a seller
+      </NavItem>
+      <NavItem onClick={() => onOpen()} icon={FiLogOut}>
+        LogOut
+      </NavItem>
     </Box>
   );
 };
 
 const NavItem = ({ icon, children, ...rest }) => {
   return (
-    <Link to="/" style={{ textDecoration: 'none' }}>
       <Flex
         align="center"
         p="4"
@@ -121,7 +128,6 @@ const NavItem = ({ icon, children, ...rest }) => {
         )}
         {children}
       </Flex>
-    </Link>
   );
 };
 
@@ -152,7 +158,7 @@ const SideBar = ({ show, handleToggle }) => {
   const boxRef = useRef(null);
   // boxOutsideClick will be true on outside click
   const boxOutsideClick = OutsideClick(boxRef); 
-
+  const {isOpen, onOpen, onClose} = useDisclosure()
   return (
     <>
     {!boxOutsideClick && 
@@ -160,10 +166,11 @@ const SideBar = ({ show, handleToggle }) => {
       direction="left"
       in={show}
       ref={boxRef}
-      style={{ height: "100vh", width: "300px", zIndex: 10000 }}
+      style={{ height: "100vh", width: "20vw", zIndex: 10000 }}
     >
-      <SidebarContent handleToggle={handleToggle}/>
-    </Slide>}</>
+      <SidebarContent onOpen={onOpen} handleToggle={handleToggle}/>
+    </Slide>}
+    <LogoutDialogue isOpen={isOpen} onClose={onClose} /></>
   );
 };
 export default SideBar;

@@ -6,7 +6,7 @@ import { getToken } from "./useToken";
 // handle the private routes
 function PrivateRoute({ component: Component, ...rest }) {
     // const { token, setToken } = useToken();
-
+    
   return (
     <Route
       {...rest}
@@ -15,9 +15,10 @@ function PrivateRoute({ component: Component, ...rest }) {
           <Component {...props} />
         ) : (
           <Redirect
-            to={{ pathname: "/login", state: { from: props.location } }}
+            to={{ pathname: "/login", 
+            state: { from: props.location } }}
             // setToken={setToken}
-          />
+          />         
         )
       }
     />
