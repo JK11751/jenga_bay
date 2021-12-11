@@ -1,15 +1,9 @@
 import React, {useEffect} from "react"
 import { useSelector } from "react-redux";
 import {Route, Switch} from "react-router-dom"
-
 //utility imports
 import PrivateRoute from "../utils/PrivateRoute.js";
-
 //All Page imports
-<<<<<<< HEAD
-import Home from "../pages/Home/home.js";
-=======
->>>>>>> 658505a5ff9c17b20e1e24fbbb69f9090a3ab6da
 import SignUp from "../pages/SignUp/SignUp.js";
 import RegistrationPage from "../pages/CompanyRegistration/RegistrationPage.js";
 import Login from "../pages/Login/Login.js";
