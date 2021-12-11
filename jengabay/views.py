@@ -67,7 +67,7 @@ class AllItemsListView(ListAPIView):
     filterset_fields = ['category',]
 
 class SpecificSellerItemsView(ListAPIView):
-    """api for listing and creating items belonging to a specific seller"""
+    """api for listing items belonging to a specific seller"""
 
     serializer_class = ItemSerializer
     filter_backends = [filters.SearchFilter, DjangoFilterBackend,]
