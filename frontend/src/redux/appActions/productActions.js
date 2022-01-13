@@ -1,5 +1,5 @@
 import APIServices from "../../utils/apiServices";
-import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY,  SEARCH_PRODUCTS } from "../App/actionTypes";
+import {  GET_PRODUCT_DETAILS, GET_PRODUCTS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY,  SEARCH_PRODUCTS, ADD_PRODUCT } from "../App/actionTypes";
 
 // Redux actions are called here with an underscore before the name (convention)
 
@@ -67,4 +67,17 @@ export const handleGetProductsFromSearch = (searchQuery) => async (dispatch) => 
   }
 };
 
+// Getting products from search
+const addProduct = (addItem) => ({
+  type: ADD_PRODUCT,
+  payload: addItem,
+});
 
+export const handleAddProductSeller = (seller_id, item) => async (dispatch) => {
+  try {
+    const { data } = await APIServices.addItem(seller_id, item);
+    await dispatch(addProduct(data));
+  } catch (error) {
+    console.log(`Error from  handleAddProductSeller: ${error}`);
+  }
+};
