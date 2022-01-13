@@ -2,7 +2,7 @@ import APIServices from "../../utils/apiServices";
 import { toast } from "react-toastify";
 import { PASSWORD_RESET, PASSWORD_RESET_CONFIRM, LOGIN_USER, LOGOUT_USER } from "../App/actionTypes";
 import { setToken } from "../../utils/useToken";
-
+// Registering a buyer to the system
 // Logging in a user to the system
 export const handleLoginUser = (userData) => async (dispatch) => {
     try {
@@ -12,6 +12,14 @@ export const handleLoginUser = (userData) => async (dispatch) => {
       console.log("This is the Logged in user", response.data);
   
       await dispatch({ type: LOGIN_USER, payload: response.data });
+       toast.success("Login successful", {
+        position: "bottom-left",
+      });
+      const token = response.data.token
+      localStorage.setItem("token", JSON.stringify(token));
+      localStorage.setItem("userInfo", JSON.stringify(response.data));
+      console.log("This is the token", token)
+      console.log("UserInfo", response.data)
       setToken(response.data)
       //     setToken(userToken.token);
       // Result is sent to the store via dispatch (Pass payload if needed)
@@ -55,6 +63,7 @@ export const handleResetPassword = (userData) => async (dispatch) => {
       position: "bottom-left",
     });
     const passwordResetToken = response.data
+    localStorage.setItem("passwordResetToken", JSON.stringify(passwordResetToken));
     sessionStorage.setItem("passwordResetToken", JSON.stringify(passwordResetToken));
     console.log("This is the passwordresettoken", passwordResetToken)
     // Result is sent to the store via dispatch (Pass payload if needed)
