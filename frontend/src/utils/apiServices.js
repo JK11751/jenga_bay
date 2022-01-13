@@ -195,7 +195,15 @@ class APIServices {
 
   //Adding an item by a specific seller
   async addItem(seller_id, data){
-    return api.post(`/sellers/${seller_id}/items/add_item`, data)
+    return api.post(`/sellers/${seller_id}/items/add_item`, data,
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+      }
+    }, 
+    {
+      withCredentials: true
+    })
   }
 
   //Updating details of a specific item belonging to a specific seller

@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_PRODUCT_DETAILS, SEARCH_PRODUCTS } from "../App/actionTypes";
+import { ADD_PRODUCT, GET_PRODUCTS, GET_PRODUCTS_IN_SPECIFIC_CATEGORY, GET_PRODUCT_DETAILS, SEARCH_PRODUCTS } from "../App/actionTypes";
 
 //STEP 2 - stating initial state and defining actions
 //Thi sis the default state
@@ -7,6 +7,7 @@ const initialState ={
     productDetails:[],
     itemsInCategory: [],
     searchedItems: [],
+    addItem: [],
 };
 
 const productReducer = (state = initialState, action) => {
@@ -34,7 +35,12 @@ const productReducer = (state = initialState, action) => {
             return{
                 ...state,
                 searchedItems:payload
-            }      
+            }
+        case ADD_PRODUCT:
+            return{
+                ...state,
+                addItem:payload
+            }          
         default:
             return state;//returns defult state if no data is fetched
         }
