@@ -13,11 +13,12 @@ import {
 import Categories from "../../data/CategoryList"
 import { useDispatch } from 'react-redux';
 import { handleAddProductSeller } from "../../redux/appActions/productActions";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const UploadForm =() => {
 
   const dispatch = useDispatch()
+  const history = useHistory()
   const seller_id = useParams()
 
   const [itemName, setItemName] = useState("")
@@ -61,6 +62,11 @@ const UploadForm =() => {
     form_data.append("category", category);
 
     dispatch(handleAddProductSeller(seller_id.SellerId, form_data))
+    history.push("/")
+  }
+
+  const handleCancel = () => {
+    history.push(`/seller/${seller_id.SellerId}/profile`)
   }
 
   return (
@@ -127,6 +133,21 @@ const UploadForm =() => {
             </FormControl>
           </HStack> 
         </VStack>
+        <HStack ml="400px">
+        <Button
+            padding="10px"
+            background="#fffffC"
+            borderRadius="50px"
+            borderWidth="1px"
+            borderColor="#007ACC"
+            borderStyle="solid "
+            width="200px"
+            height="40px"
+            color="#007ACC"
+            onClick={handleCancel}
+          >
+            Cancel
+          </Button>
         <Button
             padding="10px"
             background="#007ACC"
@@ -141,6 +162,7 @@ const UploadForm =() => {
           >
             Submit
           </Button>
+          </HStack>
       </Box>
     </Flex>
   );

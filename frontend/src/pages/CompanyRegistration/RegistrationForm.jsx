@@ -10,8 +10,12 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { handleRegisterSeller } from "../../redux/appActions/userActions";
+import { useHistory } from "react-router-dom";
 
 const RegistrationForm =() =>{
+
+  const history = useHistory()
+
   const[street,setStreet]=useState("")
   const[password,setPassword]=useState("")
   const [profile_pic,setProfile_pic]=useState("")
@@ -77,6 +81,7 @@ const onSubmit=(e)=>{
 */
 
   dispatch(handleRegisterSeller(data))
+  history.push("/")
 
 }
 
@@ -238,6 +243,7 @@ const onSubmit=(e)=>{
             width="200px"
             height="40px"
             color="#007ACC"
+            onClick={history.push("/")}
           >
             Cancel
           </Button>

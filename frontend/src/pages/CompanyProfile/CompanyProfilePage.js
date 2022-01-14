@@ -306,7 +306,7 @@ export const CompanyProfilePage = () => {
                                 <Menu>
                                 <MenuItem onClick={() => onOpen()}>Edit Profile</MenuItem>
                                 <MenuItem onClick={() => history.push(`/orders`)}>View Orders</MenuItem>
-                                <MenuItem onClick={() => history.push(`/products/seller/${sellerId}/addproduct`)}>Add Product</MenuItem>
+                                <MenuItem onClick={() => history.push(`/products/${sellerId}/addproduct`)}>Add Product</MenuItem>
                                 </Menu>
                             </Box>
                         </TabPanel>
