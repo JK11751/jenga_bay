@@ -13,11 +13,12 @@ import {
 import Categories from "../../data/CategoryList"
 import { useDispatch } from 'react-redux';
 import { handleAddProductSeller } from "../../redux/appActions/productActions";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const UploadForm =() => {
 
   const dispatch = useDispatch()
+  const history = useHistory()
   const seller_id = useParams()
 
   const [itemName, setItemName] = useState("")
@@ -61,6 +62,7 @@ const UploadForm =() => {
     form_data.append("category", category);
 
     dispatch(handleAddProductSeller(seller_id.SellerId, form_data))
+    history.push("/")
   }
 
   return (
