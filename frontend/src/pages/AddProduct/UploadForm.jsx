@@ -65,6 +65,10 @@ const UploadForm =() => {
     history.push("/")
   }
 
+  const handleCancel = () => {
+    history.push(`/seller/${seller_id.SellerId}/profile`)
+  }
+
   return (
     <Flex flexDirection="column">
       <Box alignContent="center" ml="40px">
@@ -129,6 +133,21 @@ const UploadForm =() => {
             </FormControl>
           </HStack> 
         </VStack>
+        <HStack ml="400px">
+        <Button
+            padding="10px"
+            background="#fffffC"
+            borderRadius="50px"
+            borderWidth="1px"
+            borderColor="#007ACC"
+            borderStyle="solid "
+            width="200px"
+            height="40px"
+            color="#007ACC"
+            onClick={handleCancel}
+          >
+            Cancel
+          </Button>
         <Button
             padding="10px"
             background="#007ACC"
@@ -143,6 +162,7 @@ const UploadForm =() => {
           >
             Submit
           </Button>
+          </HStack>
       </Box>
     </Flex>
   );

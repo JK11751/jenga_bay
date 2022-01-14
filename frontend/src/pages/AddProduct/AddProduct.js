@@ -8,6 +8,7 @@ import { handleGetSellerDetails } from "../../redux/appActions/sellerActions";
 import { useParams } from "react-router-dom";
 
 
+
 const AddProduct=()=> {
 
   const dispatch = useDispatch()

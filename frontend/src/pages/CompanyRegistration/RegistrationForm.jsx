@@ -243,6 +243,7 @@ const onSubmit=(e)=>{
             width="200px"
             height="40px"
             color="#007ACC"
+            onClick={history.push("/")}
           >
             Cancel
           </Button>
