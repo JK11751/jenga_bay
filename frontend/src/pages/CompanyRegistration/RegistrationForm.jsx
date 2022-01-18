@@ -95,14 +95,13 @@ const onSubmit=(e)=>{
         <HStack mb="20px">
           <Avatar size="xl" />
           <VStack>
-          <Text> Upload Company Logo</Text>
-         <FormControl id="input-file" isRequired>
-            <FormLabel>Profile pic</FormLabel>
-             <input type="file" onChange={(e)=> { 
-              setProfile_pic(e.target.files[0]);
-              console.log(e.target.files[0]);
-              }}/>
-          </FormControl>
+            <FormControl id="input-file" isRequired>
+              <FormLabel>Company Logo</FormLabel>
+              <input type="file" onChange={(e)=> { 
+                setProfile_pic(e.target.files[0]);
+                console.log(e.target.files[0]);
+                }}/>
+              </FormControl>
             </VStack>
           <FormControl id="business-name" isRequired>
             <FormLabel>Business Name</FormLabel>
@@ -243,7 +242,7 @@ const onSubmit=(e)=>{
             width="200px"
             height="40px"
             color="#007ACC"
-            onClick={history.push("/")}
+            onClick={()=>history.push("/")}
           >
             Cancel
           </Button>
