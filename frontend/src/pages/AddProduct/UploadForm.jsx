@@ -110,7 +110,7 @@ const UploadForm =() => {
           <Text fontSize={10} m={10}>You may upload up to 5 photos. Please upload good quality photos</Text>   
           <FormControl id="price" isRequired>
             <FormLabel>Item Main Image</FormLabel>
-            <input type="file" accept="image/png, image/jpeg image/jpg" onChange={e=>{setMainImage(e.target.files[0])}} variant="filled" width="100%" />
+            <input type="file" accept="image/png, image/jpeg" onChange={e=>{setMainImage(e.target.files[0])}} variant="filled" width="100%" />
           </FormControl> 
           <HStack alignItems="left">
             <FormControl id="price" >
