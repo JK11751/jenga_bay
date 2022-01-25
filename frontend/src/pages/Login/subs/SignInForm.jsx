@@ -13,9 +13,9 @@ import {
   InputGroup,
   InputRightElement,
   InputLeftElement,
-  Button, 
+  Button,
   IconButton,
-  FormControl, 
+  FormControl,
 } from "@chakra-ui/react";
 import { toast } from "react-toastify";
 import { HiOutlineMail } from "react-icons/hi";
@@ -33,9 +33,9 @@ import { useForm } from "../../../utils/useForm";
 import { handleLoginUser } from "../../../redux/appActions/authActions";
 import { getToken } from "../../../utils/useToken";
 
-const style ={
-  color:"red",
-}
+const style = {
+  color: "red",
+};
 
 const SignInForm = (props) => {
   const history = useHistory();
@@ -54,16 +54,16 @@ const SignInForm = (props) => {
     errors,
   } = useForm({
     validations: {
-    username: {
-      custom: {
-        isValid: (value) => value.length < 1,
-        message: "The username needs to be at least 6 characters long.",
-      },
+      username: {
+        custom: {
+          isValid: (value) => value.length < 1,
+          message: "The username needs to be at least 6 characters long.",
+        },
         // pattern: {
         //     value: '^[A-Za-z]*$',
         //     message: "You're not allowed to use special characters or numbers in your name.",
         // },
-        },
+      },
       email: {
         pattern: {
           value: "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$",
@@ -86,32 +86,28 @@ const SignInForm = (props) => {
       };
 
       dispatch(handleLoginUser(data));
-    //   Store token in localstorage
-    //   sessionStorage.setItem("user_id", data.InsertedId);
+      //   Store token in localstorage
+      //   sessionStorage.setItem("user_id", data.InsertedId);
       localStorage.setItem("newUserEmail", JSON.stringify(user.email));
-      console.log(getToken())
+      console.log(getToken());
       //routing back to the page where the user was currently viewing
       const token = getToken();
-      if(token){
+      if (token) {
         toast.success("Login successful", {
           position: "bottom-left",
         });
-      
-    }
+      }
 
-    // history.push(props.location.pathname ? {pathname: `${props.location.pathname}`} : `${value}`)
-      history.push("/")
+      // history.push(props.location.pathname ? {pathname: `${props.location.pathname}`} : `${value}`)
+      history.push("/");
     },
   });
 
-  
-
-
-      // const handleEnterKey = (e) => {
-      //   if (e.keyCode === 13) {
-      //       handleSubmit();
-      //   }
-      // }
+  // const handleEnterKey = (e) => {
+  //   if (e.keyCode === 13) {
+  //       handleSubmit();
+  //   }
+  // }
 
   return (
     <Flex flexDirection="column">
@@ -134,7 +130,7 @@ const SignInForm = (props) => {
         Sign in with your email address
       </Text>
       <VStack spacing="15px" pl={20} pr={20} pt={4} pb={4}>
-      <FormControl id="username" isRequired>
+        <FormControl id="username" isRequired>
           <InputGroup>
             <InputLeftElement
               pointerEvents="none"
@@ -146,10 +142,12 @@ const SignInForm = (props) => {
               placeholder="Username"
               type="text"
               value={user.username || ""}
-              onChange={handleChange("username")} 
+              onChange={handleChange("username")}
             />
           </InputGroup>
-          {errors.username && <FormHelperText>{errors.username}</FormHelperText>}
+          {errors.username && (
+            <FormHelperText>{errors.username}</FormHelperText>
+          )}
         </FormControl>
         <FormControl id="email" isRequired>
           <InputGroup>
@@ -166,7 +164,9 @@ const SignInForm = (props) => {
               onChange={handleChange("email")}
             />
           </InputGroup>
-          {errors.email && <FormHelperText {...style}>{errors.email}</FormHelperText>}
+          {errors.email && (
+            <FormHelperText {...style}>{errors.email}</FormHelperText>
+          )}
         </FormControl>
         <FormControl id="password" isRequired>
           <InputGroup>
@@ -187,7 +187,7 @@ const SignInForm = (props) => {
               {show ? (
                 <IconButton
                   as={BiShowAlt}
-                  variant="untyled"
+                  variant="unstyled"
                   h={5}
                   w={5}
                   onClick={handleClick}
@@ -202,14 +202,16 @@ const SignInForm = (props) => {
                 ></IconButton>
               )}
             </InputRightElement>
-            {errors.password && <FormHelperText {...style}>{errors.password}</FormHelperText>}
+            {errors.password && (
+              <FormHelperText {...style}>{errors.password}</FormHelperText>
+            )}
           </InputGroup>
         </FormControl>
       </VStack>
       <Flex mb={4} alignContent="center" pl={20} pr={20}>
         <Spacer />
         <Button
-          onClick={() => history.push({pathname:"/forgot-password"})}
+          onClick={() => history.push({ pathname: "/forgot-password" })}
           variant="link"
           color="black"
           fontSize="xs"
